@@ -1,7 +1,7 @@
 {
-  "name": "node_ecstatic",
+  "name": "Squad_App and API",
   "version": "1.0.0",
-  "description": "The Realtime API for Ecstatic",
+  "description": "The Realtime API for Squad",
   "main": "index.js",
   "scripts": {
     "test": "grunt test --verbose",

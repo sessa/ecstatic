@@ -8,7 +8,7 @@ util = require('util');
 request = require('request');
 port = process.env.PORT || 8080;
 async = require('async');
-client = require('redis').createClient();
+client = require('redis').createClient(6379, 'squadapp-001.2jlq4h.0001.use1.cache.amazonaws.com', {});
 proximity = require('geo-proximity').initialize(client);
 socket_number = 0;
 

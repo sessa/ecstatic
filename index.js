@@ -30,7 +30,7 @@ squad_app.use(cors());
 //set up sockets
 ecstaticSockets = require("./views/assets/js/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
-
+console.log("this printed");
 //routes
 squad_app.get('/api/upcomingEvents', function(req, res) {
 	//actual event start time = 1434448800000
