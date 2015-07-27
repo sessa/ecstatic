@@ -3,7 +3,7 @@
 
 // Declare variables used
 var ecstaticSockets, squad_app, express, path, request, events, sc, cors;
-sc = require("soundclouder");
+sc = require('soundclouder');
 express = require('express');
 path = require('path');
 request = require('request');
@@ -21,14 +21,14 @@ var my_sc_api_url = "https://api.soundcloud.com/playlists/125324586.json?client_
 //CLIENT
 //Templating
 squad_app = express();
-squad_app.set('views', __dirname + '/views');
+squad_app.set('views', __dirname + '/');
 squad_app.set('view engine', "jade"); 
 squad_app.set('port', 3001); 
-squad_app.use(express.static('views'));
+squad_app.use(express.static('./'));
 squad_app.use(cors());
 
 //set up sockets
-ecstaticSockets = require("./views/assets/js/ecstaticSockets.js");
+ecstaticSockets = require("./js/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
 console.log("this printed");
 //routes
