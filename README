@@ -1,25 +1,22 @@
-Ecstatic Web Server
-
+Squad_app Server
 
 File structure:
-ecstatic is the main folder for the app.
-in it, we have bower.son and package.json. not really sure what they do.
+squad_app is the main folder for the app.
+in it, we have bower.son and package.json. which are used by the package manager, bitch.
 We have gruntfile.js, which is necessary for running tests.
-We have the startup file in /etc/init/ecstatic.conf. I added some comments in there.
+We have the startup file in /etc/init/squad_app.conf. I added some comments in there.
 
 Server Networking
-I rerouted port 80 to port 3000 because node does not like to bind to ports under 1024.
-This is done on server startup in /etc/rc.local. For more info on this, check : http://stackoverflow.com/questions/16573668/best-practices-when-running-node-js-with-port-80-ubuntu-linode
+I may have played with /etc/rc.local. For more info on this, check : http://stackoverflow.com/questions/16573668/best-practices-when-running-node-js-with-port-80-ubuntu-linode
 
-How to Run the Server: sudo ecstatic start
-How to Stop the Server: sudo ecstatic stop
-Check the Logs @ : /var/log/ecstatic.sys.log
-	The command is "tail -f /var/log/ecstatic.sys.log"
+How to Run the Server: sudo squad_app start
+How to Stop the Server: sudo squad_app stop
+Check the Logs @ : /var/log/squad_app.sys.log
+	The command is "tail -f /var/log/squad_app.sys.log"
 Why the server stays up: a tool called "monit"
 The guide: http://howtonode.org/deploying-node-upstart-monit
-
 Writing and Running Tests:
-To run the test suit, use the command “grunt test” when in the ecstatic/test folder.
+To run the test suit, use the command “grunt test” when in the squad_app/test folder.
 To write tests, enter the file in the test folder (the file name is test.js) and follow the structure of the tests already in there. We are using Grunt with the Mocha. For specific package details, enter Gruntfile.js. 
 
 
@@ -65,6 +62,8 @@ Async library (mapping, parallel):
 http://promise-nuggets.github.io/articles/14-map-in-parallel.html
 
 
+
+DynamoDB: http://www.markomedia.com.au/dynamodb-for-javascript-cheatsheet/
 
 Redis
 How to install redis
