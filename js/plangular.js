@@ -42,6 +42,7 @@ module.exports = function() {
   // }
 
     this.play = function(src) {
+    console.log("play");
     if (src != audio.src) { audio.src = src; }
     audio.play();
     this.playing = src;

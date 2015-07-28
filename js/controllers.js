@@ -31,7 +31,7 @@ angular.module('controllers', [])
 .controller('mainController',['$scope', '$http', function($scope, $http) {
 
         //query index.js
-        $http.get('/appapi/upcomingEvents')
+        $http.get('/api/upcomingEvents')
         .success(function(data) {
 
             //parse the data
@@ -61,9 +61,9 @@ angular.module('controllers', [])
                 }
 
                 //update the countdown every second
-                document.getElementById('seconds').innerHTML = ts.seconds.toString();
-                document.getElementById('minutes').innerHTML = ts.minutes.toString();
-                document.getElementById('hours').innerHTML = ts.hours.toString();
+                //document.getElementById('seconds').innerHTML = ts.seconds.toString();
+                //document.getElementById('minutes').innerHTML = ts.minutes.toString();
+                //document.getElementById('hours').innerHTML = ts.hours.toString();
               }, 
           countdown.HOURS | countdown.MINUTES | countdown.SECONDS, 3);
       })
@@ -72,7 +72,7 @@ angular.module('controllers', [])
       });
 
       //query index.js
-      $http.get('/appapi/sync')
+      $http.get('/api/sync')
       .success(function(data) {
           timeOfReturn = new Date().getTime();
           var json = JSON.parse(data);
