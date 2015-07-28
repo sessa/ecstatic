@@ -2,43 +2,46 @@
 'use strict';
 
 // Declare variables used
-var ecstaticSockets, squad_app, express, path, request, events, sc, cors;
+var ecstaticSockets, squad_app, express, path, request, events, sc, cors, sc_client_id, sc_client_secret, sc_redirect_uri, sc_api_url;
 sc = require("soundclouder");
+sc_client_id="4cd54fa30dd13312d10dd24cc2bdcae4";
+sc_client_secret="2f845ee306729bf01254031ea1eb9803";
+sc_redirect_uri="http://ecstatic.fm/scRedirect";
+//USED FOR SYNCING
+//Change this to be a function, that returns sc_api_url
+//curl -v 'http://api.soundcloud.com/resolve.json?url=https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july&client_id=4cd54fa30dd13312d10dd24cc2bdcae4'  
+sc_api_url = "https://api.soundcloud.com/playlists/125324586.json?client_id=4cd54fa30dd13312d10dd24cc2bdcae4";
 express = require('express');
 path = require('path');
 request = require('request');
 cors = require('cors');
 
-//set up soundcloud
-var sc_client_id="4cd54fa30dd13312d10dd24cc2bdcae4";
-var sc_client_secret="2f845ee306729bf01254031ea1eb9803";
-var sc_redirect_uri="http://ecstatic.fm/scRedirect";
-
-//USED FOR SYNCING
-//curl -v 'http://api.soundcloud.com/resolve.json?url=https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july&client_id=4cd54fa30dd13312d10dd24cc2bdcae4'  
-var my_sc_api_url = "https://api.soundcloud.com/playlists/125324586.json?client_id=4cd54fa30dd13312d10dd24cc2bdcae4";
 
 //CLIENT
 //Templating
 squad_app = express();
 squad_app.set('views', __dirname + '/views');
 squad_app.set('view engine', "jade"); 
-squad_app.set('port', 3001); 
+squad_app.set('port', 8081); 
 squad_app.use(express.static('views'));
 squad_app.use(cors());
 
 //set up sockets
 ecstaticSockets = require("./views/assets/js/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
-console.log("this printed");
+
+var dynamodbTest = require("./views/assets/js/dynamodbTest.js");
+dynamodbTest.setupdynamodbTest(squad_app);
+
 //routes
+//############Need to refactor this to live in a nosql database. Or Postgresql.
 squad_app.get('/api/upcomingEvents', function(req, res) {
 	//actual event start time = 1434448800000
     res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1437130800000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
 });
 squad_app.get('/api/sync', function(req, res) {
-	console.log(my_sc_api_url);
-	var returnedjson = calculatePlaylistSync(my_sc_api_url, 1437130800000 /*Start time @ July 8th in milli*/, function (returnedjson){
+	console.log(sc_api_url);
+	var returnedjson = calculatePlaylistSync(sc_api_url, 1437130800000 /*Start time @ July 8th in milli*/, function (returnedjson){
 		res.json(JSON.stringify(returnedjson)); 
 	});
 });
@@ -47,28 +50,11 @@ squad_app.get('/flush', function(req, res) {
 	console.log("flushing redis database");
 	res.json({"succesful":true});
 });
-squad_app.get('/api/upcomingEvents', function(req, res) {
-	//actual event start time = 1434448800000
-    res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1437130800000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
-});
 squad_app.get('*', function(req, res) {
   	res.render('index');
 });
 squad_app.listen(squad_app.get('port'), function(req, res) {
  console.log('Server listening at ' + squad_app.get('port'));
-});
-
-
-
-//SERVER STARTUP SHIT
-//initialize event variable on server startup
-request('http://54.173.157.204/appindex/', function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-  	events = JSON.parse(body);
-    for(var e in events) {
-    	console.log(e);
-    }
-  }
 });
 
 //calculates the elapsed time since event start
@@ -114,8 +100,8 @@ function setupSyncJson(elapsed, json){
 }
 
 //returns json {"index" : int, "elapsedTime" : (milli) int}
-function calculatePlaylistSync(my_sc_api_url, eventStartTime, callback){
-	request(my_sc_api_url, function (error, response, body) {
+function calculatePlaylistSync(sc_api_url, eventStartTime, callback){
+	request(sc_api_url, function (error, response, body) {
 		//need to determine which song we're in
 		var elapsed = calculateElapsedTime(eventStartTime);
 		var json = JSON.parse(body);

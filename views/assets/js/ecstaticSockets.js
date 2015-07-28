@@ -8,24 +8,12 @@ util = require('util');
 request = require('request');
 port = process.env.PORT || 8080;
 async = require('async');
-client = require('redis').createClient(6379, 'squadapp-001.2jlq4h.0001.use1.cache.amazonaws.com', {});
+client = require('redis').createClient(6379, '127.0.0.1', {});
 proximity = require('geo-proximity').initialize(client);
 socket_number = 0;
 
 //make client avilable in index.js
 exports.client = client;
-//MONGO STUFF
-/*mongoose = require('mongoose');
-mongoose.connect('mongodb://ecstatic:dancefloor04@ds045252.mongolab.com:45252/ecstatic');
-
-var Event = mongoose.model('Event', { host_username: String, title: String, start_time: Date, playlist: Array, userlist: Array });
-var startupFest = new Event({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1434261600000, playlist: [{title:"test1", link:"http://soundcloud.com/asdf"}, {title:"test2", link:"http://soundcloud.com/fdas"}], userlist: ["anonymous squid", "anonymous monkey"]});
-
-startupFest.save(function (err) {
-  if (err) // ...
-  console.log('meow');
-});*/
-
 
 exports.setupEcstaticSockets = function(app){
     // Listen
