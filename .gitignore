@@ -16,6 +16,7 @@ sds/settings/__init__.py
 bin/
 lib/
 local/
+dump.rdb
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
