@@ -1,20 +1,3 @@
-.plangular(plangular='https://soundcloud.com/silentdiscosquad/sets/international-startup-fest')
-	#player.section(ng-controller='mainController')
-		.row.fullWidth
-			#playing.small-12.medium-4.large-7.columns
-			.container-fluid
-				img(src='{{ track.artwork_url.replace("-large", "-t300x300") }}', class='cover-art')
-				
-				h3 {{track.title}}
-
-				.left
-					p {{ currentTime | hhmmss }}
-				.right
-					p {{ duration | hhmmss }}
-				br
-				br
-				progress.playerprogressbar(ng-value="currentTime / duration || 0")
-					{{ currentTime / duration || 0 }}
-					.progress.meter(ng-value="currentTime / duration") {{ currentTime / duration }}
-					
-				br
+ion-view(view-title='Home')
+	ion-content.padding
+		h1 Hello world!

@@ -47,28 +47,11 @@ squad_app.get('/flush', function(req, res) {
 	console.log("flushing redis database");
 	res.json({"succesful":true});
 });
-squad_app.get('/api/upcomingEvents', function(req, res) {
-	//actual event start time = 1434448800000
-    res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1437130800000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
-});
 squad_app.get('*', function(req, res) {
   	res.render('index');
 });
 squad_app.listen(squad_app.get('port'), function(req, res) {
  console.log('Server listening at ' + squad_app.get('port'));
-});
-
-
-
-//SERVER STARTUP SHIT
-//initialize event variable on server startup
-request('http://54.173.157.204/appindex/', function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-  	events = JSON.parse(body);
-    for(var e in events) {
-    	console.log(e);
-    }
-  }
 });
 
 //calculates the elapsed time since event start

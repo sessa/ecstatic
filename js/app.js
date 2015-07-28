@@ -27,7 +27,7 @@ function clickBeta(){
 }
 
 
-var app = angular.module('ecstatic', ['ngSanitize','plangular','ngAnimate','ionic','dudedude'])
+var app = angular.module('ecstatic', ['ngSanitize','plangular','ngAnimate','ionic','controllers', 'services'])
 
 //configure plangular
 .config(function(plangularConfigProvider){

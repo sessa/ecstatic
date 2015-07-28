@@ -1,25 +1,35 @@
 doctype html
 html(ng-app='ecstatic')
+
+
+	//
+	//	disco (Android & Web)
+	//	0.1
+	// 	written by the ecstatic collective
+	//	
+
+
+	// setup
+
 	head
+		// ------------  meta data  ------------
 		meta(charset="utf-8")
 		meta(name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width")
 		title= Ecstatic
-		// external imports
+
+		// ------------  external imports  ------------
+
 		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Raleway:400,200,100', type='text/css')
 		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400,100', type='text/css')
 		// script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js')
 
-		// internal imports
-		
 
+		// ------------  internal imports  ------------
+	
 		// ionic/angularjs js
 		script(src="lib/ionic/js/ionic.bundle.js")
-
 		// cordova script (this will be a 404 during development)
 		script(src="cordova.js")
-
-		link(rel="stylesheet", href="lib/ionic/css/ionic.css")
-		
 		script(src='lib/bower_components/angular-sanitize/angular-sanitize.min.js')
 		script(src='lib/bower_components/angular-animate/angular-animate.js')
 		script(src='lib/socket.io-client/socket.io.js')
@@ -30,8 +40,10 @@ html(ng-app='ecstatic')
 		script(src='js/services.js')
 		script(src='js/app.js')
 		script(src='js/plangular.js')
+		link(rel="stylesheet", href="lib/ionic/css/ionic.css")
 
-	//THE APP
+	// THE APP
+
 	body(ng-app='ecstatic')
 
 		ion-nav-bar(class="bar-stable")

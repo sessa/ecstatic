@@ -1,4 +1,4 @@
-var dude = angular.module('dudedude', [])
+angular.module('controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
