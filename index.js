@@ -30,7 +30,7 @@ squad_app.use(cors());
 ecstaticSockets = require("./js/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
 
-var dynamodbTest = require("./views/assets/js/dynamodbTest.js");
+var dynamodbTest = require("./js/dynamodbTest.js");
 dynamodbTest.setupdynamodbTest(squad_app);
 
 //routes

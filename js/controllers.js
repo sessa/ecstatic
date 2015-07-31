@@ -11,10 +11,28 @@ angular.module('controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+  // get list of rooms
   $scope.chats = Chats.all();
+
+  // refresh the channels list
+  $scope.doRefresh = function() {
+
+    //tell the ionScroll that the job is done
+    $scope.$broadcast('scroll.refreshComplete');
+
+  };
+
+  // create room
+  $scope.create = function(chat) {
+    Chats.create(chat);
+  };
+
+  // delete room
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
+
+
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
