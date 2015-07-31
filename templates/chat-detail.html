@@ -1,0 +1,35 @@
+
+<ion-view view-title="{{chat.name}}">
+  <ion-content class="padding">
+    <!--img(ng-src='{{chat.face}}', style='width: 64px; height: 64px')-->
+    <!--|     -->
+    <!--p-->
+    <!--	| {{chat.lastText}}-->
+    <div plangular="{{chat.url}}" class="plangular">
+      <div id="player" ng-controller="mainController" class="section">
+        <div class="small-12 large-12 columns askbox">
+          <form class="{{showButton}}">
+            <button id="showButton" ng-click=" seekSync();" class="dudebutton">Tune in</button>
+          </form>
+        </div>
+        <div class="row fullWidth">
+          <div id="playing" class="small-12 medium-4 large-7 columns"></div>
+          <div class="container-fluid"><img src="{{ track.artwork_url.replace(&quot;-large&quot;, &quot;-t300x300&quot;) }}" class="cover-art"/>
+            <h3>{{track.title}}</h3>
+            <div class="left">
+              <p>{{ currentTime | hhmmss }}</p>
+            </div>
+            <div class="right">
+              <p>{{ duration | hhmmss }}</p>
+            </div><br/><br/>
+            <progress ng-value="currentTime / duration || 0">
+               
+              {{ currentTime / duration || 0 }}
+              <div ng-value="currentTime / duration" class="progress meter">{{ currentTime / duration }}</div>
+            </progress><br/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

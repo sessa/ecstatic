@@ -1,0 +1,29 @@
+
+ion-view(view-title='{{chat.name}}')
+	ion-content.padding
+		//img(ng-src='{{chat.face}}', style='width: 64px; height: 64px')
+		//|     
+		//p
+		//	| {{chat.lastText}}
+		.plangular(plangular='{{chat.url}}')
+			#player.section(ng-controller='mainController')
+				.small-12.large-12.columns.askbox
+					form(class="{{showButton}}")
+						button#showButton.dudebutton(ng-click=' seekSync();') Tune in
+				.row.fullWidth
+					#playing.small-12.medium-4.large-7.columns
+					.container-fluid
+						img(src='{{ track.artwork_url.replace("-large", "-t300x300") }}', class='cover-art')
+						
+						h3 {{track.title}}
+
+						.left
+							p {{ currentTime | hhmmss }}
+						.right
+							p {{ duration | hhmmss }}
+						br
+						br
+						progress(ng-value="currentTime / duration || 0") 
+							{{ currentTime / duration || 0 }}
+							.progress.meter(ng-value="currentTime / duration") {{ currentTime / duration }}
+						br
