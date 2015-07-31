@@ -22,8 +22,8 @@ cors = require('cors');
 squad_app = express();
 squad_app.set('views', __dirname + '/');
 squad_app.set('view engine', "jade"); 
-squad_app.set('port', 8081); 
-squad_app.use(express.static('views'));
+squad_app.set('port', 3001); 
+squad_app.use(express.static('./'));
 squad_app.use(cors());
 
 //set up sockets
@@ -40,8 +40,8 @@ squad_app.get('/api/upcomingEvents', function(req, res) {
     res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1438094733000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
 });
 squad_app.get('/api/sync', function(req, res) {
-	console.log(my_sc_api_url);
-	var returnedjson = calculatePlaylistSync(my_sc_api_url, 1438094733000 /*Start time @ July 8th in milli*/, function (returnedjson){
+	console.log(sc_api_url);
+	var returnedjson = calculatePlaylistSync(sc_api_url, 1438094733000 /*Start time @ July 8th in milli*/, function (returnedjson){
 		res.json(JSON.stringify(returnedjson)); 
 	});
 });
