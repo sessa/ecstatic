@@ -96,13 +96,15 @@ exports.setupEcstaticSockets = function(app){
         socket.on('add_song', function (data) {
             var params = JSON.parse(data);
             console.log("rooms="+socket.rooms);
+            add_song(params, socket.rooms[index]);
+
             for(var index = 0; index < socket.rooms.length; index++) {
                 if (socket.rooms[index] != socket.id){
-                    console.log("room="+socket.rooms[index]);
-                    io.sockets.to(socket.rooms[index]).emit("add_song", params);
-                    add_song(params, socket.rooms[index]);
-                    break;
+                    socket.broadcast.to(socket.rooms[index]).emit("add_song", params);
                 }
+                else{
+                    socket.emit("add_song", params);
+                }  
             }
         });
 
