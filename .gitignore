@@ -15,6 +15,7 @@ coverage
 sds/settings/__init__.py
 bin/
 local/
+dump.rdb
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
