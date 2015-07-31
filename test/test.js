@@ -1,5 +1,14 @@
 /*jslint node: true */
 /*global describe: false, before: false, after: false, it: false */
+
+/************************
+Writing and Running Tests:
+To run the test suit, use the command “grunt test” when in the squad_app/test folder.
+These tests will be run, and any that you write in the "describe" block. 
+We are using Grunt with the Mocha. For package details, see Gruntfile.js. 
+*************************/
+
+
 "use strict";
 
 // Declare the variables used
@@ -69,7 +78,7 @@ describe('ROOMS API', function () {
     describe('add_songs', function () {
         it("should add a song to the playlist", function (done) {
             var returned_twice = false;
-            socket1.emit('add_song', JSON.stringify({room_number:0, duration:120, artwork_url:"https:test1", stream_url:"https:test1", song_name:'snow', artist:'Red Hot Chili Peppers'}));
+            socket1.emit('add_song', JSON.stringify({artwork_url:"https:test1", stream_url:"https:test1", song_name:'snow', artist:'Red Hot Chili Peppers'}));
             socket1.on("add_song", function (data) {
                 done();
             });
