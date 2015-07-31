@@ -12,9 +12,19 @@ angular.module('controllers', [])
   //});
 
   $scope.chats = Chats.rooms();
+  // refresh the channels list
+  $scope.doRefresh = function() {
+
+    //tell the ionScroll that the job is done
+    $scope.$broadcast('scroll.refreshComplete');
+
+  };
+
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
+
+
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
