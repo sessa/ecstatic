@@ -1,24 +1,5 @@
-//....................../´¯/) 
-//....................,/¯../ 
-//.................../..../ 
-//............./´¯/'...'/´¯¯`·¸ 
-//........../'/.../..../......./¨¯\ 
-//........('(...´...´.... ¯~/'...') 
-//.........\.................'...../ 
-//..........''...\.......... _.·´ 
-//............\..............( 
-//..............\.............\...
-//////////////////////////////////
-//////////////////////////////////
-////////ECSTATIC COMMENTS!!!//////
-//////////////////////////////////
-//////////////////////////////////
-
-//Hey future reader!
-//Martin Weiss touched this file. He made it so that you can sync the player! 
-//There is a lot of code here, don't be frightened. I will leave a list here of the import functions.
-
-//1) scope.seekSync : this is a function that seeks within the track. It takes in an .
+//Important functions
+//1) scope.seekSync : seeks within the track.
 //2) addEventListener("canplay", canPlayHandler: this function adds a new event that catches that "canplay" event, and handles it in the canPlayHandler. 
 //3) canPlayHandler : this function only fires once, and syncs the player. HTML5 audio can only be synced once it "canplay".
 

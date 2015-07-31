@@ -1,7 +1,8 @@
-// Google Analytics
 var elapsed = 100;
 var trackIndex = 0;
 var timeOfReturn = 0;
+
+// Google Analytics
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -21,10 +22,6 @@ mixpanel.init("3cc8de265eae4e9f76364871a4ae56e7", {
         distinct_id = mixpanel.get_distinct_id();
     }
 });
-
-function clickBeta(){
-        mixpanel.track("ISF to beta");
-}
 
 
 var app = angular.module('ecstatic', ['ngSanitize','plangular','ngAnimate','ionic','controllers', 'services'])
