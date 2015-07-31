@@ -34,8 +34,8 @@ angular.module('services', [])
             socket.emit('create_room', {room_name: "testy_room"});
             socket.on('create_room', function (data) {
                 console.log("room created");
+               	return data;
             });
-			return null;
 		}
 	};
 });

@@ -18,7 +18,7 @@ angular.module('controllers', [])
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+  $scope.chat = Chats.create_room($stateParams.chatId);
 })
 
 .controller('AccountCtrl', function($scope) {
