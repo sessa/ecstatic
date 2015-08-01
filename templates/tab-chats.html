@@ -7,7 +7,8 @@
         <button ng-click="create_room()">Create a channel</button>
       </ion-item>
       <ion-item ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}" class="item-remove-animate item-avatar item-icon-right"><img ng-src="{{chat.face}}"/>
-        <h2>{{chat.name}}</h2>
+        <h2>{{chat.room_id}}</h2>
+        <h2>{{chat}}</h2>
         <p>{{chat.lastText}}</p><i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
