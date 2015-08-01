@@ -96,8 +96,10 @@ exports.setupEcstaticSockets = function(app){
         socket.on('add_song', function (data) {
             var params = JSON.parse(data);
             console.log("rooms="+socket.rooms);
+            //add the song to the db
             add_song(params, socket.rooms[index]);
 
+            
             for(var index = 0; index < socket.rooms.length; index++) {
                 if (socket.rooms[index] != socket.id){
                     socket.broadcast.to(socket.rooms[index]).emit("add_song", params);

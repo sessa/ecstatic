@@ -10,8 +10,13 @@ angular.module('controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  $scope.create_room = function() {
+    console.log("hello");
+    Chats.create_room();
+  };
 
   $scope.chats = Chats.rooms();
+
   // refresh the channels list
   $scope.doRefresh = function() {
 

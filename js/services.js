@@ -1,7 +1,12 @@
-angular.module('services', [])
+angular.module('services', ['btford.socket-io'])
 
-.factory('Chats', function() {
-	// Might use a resource here that returns a JSON array
+.factory('socket', function (socketFactory) {
+  return socketFactory({
+  	ioSocket: io.connect('http://localhost:8080/')
+  });
+})
+
+.factory('Chats', function (socket) {
 
 	// Some fake testing data
 	var chats = [{
@@ -20,9 +25,9 @@ angular.module('services', [])
 	return {
 		rooms: function() {
 			 //gimme the rooms
-			var socket = io('http://localhost:8080/');
+
 			socket.emit('rooms');
-            socket.on('rooms', function (data) {
+			socket.on('rooms', function (data) {
                 console.log("data="+JSON.stringify(data));
                 return data;
             });
@@ -33,7 +38,7 @@ angular.module('services', [])
 		create_room: function(room_name) {
             socket.emit('create_room', {room_name: "testy_room"});
             socket.on('create_room', function (data) {
-                console.log("room created");
+                console.log("room created, data="+data);
                	return data;
             });
 		}
