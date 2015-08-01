@@ -15,20 +15,24 @@ angular.module('services', ['btford.socket-io'])
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
     
+    socket.onopen = function(){  
+        console.log("Socket has been opened!");  
+    };
 	socket.on('rooms', function (data) {
-		listener(data);
-	});
+        listener(data);
+    });
+
 
     function sendRequest(request) {
-	      var defer = $q.defer();
-	      var callbackId = getCallbackId();
-	      callbacks[callbackId] = {
-	        time: new Date(),
-	        cb:defer
-	      };
-	      request.callback_id = callbackId;
-	      console.log('Sending request', request);
-	      socket.emit(request.msg);
+      var defer = $q.defer();
+      var callbackId = getCallbackId();
+      callbacks[callbackId] = {
+        time: new Date(),
+        cb:defer
+      };
+      request.callback_id = callbackId;
+      console.log('Sending request', request);
+      socket.emit(request.msg, request);
       return defer.promise;
     }
 
@@ -37,9 +41,8 @@ angular.module('services', ['btford.socket-io'])
       console.log("Received data from websocket: ", messageObj);
       // If an object exists with callback_id in our callbacks object, resolve it
       if(callbacks.hasOwnProperty(messageObj.callback_id)) {
-        console.log("hello: ");
         console.log(callbacks[messageObj.callback_id]);
-        $rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj.data));
+        $rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj));
         delete callbacks[messageObj.callbackID];
       }
     }

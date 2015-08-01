@@ -15,7 +15,7 @@ angular.module('controllers', [])
     };
     
     Chats.getRooms().then(function(messages) {
-        console.log("in");
+        console.log("in="+messages);
       $scope.chats = messages;
     });
 
@@ -37,7 +37,7 @@ angular.module('controllers', [])
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.create_room($stateParams.chatId);
+  //$scope.chat = Chats.create_room($stateParams.chatId);
 })
 
 .controller('AccountCtrl', function($scope) {
