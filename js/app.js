@@ -24,13 +24,7 @@ mixpanel.init("3cc8de265eae4e9f76364871a4ae56e7", {
 });
 
 
-var app = angular.module('ecstatic', ['ngSanitize','plangular','ngAnimate','ionic','controllers', 'services'])
-
-//configure plangular
-.config(function(plangularConfigProvider){
-    plangularConfigProvider.clientId = '96c11abd04d7d34dc518d9f3ec10a2bc';
-})
-
+var app = angular.module('ecstatic', ['ngSanitize','ngAnimate','ionic','controllers', 'services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
