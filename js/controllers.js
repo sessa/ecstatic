@@ -1,4 +1,5 @@
 angular.module('controllers', [])
+
 .controller('VideoCtrl',
 	["$sce", function ($sce) {
 		this.config = {
@@ -6,15 +7,6 @@ angular.module('controllers', [])
 				{src: $sce.trustAsResourceUrl("http://api.soundcloud.com/tracks/147550599/stream?client_id=b49f9732e4efc7dc0e497012d17b2695"), type: "audio/mpeg"},
 				{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
 				{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
-			],
-			tracks: [
-				{
-					src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
-					kind: "subtitles",
-					srclang: "en",
-					label: "English",
-					default: ""
-				}
 			],
 			theme: "bower_components/videogular-themes-default/videogular.css",
 			plugins: {
@@ -37,16 +29,19 @@ angular.module('controllers', [])
 
   // refresh the channels list
   $scope.doRefresh = function(){
-        Chats.getRooms().then(function(messages) {
-            var chats = [];
-            messages.result.forEach(function(entry) {
-                if(JSON.parse(entry.socket_info).player_state){
-                    chats.push(JSON.parse(entry.socket_info));
-                    console.log(entry.socket_info);
+        Chats.getRooms().then(function(data) {
+
+            var channels = [];
+            var id = 0;
+            data.result.forEach(function(entry) {
+            	var channel = JSON.parse(entry.socket_info).player_state;
+                if(channel){
+                	channel.id = id;
+                	id++;
+                    channels.push(channel);
                 }
             });
-            $scope.chats = chats;
-            console.log("now");
+            $scope.chats = channels;
             //tell the ionScroll that the job is done
             $scope.$broadcast('scroll.refreshComplete');
         }
@@ -55,7 +50,7 @@ angular.module('controllers', [])
 
 .controller('ChatsCreateCtrl', function($scope, Chats) {
     $scope.create_room = function() {
-        Chats.create_room().then(function(messages) {
+        Chats.create_room().then(function(data) {
             console.log("room created");
         });
     };
