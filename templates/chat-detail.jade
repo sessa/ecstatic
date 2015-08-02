@@ -1,10 +1,11 @@
 
-ion-view(view-title='{{chat.name}}')
+ion-view(view-title='{{chat}}')
 	ion-content.padding
 		//img(ng-src='{{chat.face}}', style='width: 64px; height: 64px')
 		//|     
 		//p
 		//	| {{chat.lastText}}
+		p {{chat}}
 		.plangular(plangular='{{chat.url}}')
 			#player.section(ng-controller='mainController')
 				.small-12.large-12.columns.askbox

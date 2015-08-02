@@ -1,10 +1,11 @@
 
-<ion-view view-title="{{chat.name}}">
+<ion-view view-title="{{chat}}">
   <ion-content class="padding">
     <!--img(ng-src='{{chat.face}}', style='width: 64px; height: 64px')-->
     <!--|     -->
     <!--p-->
     <!--	| {{chat.lastText}}-->
+    <p>{{chat}}</p>
     <div plangular="{{chat.url}}" class="plangular">
       <div id="player" ng-controller="mainController" class="section">
         <div class="small-12 large-12 columns askbox">
