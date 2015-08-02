@@ -20,28 +20,28 @@ cors = require('cors');
 //CLIENT
 //Templating
 squad_app = express();
-squad_app.set('views', __dirname + '/views');
+squad_app.set('views', __dirname + '/');
 squad_app.set('view engine', "jade"); 
-squad_app.set('port', 8081); 
-squad_app.use(express.static('views'));
+squad_app.set('port', 3001); 
+squad_app.use(express.static('./'));
 squad_app.use(cors());
 
 //set up sockets
-ecstaticSockets = require("./views/assets/js/ecstaticSockets.js");
+ecstaticSockets = require("./js/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
 
-var dynamodbTest = require("./views/assets/js/dynamodbTest.js");
+var dynamodbTest = require("./js/dynamodbTest.js");
 dynamodbTest.setupdynamodbTest(squad_app);
 
 //routes
 //############Need to refactor this to live in a nosql database. Or Postgresql.
 squad_app.get('/api/upcomingEvents', function(req, res) {
 	//actual event start time = 1434448800000
-    res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1437130800000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
+    res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1438094733000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
 });
 squad_app.get('/api/sync', function(req, res) {
 	console.log(sc_api_url);
-	var returnedjson = calculatePlaylistSync(sc_api_url, 1437130800000 /*Start time @ July 8th in milli*/, function (returnedjson){
+	var returnedjson = calculatePlaylistSync(sc_api_url, 1438094733000 /*Start time @ July 8th in milli*/, function (returnedjson){
 		res.json(JSON.stringify(returnedjson)); 
 	});
 });
