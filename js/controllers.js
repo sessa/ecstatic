@@ -17,7 +17,7 @@ angular.module('controllers', [])
             var chats = [];
             messages.result.forEach(function(entry) {
                 if(JSON.parse(entry.socket_info).player_state){
-                    chats.push(JSON.parse(entry.socket_info).player_state.room_name);
+                    chats.push(JSON.parse(entry.socket_info));
                     console.log(entry.socket_info);
                 }
             });
@@ -39,7 +39,6 @@ angular.module('controllers', [])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   console.log("ChatDetailCtrl");
-  $scope.chat = Chats.create_room($stateParams.chatId);
 })
 
 .controller('AccountCtrl', function($scope) {
