@@ -84,6 +84,15 @@ var app = angular.module('ecstatic', ['ngSanitize','plangular','ngAnimate','ioni
         }
       }
     })
+    .state('tab.chats-create', {
+      url: '/chats/create',
+      views: {
+        'tab-chats': {
+          templateUrl: 'templates/chat-create.html',
+          controller: 'ChatsCreateCtrl'
+        }
+      }
+    })
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
@@ -102,7 +111,7 @@ var app = angular.module('ecstatic', ['ngSanitize','plangular','ngAnimate','ioni
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');

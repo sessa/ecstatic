@@ -10,30 +10,39 @@ angular.module('controllers', [])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-    $scope.create_room = function() {
-        Chats.create_room();
-    };
-    
     Chats.getRooms().then(function(messages) {
-        console.log("in="+messages);
-      $scope.chats = messages;
+        var chats = [];
+        messages.result.forEach(function(entry) {
+            if(JSON.parse(entry.socket_info).player_state){
+                chats.push(JSON.parse(entry.socket_info).player_state.room_name);
+                console.log(entry.socket_info);
+            }
+        });
+        $scope.chats = chats;
     });
 
 
   // refresh the channels list
   $scope.doRefresh = function() {
-	console.log("heyo");
-		console.log($scope.chats);
+    console.log("heyo");
+        console.log($scope.chats);
 
-	//tell the ionScroll that the job is done
-	$scope.$broadcast('scroll.refreshComplete');
+    //tell the ionScroll that the job is done
+    $scope.$broadcast('scroll.refreshComplete');
   };
 
   $scope.remove = function(chat) {
-	Chats.remove(chat);
+    Chats.remove(chat);
   };
 
 
+})
+.controller('ChatsCreateCtrl', function($scope, Chats) {
+    $scope.create_room = function() {
+        Chats.create_room().then(function(messages) {
+            console.log("room created");
+        });
+    };
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {

@@ -43,8 +43,6 @@ exports.setupEcstaticSockets = function(app){
 
         //lists all created rooms
         socket.on('rooms', function (data) {
-                            console.log("data="+data);
-
             var rooms = io.sockets.adapter.rooms;
             var room_ids = [];
             console.log(rooms);

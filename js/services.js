@@ -6,6 +6,7 @@ angular.module('services', ['btford.socket-io'])
   });
 })
 
+// most of this model comes from: http://clintberry.com/2013/angular-js-websocket-service/
 .factory('Chats', ['$q', '$rootScope', 'socket', function($q, $rootScope, socket) {
     // We return this object to anything injecting our service
     var Service = {};
@@ -15,13 +16,12 @@ angular.module('services', ['btford.socket-io'])
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
     
-    socket.onopen = function(){  
-        console.log("Socket has been opened!");  
-    };
 	socket.on('rooms', function (data) {
         listener(data);
     });
-
+    socket.on('create_room', function (data) {
+        listener(data);
+    });
 
     function sendRequest(request) {
       var defer = $q.defer();
@@ -64,6 +64,17 @@ angular.module('services', ['btford.socket-io'])
       var promise = sendRequest(request); 
       return promise;
     }
+
+	Service.create_room = function(room_name) {
+	var request = {
+        msg: "create_room",
+        room_name: "testy_room"
+      }
+      // Storing in a variable for clarity on what sendRequest returns
+      var promise = sendRequest(request); 
+      return promise;
+	}
+
 
     return Service;
 }]);
