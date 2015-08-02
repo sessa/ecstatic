@@ -1,4 +1,28 @@
 angular.module('controllers', [])
+.controller('VideoCtrl',
+	["$sce", function ($sce) {
+		this.config = {
+			sources: [
+				{src: $sce.trustAsResourceUrl("http://api.soundcloud.com/tracks/147550599/stream?client_id=b49f9732e4efc7dc0e497012d17b2695"), type: "audio/mpeg"},
+				{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
+				{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
+			],
+			tracks: [
+				{
+					src: "http://www.videogular.com/assets/subs/pale-blue-dot.vtt",
+					kind: "subtitles",
+					srclang: "en",
+					label: "English",
+					default: ""
+				}
+			],
+			theme: "bower_components/videogular-themes-default/videogular.css",
+			plugins: {
+				poster: "http://www.videogular.com/assets/images/videogular.png"
+			}
+		};
+	}]
+)
 
 .controller('DashCtrl', function($scope) {})
 

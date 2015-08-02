@@ -35,6 +35,14 @@ dynamodbTest.setupdynamodbTest(squad_app);
 
 //routes
 //############Need to refactor this to live in a nosql database. Or Postgresql.
+
+squad_app.use(function(req, res, next) {
+	console.log('meee');
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 squad_app.get('/api/upcomingEvents', function(req, res) {
 	//actual event start time = 1434448800000
     res.json({ host_username: "Internet Wizards", title: "International Startup Fest", start_time: 1438094733000, playlist:"https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"}); 
