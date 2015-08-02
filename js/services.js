@@ -68,7 +68,8 @@ angular.module('services', ['btford.socket-io'])
 	Service.create_room = function(room_name) {
 	var request = {
         msg: "create_room",
-        room_name: "testy_room"
+        room_name: "testy_room",
+        url: "https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"
       }
       // Storing in a variable for clarity on what sendRequest returns
       var promise = sendRequest(request); 

@@ -6,7 +6,7 @@ ion-view(view-title='{{chat}}')
 		//p
 		//	| {{chat.lastText}}
 		p {{chat}}
-		.plangular(plangular='{{chat.url}}')
+		.plangular(plangular='{{chat.playlist}}')
 			#player.section(ng-controller='mainController')
 				.small-12.large-12.columns.askbox
 					form(class="{{showButton}}")

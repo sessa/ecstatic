@@ -8,7 +8,6 @@
       </ion-item>
       <ion-item ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}" class="item-remove-animate item-avatar item-icon-right"><img ng-src="{{chat.face}}"/>
         <h2>{{chat.player_state.room_name}}</h2>
-        <h2>{{chat}}</h2>
         <p>{{chat.lastText}}</p><i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
