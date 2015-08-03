@@ -1,18 +1,21 @@
 angular.module('controllers', [])
 
 .controller('VideoCtrl',
-	["$sce", function ($sce) {
-		this.config = {
-			sources: [
-				{src: $sce.trustAsResourceUrl("http://api.soundcloud.com/tracks/147550599/stream?client_id=b49f9732e4efc7dc0e497012d17b2695"), type: "audio/mpeg"},
-				{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.webm"), type: "video/webm"},
-				{src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.ogg"), type: "video/ogg"}
-			],
-			theme: "bower_components/videogular-themes-default/videogular.css",
-			plugins: {
-				poster: "http://www.videogular.com/assets/images/videogular.png"
+	["$sce", "$scope", "$stateParams","Chats", function($sce, $scope, $stateParams, Chats) {
+
+        Chats.getRooms().then(function(data) {
+        	console.log("stateParams.chatId"+$stateParams.chatId);
+        	var player_state = JSON.parse(data.result[$stateParams.chatId].socket_info).player_state;
+            console.log("data.result="+player_state.sources);
+			$scope.chat = {
+				sources: player_state.sources,
+				theme: "bower_components/videogular-themes-default/videogular.css",
+				plugins: {
+					poster: "http://www.videogular.com/assets/images/videogular.png"
+				}
 			}
-		};
+
+        });
 	}]
 )
 

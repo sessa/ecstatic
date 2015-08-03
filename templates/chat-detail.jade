@@ -1,10 +1,9 @@
 
-ion-view(view-title='{{chat}}')
+ion-view(view-title='{{chat.sources}}')
 	ion-content.padding
 		p(ng-controller="VideoCtrl as controller")
-			p {{chat.id}}
-			videogular(vg-theme="controller.config.theme")
-				vg-media(vg-src="controller.config.sources")
+			videogular(vg-theme="chat.theme")
+				vg-media(vg-src="chat.sources")
 				vg-controls
 					vg-play-pause-button
 			
