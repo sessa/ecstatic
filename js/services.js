@@ -16,7 +16,7 @@ angular.module('services', ['btford.socket-io'])
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
     
-	socket.on('rooms', function (data) {
+	  socket.on('rooms', function (data) {
         listener(data);
     });
     socket.on('create_room', function (data) {
@@ -69,7 +69,11 @@ angular.module('services', ['btford.socket-io'])
 	var request = {
         msg: "create_room",
         room_name: "testy_room",
-        url: "https://soundcloud.com/silentdiscosquad/sets/radio-startupfest-friday-july"
+        sources: [
+          {src: "http://api.soundcloud.com/tracks/147550599/stream?client_id=b49f9732e4efc7dc0e497012d17b2695", type: "audio/mpeg"},
+          {src: "http://static.videogular.com/assets/videos/videogular.webm", type: "video/webm"},
+          {src: "http://static.videogular.com/assets/videos/videogular.ogg", type: "video/ogg"}
+        ]
       }
       // Storing in a variable for clarity on what sendRequest returns
       var promise = sendRequest(request); 

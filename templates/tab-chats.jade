@@ -3,10 +3,10 @@ ion-view(view-title='Channels')
 		ion-refresher(pulling-text="Pull to refresh", on-refresh="doRefresh()")
 		ion-list
 			ion-item
-				button Create a channel
+				a(href="#/tab/chats/create") Create a channel
 			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='chat in chats', type='item-text-wrap', href='#/tab/chats/{{chat.id}}')
 				img(ng-src='{{chat.face}}')
-				h2 {{chat.name}}
-				p {{chat.lastText}}
+				h2 {{chat.room_name}}
+				h2 {{chat.id}}
 				i.icon.ion-chevron-right.icon-accessory
 				

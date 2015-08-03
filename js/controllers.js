@@ -1,5 +1,24 @@
 angular.module('controllers', [])
 
+.controller('VideoCtrl',
+	["$sce", "$scope", "$stateParams","Chats", function($sce, $scope, $stateParams, Chats) {
+
+        Chats.getRooms().then(function(data) {
+        	console.log("stateParams.chatId"+$stateParams.chatId);
+        	var player_state = JSON.parse(data.result[$stateParams.chatId].socket_info).player_state;
+            console.log("data.result="+player_state.sources);
+			$scope.chat = {
+				sources: player_state.sources,
+				theme: "bower_components/videogular-themes-default/videogular.css",
+				plugins: {
+					poster: "http://www.videogular.com/assets/images/videogular.png"
+				}
+			}
+
+        });
+	}]
+)
+
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -13,16 +32,19 @@ angular.module('controllers', [])
 
   // refresh the channels list
   $scope.doRefresh = function(){
-        Chats.getRooms().then(function(messages) {
-            var chats = [];
-            messages.result.forEach(function(entry) {
-                if(JSON.parse(entry.socket_info).player_state){
-                    chats.push(JSON.parse(entry.socket_info));
-                    console.log(entry.socket_info);
+        Chats.getRooms().then(function(data) {
+
+            var channels = [];
+            var id = 0;
+            data.result.forEach(function(entry) {
+            	var channel = JSON.parse(entry.socket_info).player_state;
+                if(channel){
+                	channel.id = id;
+                	id++;
+                    channels.push(channel);
                 }
             });
-            $scope.chats = chats;
-            console.log("now");
+            $scope.chats = channels;
             //tell the ionScroll that the job is done
             $scope.$broadcast('scroll.refreshComplete');
         }
@@ -31,7 +53,7 @@ angular.module('controllers', [])
 
 .controller('ChatsCreateCtrl', function($scope, Chats) {
     $scope.create_room = function() {
-        Chats.create_room().then(function(messages) {
+        Chats.create_room().then(function(data) {
             console.log("room created");
         });
     };

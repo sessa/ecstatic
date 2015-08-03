@@ -31,7 +31,6 @@ ecstaticSockets = require("./js/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
 
 //routes
-//############Need to refactor this to live in a nosql database. Or Postgresql.
 squad_app.get('*', function(req, res) {
   	res.render('index');
 });

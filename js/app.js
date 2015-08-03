@@ -24,7 +24,18 @@ mixpanel.init("3cc8de265eae4e9f76364871a4ae56e7", {
 });
 
 
-var app = angular.module('ecstatic', ['ngSanitize','ngAnimate','ionic','controllers', 'services'])
+var app = angular.module('ecstatic', [
+      'ngSanitize',
+      'ngAnimate',
+      'ionic',
+      'controllers', 
+      'services',
+      'com.2fdevs.videogular',
+      'com.2fdevs.videogular.plugins.controls',
+      'com.2fdevs.videogular.plugins.overlayplay',
+      'com.2fdevs.videogular.plugins.poster'
+
+])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -92,7 +103,7 @@ var app = angular.module('ecstatic', ['ngSanitize','ngAnimate','ionic','controll
       views: {
         'tab-chats': {
           templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'VideoCtrl'
         }
       }
     })
