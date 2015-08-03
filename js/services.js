@@ -6,16 +6,23 @@ angular.module('services', ['btford.socket-io'])
   });
 })
 
-.factory('Souncloud',['$q', function($q) {
-    SC.initialize({
-        client_id: 'd977aa793080e7656a3b73f35a27406f',
-        redirect_uri: 'http://soundcloud.dev/soundcloud.html'
-    });
-    var data;
-    SC.get('/users/kavverhouzer', function(data) {
-        data = data;
-    });
-    return data;
+.factory('Soundcloud',['$q', '$rootScope', function($q, $rootScope) {
+      var Service = {};
+      var defer = $q.defer();
+
+      Service.getUser = function() {
+        SC.initialize({
+            client_id: '9d93a2f8833de3799958dfecf637cd9a',
+            redirect_uri: 'http://soundcloud.dev/soundcloud.html'
+        });
+
+        SC.get('/tracks', {q:'buskers'}, function(data) {
+            $rootScope.$apply(defer.resolve(data));
+        });
+        return defer.promise;
+      }
+
+    return Service;
 }])
 
 // most of this model comes from: http://clintberry.com/2013/angular-js-websocket-service/

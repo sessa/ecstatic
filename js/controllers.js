@@ -2,7 +2,7 @@ angular.module('controllers', [])
 
 .controller('VideoCtrl',
 	["$sce", "$scope", "$stateParams", "Chats", function($sce, $scope, $stateParams, Chats) {
-
+		console.log("Chats="+Chats);
         Chats.getRooms().then(function(data) {
         	console.log("stateParams.chatId"+$stateParams.chatId);
         	var player_state = JSON.parse(data.result[$stateParams.chatId].socket_info).player_state;
@@ -21,8 +21,11 @@ angular.module('controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsSCPick',[ 'Soundcloud', function(Soundcloud) {
-    console.log(Soundcloud)
+.controller('ChatsSCPick',["Soundcloud", '$scope', function(Soundcloud, $scope) {
+	Soundcloud.getUser().then(function(data){
+		$scope.sc = data;
+	    console.log("Soundcloud="+JSON.stringify(data));
+	});
 }])
 
 .controller('ChatsCtrl', function($scope, Chats) {
