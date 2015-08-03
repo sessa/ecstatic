@@ -1,7 +1,7 @@
 angular.module('controllers', [])
 
 .controller('VideoCtrl',
-	["$sce", "$scope", "$stateParams","Chats", function($sce, $scope, $stateParams, Chats) {
+	["$sce", "$scope", "$stateParams", "Chats", function($sce, $scope, $stateParams, Chats) {
 
         Chats.getRooms().then(function(data) {
         	console.log("stateParams.chatId"+$stateParams.chatId);
@@ -20,6 +20,10 @@ angular.module('controllers', [])
 )
 
 .controller('DashCtrl', function($scope) {})
+
+.controller('ChatsSCPick',[ 'Soundcloud', function(Soundcloud) {
+    console.log(Soundcloud)
+}])
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called

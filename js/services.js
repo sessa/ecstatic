@@ -6,6 +6,18 @@ angular.module('services', ['btford.socket-io'])
   });
 })
 
+.factory('Souncloud',['$q', function($q) {
+    SC.initialize({
+        client_id: 'd977aa793080e7656a3b73f35a27406f',
+        redirect_uri: 'http://soundcloud.dev/soundcloud.html'
+    });
+    var data;
+    SC.get('/users/kavverhouzer', function(data) {
+        data = data;
+    });
+    return data;
+}])
+
 // most of this model comes from: http://clintberry.com/2013/angular-js-websocket-service/
 .factory('Chats', ['$q', '$rootScope', 'socket', function($q, $rootScope, socket) {
     // We return this object to anything injecting our service
@@ -84,25 +96,3 @@ angular.module('services', ['btford.socket-io'])
     return Service;
 }]);
 
-/*.factory('Chats', [ function (socket) {
-
-	return {
-		rooms: function() {
-			socket.emit('rooms');
-			socket.on('rooms', function (data) {
-				data.forEach(function(chat) { console.log(chat.room_id); });
-                return data;
-            });
-		},
-		remove: function(chat) {
-			chats.splice(chats.indexOf(chat), 1);
-		},
-		create_room: function(room_name) {
-            socket.emit('create_room', {room_name: "testy_room"});
-            socket.on('create_room', function (data) {
-                console.log("room created, data="+data);
-               	return data;
-            });
-		}
-	};
-}]);*/
