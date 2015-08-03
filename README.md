@@ -1,29 +1,65 @@
 README.md
 
+
+		         (
+		         )\
+		         {_}
+		        .-;-.
+		       |'-=-'|
+		       |     |
+		       |     |
+		       |     |
+		       |     |
+		       '.___.'
+
+	  Thank you for being here.
+
 ---------------------
 todos
 
 	refactoring
 
 	**ionic is both in lib and node_modules ???
+	**same for socket.io ???
 	**find & replace chat(s) to channel(s)
+	**find & replace dash to home
 	**rename the 'ecstatic' module or it's file name
 	**rename index.js to server.js and add a npm start script 
+	**hookup cordova
+	**removed unused libraries
+	**retire mainController?
+
 
 
 ---------------------
 the server
 	
+
 	index.js
 
 
 ---------------------
-States
+states
 
-	1. Channel list
-	2. Create a channel
-	3. Channel details/Player
-	4. Soundcloud Media Picker
+	0. 'tab' Abstract state for the tabs directive
+
+		1. 'tab.dash' The home tab
+
+
+		2 'tab.chats' Channel list
+
+
+		3. 'tab.chats-create' Create a channel
+
+
+		4. 'tab.chats-scpick' Soundcloud Media Picker
+
+
+		5. 'tab.chat-detail' Channel Player
+
+
+		6. 'tab.account' The Star tab
+
 
 
 ---------------------
@@ -46,24 +82,34 @@ angular modules
 				.create_room service
 					promises to create a room with room_name and a list of sources (URLs)
 				.getRooms service
+					provides a list of all rooms
 
 
 	2. 'controllers' (js/controllers.js)
 
-			VideoCtrl
+			1. VideoCtrl
+						plays media from the .getRooms service's list of sources
 
-			ChatsSCPick
 
-			ChatsCtrl
+			2. ChatsSCPick
+						.getUser
+							asks 'Soundcloud' factory for some data 
 
-			ChatsCreateCtrl
+			3. ChatsCtrl
+						.doRefresh
+							refreshes the list when pulled down
 
-			ChatDetailCtrl
+			4. ChatsCreateCtrl
+						.create_room
+							asks for a create_room promise to 'Chats' factory
+
+			5. ChatDetailCtrl
+
 
 
 	3. 'ecstatic'  (js/app.js)
 
-		!dependencies
+		dependencies
 
 				angular and ionic
 			      'ngSanitize',
@@ -79,6 +125,11 @@ angular modules
 			    modules
 			      'controllers', 
 			      'services',
+
+		inits ionic
+
+		state config
+
 
 
 ---------------------
@@ -105,7 +156,7 @@ libraries
 ---------------------
 tests
 
-	
+
 	Gruntfile.js (test)
 
 
