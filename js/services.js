@@ -29,7 +29,6 @@ angular.module('services', ['btford.socket-io'])
   var Service = {};
   Service.playlist = [];
   Service.add = function(source) {
-    console.log("adding");
     Service.playlist.push(source);
   }
   Service.remove = function(index) {
@@ -40,8 +39,24 @@ angular.module('services', ['btford.socket-io'])
   }
   return Service;
 })
+
+.factory('channelModel', function($rootScope){
+  var Service = {};
+  Service.channels = [];
+  Service.add = function(channel) {
+    Service.channels.push(channel);
+  }
+  Service.set = function(channels) {
+    Service.channels = channels;
+  }
+  Service.remove = function(index) {
+    Service.channels.remove(index);
+  }
+  return Service;
+})
+
 // most of this model comes from: http://clintberry.com/2013/angular-js-websocket-service/
-.factory('Chats', ['$q', '$rootScope', 'socket', function($q, $rootScope, socket) {
+.factory('Chats', ['$q', '$rootScope', 'socket', 'channelModel', 'playlistModel', function($q, $rootScope, socket, channelModel, playlistModel) {
     // We return this object to anything injecting our service
     var Service = {};
     // Keep all pending requests here until they get responses
@@ -50,11 +65,12 @@ angular.module('services', ['btford.socket-io'])
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
     
-	  socket.on('rooms', function (data) {
-        listener(data);
-    });
     socket.on('create_room', function (data) {
         listener(data);
+    });
+    socket.on('rooms', function (data) {
+        listener(data);
+        channelModel.set(data);
     });
 
     function sendRequest(request) {
@@ -65,7 +81,7 @@ angular.module('services', ['btford.socket-io'])
         cb:defer
       };
       request.callback_id = callbackId;
-      console.log('Sending request', request);
+      console.log('Sending request', JSON.stringify(request));
       socket.emit(request.msg, request);
       return defer.promise;
     }
@@ -75,7 +91,6 @@ angular.module('services', ['btford.socket-io'])
       console.log("Received data from websocket: ", messageObj);
       // If an object exists with callback_id in our callbacks object, resolve it
       if(callbacks.hasOwnProperty(messageObj.callback_id)) {
-        console.log(callbacks[messageObj.callback_id]);
         $rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj));
         delete callbacks[messageObj.callbackID];
       }
@@ -100,19 +115,19 @@ angular.module('services', ['btford.socket-io'])
     }
 
 	Service.create_room = function(room_name) {
-	var request = {
-        msg: "create_room",
-        room_name: "testy_room",
-        sources: [
-          {src: "http://api.soundcloud.com/tracks/147550599/stream?client_id=b49f9732e4efc7dc0e497012d17b2695", type: "audio/mpeg"},
-          {src: "http://static.videogular.com/assets/videos/videogular.webm", type: "video/webm"},
-          {src: "http://static.videogular.com/assets/videos/videogular.ogg", type: "video/ogg"}
-        ]
-      }
-      // Storing in a variable for clarity on what sendRequest returns
-      var promise = sendRequest(request); 
-      return promise;
-	}
+    var sources = [];
+    for(var index = 0; index < playlistModel.playlist.length; index++){
+      sources.push({src:playlistModel.playlist[index].uri, type:"audio/"+playlistModel.playlist[index].original_format})
+    }
+  	var request = {
+          msg: "create_room",
+          room_name: "testy_room",
+          sources: sources
+        }
+        // Storing in a variable for clarity on what sendRequest returns
+        var promise = sendRequest(request); 
+        return promise;
+  	}
 
 
     return Service;

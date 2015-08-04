@@ -1,7 +1,16 @@
+
 <ion-view view-title="Create a Channel">
+  <ion-nav-buttons side="secondary">
+    <button ng-click="create_room()">add songs</button>
+  </ion-nav-buttons>
   <ion-content>
-  	<a href="#/tab/chats/scpick">Choose songs from Soundcloud </a>
-  	<input ng-model="newItem" type="text"></input>
-  	<button ng-click="create_room()">Create a Channel </button>
+    <ion-list class="list">
+      <ion-item ng-repeat="source in sc track by $index" class="item">
+        <button ng-click="add_to_playlist(source)">Add</button>
+        <p>Title: "{{source.title}}" </p>
+        <p>Artist: "{{source.user.username}}"</p>
+        <p>Duration: "{{source.duration}}"</p>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

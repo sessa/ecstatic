@@ -22,15 +22,6 @@ angular.module('controllers', [])
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsSCPick', ["Soundcloud", '$scope', 'playlistModel', function(Soundcloud, $scope, playlistModel) {
-	var songs
-	Soundcloud.getUser().then(function(data){
-		$scope.sc = data;
-	    console.log("Soundcloud="+JSON.stringify(data));
-	});
-	$scope.add_to_playlist = function(source){
-		console.log("add song="+JSON.stringify(source.title));
-		playlistModel.add(source);
-	}
 }])
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -63,20 +54,25 @@ angular.module('controllers', [])
     )};
 })
 
-.controller('ChatsCreateCtrl', function($scope, Chats) {
+.controller('ChatsCreateCtrl', ["Soundcloud", '$scope', 'playlistModel','Chats', function(Soundcloud, $scope, playlistModel, Chats) {
+    
     $scope.create_room = function() {
-        Chats.create_room().then(function(data) {
+        Chats.create_room("test").then(function(data) {
+        	console.log("data="+data);
             console.log("room created");
         });
-    };
-})
+    }
+
+    Soundcloud.getUser().then(function(data){
+		$scope.sc = data;
+	});
+	$scope.add_to_playlist = function(source){
+		console.log("add song="+JSON.stringify(source.title));
+		playlistModel.add(source);
+	}
+
+}])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
   console.log("ChatDetailCtrl");
-})
-
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-	enableFriends: true
-  };
 });
