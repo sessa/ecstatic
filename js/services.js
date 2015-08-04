@@ -25,6 +25,21 @@ angular.module('services', ['btford.socket-io'])
     return Service;
 }])
 
+.factory('playlistModel', function($rootScope){
+  var Service = {};
+  Service.playlist = [];
+  Service.add = function(source) {
+    console.log("adding");
+    Service.playlist.push(source);
+  }
+  Service.remove = function(index) {
+    Service.playlist.remove(index);
+  }
+  Service.getAll = function() {
+    return playlist;
+  }
+  return Service;
+})
 // most of this model comes from: http://clintberry.com/2013/angular-js-websocket-service/
 .factory('Chats', ['$q', '$rootScope', 'socket', function($q, $rootScope, socket) {
     // We return this object to anything injecting our service

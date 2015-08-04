@@ -1,3 +1,9 @@
 ion-view(view-title='{{sc.id}}')
 	ion-content.padding
-		h1 Soundcloud Picker!		
+		h1 Soundcloud Picker!
+		ul(class="list")
+			li(class="item", ng-repeat="source in sc track by $index")
+				button(ng-click="add_to_playlist(source)") Add
+				p Title: "{{source.title}}" 
+				p Artist: "{{source.user.username}}"
+				p Duration: "{{source.duration}}"
