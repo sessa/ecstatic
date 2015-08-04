@@ -1,0 +1,13 @@
+ion-view(view-title='{{chat.sources}}')
+	ion-content.padding
+		p(ng-controller="ctrl")
+			videogular(vg-theme="chat.theme")
+				vg-media(vg-src="chat.sources")
+				vg-controls
+					vg-play-pause-button
+					vg-scrub-bar
+						vg-scrub-bar-current-time
+					vg-volume
+						vg-mute-button
+						vg-volume-bar
+					vg-fullscreen-button
