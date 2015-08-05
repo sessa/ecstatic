@@ -1,1 +1,1 @@
-angular.module('ecstatic.player', ['channel'])
+angular.module('ecstatic.player', [])

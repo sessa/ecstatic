@@ -30,6 +30,7 @@ var app = angular.module('ecstatic', [
       'ionic',
       'controllers', 
       'ecstatic.player',
+      'ecstatic.sockets',
       'services',
       'com.2fdevs.videogular',
       'com.2fdevs.videogular.plugins.controls',
@@ -99,21 +100,12 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.chats-scpick', {
-      url: '/chats/scpick',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chats-scpick.html',
-          controller: 'ChatsSCPick'
-        }
-      }
-    })
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
           templateUrl: 'player/player.html',
-          controller: 'ctrl'
+          controller: 'PlayerCtrl'
         }
       }
     })

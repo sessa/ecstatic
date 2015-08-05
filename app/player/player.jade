@@ -1,8 +1,8 @@
-ion-view(view-title='{{chat.sources}}')
+ion-view(view-title='room_name')
 	ion-content.padding
-		p(ng-controller="ctrl")
-			videogular(vg-theme="chat.theme")
-				vg-media(vg-src="chat.sources")
+		p(ng-controller="PlayerCtrl")
+			videogular(vg-theme="channel.theme")
+				vg-media(vg-src="channel.sources")
 				vg-controls
 					vg-play-pause-button
 					vg-scrub-bar

@@ -2,10 +2,7 @@ angular.module('controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsSCPick', ["Soundcloud", '$scope', 'playlistModel', function(Soundcloud, $scope, playlistModel) {
-}])
-
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope, socketManager) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -16,7 +13,7 @@ angular.module('controllers', [])
 
   // refresh the channels list
   $scope.doRefresh = function(){
-        Chats.getRooms().then(function(data) {
+        socketManager.getRooms().then(function(data) {
 
             var channels = [];
             var id = 0;
@@ -35,10 +32,10 @@ angular.module('controllers', [])
     )};
 })
 
-.controller('ChatsCreateCtrl', ["Soundcloud", '$scope', 'playlistModel','Chats', function(Soundcloud, $scope, playlistModel, Chats) {
+.controller('ChatsCreateCtrl', ['Soundcloud', '$scope', 'playlistModel','socketManager', function(Soundcloud, $scope, playlistModel, socketManager) {
     
     $scope.create_room = function() {
-        Chats.create_room("test").then(function(data) {
+        socketManager.create_room("test").then(function(data) {
         	console.log("data="+data);
             console.log("room created");
         });
@@ -54,6 +51,6 @@ angular.module('controllers', [])
 
 }])
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, socketManager) {
   console.log("ChatDetailCtrl");
 });
