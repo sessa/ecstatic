@@ -1,4 +1,4 @@
-angular.module('ecstatic.sockets', ['btford.socket-io'])
+angular.module('ecstatic.sockets')
 
 .factory('socket', function (socketFactory) {
   return socketFactory({
@@ -63,15 +63,14 @@ angular.module('ecstatic.sockets', ['btford.socket-io'])
       var promise = sendRequest(request); 
       return promise;
     }
-
-  	Service.create_room = function(room_name) {
+    Service.createRoom = function(room_name) {
       var sources = [];
       for(var index = 0; index < playlistModel.playlist.length; index++){
         //for each song in the playlist
         var media = playlistModel.playlist[index];
         sources.push({src:media.stream_url + '?client_id=9d93a2f8833de3799958dfecf637cd9a', type:"audio/"+media.original_format})
       }
-    	var request = {
+      var request = {
             msg: "create_room",
             room_name: "testy_room",
             sources: sources
@@ -79,6 +78,7 @@ angular.module('ecstatic.sockets', ['btford.socket-io'])
           // Storing in a variable for clarity on what sendRequest returns
           var promise = sendRequest(request); 
           return promise;
-    	}
+      }
+
     return Service;
 }]);

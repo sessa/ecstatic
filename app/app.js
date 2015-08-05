@@ -81,7 +81,6 @@ var app = angular.module('ecstatic', [
       }
     }
   })
-
   .state('tab.chats', {
       url: '/chats',
       views: {
