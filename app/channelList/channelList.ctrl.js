@@ -1,6 +1,4 @@
-angular.module('controllers', ['ecstatic.sockets'])
-
-.controller('DashCtrl', function($scope) {})
+angular.module('ecstatic.channelList', ['ecstatic.sockets'])
 
 .controller('ChatsCtrl', ['$scope', 'socketManager', function($scope, socketManager) {
   // With the new view caching in Ionic, Controllers are only called

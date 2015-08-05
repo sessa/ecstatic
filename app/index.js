@@ -27,7 +27,7 @@ squad_app.use(express.static('./'));
 squad_app.use(cors());
 
 //set up sockets
-ecstaticSockets = require("./js/ecstaticSockets.js");
+ecstaticSockets = require("./lib/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
 
 //routes
