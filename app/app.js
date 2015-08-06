@@ -69,7 +69,7 @@ var app = angular.module('ecstatic', [
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'index/tabs.html'
   })
 
   // Each tab has its own nav history stack:
@@ -78,7 +78,7 @@ var app = angular.module('ecstatic', [
     url: '/dash',
     views: {
       'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
+        templateUrl: 'dash/tab-dash.html',
         controller: 'DashCtrl'
       }
     }
@@ -87,7 +87,7 @@ var app = angular.module('ecstatic', [
       url: '/chats',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
+          templateUrl: 'channelList/tab-chats.html',
           controller: 'ChatsCtrl'
         }
       }
@@ -96,7 +96,7 @@ var app = angular.module('ecstatic', [
       url: '/chats/create',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/chat-create.html',
+          templateUrl: 'sockets/chat-create.html',
           controller: 'ChatsCreateCtrl'
         }
       }
