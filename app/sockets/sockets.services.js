@@ -38,7 +38,7 @@ angular.module('ecstatic.sockets')
 
     function listener(data) {
       var messageObj = data;
-      console.log("Received data from websocket: ", messageObj);
+      console.log("Received data from websocket: ", JSON.stringify(messageObj));
       // If an object exists with callback_id in our callbacks object, resolve it
       if(callbacks.hasOwnProperty(messageObj.callback_id)) {
         $rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj));
