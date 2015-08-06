@@ -20,6 +20,7 @@ cors = require('cors');
 //CLIENT
 //Templating
 squad_app = express();
+console.log("dirname="+__dirname);
 squad_app.set('views', __dirname + '/');
 squad_app.set('view engine', "jade"); 
 squad_app.set('port', 3001); 

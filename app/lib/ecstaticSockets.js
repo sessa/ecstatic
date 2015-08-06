@@ -54,12 +54,7 @@ exports.setupEcstaticSockets = function(app){
 
             //check whether the owner is in the room, if they are, then add the room
             async.map(room_ids, get_room_info, function (err, result){
-                if(data.callback_id !== undefined){
-                    socket.emit("rooms", {result:result, callback_id: data.callback_id});
-                }
-                else{
-                    socket.emit("rooms", {result:result});
-                }
+                socket.emit("rooms", {result:result, callback_id: data.callback_id});
             });
         });
 
