@@ -36,7 +36,7 @@ exports.setupEcstaticSockets = function(app){
             client.get(socket.id, function (err, socket_info){
                 socket_info_dict = JSON.parse(socket_info);
                 socket_info_dict.callback_id = data.callback_id;
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playing_song_index':0, 'elapsed': 0, 'timestamp': new Date().getTime(), room_name: data.room_name, sources: data.sources};
+                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playing_song_index':0, 'elapsed': 0, 'timestamp': new Date().getTime(), room_name: data.room_name, sources: data.sources, room_id: socket.id};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
                 io.sockets.emit("create_room", socket_info_dict);
             });

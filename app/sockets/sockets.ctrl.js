@@ -1,11 +1,11 @@
 angular.module('ecstatic.sockets')
 
-.controller('ChatsCreateCtrl', ['soundcloudService', '$scope', 'playlistModel','socketManager', function(soundcloudService, $scope, playlistModel, socketManager) {
+.controller('ChatsCreateCtrl', ['soundcloudService', '$scope', 'playlistModel','socketManager','$state', function(soundcloudService, $scope, playlistModel, socketManager, $state) {
     
     $scope.create_room = function() {
         socketManager.createRoom("test").then(function(data) {
-        	console.log("data="+data);
-            console.log("room created");
+        	console.log("data="+JSON.stringify(data));
+            $state.go('tab.chat-detail', {room_id:data.player_state.room_id});
         });
     }
 

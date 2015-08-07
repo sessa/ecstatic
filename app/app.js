@@ -101,7 +101,7 @@ var app = angular.module('ecstatic', [
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+      url: '/chats/:room_id',
       views: {
         'tab-chats': {
           templateUrl: 'player/player.html',

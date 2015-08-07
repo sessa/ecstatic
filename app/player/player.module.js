@@ -1,1 +1,1 @@
-angular.module('ecstatic.player', [])
+angular.module('ecstatic.player', ['ecstatic.models'])
