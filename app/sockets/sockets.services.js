@@ -16,7 +16,7 @@ angular.module('ecstatic.sockets')
     // Create our websocket object with the address to the websocket
     
     socket.on('create_room', function (data) {
-      console.log("create_room_data="+data);
+      console.log("create_room_data="+JSON.stringify(data));
         channelModel.add(data);
         listener(data);
     });
