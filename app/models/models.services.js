@@ -21,12 +21,9 @@ angular.module('ecstatic.models', [])
   var Service = {};
   Service.channels = [];
   Service.add = function(channel) {
-    console.log("add, channel.player_state="+JSON.stringify(channel.player_state));
     Service.channels.push(channel.player_state);
   }
   Service.get = function(room_id){
-    console.log("get, room_Id"+room_id);
-    console.log("get, Service.channels = "+Service.channels);
     for(var index = 0; index < Service.channels.length; index++){
       var channel = Service.channels[index];
       if(channel.room_id == room_id){
@@ -39,7 +36,6 @@ angular.module('ecstatic.models', [])
     var roomList = rooms.roomList;
     for(var index = 0; index < roomList.length; index++){
       if(roomList[index].player_state){
-        console.log("set, Service.channels.push="+JSON.stringify(roomList[index].player_state));
         Service.channels.push(roomList[index].player_state);
       }
     }
