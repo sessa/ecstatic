@@ -34,10 +34,6 @@ var app = angular.module('ecstatic', [
       'ecstatic.soundcloud',
       'ecstatic.dash',
       'ecstatic.channelList',
-      'com.2fdevs.videogular',
-      'com.2fdevs.videogular.plugins.controls',
-      'com.2fdevs.videogular.plugins.overlayplay',
-      'com.2fdevs.videogular.plugins.poster'
 ])
 
 .run(function($ionicPlatform) {
