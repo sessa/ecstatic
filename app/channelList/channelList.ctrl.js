@@ -17,6 +17,6 @@ angular.module('ecstatic.channelList', ['ecstatic.sockets'])
             $scope.$broadcast('scroll.refreshComplete');
         }
     )};
-          $scope.doRefresh();
+    $scope.doRefresh();
 
 }]);
