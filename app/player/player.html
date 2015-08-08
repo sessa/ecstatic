@@ -1,9 +1,9 @@
 
 <ion-view view-title="room_name">
-  <ion-content class="padding">
+  <ion-content class="padding"><br/><br/><br/>
     <p ng-controller="PlayerCtrl as controller">
-      <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-autoplay="controller.autoplay">
-        <vg-media vg-src="controller.sources"></vg-media>
+      <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-autoplay="controller.autoplay" class="videogular-container audio">
+        <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
         <vg-controls>
           <vg-play-pause-button></vg-play-pause-button>
           <vg-scrub-bar>

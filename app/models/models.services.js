@@ -4,9 +4,7 @@ angular.module('ecstatic.models', [])
   var Service = {};
   Service.playlist = [];
   Service.add = function(source) {
-    console.log("service.playlist="+JSON.stringify(Service.playlist));
     Service.playlist.push(source);
-    console.log("service.playlist="+JSON.stringify(Service.playlist));
   }
   Service.remove = function(index) {
     Service.playlist.remove(index);
@@ -32,7 +30,6 @@ angular.module('ecstatic.models', [])
     }
   }
   Service.set = function(rooms) {
-    console.log("set, rooms="+JSON.stringify(rooms));
     var roomList = rooms.roomList;
     for(var index = 0; index < roomList.length; index++){
       if(roomList[index].player_state){

@@ -13,7 +13,6 @@ angular.module('ecstatic.player')
 		var controller = this;
 		controller.API = null;
 		controller.onPlayerReady = function(API) {
-			console.log("hererher");
 			controller.API = API;
 		};
 		controller.autoplay = true;
