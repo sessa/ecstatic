@@ -20,7 +20,7 @@ angular.module('ecstatic.sockets')
         channelModel.add(data);
         listener(data);
     });
-    socket.on('rooms', function (data) {
+    socket.on('roomList', function (data) {
         listener(data);
         channelModel.set(data);
     });
@@ -59,7 +59,7 @@ angular.module('ecstatic.sockets')
     // Define a "getter" for getting customer data
     Service.getRooms = function() {
       var request = {
-        msg: "rooms"
+        msg: "roomList"
       }
       // Storing in a variable for clarity on what sendRequest returns
       var promise = sendRequest(request); 

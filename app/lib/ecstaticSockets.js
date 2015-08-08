@@ -43,7 +43,7 @@ exports.setupEcstaticSockets = function(app){
         });
 
         //lists all created rooms
-        socket.on('rooms', function (data) {
+        socket.on('roomList', function (data) {
             var rooms = io.sockets.adapter.rooms;
             var room_ids = [];
             console.log(rooms);
@@ -53,14 +53,17 @@ exports.setupEcstaticSockets = function(app){
             }
 
             //check whether the owner is in the room, if they are, then add the room
-            async.map(room_ids, get_room_info, function (err, result){
-                socket.emit("rooms", {result:result, callback_id: data.callback_id});
+            async.map(room_ids, get_room_info, function (err, roomList){
+                console.log("roomList="+JSON.stringify(roomList));
+                socket.emit("roomList", {roomList:roomList, callback_id: data.callback_id});
             });
         });
 
         function get_room_info(room_id, callback){
-            client.get(room_id, function (err, socket_info){
-                callback(null, {room_id: room_id, socket_info: socket_info, users: io.sockets.adapter.rooms[room_id]});
+            client.get(room_id, function (err, player_state){
+                var parsed = JSON.parse(player_state);
+                parsed.users = io.sockets.adapter.rooms[room_id];
+                callback(null, parsed);
             });
         }
         

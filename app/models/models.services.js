@@ -21,22 +21,28 @@ angular.module('ecstatic.models', [])
   var Service = {};
   Service.channels = [];
   Service.add = function(channel) {
-    console.log("Service.channels="+JSON.stringify(channel));
-    Service.channels.push(channel);
+    console.log("add, channel.player_state="+JSON.stringify(channel.player_state));
+    Service.channels.push(channel.player_state);
   }
-  Service.get = function(channelId){
+  Service.get = function(room_id){
+    console.log("get, room_Id"+room_id);
+    console.log("get, Service.channels = "+Service.channels);
     for(var index = 0; index < Service.channels.length; index++){
-      console.log("channelId="+channelId);
-      console.log("Service.channels="+JSON.stringify(Service.channels));
-      console.log("Service.channels[index].player_state.room_id"+Service.channels[index].player_state.room_id);
-      if(Service.channels[index].player_state.room_id == channelId){
-        console.log("where equal");
+      var channel = Service.channels[index];
+      if(channel.room_id == room_id){
         return Service.channels[index];
       }
     }
   }
-  Service.set = function(channels) {
-    Service.channels = channels;
+  Service.set = function(rooms) {
+    console.log("set, rooms="+JSON.stringify(rooms));
+    var roomList = rooms.roomList;
+    for(var index = 0; index < roomList.length; index++){
+      if(roomList[index].player_state){
+        console.log("set, Service.channels.push="+JSON.stringify(roomList[index].player_state));
+        Service.channels.push(roomList[index].player_state);
+      }
+    }
   }
   Service.remove = function(index) {
     Service.channels.remove(index);

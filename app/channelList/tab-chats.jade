@@ -4,9 +4,9 @@ ion-view(view-title='Channels')
 		ion-list
 			ion-item
 				a(href="#/tab/chats/create") Create a channel
-			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='chat in chats', type='item-text-wrap', href='#/tab/chats/{{chat.id}}')
-				img(ng-src='{{chat.face}}')
-				h2 {{chat.room_name}}
-				h2 {{chat.id}}
+			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='room in rooms', type='item-text-wrap', href='#/tab/chats/{{room.room_id}}')
+				img(ng-src='{{room.face}}')
+				h2 {{room.room_name}}
+				h2 {{room.room_id}}
 				i.icon.ion-chevron-right.icon-accessory
 				
