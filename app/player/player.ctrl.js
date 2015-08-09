@@ -1,7 +1,7 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope","$stateParams", "channelModel", function($sce, $scope, $stateParams, channelModel) {
+	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout) {
 		
 		//parse sources
 		var player_state = channelModel.get($stateParams.room_id);
@@ -12,7 +12,6 @@ angular.module('ecstatic.player')
 		controller.currentItem = 0;
 		controller.autoplay = true;
 		controller.playlist = constructPlaylist(player_state, $sce);
-		console.log("controller.playlist="+JSON.stringify(controller.playlist));
 		controller.sources = [];
 		controller.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
 
@@ -25,20 +24,33 @@ angular.module('ecstatic.player')
 	    controller.onCompleteItem = function() {
             controller.isCompleted = true;
             controller.currentItem++;
-
             if (controller.currentItem >= controller.playlist.length) controller.currentItem= 0;
-
             controller.setItem(controller.currentItem);
-        };
+        }
         controller.setItem = function(index) {
             controller.API.stop();
             controller.currentItem = index;
             controller.sources = [];
             controller.sources.push(controller.playlist[index]);
             $timeout(controller.API.play.bind(controller.API), 100);
-        };
+        }
+        controller.nextSong = function() {
+        	local_next_song(controller);
+            socketManager.next_song_action(controller.currentItem, $stateParams.room_id);
+        }
+        $scope.$on('nextSong', function(event, data) {
+        	console.log("heard nextSong in ctrl");
+        	local_next_song(controller);
+        });
 	}]
 )
+
+function local_next_song(controller){
+    controller.isCompleted = true;
+    controller.currentItem++;
+    if (controller.currentItem >= controller.playlist.length) controller.currentItem= 0;
+    controller.setItem(controller.currentItem);
+}
 
 function constructPlaylist(player_state, $sce){
 	//parse sources
@@ -48,11 +60,4 @@ function constructPlaylist(player_state, $sce){
     	sources.push({src: $sce.trustAsResourceUrl(src), type: player_state.sources[index].type});
     }
     return sources;
-}
-
-//determine the offset in number of songs
-//determine the offset within a particular song
-function sync(player_state){
-	console.log("player_state="+JSON.stringify(player_state));
-
 }

@@ -16,13 +16,18 @@ angular.module('ecstatic.sockets')
     // Create our websocket object with the address to the websocket
     
     socket.on('create_room', function (data) {
-      console.log("create_room_data="+JSON.stringify(data));
         channelModel.add(data);
         listener(data);
     });
     socket.on('roomList', function (data) {
         listener(data);
         channelModel.set(data);
+    });
+
+    socket.on('next_song_action', function (data) {
+      console.log("returned next song action, data="+JSON.stringify(data));
+        $rootScope.$broadcast('nextSong');
+        listener(data);
     });
 
     function sendRequest(request) {
@@ -60,6 +65,17 @@ angular.module('ecstatic.sockets')
     Service.getRooms = function() {
       var request = {
         msg: "roomList"
+      }
+      // Storing in a variable for clarity on what sendRequest returns
+      var promise = sendRequest(request); 
+      return promise;
+    }
+    // Define a "getter" for getting customer data
+    Service.next_song_action = function(playlistIndex, room_id) {
+      var request = {
+        msg: "next_song_action",
+        room_id: room_id,
+        playlistIndex: playlistIndex
       }
       // Storing in a variable for clarity on what sendRequest returns
       var promise = sendRequest(request); 

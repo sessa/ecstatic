@@ -11,10 +11,10 @@ ion-view(view-title='room_name')
 				vg-auto-play="controller.autoplay")
 				vg-media(vg-src="controller.sources", vg-type="audio")
 				vg-controls
-					vg-play-pause-button
 					vg-scrub-bar
 						vg-scrub-bar-current-time
 					vg-volume
 						vg-mute-button
 						vg-volume-bar
-					vg-fullscreen-button
+			button(ng-click="controller.nextSong()") next song
+

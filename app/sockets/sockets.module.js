@@ -1,1 +1,1 @@
-angular.module('ecstatic.sockets', ['btford.socket-io'])
+angular.module('ecstatic.sockets', ['btford.socket-io', 'ecstatic.player'])

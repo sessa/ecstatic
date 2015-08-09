@@ -36,7 +36,7 @@ exports.setupEcstaticSockets = function(app){
             client.get(socket.id, function (err, socket_info){
                 //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'elapsed': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'room_name': data.room_name, 'room_id': socket.id, sources: data.sources};
+                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playlistIndex': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'room_name': data.room_name, 'room_id': socket.id, sources: data.sources};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
@@ -72,6 +72,22 @@ exports.setupEcstaticSockets = function(app){
             });
         }
         
+        socket.on('next_song_action', function (data) {
+            console.log("next_song, data="+JSON.stringify(data));
+            client.get(data.room_id, function (err, socket_info){
+                //create a new playerstate and save it
+                socket_info_dict = JSON.parse(socket_info);
+                socket_info_dict.player_state.playlistIndex = data.playlistIndex;
+                socket_info_dict.player_state.timestamp = new Date().getTime();
+                client.set(socket.id, JSON.stringify(socket_info_dict));
+
+                //add the callback id and send it back
+                socket_info_dict.callback_id = data.callback_id;
+                socket.broadcast.to(data.room_id).emit("next_song_action", socket_info_dict);
+            });
+
+        });
+
         //Joins an existing room
         socket.on('join_room', function (data) {
             socket.join(data.room_id);
