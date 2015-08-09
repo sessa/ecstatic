@@ -34,10 +34,13 @@ exports.setupEcstaticSockets = function(app){
         //creates a new room
         socket.on('create_room', function (data) {            
             client.get(socket.id, function (err, socket_info){
+                //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
-                socket_info_dict.callback_id = data.callback_id;
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playing_song_index':0, 'elapsed': 0, 'timestamp': new Date().getTime(), room_name: data.room_name, sources: data.sources, room_id: socket.id};
+                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'elapsed': 0, 'timestamp': new Date().getTime(), room_name: data.room_name, room_id: socket.id, sources: data.sources};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
+
+                //add the callback id and send it back
+                socket_info_dict.callback_id = data.callback_id;
                 io.sockets.emit("create_room", socket_info_dict);
             });
         });
@@ -54,15 +57,17 @@ exports.setupEcstaticSockets = function(app){
 
             //check whether the owner is in the room, if they are, then add the room
             async.map(room_ids, get_room_info, function (err, roomList){
-                console.log("roomList="+JSON.stringify(roomList));
                 socket.emit("roomList", {roomList:roomList, callback_id: data.callback_id});
             });
         });
 
         function get_room_info(room_id, callback){
-            client.get(room_id, function (err, player_state){
-                var parsed = JSON.parse(player_state);
-                parsed.users = io.sockets.adapter.rooms[room_id];
+            client.get(room_id, function (err, room_info){
+                var parsed = JSON.parse(room_info);
+                if("player_state" in parsed){
+                    parsed.player_state.users = io.sockets.adapter.rooms[room_id];
+                    parsed.player_state.requestTime = new Date().getTime();
+                }
                 callback(null, parsed);
             });
         }

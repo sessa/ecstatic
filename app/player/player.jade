@@ -4,7 +4,7 @@ ion-view(view-title='room_name')
 		br
 		br
 		p(ng-controller="PlayerCtrl as controller")
-			videogular(vg-theme="controller.theme", vg-player-ready="controller.onPlayerReady($API)", class="videogular-container audio" vg-autoplay="controller.autoplay")
+			videogular(vg-theme="controller.theme", vg-player-ready="controller.onPlayerReady($API)", class="videogular-container audio" vg-auto-play="controller.autoplay")
 				vg-media(vg-src="controller.sources", vg-type="audio")
 				vg-controls
 					vg-play-pause-button
