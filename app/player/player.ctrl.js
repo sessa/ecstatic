@@ -26,7 +26,7 @@ angular.module('ecstatic.player')
             controller.isCompleted = true;
             controller.currentItem++;
 
-            if (controller.currentItem >= controller.sources.length) controller.currentVideo = 0;
+            if (controller.currentItem >= controller.playlist.length) controller.currentItem= 0;
 
             controller.setItem(controller.currentItem);
         };
