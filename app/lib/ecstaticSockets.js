@@ -79,7 +79,7 @@ exports.setupEcstaticSockets = function(app){
                 socket_info_dict = JSON.parse(socket_info);
                 socket_info_dict.player_state.playlistIndex = data.playlistIndex;
                 socket_info_dict.player_state.timestamp = new Date().getTime();
-                client.set(socket.id, JSON.stringify(socket_info_dict));
+                client.set(data.room_id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
                 socket_info_dict.callback_id = data.callback_id;

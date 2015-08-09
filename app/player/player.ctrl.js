@@ -9,7 +9,7 @@ angular.module('ecstatic.player')
 
 		var controller = this;
 		controller.API = null;
-		controller.currentItem = 0;
+		controller.currentItem = player_state.playlistIndex;
 		controller.autoplay = true;
 		controller.playlist = constructPlaylist(player_state, $sce);
 		controller.sources = [];
