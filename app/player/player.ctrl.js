@@ -4,6 +4,7 @@ angular.module('ecstatic.player')
 	["$sce", "$scope","$stateParams", "channelModel", function($sce, $scope, $stateParams, channelModel) {
 		//parse sources
 		var player_state = channelModel.get($stateParams.room_id);
+		console.log("player_state="+JSON.stringify(player_state));
         var sources = [];
         for (var index = 0; index < player_state.sources.length; index++){
         	var src = player_state.sources[index].src;
@@ -14,17 +15,10 @@ angular.module('ecstatic.player')
 		controller.API = null;
 		controller.onPlayerReady = function(API) {
 			controller.API = API;
-			var delta = player_state.requestTime - player_state.timestamp;
-			while(API.currentState != "play"){
-				console.log("API.isReady"+API.isReady);
-				API.play();
-				API.seekTime(100, false);
-								console.log("API.currentState"+API.currentState);
-				setTimeout(function(){}, 100);
-				console.log("waited 100 ms");
-			}
-			console.log("hit play");
-		};
+			var delta = (player_state.requestTime - player_state.timestamp)/1000;
+			console.log("delta="+delta);
+			API.seekTime(delta, false);
+		}
 		controller.autoplay = true;
 		controller.sources = sources;
 		controller.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";

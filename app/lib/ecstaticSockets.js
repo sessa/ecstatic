@@ -36,7 +36,7 @@ exports.setupEcstaticSockets = function(app){
             client.get(socket.id, function (err, socket_info){
                 //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'elapsed': 0, 'timestamp': new Date().getTime(), room_name: data.room_name, room_id: socket.id, sources: data.sources};
+                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'elapsed': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'room_name': data.room_name, 'room_id': socket.id, sources: data.sources};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
