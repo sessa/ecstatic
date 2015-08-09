@@ -61,26 +61,33 @@ angular.module('ecstatic.sockets')
       return currentCallbackId;
     }
 
-    // Define a "getter" for getting customer data
     Service.getRooms = function() {
       var request = {
         msg: "roomList"
       }
-      // Storing in a variable for clarity on what sendRequest returns
       var promise = sendRequest(request); 
       return promise;
     }
-    // Define a "getter" for getting customer data
-    Service.next_song_action = function(playlistIndex, room_id) {
+
+    Service.joinRoom = function(room_id) {
+      var request = {
+        msg: "join_room",
+        room_id:room_id
+      }
+      var promise = sendRequest(request); 
+      return promise;
+    }
+
+    Service.nextSongAction = function(playlistIndex, room_id) {
       var request = {
         msg: "next_song_action",
         room_id: room_id,
         playlistIndex: playlistIndex
       }
-      // Storing in a variable for clarity on what sendRequest returns
       var promise = sendRequest(request); 
       return promise;
     }
+
     Service.createRoom = function(room_name) {
       var sources = [];
       for(var index = 0; index < playlistModel.playlist.length; index++){

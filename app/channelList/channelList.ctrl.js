@@ -18,5 +18,8 @@ angular.module('ecstatic.channelList', ['ecstatic.sockets'])
         }
     )};
     $scope.doRefresh();
-
+    $scope.joinRoom = function(room_id){
+        console.log("joinRoom="+room_id);
+        socketManager.joinRoom(room_id);
+    }
 }]);

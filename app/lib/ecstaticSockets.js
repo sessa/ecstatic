@@ -90,10 +90,8 @@ exports.setupEcstaticSockets = function(app){
 
         //Joins an existing room
         socket.on('join_room', function (data) {
+            console.log("socket.id="+socket.id+"joining room"+data.room_id);
             socket.join(data.room_id);
-            get_room_info(data.room_id, function (err, callback_data){
-                socket.emit("join_room", callback_data);
-            });
         });
 
         //leaves an existing room

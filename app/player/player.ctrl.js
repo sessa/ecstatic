@@ -35,17 +35,17 @@ angular.module('ecstatic.player')
             $timeout(controller.API.play.bind(controller.API), 100);
         }
         controller.nextSong = function() {
-        	local_next_song(controller);
-            socketManager.next_song_action(controller.currentItem, $stateParams.room_id);
+        	localNextSong(controller);
+            socketManager.nextSongAction(controller.currentItem, $stateParams.room_id);
         }
         $scope.$on('nextSong', function(event, data) {
         	console.log("heard nextSong in ctrl");
-        	local_next_song(controller);
+        	localNextSong(controller);
         });
 	}]
 )
 
-function local_next_song(controller){
+function localNextSong(controller){
     controller.isCompleted = true;
     controller.currentItem++;
     if (controller.currentItem >= controller.playlist.length) controller.currentItem= 0;
