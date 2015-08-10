@@ -1,7 +1,7 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout) {
+	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", '$state', '$ionicHistory', function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout, $state,$ionicHistory) {
 		
 		//parse sources
 		var player_state = channelModel.get($stateParams.room_id);

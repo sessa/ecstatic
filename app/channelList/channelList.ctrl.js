@@ -1,6 +1,7 @@
 angular.module('ecstatic.channelList', ['ecstatic.sockets'])
 
 .controller('ChatsCtrl', ['$scope', 'socketManager', function($scope, socketManager) {
+
   // refresh the rooms list
   $scope.doRefresh = function(){
         socketManager.getRooms().then(function(data) {

@@ -25,9 +25,7 @@ angular.module('ecstatic.sockets')
     });
 
     socket.on('next_song_action', function (data) {
-      console.log("returned next song action, data="+JSON.stringify(data));
         $rootScope.$broadcast('nextSong');
-        listener(data);
     });
 
     function sendRequest(request) {
@@ -72,6 +70,15 @@ angular.module('ecstatic.sockets')
     Service.joinRoom = function(room_id) {
       var request = {
         msg: "join_room",
+        room_id:room_id
+      }
+      var promise = sendRequest(request); 
+      return promise;
+    }
+
+    Service.leaveRoom = function(room_id) {
+      var request = {
+        msg: "leave_room",
         room_id:room_id
       }
       var promise = sendRequest(request); 

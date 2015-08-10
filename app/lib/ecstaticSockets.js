@@ -32,7 +32,24 @@ exports.setupEcstaticSockets = function(app){
         });
 
         //creates a new room
-        socket.on('create_room', function (data) {            
+        socket.on('create_room', function (data) {    
+            //check if you already joined a room
+            console.log("create_room, io.sockets.adapter.rooms="+JSON.stringify(io.sockets.adapter.rooms));
+            console.log("Object.keys(io.sockets.adapter.rooms).length="+Object.keys(io.sockets.adapter.rooms).length);
+            if(Object.keys(io.sockets.adapter.rooms).length > 1){
+                for(var key in io.sockets.adapter.rooms){
+                    console.log("all keys="+key);
+                    if(key !== socket.id){
+                        console.log("leave key="+key);
+                        socket.leave(key);
+                    }
+                }
+                /*for(var index = 0; index < Object.keys(io.sockets.adapter.rooms).length; index++){
+                                    console.log("io.sockets.adapter.rooms[1]="+io.sockets.adapter.rooms.get(1));
+                socket.leave(io.sockets.adapter.rooms[1]);
+                }*/
+            }
+        
             client.get(socket.id, function (err, socket_info){
                 //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
@@ -97,16 +114,7 @@ exports.setupEcstaticSockets = function(app){
         //leaves an existing room
         socket.on('leave_room', function (data){
             console.log("leave_room, data="+data);
-            //find the room you're in that isn't your own
-            for(var index = 0; index < socket.rooms.length; index++) {
-                if (socket.rooms[index] != socket.id){
-                    console.log("room="+socket.rooms[index]);
-                    io.sockets.to(socket.rooms[index]).emit("leave_room", socket.id);
-                    socket.leave(socket.rooms[index]);
-                    break;
-                }
-            }
-
+            socket.leave(data.room_id);
         });
 
         socket.on('users', function (data) {
