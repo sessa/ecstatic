@@ -1,4 +1,4 @@
-angular.module('ecstatic.soundcloud', [])
+angular.module('ecstatic.soundcloud')
 
 .factory('soundcloudService',['$q', '$rootScope', function($q, $rootScope) {
       var Service = {};
@@ -7,9 +7,16 @@ angular.module('ecstatic.soundcloud', [])
       Service.getUser = function() {
         SC.initialize({
             client_id: '9d93a2f8833de3799958dfecf637cd9a',
-            redirect_uri: 'http://soundcloud.dev/soundcloud.html'
+            redirect_uri: 'http://localhost:3001/soundcloud/callback'
         });
 
+        // initiate auth popup
+        SC.connect(function() {
+          SC.get('/me', function(me) {
+            alert('Hello, ' + me.username);
+          });
+        });
+        
         SC.get('/tracks', {q:'buskers'}, function(data) {
           console.log("data="+JSON.stringify(data));
             $rootScope.$apply(defer.resolve(data));
@@ -19,4 +26,3 @@ angular.module('ecstatic.soundcloud', [])
 
     return Service;
 }]);
-

@@ -32,8 +32,8 @@ ecstaticSockets = require("./lib/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
 
 //routes
-squad_app.get('*', function(req, res) {
-  	res.render('index');
+squad_app.get('/soundcloud/callback', function(req, res) {
+  	res.render('soundcloud/callback');
 });
 squad_app.listen(squad_app.get('port'), function(req, res) {
  console.log('Server listening at ' + squad_app.get('port'));
