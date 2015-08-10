@@ -34,8 +34,6 @@ exports.setupEcstaticSockets = function(app){
         //creates a new room
         socket.on('create_room', function (data) {    
             //check if you already joined a room
-            console.log("create_room, io.sockets.adapter.rooms="+JSON.stringify(io.sockets.adapter.rooms));
-            console.log("Object.keys(io.sockets.adapter.rooms).length="+Object.keys(io.sockets.adapter.rooms).length);
             if(Object.keys(io.sockets.adapter.rooms).length > 1){
                 for(var key in io.sockets.adapter.rooms){
                     console.log("all keys="+key);
@@ -44,10 +42,6 @@ exports.setupEcstaticSockets = function(app){
                         socket.leave(key);
                     }
                 }
-                /*for(var index = 0; index < Object.keys(io.sockets.adapter.rooms).length; index++){
-                                    console.log("io.sockets.adapter.rooms[1]="+io.sockets.adapter.rooms.get(1));
-                socket.leave(io.sockets.adapter.rooms[1]);
-                }*/
             }
         
             client.get(socket.id, function (err, socket_info){
