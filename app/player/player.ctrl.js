@@ -35,7 +35,11 @@ angular.module('ecstatic.player')
             $timeout(controller.API.play.bind(controller.API), 100);
         }
         controller.nextSong = function() {
-        	localNextSong(controller);
+            localNextSong(controller);
+            socketManager.nextSongAction(controller.currentItem, $stateParams.room_id);
+        }
+        controller.addSongs = function() {
+            localNextSong(controller);
             socketManager.nextSongAction(controller.currentItem, $stateParams.room_id);
         }
         $scope.$on('nextSong', function(event, data) {

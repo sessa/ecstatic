@@ -2,7 +2,7 @@
 'use strict';
 
 // Declare variables used
-var ecstaticSockets, squad_app, express, path, request, events, sc, cors, sc_client_id, sc_client_secret, sc_redirect_uri, sc_api_url;
+var ecstaticSockets, squad_app, express, path, request, events, sc, cors, sc_client_id, sc_client_secret, sc_redirect_uri, sc_api_url, nodemailer;
 sc = require("soundclouder");
 sc_client_id="4cd54fa30dd13312d10dd24cc2bdcae4";
 sc_client_secret="2f845ee306729bf01254031ea1eb9803";
@@ -15,7 +15,7 @@ express = require('express');
 path = require('path');
 request = require('request');
 cors = require('cors');
-
+nodemailer = require('nodemailer');
 
 //CLIENT
 //Templating
@@ -35,8 +35,34 @@ ecstaticSockets.setupEcstaticSockets(squad_app);
 squad_app.get('/soundcloud/callback', function(req, res) {
   	res.render('soundcloud/callback');
 });
+squad_app.post('/feedback', function(req, res) {
+console.log("Result: "+ req.body.dname);
+   /* var name = req.body.name;
+    var from = req.body.from;
+    var message = req.body.message;
+    var to = '*******@gmail.com';
+    var smtpTransport = nodemailer.createTransport("SMTP",{
+        service: "Gmail",
+        auth: {
+            user: "martin.clyde.weiss@gmail.com",
+            pass: "make"
+        }
+    });
+    var mailOptions = {
+        from: from,
+        to: to, 
+        subject: name+' | new message !',
+        text: message
+    }
+    smtpTransport.sendMail(mailOptions, function(error, response){
+        if(error){
+            console.log(error);
+        }else{
+            res.redirect('/');
+        }
+    });*/
+});
 squad_app.listen(squad_app.get('port'), function(req, res) {
  console.log('Server listening at ' + squad_app.get('port'));
 });
-
 

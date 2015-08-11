@@ -13,7 +13,7 @@ angular.module('ecstatic.soundcloud')
         // initiate auth popup
         SC.connect(function() {
           SC.get('/me', function(me) {
-            SC.get('/users/'+me.id+'/tracks', function(data) {
+            SC.get('/users/'+me.id+'/favorites', function(data) {
               console.log("data="+JSON.stringify(data));
                 $rootScope.$apply(defer.resolve(data));
             });

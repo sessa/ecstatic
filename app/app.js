@@ -105,6 +105,16 @@ var app = angular.module('ecstatic', [
       }
     })
 
+    .state('tab.feedback', {
+      url: '/feedback',
+      views: {
+        'tab-chats': {
+          templateUrl: 'feedback/feedback.html',
+          controller: 'feedback'
+        }
+      }
+    })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 });
