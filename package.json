@@ -45,7 +45,7 @@
     "request": "~2.57.0",
     "socket.io": "~1.3.5",
     "socket.io-client": "~1.3.5",
-    "soundclouder": "~0.8.1"
+    "soundclouder": "~0.8.1",
     "bower": "^1.3.3",
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
