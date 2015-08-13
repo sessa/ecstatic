@@ -16,7 +16,7 @@ sds/settings/__init__.py
 local/
 dump.rdb
 node_modules
-ionic
+/ionic
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
