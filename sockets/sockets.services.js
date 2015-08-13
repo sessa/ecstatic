@@ -2,7 +2,7 @@ angular.module('ecstatic.sockets')
 
 .factory('socket', function (socketFactory) {
   return socketFactory({
-  	ioSocket: io.connect('http://localhost:8080/')
+  	ioSocket: io.connect('http://squad-dev.elasticbeanstalk.com:3001/')
   });
 })
 

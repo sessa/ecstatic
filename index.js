@@ -23,7 +23,7 @@ squad_app = express();
 console.log("dirname="+__dirname);
 squad_app.set('views', __dirname + '/');
 squad_app.set('view engine', "jade"); 
-squad_app.set('port', 3001); 
+squad_app.set('port', 8081); 
 squad_app.use(express.static('./'));
 squad_app.use(cors());
 
