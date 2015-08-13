@@ -13,7 +13,6 @@ ecstatic_geo/*
 node_modules/*
 coverage
 sds/settings/__init__.py
-bin/
 local/
 dump.rdb
 node_modules
