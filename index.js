@@ -28,8 +28,8 @@ squad_app.use(express.static('./'));
 squad_app.use(cors());
 
 //set up sockets
-ecstaticSockets = require("./lib/ecstaticSockets.js");
-ecstaticSockets.setupEcstaticSockets(squad_app);
+//ecstaticSockets = require("./lib/ecstaticSockets.js");
+//ecstaticSockets.setupEcstaticSockets(squad_app);
 
 //routes
 squad_app.get('/soundcloud/callback', function(req, res) {
