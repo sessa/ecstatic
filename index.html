@@ -40,19 +40,7 @@
 
   </head>
   <!--THE APP-->
-  <body ng-app="ecstatic" ng-controller="IndexCtrl">
-      <script>
-    var CONFIG = {
-      development: {
-        soundcloudBackend: "http://localhost:3001/soundcloud/callback"
-      },
-      production: {
-        soundcloudBackend: "http://squad-dev.elasticbeanstalk.com/soundcloud/callback"
-      }
-    }
-      angular.module('ecstatic.config', []).constant('config', CONFIG['{{env}}'])
-     </script>
-
+  <body ng-app="ecstatic">
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button> </ion-nav-back-button>
     </ion-nav-bar>
