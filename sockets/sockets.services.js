@@ -1,10 +1,10 @@
 angular.module('ecstatic.sockets')
 
-.factory('socket', function (socketFactory) {
+.factory('socket', ['socketFactory','ConfigService', function (socketFactory, ConfigService) {
   return socketFactory({
-  	ioSocket: io.connect('http://squad-dev.elasticbeanstalk.com:3001/')
+  	ioSocket: io.connect(ConfigService.getConfigs())
   });
-})
+}])
 
 .factory('socketManager', ['$q', '$rootScope', 'socket', 'channelModel', 'playlistModel', function($q, $rootScope, socket, channelModel, playlistModel) {
     // We return this object to anything injecting our service

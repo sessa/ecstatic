@@ -4,24 +4,18 @@ angular.module('ecstatic.config', [])
 	var Service = {};
 	var CONFIG = {
 	  	development: {
+	  		apiBackend: "http://localhost:3001/",
 	    	soundcloudBackend: "http://localhost:3001/soundcloud/callback"
 	  	},
 	  	production: {
+	  		apiBackend: "http://squad-dev.elasticbeanstalk.com:3001/",
 	    	soundcloudBackend: "http://squad-dev.elasticbeanstalk.com/soundcloud/callback"
 	  	}
 	}
 
-	function sendRequest() {
-		var defer = $q.defer();
-		$http.get("/env").success(function (data) {
-    		$rootScope.$apply(defer.resolve(data));
-		});
-		return defer.promise;
-    }
-
+	//change this in dev vs live
 	Service.getConfigs = function(){
-		var promise = sendRequest(); 
-		return promise;
+		return CONFIG.development;
 	}
 	return Service;
 }]);
