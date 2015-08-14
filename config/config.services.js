@@ -5,7 +5,10 @@ angular.module('ecstatic.config', [])
 
 	//change this in dev vs live
 	Service.getConfigs = function(){
-		return CONFIG.development;
+		$http.get('config/config.json').success(function (data){
+			console.log("data="+data);
+	      	return data.development;
+	    });
 	}
 	return Service;
 }]);

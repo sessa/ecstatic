@@ -1,14 +1,22 @@
 var exports = module.exports = {};
 
 // Declare variables used
-var client, express, io, port, rtg, room_counter,request, async, proximity, util, mongoose, socket;
+var client, express, io, port, rtg, room_counter,request, async, proximity, util, mongoose, socket, config;
 
 // Define values
 util = require('util');
 request = require('request');
 port = 3001;
 async = require('async');
-client = require('redis').createClient(6379, 'squad-001.2jlq4h.0001.use1.cache.amazonaws.com', {no_ready_check: true});
+config = require('./config/config.json');
+console.log("config="+config);
+if(process.env.NODE_ENV == 'development'){
+    config = config.development;
+}
+else{
+    config = config.production;
+}
+client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
 proximity = require('geo-proximity').initialize(client);
 socket_number = 0;
 

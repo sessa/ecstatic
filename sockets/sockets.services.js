@@ -2,7 +2,9 @@ angular.module('ecstatic.sockets')
 
 .factory('socket', ['socketFactory','ConfigService', function (socketFactory, ConfigService) {
   return socketFactory({
-  	ioSocket: io.connect(ConfigService.getConfigs().apiBackend)
+  	ioSocket: io.connect(ConfigService.success(function (data) {
+      data.development.apiBackend
+    }
   });
 }])
 
