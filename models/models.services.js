@@ -1,4 +1,4 @@
-angular.module('ecstatic.models', [])
+angular.module('ecstatic.models')
 
 .factory('playlistModel', function($rootScope){
   var Service = {};
