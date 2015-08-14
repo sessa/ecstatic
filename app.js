@@ -32,7 +32,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.sockets',
       'ecstatic.models',
       'ecstatic.soundcloud',
-      'ecstatic.dash',
+      'ecstatic.home',
       'ecstatic.channelList',
       'ecstatic.config'
 ])
@@ -69,12 +69,12 @@ var app = angular.module('ecstatic', [
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.home', {
+    url: '/home',
     views: {
-      'tab-dash': {
-        templateUrl: 'dash/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-home': {
+        templateUrl: 'home/home.html',
+        controller: 'HomeCtrl'
       }
     }
   })
@@ -117,6 +117,6 @@ var app = angular.module('ecstatic', [
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 });
 
