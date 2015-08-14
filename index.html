@@ -37,9 +37,22 @@
     <script src="dash/dash.ctrl.js"></script>
     <script src="app.js"></script>
     <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
+
   </head>
   <!--THE APP-->
-  <body ng-app="ecstatic">
+  <body ng-app="ecstatic" ng-controller="IndexCtrl">
+      <script>
+    var CONFIG = {
+      development: {
+        soundcloudBackend: "http://localhost:3001/soundcloud/callback"
+      },
+      production: {
+        soundcloudBackend: "http://squad-dev.elasticbeanstalk.com/soundcloud/callback"
+      }
+    }
+      angular.module('ecstatic.config', []).constant('config', CONFIG['{{env}}'])
+     </script>
+
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button> </ion-nav-back-button>
     </ion-nav-bar>
