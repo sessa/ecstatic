@@ -5,9 +5,10 @@ angular.module('ecstatic.soundcloud')
       var defer = $q.defer();
 
       Service.getUser = function() {
+        console.log(ConfigService.getConfig().soundcloudBackend);
         SC.initialize({
             client_id: '9d93a2f8833de3799958dfecf637cd9a',
-            redirect_uri: ConfigService.getConfigs().soundcloudBackend
+            redirect_uri: ConfigService.getConfig().soundcloudBackend
         });
 
         // initiate auth popup

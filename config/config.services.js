@@ -2,13 +2,15 @@ angular.module('ecstatic.config', [])
 
 .factory('ConfigService', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
 	var Service = {};
+	Service.configData = {};
 
-	//change this in dev vs live
-	Service.getConfigs = function(){
-		$http.get('config/config.json').success(function (data){
-			console.log("data="+data);
-	      	return data.development;
-	    });
+	Service.getConfig = function(){
+		$http.get('config/config.json')
+			.success(function (data){
+				console.log("data="+JSON.stringify(data.development));
+		      	Service.configData = data.development;
+	    	});
+	    return Service.configData;
 	}
 	return Service;
 }]);
