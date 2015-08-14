@@ -28,6 +28,9 @@ angular.module('ecstatic.sockets')
         $rootScope.$broadcast('nextSong');
     });
 
+    //listen for the API to return a message from the api 
+    //some rootscope broadcast thing, that will get heard in the controller
+
     function sendRequest(request) {
       var defer = $q.defer();
       var callbackId = getCallbackId();
@@ -94,6 +97,7 @@ angular.module('ecstatic.sockets')
       var promise = sendRequest(request); 
       return promise;
     }
+    //send message to room similar to above
 
     Service.createRoom = function(room_name) {
       var sources = [];

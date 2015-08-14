@@ -34,6 +34,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.soundcloud',
       'ecstatic.dash',
       'ecstatic.channelList',
+      'ecstatic.chat',
 ])
 
 .run(function($ionicPlatform) {
