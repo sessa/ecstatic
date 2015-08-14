@@ -30,11 +30,6 @@ squad_app.use(cors());
 //set up sockets
 ecstaticSockets = require("./lib/ecstaticSockets.js");
 ecstaticSockets.setupEcstaticSockets(squad_app);
-squad_app.route('/*')
-.get(function(req, res) {
-  res.render('index', {env: "production"})
-});
-
 
 //routes
 squad_app.get('/soundcloud/callback', function(req, res) {

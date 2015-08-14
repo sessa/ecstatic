@@ -1,0 +1,10 @@
+CONFIG = {
+  	development: {
+  		apiBackend: "http://localhost:3001/",
+    	soundcloudBackend: "http://localhost:3001/soundcloud/callback"
+  	},
+  	production: {
+  		apiBackend: "http://squad-dev.elasticbeanstalk.com:3001/",
+    	soundcloudBackend: "http://squad-dev.elasticbeanstalk.com/soundcloud/callback"
+  	}
+}
