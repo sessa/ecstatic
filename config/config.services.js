@@ -7,8 +7,7 @@ angular.module('ecstatic.config', [])
 	Service.getConfig = function(){
 		$http.get('config/config.json')
 			.success(function (data){
-				console.log("data="+JSON.stringify(data.development));
-		      	Service.configData = data.development;
+		      	Service.configData = data;
 	    	});
 	    return Service.configData;
 	}
