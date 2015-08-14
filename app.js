@@ -78,28 +78,28 @@ var app = angular.module('ecstatic', [
       }
     }
   })
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.channels', {
+      url: '/channels',
       views: {
-        'tab-chats': {
-          templateUrl: 'channelList/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-channels': {
+          templateUrl: 'channelList/tab-channels.html',
+          controller: 'ChannelsCtrl'
         }
       }
     })
-    .state('tab.chats-create', {
+    .state('tab.channels-create', {
       url: '/create',
       views: {
-        'tab-chats': {
-          templateUrl: 'sockets/chat-create.html',
-          controller: 'ChatsCreateCtrl'
+        'tab-channels': {
+          templateUrl: 'sockets/channels-create.html',
+          controller: 'CreateChannelCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:room_id',
+    .state('tab.channels-player', {
+      url: '/player/:room_id',
       views: {
-        'tab-chats': {
+        'tab-channels': {
           templateUrl: 'player/player.html',
           controller: 'PlayerCtrl'
         }
