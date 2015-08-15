@@ -105,20 +105,11 @@ exports.setupEcstaticSockets = function(app){
             console.log("socket.id="+socket.id+"joining channel"+data.channel_id);
             socket.join(data.channel_id);
         });
-
-<<<<<<< HEAD:lib/ecstaticSockets.js
-        //socket.on heard message or some shit, write to the room
-
-        //leaves an existing room
-        socket.on('leave_room', function (data){
-            console.log("leave_room, data="+data);
-            socket.leave(data.room_id);
-=======
+        
         //leaves an existing channel
         socket.on('leave_channel', function (data){
             console.log("leave_channel, data="+data);
             socket.leave(data.channel_id);
->>>>>>> master:ecstaticSockets.js
         });
 
         socket.on('users', function (data) {
