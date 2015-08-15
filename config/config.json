@@ -1,5 +1,6 @@
 {
 	"apiBackend": "http://localhost:3001/",
 	"soundcloudBackend": "http://localhost:3001/soundcloud/callback",
-	"cacheBackend": "127.0.0.1"
+	"cacheBackend": "127.0.0.1",
+	"soundcloudClientId": "9d93a2f8833de3799958dfecf637cd9a"
 }

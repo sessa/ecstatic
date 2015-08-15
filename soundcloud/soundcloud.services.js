@@ -7,7 +7,7 @@ angular.module('ecstatic.soundcloud')
       Service.getUser = function() {
         console.log(ConfigService.getConfig().soundcloudBackend);
         SC.initialize({
-            client_id: '9d93a2f8833de3799958dfecf637cd9a',
+            client_id: ConfigService.getConfig().soundcloudClientId,
             redirect_uri: ConfigService.getConfig().soundcloudBackend
         });
 
