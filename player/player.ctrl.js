@@ -1,7 +1,7 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", '$state', '$ionicHistory', function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout, $state,$ionicHistory) {
+	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout) {
 		//parse sources
         var player_state = channelModel.get($stateParams.channel_id);
         if(!player_state){
@@ -11,19 +11,21 @@ angular.module('ecstatic.player')
                     var player_state = channelList[index].player_state;
                     if(player_state.channel_id == $stateParams.channel_id){
                       console.log("player_state="+JSON.stringify(player_state));
-                      createController(player_state);
+                      console.log("up");
+                      createController(player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout);
                       break;
                     }
                 }
             });
         }
         else{
-            createController(player_state);
+            console.log("hereher");
+            createController(player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout);
         }
 	}]
 )
 
-function createController(player_state){
+function createController(player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout){
     var controller = this;
     controller.API = null;
     controller.currentItem = player_state.playlistIndex;
