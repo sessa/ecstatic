@@ -9,4 +9,5 @@ angular.module('ecstatic.chat')
         	localNextSong(controller);
         });
 	}]*/
-)
+}]
+);
