@@ -26,6 +26,7 @@ angular.module('ecstatic.models')
     for(var index = 0; index < Service.channels.length; index++){
       var channel = Service.channels[index];
       if(channel.channel_id == channel_id){
+        console.log("Service.channels[index]"+Service.channels[index]);
         return Service.channels[index];
       }
     }
