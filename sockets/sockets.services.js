@@ -1,10 +1,10 @@
 angular.module('ecstatic.sockets')
 
-.factory('socket', function (socketFactory) {
+.factory('socket', ['socketFactory','ConfigService', function (socketFactory, ConfigService) {
   return socketFactory({
-  	ioSocket: io.connect('http://squad-dev.elasticbeanstalk.com:3001/')
+  	ioSocket: io.connect(ConfigService.getConfig().apiBackend)
   });
-})
+}])
 
 .factory('socketManager', ['$q', '$rootScope', 'socket', 'channelModel', 'playlistModel', function($q, $rootScope, socket, channelModel, playlistModel) {
     // We return this object to anything injecting our service
@@ -15,11 +15,11 @@ angular.module('ecstatic.sockets')
     var currentCallbackId = 0;
     // Create our websocket object with the address to the websocket
     
-    socket.on('create_room', function (data) {
+    socket.on('create_channel', function (data) {
         channelModel.add(data);
         listener(data);
     });
-    socket.on('roomList', function (data) {
+    socket.on('channelList', function (data) {
         listener(data);
         channelModel.set(data);
     });
@@ -62,36 +62,36 @@ angular.module('ecstatic.sockets')
       return currentCallbackId;
     }
 
-    Service.getRooms = function() {
+    Service.getChannels = function() {
       var request = {
-        msg: "roomList"
+        msg: "channelList"
       }
       var promise = sendRequest(request); 
       return promise;
     }
 
-    Service.joinRoom = function(room_id) {
+    Service.joinChannel = function(channel_id) {
       var request = {
-        msg: "join_room",
-        room_id:room_id
+        msg: "join_channel",
+        channel_id:channel_id
       }
       var promise = sendRequest(request); 
       return promise;
     }
 
-    Service.leaveRoom = function(room_id) {
+    Service.leaveChannel = function(channel_id) {
       var request = {
-        msg: "leave_room",
-        room_id:room_id
+        msg: "leave_channel",
+        channel_id:channel_id
       }
       var promise = sendRequest(request); 
       return promise;
     }
 
-    Service.nextSongAction = function(playlistIndex, room_id) {
+    Service.nextSongAction = function(playlistIndex, channel_id) {
       var request = {
         msg: "next_song_action",
-        room_id: room_id,
+        channel_id: channel_id,
         playlistIndex: playlistIndex
       }
       var promise = sendRequest(request); 
@@ -99,7 +99,7 @@ angular.module('ecstatic.sockets')
     }
     //send message to room similar to above
 
-    Service.createRoom = function(room_name) {
+    Service.createChannel = function(channelName) {
       var sources = [];
       for(var index = 0; index < playlistModel.playlist.length; index++){
         //for each song in the playlist
@@ -107,8 +107,8 @@ angular.module('ecstatic.sockets')
         sources.push({src:media.stream_url + '?client_id=9d93a2f8833de3799958dfecf637cd9a', type:"audio/"+media.original_format})
       }
       var request = {
-            msg: "create_room",
-            room_name: "testy_room",
+            msg: "create_channel",
+            channel_name: "testy_room",
             sources: sources
           }
           // Storing in a variable for clarity on what sendRequest returns

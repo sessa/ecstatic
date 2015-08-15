@@ -1,4 +1,4 @@
-angular.module('ecstatic.models', [])
+angular.module('ecstatic.models')
 
 .factory('playlistModel', function($rootScope){
   var Service = {};
@@ -21,19 +21,20 @@ angular.module('ecstatic.models', [])
   Service.add = function(channel) {
     Service.channels.push(channel.player_state);
   }
-  Service.get = function(room_id){
+  Service.get = function(channel_id){
+    console.log("channel_id="+channel_id);
     for(var index = 0; index < Service.channels.length; index++){
       var channel = Service.channels[index];
-      if(channel.room_id == room_id){
+      if(channel.channel_id == channel_id){
         return Service.channels[index];
       }
     }
   }
-  Service.set = function(rooms) {
-    var roomList = rooms.roomList;
-    for(var index = 0; index < roomList.length; index++){
-      if(roomList[index].player_state){
-        Service.channels.push(roomList[index].player_state);
+  Service.set = function(channels) {
+    var channelList = channels.channelList;
+    for(var index = 0; index < channelList.length; index++){
+      if(channelList[index].player_state){
+        Service.channels.push(channelList[index].player_state);
       }
     }
   }

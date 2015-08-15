@@ -4,7 +4,7 @@ angular.module('ecstatic.player')
 	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", '$state', '$ionicHistory', function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout, $state,$ionicHistory) {
 		
 		//parse sources
-		var player_state = channelModel.get($stateParams.room_id);
+		var player_state = channelModel.get($stateParams.channel_id);
 		console.log("player_state="+JSON.stringify(player_state));
 
 		var controller = this;
@@ -36,11 +36,11 @@ angular.module('ecstatic.player')
         }
         controller.nextSong = function() {
             localNextSong(controller);
-            socketManager.nextSongAction(controller.currentItem, $stateParams.room_id);
+            socketManager.nextSongAction(controller.currentItem, $stateParams.channel_id);
         }
         controller.addSongs = function() {
             localNextSong(controller);
-            socketManager.nextSongAction(controller.currentItem, $stateParams.room_id);
+            socketManager.nextSongAction(controller.currentItem, $stateParams.channel_id);
         }
         $scope.$on('nextSong', function(event, data) {
         	console.log("heard nextSong in ctrl");

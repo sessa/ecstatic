@@ -32,9 +32,10 @@ var app = angular.module('ecstatic', [
       'ecstatic.sockets',
       'ecstatic.models',
       'ecstatic.soundcloud',
-      'ecstatic.dash',
+      'ecstatic.home',
       'ecstatic.channelList',
       'ecstatic.chat',
+      'ecstatic.config'
 ])
 
 .run(function($ionicPlatform) {
@@ -69,37 +70,37 @@ var app = angular.module('ecstatic', [
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.home', {
+    url: '/home',
     views: {
-      'tab-dash': {
-        templateUrl: 'dash/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-home': {
+        templateUrl: 'home/home.html',
+        controller: 'HomeCtrl'
       }
     }
   })
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.channels', {
+      url: '/channels',
       views: {
-        'tab-chats': {
-          templateUrl: 'channelList/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-channels': {
+          templateUrl: 'channelList/tab-channels.html',
+          controller: 'ChannelsCtrl'
         }
       }
     })
-    .state('tab.chats-create', {
+    .state('tab.channels-create', {
       url: '/create',
       views: {
-        'tab-chats': {
-          templateUrl: 'sockets/chat-create.html',
-          controller: 'ChatsCreateCtrl'
+        'tab-channels': {
+          templateUrl: 'sockets/channels-create.html',
+          controller: 'CreateChannelCtrl'
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:room_id',
+    .state('tab.channels-player', {
+      url: '/player/:channel_id',
       views: {
-        'tab-chats': {
+        'tab-channels': {
           templateUrl: 'player/player.html',
           controller: 'PlayerCtrl'
         }
@@ -117,6 +118,6 @@ var app = angular.module('ecstatic', [
     })
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 });
 

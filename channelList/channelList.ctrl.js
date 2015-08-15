@@ -1,26 +1,26 @@
 angular.module('ecstatic.channelList', ['ecstatic.sockets'])
 
-.controller('ChatsCtrl', ['$scope', 'socketManager', function($scope, socketManager) {
+.controller('ChannelsCtrl', ['$scope', 'socketManager', function($scope, socketManager) {
 
   // refresh the rooms list
   $scope.doRefresh = function(){
-        socketManager.getRooms().then(function(data) {
+        socketManager.getChannels().then(function(data) {
 
-            var rooms = [];
-            data.roomList.forEach(function(room) {
-            	var player_state = room.player_state;
+            var channels = [];
+            data.channelList.forEach(function(channel) {
+            	var player_state = channel.player_state;
                 if(player_state){
-                  rooms.push(player_state);
+                  channels.push(player_state);
                 }
             });
-            $scope.rooms = rooms;
+            $scope.channels = channels;
             //tell the ionScroll that the job is done
             $scope.$broadcast('scroll.refreshComplete');
         }
     )};
     $scope.doRefresh();
-    $scope.joinRoom = function(room_id){
-        console.log("joinRoom="+room_id);
-        socketManager.joinRoom(room_id);
+    $scope.joinChannel = function(channel_id){
+        console.log("joinChannel="+channel_id);
+        socketManager.joinChannel(channel_id);
     }
 }]);
