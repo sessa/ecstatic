@@ -1,0 +1,10 @@
+branch-defaults:
+  production:
+    environment: prod
+global:
+  application_name: Squad
+  default_ec2_keyname: aws-eb2
+  default_platform: 64bit Amazon Linux 2015.03 v1.4.4 running Node.js
+  default_region: us-east-1
+  profile: null
+  sc: git
