@@ -3,9 +3,9 @@ angular.module('ecstatic.player')
 .controller('PlayerCtrl',
 	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "socketManager","$timeout", function($sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout) {
 		//parse sources
-        var controller = this;
         var player_state = channelModel.get($stateParams.channel_id);
-        console.log("1 player_state="+JSON.stringify(player_state));
+
+        socketManager.joinChannel($stateParams.channel_id);
         if(!player_state){
             socketManager.getChannels().then(function (data){
                 console.log("channelbang data="+JSON.stringify(data.channelList));
@@ -13,20 +13,20 @@ angular.module('ecstatic.player')
                     var player_state = data.channelList[index].player_state;
                     if(player_state.channel_id == $stateParams.channel_id){
                       console.log("2 player_state="+JSON.stringify(player_state));
-                      createController(controller, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout);
+                    createController(this, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout);
                       break;
                     }
                 }
             });
         }
         else{
-            console.log("3 player_state="+JSON.stringify(player_state));
-            createController(controller, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout);
+            createController(this, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout);
         }
 	}]
 )
 
 function createController(controller, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, socketManager, $timeout){
+    console.log("asfd");
     controller.API = null;
     controller.currentItem = player_state.playlistIndex;
     controller.autoplay = true;
@@ -38,6 +38,7 @@ function createController(controller, player_state, $sce, $scope, $rootScope, $s
         controller.sources.push(controller.playlist[controller.currentItem]);
         controller.API = API;
         var delta = (player_state.requestTime - player_state.timestamp)/1000;
+        console.log("delta="+delta);
         API.seekTime(delta, false);
     }
     controller.onCompleteItem = function() {
@@ -64,11 +65,6 @@ function createController(controller, player_state, $sce, $scope, $rootScope, $s
     $scope.$on('nextSong', function(event, data) {
         localNextSong(controller);
     });
-    $scope.$on('getChannel', function(event, data) {
-        console.log("heard getChannel");
-        localNextSong(controller);
-    });
-    return controller;
 }
 
 
