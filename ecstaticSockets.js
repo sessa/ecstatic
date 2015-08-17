@@ -117,6 +117,11 @@ exports.setupEcstaticSockets = function(app){
             socket.emit("users", clients);
         });
 
+        socket.on('send_text', function (data) {
+            console.log("send text data on server = : " + JSON.stringify(data));
+            io.sockets.emit('send_text', data);
+        });
+
 
         //PLAYLIST
         socket.on('add_song', function (data) {

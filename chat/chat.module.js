@@ -1,1 +1,1 @@
-angular.module('ecstatic.chat', [])
+angular.module('ecstatic.chat', ['ecstatic.sockets'])

@@ -28,6 +28,11 @@ angular.module('ecstatic.sockets')
         $rootScope.$broadcast('nextSong');
     });
 
+    socket.on('send_text', function (data) {
+      console.log("text returend from server"+data);
+      $rootScope.$broadcast('send_text', data);
+    });
+
     //listen for the API to return a message from the api 
     //some rootscope broadcast thing, that will get heard in the controller
 
@@ -114,6 +119,17 @@ angular.module('ecstatic.sockets')
           // Storing in a variable for clarity on what sendRequest returns
           var promise = sendRequest(request); 
           return promise;
+      }
+
+      Service.sendText = function(text) {
+        console.log("socket services got your text: " + text);
+        var request = {
+          //msg: name of the api function
+          msg: "send_text",
+          txt: text
+        }
+        var promise = sendRequest(request); 
+        return promise;
       }
 
     return Service;
