@@ -6,9 +6,12 @@ angular.module('ecstatic.chat')
       var Service = {};
       var defer = $q.defer();
 
-      Service.getUser = function() {
-        
-        return defer.promise;
+      // Service.getChatlog = function() {
+	     //   return defer.promise;
+      // }
+
+      Services.submitText = function() {
+	       return defer.promise;
       }
 
     return Service;

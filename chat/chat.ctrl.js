@@ -1,7 +1,12 @@
 angular.module('ecstatic.chat')
 //on receive messages display them
 
-.controller('ChatCtrl', ["$sce",  function($sce) {
+.controller('chatCtrl', ["$sce", "$scope",  function($sce, $scope) {
+	$scope.submitText = function(lineText){
+		console.log("Hey pal heres your text: " + lineText);
+	}
+}]
+);
 		
 		//listen for new messages
         /*$scope.$on('nextSong', function(event, data) {
@@ -9,5 +14,7 @@ angular.module('ecstatic.chat')
         	localNextSong(controller);
         });
 	}]*/
-}]
-);
+
+	// $scope.$on('chatBacklog' function(event, data) {
+	// 	console.log("heard get chat backlog");
+	// });
