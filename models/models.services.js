@@ -15,6 +15,21 @@ angular.module('ecstatic.models')
   return Service;
 })
 
+.factory('chatModel', function($rootScope){
+  var Service = {};
+  Service.chat = [];
+
+  Service.add = function(source) {
+    Service.chat.push(source);
+  }
+
+  Service.getAll = function() {
+    return chat;
+  }
+
+  return Service;
+})
+
 .factory('channelModel', function($rootScope){
   var Service = {};
   Service.channels = [];

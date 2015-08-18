@@ -5,9 +5,11 @@ ng-click in the button to run a function in the controller to send a message ove
 -->
 <p ng-controller="chatCtrl">
 	<ion-content>
-	  <ion-item collection-repeat="item in items">
+	<ion-list class="list">
+	  <ion-item ng-repeat="source in chat" class="item">
 	    {{index}}
 	  </ion-item>
+	  </ion-list>
 	</ion-content>
 
 	<label class="item item-input">

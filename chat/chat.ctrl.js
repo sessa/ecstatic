@@ -1,10 +1,9 @@
 angular.module('ecstatic.chat')
 //on receive messages display them
 
-.controller('chatCtrl', ["$sce", "$scope", "socketManager",  function($sce, $scope, socketManager) {
+.controller('chatCtrl', ["$sce", "$scope", "socketManager", "$stateParams",  function($sce, $scope, socketManager, $stateParams) {
 	$scope.submitText = function(lineText){
-		console.log("Hey pal heres your text: " + lineText);
-		socketManager.sendText(lineText);
+		socketManager.sendText(lineText, $stateParams.channel_id);
 	}
 
 	$scope.$on('send_text', function(event, data) {

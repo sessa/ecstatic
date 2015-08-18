@@ -114,18 +114,19 @@ angular.module('ecstatic.sockets')
       var request = {
             msg: "create_channel",
             channel_name: "testy_room",
-            sources: sources
+            sources: sources,
+            chat:[]
           }
           // Storing in a variable for clarity on what sendRequest returns
           var promise = sendRequest(request); 
           return promise;
       }
 
-      Service.sendText = function(text) {
-        console.log("socket services got your text: " + text);
+      Service.sendText = function(text, channel_id) {
         var request = {
           //msg: name of the api function
           msg: "send_text",
+          channel_id: channel_id,
           txt: text
         }
         var promise = sendRequest(request); 

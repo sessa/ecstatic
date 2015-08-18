@@ -48,7 +48,7 @@ exports.setupEcstaticSockets = function(app){
             client.get(socket.id, function (err, socket_info){
                 //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playlistIndex': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'channel_name': data.channel_name, 'channel_id': socket.id, sources: data.sources};
+                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playlistIndex': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'channel_name': data.channel_name, 'channel_id': socket.id, sources: data.sources, chat: data.chat};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
@@ -118,8 +118,14 @@ exports.setupEcstaticSockets = function(app){
         });
 
         socket.on('send_text', function (data) {
-            console.log("send text data on server = : " + JSON.stringify(data));
-            io.sockets.emit('send_text', data);
+            console.log("send text data on server = : " + JSON.stringify(data.txt) + " on channel: " + JSON.stringify(data.channel_id));
+            // io.sockets.emit('send_text', data);
+            client.get(data.channel_id, function (err, socket_info){
+                console.log("Socket info in send text: " + socket_info);
+                socket_info = JSON.parse(socket_info);
+                socket_info.player_state.chat.push(data.txt);
+                client.set(data.channel_id, JSON.stringify(socket_info));
+            });
         });
 
 
