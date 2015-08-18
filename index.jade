@@ -1,22 +1,55 @@
+doctype html
+head
+	meta(charset='utf-8')
+	meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
+	title Ecstatic
+	base(href='/')
 
-tag = 'p'
-foo = 'bar'
+	// external imports
+	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Raleway:400,200,100', type='text/css')
+	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400,100', type='text/css')
+	
+	// internal imports
+	script(src='lib/ionic/js/ionic.bundle.js')
+	// cordova script (this will be a 404 during development)
+	script(src='cordova.js')
+	link(rel='stylesheet', href='lib/ionic/css/ionic.css')
+	link(rel='stylesheet', href='feedback/feedback.css')
+	script(src='lib/bower_components/angular-sanitize/angular-sanitize.min.js')
+	script(src='lib/bower_components/angular-animate/angular-animate.js')
+	script(src='lib/bower_components/angular-socket-io/socket.js')
+	script(src='lib/bower_components/videogular/videogular.js')
+	script(src='lib/bower_components/videogular-controls/vg-controls.js')
+	script(src='lib/bower_components/videogular-overlay-play/vg-overlay-play.js')
+	script(src='lib/bower_components/videogular-poster/vg-poster.js')
+	script(src='lib/bower_components/videogular-buffering/vg-buffering.js')
+	script(src='lib/socket.io-client/socket.io.js')
+	script(src='lib/countdown.js')
+	script(type='application/json', src='config/config.json')
+	script(src='config/config.services.js')
+	script(src='player/player.module.js')
+	script(src='player/player.services.js')
+	script(src='player/player.ctrl.js')
+	script(src='soundcloud/soundcloud.module.js')
+	script(src='soundcloud/soundcloud.services.js')
+	script(src='soundcloud/soundcloud.ctrl.js')
+	script(src='sockets/sockets.module.js')
+	script(src='sockets/sockets.services.js')
+	script(src='sockets/sockets.ctrl.js')
+	script(src="chat/chat.module.js")
+	script(src='chat/chat.services.js')
+	script(src='chat/chat.ctrl.js')
+	script(src='feedback/feedback.ctrl.js')
+	script(src='channels/channels.module.js')
+	script(src='channels/channels.services.js')
+	script(src='channels/channels.ctrl.js')
+	script(src='home/home.module.js')
+	script(src='home/home.ctrl.js')
+	script(src='app.js')
+	script(src='//connect.soundcloud.com/sdk-2.0.0.js')
 
-#{tag} value
-#{tag}(foo='bar') value
-#{foo ? 'a' : 'li'}(something) here
-
-mixin item(icon)
-  li
-    if attributes.href
-      a(attributes)
-        img.icon(src=icon)
-        block
-    else
-      span(attributes)
-        img.icon(src=icon)
-        block
-
-ul
-  +item('contact') Contact
-  +item(href='/contact') Contact
+// THE APP
+body(ng-app='ecstatic')
+	ion-nav-bar.bar-stable
+		ion-nav-back-button
+	ion-nav-view
