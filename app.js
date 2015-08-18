@@ -109,8 +109,7 @@ var app = angular.module('ecstatic', [
       url: '/player/:channel_id',
       views: {
         'tab-channels': {
-          templateUrl: 'player/player.html',
-          controller: 'PlayerCtrl'
+          templateUrl: 'player/player.html'
         }
       }
     })

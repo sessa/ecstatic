@@ -1,10 +1,10 @@
 angular.module('ecstatic.channels')
 
-.controller('ChannelsCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
+.controller('ChannelsCtrl', ['$scope', 'soundcloudService', 'channelServices', 'playlistModel', '$state', function($scope, soundcloudService, channelServices, playlistModel, $state) {
 
 // refresh the rooms list
     $scope.doRefresh = function(){
-        socketManager.getChannels().then(function(data) {
+        channelServices.getChannels().then(function(data) {
 
             var channels = [];
             data.channelList.forEach(function(channel) {
@@ -18,18 +18,23 @@ angular.module('ecstatic.channels')
             $scope.$broadcast('scroll.refreshComplete');
         }
     )};
-
+        
     $scope.doRefresh();
+
     $scope.joinChannel = function(channel_id){
         console.log("joinChannel="+channel_id);
-        socketManager.joinChannel(channel_id);
+        channelServices.joinChannel(channel_id);
     }
-
-
 }])
+.controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'channelServices', 'playlistModel', '$state', function($scope, soundcloudService, channelServices, playlistModel, $state) {
 
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
-
+    $scope.create_channel = function() {
+        var habibi = $scope.channelName;
+        channelServices.createChannel(habibi).then(function(data) {
+            $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
+        });
+    }
+    
     // Gets your likes from Soundcloud
     soundcloudService.getUser().then(function(data){
         $scope.sc = data;
@@ -38,22 +43,6 @@ angular.module('ecstatic.channels')
     $scope.add_to_playlist = function(source){
         playlistModel.add(source);
     }
-
 }])
-
-.controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
-
-    $scope.create_channel = function() {
-        console.log("channelName")
-        var habibi = $scope.channelName;
-        socketManager.createChannel(habibi).then(function(data) {
-            console.log("Then go")
-            $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
-        });
-    }
-
-    $scope.add_to_playlist = function(source){
-        playlistModel.add();
-    }
 
 }]);

@@ -1,5 +1,5 @@
 angular.module('ecstatic.player', [
-	'ecstatic.models',
+	'ecstatic.channels',
 	'ecstatic.sockets',       
 	'com.2fdevs.videogular',
     'com.2fdevs.videogular.plugins.controls',
