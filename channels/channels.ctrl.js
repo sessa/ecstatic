@@ -1,10 +1,10 @@
 angular.module('ecstatic.channels')
 
-.controller('ChannelsCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
+.controller('ChannelsCtrl', ['$scope', 'soundcloudService', 'channelServices', 'playlistModel', '$state', function($scope, soundcloudService, channelServices, playlistModel, $state) {
 
 // refresh the rooms list
     $scope.doRefresh = function(){
-        socketManager.getChannels().then(function(data) {
+        channelServices.getChannels().then(function(data) {
 
             var channels = [];
             data.channelList.forEach(function(channel) {
@@ -18,19 +18,19 @@ angular.module('ecstatic.channels')
             $scope.$broadcast('scroll.refreshComplete');
         }
     )};
-
+        
     $scope.doRefresh();
+
     $scope.joinChannel = function(channel_id){
         console.log("joinChannel="+channel_id);
-        socketManager.joinChannel(channel_id);
+        channelServices.joinChannel(channel_id);
     }
-
-
 }])
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
+
+.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'channelServices', 'playlistModel', '$state', function($scope, soundcloudService, channelServices, playlistModel, $state) {
 
     $scope.create_channel = function() {
-        socketManager.createChannel("test").then(function(data) {
+        channelServices.createChannel("test").then(function(data) {
             $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
         });
     }
@@ -40,9 +40,7 @@ angular.module('ecstatic.channels')
         $scope.sc = data;
     });
 
-
     $scope.add_to_playlist = function(source){
         playlistModel.add(source);
     }
-
 }]);
