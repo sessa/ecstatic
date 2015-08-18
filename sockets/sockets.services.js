@@ -104,7 +104,7 @@ angular.module('ecstatic.sockets')
       }
       var request = {
             msg: "create_channel",
-            channel_name: "testy_room",
+            channel_name: channelName,
             sources: sources
           }
           // Storing in a variable for clarity on what sendRequest returns

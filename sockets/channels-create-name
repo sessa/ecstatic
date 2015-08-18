@@ -1,0 +1,6 @@
+ion-view(view-title='What do you want to call it?')
+	ion-content
+		form
+			input(ng-model="channelName")
+			button(ng-click="create_channel(channelName)") add songs
+				

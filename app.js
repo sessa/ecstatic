@@ -87,6 +87,15 @@ var app = angular.module('ecstatic', [
         }
       }
     })
+    .state('tab.channels-create-name', {
+      url: '/create-name',
+      views: {
+        'tab-channels': {
+          templateUrl: 'sockets/channels-create-name.html',
+          controller: 'CreateChannelCtrl'
+        }
+      }
+    })
     .state('tab.channels-create', {
       url: '/create',
       views: {

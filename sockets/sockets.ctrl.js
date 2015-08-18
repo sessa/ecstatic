@@ -2,8 +2,10 @@ angular.module('ecstatic.sockets')
 
 .controller('CreateChannelCtrl', ['soundcloudService', '$scope', 'playlistModel','socketManager','$state', '$ionicHistory',function(soundcloudService, $scope, playlistModel, socketManager, $state, $ionicHistory) {
     
-    $scope.create_channel = function() {
-        socketManager.createChannel("test").then(function(data) {
+    $scope.create_channel = function(channelName) {
+
+        console.log(channelName);
+        socketManager.createChannel(channelName).then(function(data) {
             $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
         });
     }

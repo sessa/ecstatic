@@ -1,7 +1,8 @@
 
 <ion-view view-title="Create a Channel">
   <ion-nav-buttons side="secondary">
-    <button ng-click="create_channel()">add songs</button>
+    <input ng-model="channelName"/>
+    <button ng-click="create_channel(channelName)">add songs</button>
   </ion-nav-buttons>
   <ion-content>
     <ion-list class="list">
