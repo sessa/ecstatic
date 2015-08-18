@@ -33,7 +33,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.models',
       'ecstatic.soundcloud',
       'ecstatic.home',
-      'ecstatic.channelList',
+      'ecstatic.channels',
       'ecstatic.config'
 ])
 
@@ -82,7 +82,7 @@ var app = angular.module('ecstatic', [
       url: '/channels',
       views: {
         'tab-channels': {
-          templateUrl: 'channelList/tab-channels.html',
+          templateUrl: 'channels/tab-channels.html',
           controller: 'ChannelsCtrl'
         }
       }
@@ -91,8 +91,8 @@ var app = angular.module('ecstatic', [
       url: '/create',
       views: {
         'tab-channels': {
-          templateUrl: 'sockets/channels-create.html',
-          controller: 'CreateChannelCtrl'
+          templateUrl: 'channels/channels-create.html',
+          controller: 'AddSongsCtrl'
         }
       }
     })
