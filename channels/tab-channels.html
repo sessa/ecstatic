@@ -4,7 +4,7 @@
     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()"></ion-refresher>
     <ion-list>
       <ion-item><a href="#/tab/create">Create a channel</a></ion-item>
-      <ion-item ng-repeat="channel in channels" type="item-text-wrap" ng-click="joinChannel(channel.channel_id)" href="#/tab/chats/{{channel.channel_id}}" class="item-remove-animate item-avatar item-icon-right"><img ng-src="{{room.face}}"/>
+      <ion-item ng-repeat="channel in channels" type="item-text-wrap" ng-click="joinChannel(channel.channel_id)" href="#/tab/player/{{channel.channel_id}}" class="item-remove-animate item-avatar item-icon-right"><img ng-src="{{channel.face}}"/>
         <h2>{{channel.channel_name}}</h2>
         <h2>{{channel.channel_id}}</h2><i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
