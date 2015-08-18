@@ -27,22 +27,33 @@ angular.module('ecstatic.channels')
 
 
 }])
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
 
-    $scope.create_channel = function() {
-        socketManager.createChannel("test").then(function(data) {
-            $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
-        });
-    }
+.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
 
     // Gets your likes from Soundcloud
     soundcloudService.getUser().then(function(data){
         $scope.sc = data;
     });
 
-
     $scope.add_to_playlist = function(source){
         playlistModel.add(source);
+    }
+
+}])
+
+.controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'socketManager', 'playlistModel', '$state', function($scope, soundcloudService, socketManager, playlistModel, $state) {
+
+    $scope.create_channel = function() {
+        console.log("channelName")
+        var habibi = $scope.channelName;
+        socketManager.createChannel(habibi).then(function(data) {
+            console.log("Then go")
+            $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
+        });
+    }
+
+    $scope.add_to_playlist = function(source){
+        playlistModel.add();
     }
 
 }]);

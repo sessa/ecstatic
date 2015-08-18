@@ -1,9 +1,10 @@
-ion-view(view-title='channel_name')
+ion-view(ng-controller="PlayerCtrl as controller", view-title='{{channelName}}')
 	ion-content.padding
+		p {{channelName}}
 		br
 		br
 		br
-		p(ng-controller="PlayerCtrl as controller")
+		p
 			videogular(vg-theme="controller.theme", 
 				vg-player-ready="controller.onPlayerReady($API)", 
 				vg-complete="controller.onCompleteItem()", 

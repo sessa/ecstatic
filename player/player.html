@@ -1,7 +1,8 @@
 
-<ion-view view-title="channel_name">
-  <ion-content class="padding"><br/><br/><br/>
-    <p ng-controller="PlayerCtrl as controller">
+<ion-view ng-controller="PlayerCtrl as controller" view-title="{{channelName}}">
+  <ion-content class="padding">
+    <p>{{channelName}}</p><br/><br/><br/>
+    <p>
       <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="videogular-container audio">
         <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
         <vg-controls>

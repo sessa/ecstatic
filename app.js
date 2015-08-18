@@ -87,12 +87,12 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.channels-create-name', {
-      url: '/create-name',
+    .state('tab.name-a-channel', {
+      url: '/name-a-channel',
       views: {
         'tab-channels': {
-          templateUrl: 'sockets/channels-create-name.html',
-          controller: 'CreateChannelCtrl'
+          templateUrl: 'channels/name-a-channel.html',
+          controller: 'NameChannelCtrl'
         }
       }
     })

@@ -1,0 +1,6 @@
+ion-view(view-title='Name your channel')
+	ion-content
+		label
+			input(type="text", placeholder="Your channel's name")
+		button.button(ng-click="create_channel()", ng-init="channelName=random_name") Broadcast
+
