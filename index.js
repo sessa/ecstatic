@@ -33,6 +33,7 @@ ecstaticSockets.setupEcstaticSockets(squad_app);
 
 //routes
 squad_app.get('/soundcloud/callback', function(req, res) {
+    console.log("caught");
   	res.render('soundcloud/callback');
 });
 squad_app.post('/feedback', function(req, res) {
@@ -62,6 +63,11 @@ console.log("Result: "+ req.body.dname);
         }
     });*/
 });
+squad_app.route('/*')
+.get(function(req, res) {
+  res.render('index', {env: "production"})
+});
+
 squad_app.listen(squad_app.get('port'), function(req, res) {
  console.log('Server listening at ' + squad_app.get('port'));
 });
