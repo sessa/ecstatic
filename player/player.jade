@@ -15,7 +15,9 @@ ion-view(ng-controller="PlayerCtrl as controller")
 						a.item.item-thumbnail-left(href="#")
 							img(src="images/AppIconSquare_1024.png")
 							h2 Now playing
-							p {{source.title}} by {{source.user.username}}
+							p {{trackTitle}}
+							p {{trackUser}}
+
 					vg-media(vg-src="controller.sources", vg-type="audio")
 					vg-controls.item
 						vg-scrub-bar

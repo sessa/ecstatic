@@ -8,7 +8,8 @@
         <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="list list-inset videogular-container audio">
           <div class="list"><a href="#" class="item item-thumbnail-left"><img src="images/AppIconSquare_1024.png"/>
               <h2>Now playing</h2>
-              <p>{{source.title}} by {{source.user.username}}</p></a></div>
+              <p>{{trackTitle}}</p>
+              <p>{{trackUser}}</p></a></div>
           <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
           <vg-controls class="item">
             <vg-scrub-bar>
@@ -29,6 +30,6 @@
         <button ng-click="controller.addSongs()">add songs</button>
       </div>
     </ng-switch>
-    <div data-ng-include data-src="'chat/chat.html'"></div>
+    <div data-ng-include="" data-src="'chat/chat.html'"></div>
   </ion-content>
 </ion-view>
