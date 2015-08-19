@@ -29,11 +29,13 @@ var app = angular.module('ecstatic', [
       'ngAnimate',
       'ionic',
       'ecstatic.player',
+      'ecstatic.playlist',
       'ecstatic.sockets',
       'ecstatic.soundcloud',
       'ecstatic.home',
       'ecstatic.channels',
-      'ecstatic.config'
+      'ecstatic.config',
+      'ecstatic.feedback'
 ])
 
 .run(function($ionicPlatform) {
@@ -112,12 +114,21 @@ var app = angular.module('ecstatic', [
         }
       }
     })
+    .state('tab.playlist', {
+      url: '/player/:channel_id/playlist',
+      views: {
+        'tab-channels': {
+          templateUrl: 'player/playlist.html',
+          controller: 'PlaylistCtrl'
+        }
+      }
+    })    
     .state('tab.feedback', {
       url: '/feedback',
       views: {
-        'tab-channels': {
+        'tab-feedback': {
           templateUrl: 'feedback/feedback.html',
-          controller: 'feedback'
+          controller: 'FeedbackCtrl'
         }
       }
     })

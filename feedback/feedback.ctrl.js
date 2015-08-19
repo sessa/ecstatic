@@ -1,6 +1,7 @@
 angular.module('ecstatic.feedback', [])
 
 .controller('FeedbackCtrl', function() {
+	/*
 	var x = document.getElementById("form_sample");
 
 	var createform = document.createElement('form'); // Create New Element form
@@ -60,5 +61,5 @@ angular.module('ecstatic.feedback', [])
 		submitelement.setAttribute("type", "submit");
 		submitelement.setAttribute("name", "dsubmit");
 		submitelement.setAttribute("value", "Submit");
-		createform.appendChild(submitelement);
+		createform.appendChild(submitelement); */
 });

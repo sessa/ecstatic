@@ -1,11 +1,13 @@
 
 <ion-view ng-controller="PlayerCtrl as controller">
+  <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
+      <button class="button button-clear icon-right ion-chevron-right">Playlist</button></a></ion-nav-buttons>
   <ion-content class="padding">
     <ng-switch on="controller.showPlayer">
       <div ng-switch-when="true"> 
-        <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="videogular-container audio">
+        <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="list list-inset videogular-container audio">
           <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
-          <vg-controls>
+          <vg-controls class="item">
             <vg-scrub-bar>
               <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
             </vg-scrub-bar>
@@ -15,8 +17,8 @@
             </vg-volume>
           </vg-controls>
         </videogular>
-        <button ng-click="controller.nextSong()">next song</button>
-        <button ng-click="controller.addSongs()">add songs</button><br/><br/><br/>
+        <button ng-click="controller.nextSong()" class="button">next song</button>
+        <button ng-click="controller.addSongs()" class="button">add songs</button>
       </div>
       <div ng-switch-default="ng-switch-default"> 
         <p>{{controller.showPlayer}}</p>
