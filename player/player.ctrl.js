@@ -7,17 +7,17 @@ angular.module('ecstatic.player')
 
         channelServices.joinChannel($stateParams.channel_id);
         if(!player_state){
-            channelServices.getChannels().then(function (data){
+            /*channelServices.getChannels().then(function (data){
                 console.log("channelbang data="+JSON.stringify(data.channelList));
                 for(var index = 0; index < data.channelList.length; index++){
                     var player_state = data.channelList[index].player_state;
                     if(player_state.channel_id == $stateParams.channel_id){
-                      console.log("2 player_state="+JSON.stringify(player_state));
-                    createController(this, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, playerService, $timeout);
-                      break;
+                        console.log("2 player_state="+JSON.stringify(player_state));
+                        createController(this, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, playerService, $timeout);
+                        break;
                     }
                 }
-            });
+            });*/
         }
         else{
             createController(this, player_state, $sce, $scope, $rootScope, $stateParams, channelModel, playerService, $timeout);
@@ -35,7 +35,11 @@ function createController(controller, player_state, $sce, $scope, $rootScope, $s
     controller.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
 
     controller.onPlayerReady = function(API) {
+        //check if there are any songs
         controller.sources.push(controller.playlist[controller.currentItem]);
+        //if there aren't any songs, then play rick roll song
+
+        
         controller.API = API;
         var delta = (player_state.requestTime - player_state.timestamp)/1000;
         console.log("delta="+delta);

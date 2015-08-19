@@ -34,7 +34,7 @@ angular.module('ecstatic.channels')
             $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
         });
     }
-    
+
     // Gets your likes from Soundcloud
     soundcloudService.getUser().then(function(data){
         $scope.sc = data;
@@ -44,5 +44,3 @@ angular.module('ecstatic.channels')
         playlistModel.add(source);
     }
 }])
-
-}]);
