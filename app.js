@@ -30,7 +30,6 @@ var app = angular.module('ecstatic', [
       'ionic',
       'ecstatic.player',
       'ecstatic.sockets',
-      'ecstatic.models',
       'ecstatic.soundcloud',
       'ecstatic.home',
       'ecstatic.channels',
@@ -53,7 +52,8 @@ var app = angular.module('ecstatic', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.views.maxCache(0);
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router

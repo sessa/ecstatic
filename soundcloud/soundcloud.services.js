@@ -4,7 +4,7 @@ angular.module('ecstatic.soundcloud')
       var Service = {};
       var defer = $q.defer();
 
-      Service.getUser = function() {
+      Service.getFavorites = function() {
         console.log(ConfigService.getConfig().soundcloudBackend);
         SC.initialize({
             client_id: ConfigService.getConfig().soundcloudClientId,

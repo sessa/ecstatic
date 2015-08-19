@@ -1,49 +1,44 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['socket', 'socketManager', 'channelModel', 'playlistModel', function(socket, socketManager, channelModel, playlistModel) {
-    // We return this object to anything injecting our service
-    var Service = {};
+.factory('channelServices', ['socket', 'socketManager', 'channelModel', 'playerModel', 'playlistModel', function(socket, socketManager, channelModel, playerModel, playlistModel) {
+  // We return this object to anything injecting our service
+  var Service = {};
 
-    Service.getChannels = function() {
-		var request = {
-			msg: "channelList"
-		}
+  Service.getChannels = function() {
+	var request = {
+		msg: "channelList"
+	}
 
-		//channelList returns all channels
-	    socket.on('channelList', function (data) {
-	        channelModel.set(data);
-	        socketManager.listener(data);
-	    });
+	//channelList returns all channels
+    socket.on('channelList', function (data) {
+        channelModel.set(data);
+        socketManager.listener(data);
+    });
 
-		var promise = socketManager.sendRequest(request); 
-		return promise;
+	var promise = socketManager.sendRequest(request); 
+	return promise;
+  }
+
+  Service.joinChannel = function(channel_id) {
+    var request = {
+      msg: "join_channel",
+      channel_id:channel_id
     }
-
-    Service.joinChannel = function(channel_id) {
-      var request = {
-        msg: "join_channel",
-        channel_id:channel_id
-      }
-      var promise = socketManager.sendRequest(request); 
-      return promise;
-    }
+    var promise = socketManager.sendRequest(request); 
+    return promise;
+  }
 
 	Service.createChannel = function(channelName) {
-		var sources = [];
-		for(var index = 0; index < playlistModel.playlist.length; index++){
-			//for each song in the playlist
-			var media = playlistModel.playlist[index];
-			sources.push({src:media.stream_url + '?client_id=9d93a2f8833de3799958dfecf637cd9a', type:"audio/"+media.original_format})
-		}
 		var request = {
 			msg: "create_channel",
-			channel_name: "testy_room",
-			sources: sources
+			channel_name: "testy_room"
 		}
 
 		//When create channel returns, add the data to the channelModel
 		socket.on('create_channel', function (data) {
-			channelModel.add(data);
+      channelModel.add(data);
+      var player_state = data.player_state;
+      playerModel.set(player_state);
 			socketManager.listener(data);
 		});
 		// Storing in a variable for clarity on what sendRequest returns

@@ -1,18 +1,17 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", '$rootScope', "$stateParams", "channelModel", "playerService", "$state", "$timeout", 'channelServices', function($sce, $scope, $rootScope, $stateParams, channelModel, playerService, $state, $timeout, channelServices) {
-		//parse sources
-        var player_state = channelModel.get($stateParams.channel_id);
+	["$sce", "$scope", '$rootScope', "$stateParams", "playerModel", "playerService", "playlistModel", "$state", "$timeout", 'channelServices', function($sce, $scope, $rootScope, $stateParams, playerModel, playerService, playlistModel, $state, $timeout, channelServices) {
+        var playlist = playlistModel.playlist;
+        console.log("playlist in playerctrl = "+JSON.stringify(playlist));
         var controller = this;
         controller.addSongs = function() {
-            console.log('in add songs');
             $state.go('tab.channels-add');
         }
 
-        channelServices.joinChannel($stateParams.channel_id);
-        if(!player_state){
-            console.log("no player state");
+//        channelServices.joinChannel($stateParams.channel_id);
+        if(playlist.length == 0){
+            controller.showPlayer = false;
             /*channelServices.getChannels().then(function (data){
                 console.log("channelbang data="+JSON.stringify(data.channelList));
                 for(var index = 0; index < data.channelList.length; index++){
@@ -26,22 +25,23 @@ angular.module('ecstatic.player')
             });*/
         }
         else{
-            console.log("asfd");
+            var player_state = playerModel.player_state;
+            controller.showPlayer = true;
             controller.API = null;
             controller.currentItem = player_state.playlistIndex;
             controller.autoplay = true;
-            controller.playlist = constructPlaylist(player_state, $sce);
+            controller.playlist = playlist;
             controller.sources = [];
             controller.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
+            console.log("controller.playlist="+JSON.stringify(controller.playlist));
 
             controller.onPlayerReady = function(API) {
-                //check if there are any songs
-                controller.sources.push(controller.playlist[controller.currentItem]);
-                //if there aren't any songs, then play rick roll song
-
+                var track = controller.playlist[controller.currentItem];
+                console.log("trac="+JSON.stringify(track));
+                controller.sources.push({src:$sce.trustAsResourceUrl(track.src), type: track.type});
+                console.log("controller.sources="+JSON.stringify(controller.sources));
                 controller.API = API;
                 var delta = (player_state.requestTime - player_state.timestamp)/1000;
-                console.log("delta="+delta);
                 API.seekTime(delta, false);
             }
             controller.onCompleteItem = function() {
@@ -49,6 +49,7 @@ angular.module('ecstatic.player')
                 controller.currentItem++;
                 if (controller.currentItem >= controller.playlist.length) controller.currentItem= 0;
                 controller.setItem(controller.currentItem);
+
             }
             controller.setItem = function(index) {
                 controller.API.stop();
@@ -58,6 +59,7 @@ angular.module('ecstatic.player')
                 $timeout(controller.API.play.bind(controller.API), 100);
             }
             controller.nextSong = function() {
+
                 localNextSong(controller);
                 playerService.nextSongAction(controller.currentItem, $stateParams.channel_id);
             }
@@ -80,12 +82,3 @@ function localNextSong(controller){
     controller.setItem(controller.currentItem);
 }
 
-function constructPlaylist(player_state, $sce){
-	//parse sources
-    var sources = [];
-    for (var index = 0; index < player_state.sources.length; index++){
-    	var src = player_state.sources[index].src;
-    	sources.push({src: $sce.trustAsResourceUrl(src), type: player_state.sources[index].type});
-    }
-    return sources;
-}

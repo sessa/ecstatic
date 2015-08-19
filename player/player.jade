@@ -1,7 +1,7 @@
-ion-view(ng-controller="PlayerCtrl as controller", view-title='{{channelName}}')
+ion-view(ng-controller="PlayerCtrl as controller")
 	ion-content.padding
-		div(ng-switch on="controller")
-			div(ng-switch-when="controller.theme") 
+		ng-switch(on="controller.showPlayer")
+			div(ng-switch-when="true") 
 				videogular(vg-theme="controller.theme", 
 					vg-player-ready="controller.onPlayerReady($API)", 
 					vg-complete="controller.onCompleteItem()", 
@@ -16,10 +16,10 @@ ion-view(ng-controller="PlayerCtrl as controller", view-title='{{channelName}}')
 							vg-volume-bar
 				button(ng-click="controller.nextSong()") next song
 				button(ng-click="controller.addSongs()") add songs
-				p {{channelName}}
 				br
 				br
 				br
 			div(ng-switch-default) 
+				p {{controller.showPlayer}}
 				p There aren't any songs in your playlist.
 				button(ng-click="controller.addSongs()") add songs

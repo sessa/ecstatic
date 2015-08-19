@@ -1,8 +1,8 @@
 
 <ion-view ng-controller="PlayerCtrl as controller" view-title="{{channelName}}">
   <ion-content class="padding">
-    <div ng-switch="ng-switch" on="controller">
-      <div ng-switch-when="controller.theme"> 
+    <ng-switch on="controller.showPlayer">
+      <div ng-switch-when="true"> 
         <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="videogular-container audio">
           <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
           <vg-controls>
@@ -20,9 +20,10 @@
         <p>{{channelName}}</p><br/><br/><br/>
       </div>
       <div ng-switch-default="ng-switch-default"> 
+        <p>{{controller.showPlayer}}</p>
         <p>There aren't any songs in your playlist.</p>
         <button ng-click="controller.addSongs()">add songs</button>
       </div>
-    </div>
+    </ng-switch>
   </ion-content>
 </ion-view>
