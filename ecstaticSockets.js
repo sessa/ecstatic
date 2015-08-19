@@ -129,6 +129,14 @@ exports.setupEcstaticSockets = function(app){
             });
         });
 
+        socket.on('chat_backlog', function (data) {
+            console.log("On server getting chat backlog");
+            client.get(data.channel_id, function(err, socket_info) {
+                socket_info = JSON.parse(socket_info);
+                console.log(socket_info.player_state.chat.length);
+                socket.emit("chat_backlog", socket_info.player_state.chat);
+            })
+        });
 
         //PLAYLIST
         socket.on('add_song', function (data) {

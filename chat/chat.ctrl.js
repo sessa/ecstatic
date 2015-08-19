@@ -6,13 +6,16 @@ angular.module('ecstatic.chat')
 		console.log("We are submitting the text in chat.ctrl.js");
 		chatModel.add(lineText);
 		chatServices.sendText(lineText, $stateParams.channel_id);
-		$scope.chatLog = chatModel.getAll();
 	}
-	$scope.chatLog = chatModel.getAll();
-	
-	$scope.$on('send_text', function(event, data) {
-		console.log("We got an 'on' message in chat.ctrl.js");
-		chatModel.add(lineText);
+	console.log("about to call all chatlog");
+	$scope.chatLog = chatModel.getAll($stateParams.channel_id);
+
+	$scope.$on('chat_backlog', function(event, data) {
+		console.log("returning from server with data!");
+		if(data != undefined){
+			console.log("data defined");
+			$scope.chatLog = chatModel.addChatBacklog(data);
+		}
 	})
 
 }]);

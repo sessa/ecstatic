@@ -1,6 +1,6 @@
 angular.module('ecstatic.chat')
 
-.factory('chatServices', ['socket', 'socketManager',  function(socket, socketManager) {
+.factory('chatServices', ['$rootScope', 'socket', 'socketManager',  function($rootScope, socket, socketManager) {
     // We return this object to anything injecting our service
     var Service = {};
 
@@ -15,6 +15,22 @@ angular.module('ecstatic.chat')
         var promise = socketManager.sendRequest(request); 
         return promise;
       }
+
+      Service.getChatBacklog = function(channel_id) {
+        console.log("Chat.Services.js - getChatBacklog()");
+        var request = {
+          msg: "chat_backlog",
+          channel_id: channel_id,
+        }
+        socket.on('chat_backlog', function (data) {
+          console.log("returned chat from the server" + JSON.stringify(data));
+          $rootScope.$broadcast('chat_backlog', data);
+        })
+
+        var promise = socketManager.sendRequest(request);
+        return promise;
+      }
+
       return Service;
   }])
 
@@ -27,8 +43,15 @@ angular.module('ecstatic.chat')
     Service.chat.push(txt);
   }
 
-  Service.getAll = function() {
-    console.log("Chat.services.js - getALl() with count: " + Service.chat.length);
+  Service.addChatBacklog = function(chat_backlog) {
+    console.log("setting chat backlog" + chat_backlog);
+    Service.chat = chat_backlog;
+    return Service.chat;
+  }
+
+  Service.getAll = function(channel_id) {
+    console.log("Chat.services.js - getAll() with count: " + Service.chat.length );
+    chatServices.getChatBacklog(channel_id);
     return Service.chat;
   }
   return Service;
