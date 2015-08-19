@@ -28,14 +28,11 @@ angular.module('ecstatic.player')
 	return Service;
 })
 
-.factory('playlistModel', function($rootScope, ConfigService){
+.factory('playlistModel', function($rootScope, ConfigService, $sce){
 	var Service = {};
 	Service.playlist = [];
 	Service.add = function(source) {
-	    Service.playlist.push({src: source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId, type: source.original_format});
-	}
-	Service.remove = function(index) {
-		Service.playlist.remove(index);
+	    Service.playlist.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
 	}
 	return Service;
 })

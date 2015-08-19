@@ -3,7 +3,6 @@ angular.module('ecstatic.player')
 .controller('PlayerCtrl',
 	["$sce", "$scope", '$rootScope', "$stateParams", "playerModel", "playerService", "playlistModel", "$state", "$timeout", 'channelServices', function($sce, $scope, $rootScope, $stateParams, playerModel, playerService, playlistModel, $state, $timeout, channelServices) {
         var playlist = playlistModel.playlist;
-        console.log("playlist in playerctrl = "+JSON.stringify(playlist));
         var controller = this;
         controller.addSongs = function() {
             $state.go('tab.channels-add');
@@ -33,12 +32,11 @@ angular.module('ecstatic.player')
             controller.playlist = playlist;
             controller.sources = [];
             controller.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
-            console.log("controller.playlist="+JSON.stringify(controller.playlist));
 
             controller.onPlayerReady = function(API) {
                 var track = controller.playlist[controller.currentItem];
-                console.log("trac="+JSON.stringify(track));
-                controller.sources.push({src:$sce.trustAsResourceUrl(track.src), type: track.type});
+                console.log("track="+track);
+                controller.sources.push(track);
                 console.log("controller.sources="+JSON.stringify(controller.sources));
                 controller.API = API;
                 var delta = (player_state.requestTime - player_state.timestamp)/1000;

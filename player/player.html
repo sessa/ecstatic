@@ -1,5 +1,5 @@
 
-<ion-view ng-controller="PlayerCtrl as controller" view-title="{{channelName}}">
+<ion-view ng-controller="PlayerCtrl as controller">
   <ion-content class="padding">
     <ng-switch on="controller.showPlayer">
       <div ng-switch-when="true"> 
@@ -16,8 +16,7 @@
           </vg-controls>
         </videogular>
         <button ng-click="controller.nextSong()">next song</button>
-        <button ng-click="controller.addSongs()">add songs</button>
-        <p>{{channelName}}</p><br/><br/><br/>
+        <button ng-click="controller.addSongs()">add songs</button><br/><br/><br/>
       </div>
       <div ng-switch-default="ng-switch-default"> 
         <p>{{controller.showPlayer}}</p>
