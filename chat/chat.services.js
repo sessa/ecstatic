@@ -18,7 +18,7 @@ angular.module('ecstatic.chat')
       return Service;
   }])
 
-.factory('chatModel', function($rootScope){
+.factory('chatModel', ['$rootScope', 'chatServices', function($rootScope, chatServices) {
   var Service = {};
   Service.chat = [];
 
@@ -28,7 +28,8 @@ angular.module('ecstatic.chat')
   }
 
   Service.getAll = function() {
+    console.log("Chat.services.js - getALl() with count: " + Service.chat.length);
     return Service.chat;
   }
   return Service;
-})
+}])

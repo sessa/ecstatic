@@ -9,6 +9,7 @@ angular.module('ecstatic.chat')
 		$scope.chatLog = chatModel.getAll();
 	}
 	$scope.chatLog = chatModel.getAll();
+	
 	$scope.$on('send_text', function(event, data) {
 		console.log("We got an 'on' message in chat.ctrl.js");
 		chatModel.add(lineText);
