@@ -1,6 +1,6 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['socket', 'socketManager', 'channelModel', 'playerModel', 'playlistModel', function(socket, socketManager, channelModel, playerModel, playlistModel) {
+.factory('channelServices', ['socket', 'socketManager', 'channelModel', 'playerService', function(socket, socketManager, channelModel, playerService) {
   // We return this object to anything injecting our service
   var Service = {};
 
@@ -38,7 +38,7 @@ angular.module('ecstatic.channels')
 		socket.on('create_channel', function (data) {
       channelModel.add(data);
       var player_state = data.player_state;
-      playerModel.set(player_state);
+      playerService.setPlayerState(player_state);
 			socketManager.listener(data);
 		});
 		// Storing in a variable for clarity on what sendRequest returns

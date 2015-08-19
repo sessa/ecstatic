@@ -1,8 +1,8 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", '$rootScope', "$stateParams", "playerModel", "playerService", "playlistModel", "$state", "$timeout", 'channelServices', function($sce, $scope, $rootScope, $stateParams, playerModel, playerService, playlistModel, $state, $timeout, channelServices) {
-        var playlist = playlistModel.playlist;
+	["$sce", "$scope", '$rootScope', "$stateParams", "playerService", "$state", "$timeout", 'channelServices', function($sce, $scope, $rootScope, $stateParams, playerService, $state, $timeout, channelServices) {
+        var playlist = playerService.playlist;
         var controller = this;
         controller.addSongs = function() {
             $state.go('tab.channels-add');
@@ -24,7 +24,7 @@ angular.module('ecstatic.player')
             });*/
         }
         else{
-            var player_state = playerModel.player_state;
+            var player_state = playerService.player_state;
             controller.showPlayer = true;
             controller.API = null;
             controller.currentItem = player_state.playlistIndex;
