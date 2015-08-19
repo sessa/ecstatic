@@ -36,11 +36,16 @@ angular.module('ecstatic.channels')
     }
 }])
 .controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playlistModel', '$state', function($scope, soundcloudService, playlistModel, $state) {
-
     // Gets your likes from Soundcloud
     soundcloudService.getUser().then(function(data){
         $scope.sc = data;
     });
+
+    $scope.submit = function() {
+        channelServices.createChannel(habibi).then(function(data) {
+            $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
+        });
+    }
 
     $scope.add_to_playlist = function(source){
         playlistModel.add(source);
