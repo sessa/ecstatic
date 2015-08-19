@@ -1,6 +1,6 @@
 angular.module('ecstatic.channels')
 
-.controller('ChannelsCtrl', ['$scope', 'soundcloudService', 'channelServices', 'playlistModel', '$state', function($scope, soundcloudService, channelServices, playlistModel, $state) {
+.controller('ChannelsCtrl', ['$scope', 'channelServices', '$state', function($scope, channelServices, $state) {
 
 // refresh the rooms list
     $scope.doRefresh = function(){
@@ -26,7 +26,7 @@ angular.module('ecstatic.channels')
         channelServices.joinChannel(channel_id);
     }
 }])
-.controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'channelServices', 'playlistModel', '$state', function($scope, soundcloudService, channelServices, playlistModel, $state) {
+.controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'channelServices', '$state', function($scope, soundcloudService, channelServices, $state) {
 
     $scope.create_channel = function() {
         var habibi = $scope.channelName;
@@ -34,6 +34,8 @@ angular.module('ecstatic.channels')
             $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
         });
     }
+}])
+.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playlistModel', '$state', function($scope, soundcloudService, playlistModel, $state) {
 
     // Gets your likes from Soundcloud
     soundcloudService.getUser().then(function(data){

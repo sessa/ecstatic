@@ -1,0 +1,10 @@
+ion-view(ng-controller="AddSongsCtrl as controller", view-title="Create a Channel")
+	ion-nav-buttons(side="secondary")
+		button(ng-click="create_channel()") add songs
+	ion-content
+		ion-list(class="list")
+			ion-item(class="item", ng-repeat="source in sc track by $index")
+				button(ng-click="add_to_playlist(source)") Add
+				p Title: "{{source.title}}" 
+				p Artist: "{{source.user.username}}"
+				p Duration: "{{source.duration}}"

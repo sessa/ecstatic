@@ -1,27 +1,25 @@
 ion-view(ng-controller="PlayerCtrl as controller", view-title='{{channelName}}')
 	ion-content.padding
-		- if (typeof(controller) == 'undefined') {
-			p There aren't any songs in your playlist.
-		- }
-		- else {
-			p fff
-			videogular(vg-theme="controller.theme", 
-				vg-player-ready="controller.onPlayerReady($API)", 
-				vg-complete="controller.onCompleteItem()", 
-				class="videogular-container audio" 
-				vg-auto-play="controller.autoplay")
-				vg-media(vg-src="controller.sources", vg-type="audio")
-				vg-controls
-					vg-scrub-bar
-						vg-scrub-bar-current-time
-					vg-volume
-						vg-mute-button
-						vg-volume-bar
+		div(ng-switch on="controller")
+			div(ng-switch-when="controller.theme") 
+				videogular(vg-theme="controller.theme", 
+					vg-player-ready="controller.onPlayerReady($API)", 
+					vg-complete="controller.onCompleteItem()", 
+					class="videogular-container audio" 
+					vg-auto-play="controller.autoplay")
+					vg-media(vg-src="controller.sources", vg-type="audio")
+					vg-controls
+						vg-scrub-bar
+							vg-scrub-bar-current-time
+						vg-volume
+							vg-mute-button
+							vg-volume-bar
 				button(ng-click="controller.nextSong()") next song
 				button(ng-click="controller.addSongs()") add songs
-			p {{channelName}}
-			br
-			br
-			br
-
-		- }
+				p {{channelName}}
+				br
+				br
+				br
+			div(ng-switch-default) 
+				p There aren't any songs in your playlist.
+				button(ng-click="controller.addSongs()") add songs

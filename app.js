@@ -96,15 +96,6 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.channels-create', {
-      url: '/create',
-      views: {
-        'tab-channels': {
-          templateUrl: 'channels/channels-create.html',
-          controller: 'AddSongsCtrl'
-        }
-      }
-    })
     .state('tab.channels-player', {
       url: '/player/:channel_id',
       views: {
@@ -113,11 +104,18 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-
+    .state('tab.channels-add', {
+      url: '/add',
+      views: {
+        'tab-channels': {
+          templateUrl: 'channels/add.html',
+        }
+      }
+    })
     .state('tab.feedback', {
       url: '/feedback',
       views: {
-        'tab-chats': {
+        'tab-channels': {
           templateUrl: 'feedback/feedback.html',
           controller: 'feedback'
         }
