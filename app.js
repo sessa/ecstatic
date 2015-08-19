@@ -34,7 +34,8 @@ var app = angular.module('ecstatic', [
       'ecstatic.soundcloud',
       'ecstatic.home',
       'ecstatic.channels',
-      'ecstatic.config'
+      'ecstatic.config',
+      'ecstatic.feedback'
 ])
 
 .run(function($ionicPlatform) {
@@ -118,9 +119,9 @@ var app = angular.module('ecstatic', [
     .state('tab.feedback', {
       url: '/feedback',
       views: {
-        'tab-chats': {
+        'tab-feedback': {
           templateUrl: 'feedback/feedback.html',
-          controller: 'feedback'
+          controller: 'FeedbackCtrl'
         }
       }
     })
