@@ -29,6 +29,7 @@ var app = angular.module('ecstatic', [
       'ngAnimate',
       'ionic',
       'ecstatic.player',
+      'ecstatic.playlist',
       'ecstatic.sockets',
       'ecstatic.models',
       'ecstatic.soundcloud',
@@ -115,6 +116,15 @@ var app = angular.module('ecstatic', [
         }
       }
     })
+    .state('tab.playlist', {
+      url: '/player/:channel_id/playlist',
+      views: {
+        'tab-channels': {
+          templateUrl: 'player/playlist.html',
+          controller: 'PlaylistCtrl'
+        }
+      }
+    })    
 
     .state('tab.feedback', {
       url: '/feedback',

@@ -1,22 +1,21 @@
+
 ion-view(ng-controller="PlayerCtrl as controller", view-title='{{channelName}}')
+	ion-nav-buttons(side="secondary")
+		a(href="#/tab/channels/{{channel.channel_id}}")
+			button.button.button-clear.icon-right.ion-chevron-right Playlist
 	ion-content.padding
-		p {{channelName}}
-		br
-		br
-		br
-		p
-			videogular(vg-theme="controller.theme", 
-				vg-player-ready="controller.onPlayerReady($API)", 
-				vg-complete="controller.onCompleteItem()", 
-				class="videogular-container audio" 
-				vg-auto-play="controller.autoplay")
-				vg-media(vg-src="controller.sources", vg-type="audio")
-				vg-controls
-					vg-scrub-bar
-						vg-scrub-bar-current-time
-					vg-volume
-						vg-mute-button
-						vg-volume-bar
-			button(ng-click="controller.nextSong()") next song
-			button(ng-click="controller.addSongs()") add songs
+		videogular.list.list-inset(vg-theme="controller.theme", 
+			vg-player-ready="controller.onPlayerReady($API)", 
+			vg-complete="controller.onCompleteItem()", 
+			class="videogular-container audio" 
+			vg-auto-play="controller.autoplay")
+			vg-media(vg-src="controller.sources", vg-type="audio")
+			vg-controls.item
+				vg-scrub-bar
+					vg-scrub-bar-current-time
+				vg-volume
+					vg-mute-button
+					vg-volume-bar
+		button.button(ng-click="controller.nextSong()") next song
+		button.button(ng-click="controller.addSongs()") add songs
 

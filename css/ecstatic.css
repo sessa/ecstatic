@@ -1,0 +1,12 @@
+.gradient {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
+background: #F29537; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #F29537 0%, #C14D9E 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, top right, 0px, bottom left, 100%, color-stop(0%,#F29537), color-stop(100%,#C14D9E)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Opera 12+ */
+background: -ms-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* IE10+ */
+background: radial-gradient(ellipse at top right,  #F29537 0%,#C14D9E 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}

@@ -1,22 +1,21 @@
 
 <ion-view ng-controller="PlayerCtrl as controller" view-title="{{channelName}}">
+  <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
+      <button class="button button-clear icon-right ion-chevron-right">Playlist</button></a></ion-nav-buttons>
   <ion-content class="padding">
-    <p>{{channelName}}</p><br/><br/><br/>
-    <p>
-      <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="videogular-container audio">
-        <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
-        <vg-controls>
-          <vg-scrub-bar>
-            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-          </vg-scrub-bar>
-          <vg-volume>
-            <vg-mute-button></vg-mute-button>
-            <vg-volume-bar></vg-volume-bar>
-          </vg-volume>
-        </vg-controls>
-      </videogular>
-      <button ng-click="controller.nextSong()">next song</button>
-      <button ng-click="controller.addSongs()">add songs</button>
-    </p>
+    <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="list list-inset videogular-container audio">
+      <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
+      <vg-controls class="item">
+        <vg-scrub-bar>
+          <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        </vg-scrub-bar>
+        <vg-volume>
+          <vg-mute-button></vg-mute-button>
+          <vg-volume-bar></vg-volume-bar>
+        </vg-volume>
+      </vg-controls>
+    </videogular>
+    <button ng-click="controller.nextSong()" class="button">next song</button>
+    <button ng-click="controller.addSongs()" class="button">add songs</button>
   </ion-content>
 </ion-view>
