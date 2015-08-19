@@ -1,0 +1,16 @@
+<!--
+chat box
+chat button
+ng-click in the button to run a function in the controller to send a message over the socket in sockets.services.js
+-->
+<div ng-controller="chatCtrl">
+
+	<div class="list">
+	<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item">
+	 Anonymous: {{txt}}
+	  </ion-item>
+	  </div>
+
+	<input type="text" ng-model="lineText" />
+	<button class="button" ng-click="submitText(lineText); lineText=''">Submit</button>
+</div>

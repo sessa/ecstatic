@@ -33,6 +33,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.sockets',
       'ecstatic.soundcloud',
       'ecstatic.home',
+      'ecstatic.chat',
       'ecstatic.channels',
       'ecstatic.config',
       'ecstatic.feedback'

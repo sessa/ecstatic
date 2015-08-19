@@ -48,7 +48,7 @@ exports.setupEcstaticSockets = function(app){
             client.get(socket.id, function (err, socket_info){
                 //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playlistIndex': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'channel_name': data.channel_name, 'channel_id': socket.id, sources: []};
+                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playlistIndex': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'channel_name': data.channel_name, 'channel_id': socket.id, sources: [], chat: data.chat};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
@@ -105,7 +105,7 @@ exports.setupEcstaticSockets = function(app){
             console.log("socket.id="+socket.id+"joining channel"+data.channel_id);
             socket.join(data.channel_id);
         });
-
+        
         //leaves an existing channel
         socket.on('leave_channel', function (data){
             console.log("leave_channel, data="+data);
@@ -117,6 +117,23 @@ exports.setupEcstaticSockets = function(app){
             socket.emit("users", clients);
         });
 
+        socket.on('send_text', function (data) {
+            client.get(data.channel_id, function (err, socket_info){
+                socket_info = JSON.parse(socket_info);
+                socket_info.player_state.chat.push(data.txt);
+                client.set(data.channel_id, JSON.stringify(socket_info));
+                socket.broadcast.to(data.channel_id).emit("send_text", data.txt);
+            });
+        });
+
+        socket.on('chat_backlog', function (data) {
+            console.log("On server getting chat backlog");
+            client.get(data.channel_id, function(err, socket_info) {
+                socket_info = JSON.parse(socket_info);
+                console.log(socket_info.player_state.chat.length);
+                socket.emit("chat_backlog", socket_info.player_state.chat);
+            })
+        });
 
         //PLAYLIST
         socket.on('add_song', function (data) {

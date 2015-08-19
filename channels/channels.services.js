@@ -31,7 +31,8 @@ angular.module('ecstatic.channels')
 	Service.createChannel = function(channelName) {
 		var request = {
 			msg: "create_channel",
-			channel_name: "testy_room"
+			channel_name: "testy_room",
+      chat: []
 		}
 
 		//When create channel returns, add the data to the channelModel
