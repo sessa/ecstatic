@@ -118,13 +118,14 @@ exports.setupEcstaticSockets = function(app){
         });
 
         socket.on('send_text', function (data) {
-            console.log("send text data on server = : " + JSON.stringify(data.txt) + " on channel: " + JSON.stringify(data.channel_id));
             // io.sockets.emit('send_text', data);
+            console.log("in ecstatic sockets send text");
             client.get(data.channel_id, function (err, socket_info){
                 console.log("Socket info in send text: " + socket_info);
                 socket_info = JSON.parse(socket_info);
                 socket_info.player_state.chat.push(data.txt);
                 client.set(data.channel_id, JSON.stringify(socket_info));
+                socket.broadcast.to(data.channel_id).emit("send_text", data.txt);
             });
         });
 

@@ -3,21 +3,14 @@ chat box
 chat button
 ng-click in the button to run a function in the controller to send a message over the socket in sockets.services.js
 -->
-<p ng-controller="chatCtrl">
-	<ion-content>
-	<ion-list class="list">
-	  <ion-item ng-repeat="source in chat" class="item">
-	    {{index}}
+<div ng-controller="chatCtrl">
+
+	<div class="list">
+	<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item">
+	 Anonymous: {{txt}}
 	  </ion-item>
-	  </ion-list>
-	</ion-content>
+	  </div>
 
-	<label class="item item-input">
-	  <span class="input-label">Chat:</span>
-	  <input type="text" ng-model="lineText">
-	</label>
-
-	<button class="button" ng-click="submitText(lineText)">
-	      Submit
-		</button>
-</p>
+	<input type="text" ng-model="lineText" />
+	<button class="button" ng-click="submitText(lineText)">Submit</button>
+</div>

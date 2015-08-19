@@ -5,6 +5,7 @@ angular.module('ecstatic.chat')
     var Service = {};
 
       Service.sendText = function(text, channel_id) {
+      	console.log("We just sent text in chat.services.js");
         var request = {
           //msg: name of the api function
           msg: "send_text",
@@ -21,12 +22,13 @@ angular.module('ecstatic.chat')
   var Service = {};
   Service.chat = [];
 
-  Service.add = function(source) {
-    Service.chat.push(source);
+  Service.add = function(txt) {
+  	console.log("in chat.services.js add function");
+    Service.chat.push(txt);
   }
 
   Service.getAll = function() {
-    return chat;
+    return Service.chat;
   }
   return Service;
 })
