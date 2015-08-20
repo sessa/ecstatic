@@ -1,5 +1,5 @@
 
-<ion-view view-title="Name your channel">
+<ion-view view-title="">
   <ion-content>
     <p></p>
     <div class="row"></div>
@@ -7,9 +7,9 @@
       <div class="col">
         <div class="list list-inset">
           <label class="item item-input padding">
-            <input type="text"/>
+            <input type="text" placeholder="What do you want to call you channel?" ng-model="channelName"/>
           </label>
-          <button ng-click="create_channel()" ng-init="channelName=random_name" class="button button-positive button-full">Broadcast</button>
+          <button ng-click="create_channel()" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
         </div>
       </div>
     </div>

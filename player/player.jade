@@ -25,8 +25,9 @@ ion-view(ng-controller="PlayerCtrl as controller")
 						vg-volume
 							vg-mute-button
 							vg-volume-bar
-				button.button(ng-click="controller.nextSong()") next song
-				button.button(ng-click="controller.addSongs()") add songs
+				
+				button.button.icon-left.ion-ios-skipforward(ng-click="controller.nextSong()") Next song
+				button.button.icon-left.ion-plus-circled(ng-click="controller.addSongs()") Add songs
 
 			div(ng-switch-default) 
 				p {{controller.showPlayer}}
