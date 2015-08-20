@@ -1,14 +1,17 @@
 angular.module('ecstatic.player')
 
-.factory('playerService', function($rootScope, $sce, ConfigService){
+.factory('playerService', function($rootScope, $sce, ConfigService, socket, socketManager){
 	var Service = {};
 	Service.player_state = {};
 	Service.playlist = [];
+	Service.soundcloudResources = [];
 
 	Service.setPlayerState = function(data) {
 		Service.player_state = data;
 	}
 	Service.addToPlaylist = function(source) {
+		console.log("source="+source);
+		Service.soundcloudResources.push(source);
 	    Service.playlist.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
 	}
 
@@ -21,7 +24,7 @@ angular.module('ecstatic.player')
 		socket.on('next_song_action', function (data) {
 			$rootScope.$broadcast('nextSong');
 		});
-		var promise = sendRequest(request); 
+		var promise = socketManager.sendRequest(request); 
 		return promise;
 	}
 

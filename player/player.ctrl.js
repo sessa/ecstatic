@@ -7,6 +7,7 @@ angular.module('ecstatic.player')
         controller.addSongs = function() {
             $state.go('tab.channels-add');
         }
+    
 
 //        channelServices.joinChannel($stateParams.channel_id);
         if(playlist.length == 0){
@@ -32,6 +33,13 @@ angular.module('ecstatic.player')
             controller.playlist = playlist;
             controller.sources = [];
             controller.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
+            $scope.trackTitle = playerService.soundcloudResources[controller.currentItem].title;
+            $scope.trackUser = playerService.soundcloudResources[controller.currentItem].user.username;
+
+            controller.updateView = function() {
+                $scope.trackTitle = playerService.soundcloudResources[controller.currentItem].title;
+                $scope.trackUser = playerService.soundcloudResources[controller.currentItem].user.username;
+            }
 
             controller.onPlayerReady = function(API) {
                 var track = controller.playlist[controller.currentItem];
@@ -76,7 +84,9 @@ angular.module('ecstatic.player')
 function localNextSong(controller){
     controller.isCompleted = true;
     controller.currentItem++;
+    controller.updateView();
     if (controller.currentItem >= controller.playlist.length) controller.currentItem= 0;
     controller.setItem(controller.currentItem);
+
 }
 
