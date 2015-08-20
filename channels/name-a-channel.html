@@ -7,9 +7,9 @@
       <div class="col">
         <div class="list list-inset">
           <label class="item item-input padding">
-            <input type="text"/>
+            <input type="text" ng-model="channelName"/>
           </label>
-          <button ng-click="create_channel()" ng-init="channelName=random_name" class="button button-positive button-full">Broadcast</button>
+          <button ng-click="create_channel(channelName)" ng-init="channelName=random_name" class="button button-positive button-full">Broadcast</button>
         </div>
       </div>
     </div>
