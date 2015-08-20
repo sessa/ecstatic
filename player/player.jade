@@ -3,14 +3,14 @@ ion-view(ng-controller="PlayerCtrl as controller")
 		a(href="#/tab/channels/{{channel.channel_id}}")
 			button.button.button-clear.icon-right.ion-chevron-right Playlist
 	ion-content.padding
-		ng-switch(on="controller.showPlayer")
+		ng-switch(on="showPlayer")
 			div(ng-switch-when="true") 
 				
-				videogular.list.list-inset(vg-theme="controller.theme", 
-					vg-player-ready="controller.onPlayerReady($API)", 
-					vg-complete="controller.onCompleteItem()", 
+				videogular.list.list-inset(vg-theme="theme", 
+					vg-player-ready="onPlayerReady($API)", 
+					vg-complete="onCompleteItem()", 
 					class="videogular-container audio" 
-					vg-auto-play="controller.autoplay")
+					vg-auto-play="autoplay")
 					.list
 						a.item.item-thumbnail-left(href="#")
 							img(src="images/AppIconSquare_1024.png")
@@ -18,7 +18,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							p {{trackTitle}}
 							p {{trackUser}}
 
-					vg-media(vg-src="controller.sources", vg-type="audio")
+					vg-media(vg-src="sources", vg-type="audio")
 					vg-controls.item
 						vg-scrub-bar
 							vg-scrub-bar-current-time
@@ -26,11 +26,11 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							vg-mute-button
 							vg-volume-bar
 				
-				button.button.icon-left.ion-ios-skipforward(ng-click="controller.nextSong()") Next song
-				button.button.icon-left.ion-plus-circled(ng-click="controller.addSongs()") Add songs
+				button.button.icon-left.ion-ios-skipforward(ng-click="nextSong()") Next song
+				button.button.icon-left.ion-plus-circled(ng-click="addSongs()") Add songs
 
 			div(ng-switch-default) 
 				p {{controller.showPlayer}}
 				p There aren't any songs in your playlist.
-				button(ng-click="controller.addSongs()") add songs
+				button(ng-click="addSongs()") add songs
 		div(data-ng-include="", data-src="'chat/chat.html'")

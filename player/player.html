@@ -3,14 +3,14 @@
   <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
       <button class="button button-clear icon-right ion-chevron-right">Playlist</button></a></ion-nav-buttons>
   <ion-content class="padding">
-    <ng-switch on="controller.showPlayer">
+    <ng-switch on="showPlayer">
       <div ng-switch-when="true"> 
-        <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="list list-inset videogular-container audio">
+        <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="list list-inset videogular-container audio">
           <div class="list"><a href="#" class="item item-thumbnail-left"><img src="images/AppIconSquare_1024.png"/>
               <h2>Now playing</h2>
               <p>{{trackTitle}}</p>
               <p>{{trackUser}}</p></a></div>
-          <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
+          <vg-media vg-src="sources" vg-type="audio"></vg-media>
           <vg-controls class="item">
             <vg-scrub-bar>
               <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
@@ -21,13 +21,13 @@
             </vg-volume>
           </vg-controls>
         </videogular>
-        <button ng-click="controller.nextSong()" class="button icon-left ion-ios-skipforward">Next song</button>
-        <button ng-click="controller.addSongs()" class="button icon-left ion-plus-circled">Add songs</button>
+        <button ng-click="nextSong()" class="button icon-left ion-ios-skipforward">Next song</button>
+        <button ng-click="addSongs()" class="button icon-left ion-plus-circled">Add songs</button>
       </div>
       <div ng-switch-default="ng-switch-default"> 
         <p>{{controller.showPlayer}}</p>
         <p>There aren't any songs in your playlist.</p>
-        <button ng-click="controller.addSongs()">add songs</button>
+        <button ng-click="addSongs()">add songs</button>
       </div>
     </ng-switch>
     <div data-ng-include="" data-src="'chat/chat.html'"></div>

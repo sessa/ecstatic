@@ -48,7 +48,18 @@ exports.setupEcstaticSockets = function(app){
             client.get(socket.id, function (err, socket_info){
                 //create a new playerstate and save it
                 socket_info_dict = JSON.parse(socket_info);
-                socket_info_dict.player_state = {'is_playing': 1, 'is_locked': 0, 'playlistIndex': 0, 'timestamp': new Date().getTime(), 'requestTime':new Date().getTime(), 'channel_name': data.channel_name, 'channel_id': socket.id, sources: [], chat: data.chat};
+                socket_info_dict.player_state = {
+                    'is_playing': 1,
+                    'is_locked': 0, 
+                    'playlistIndex': 0, 
+                    'timestamp': new Date().getTime(), 
+                    'requestTime':new Date().getTime(), 
+                    'channel_name': data.channel_name, 
+                    'channel_id': socket.id, 
+                    'sources': [], 
+                    'chat': data.chat,
+                    'playlist': [],
+                    'soundcloudResources': []};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
@@ -135,30 +146,14 @@ exports.setupEcstaticSockets = function(app){
             })
         });
 
-        //PLAYLIST
-        socket.on('add_song', function (data) {
-            var params = JSON.parse(data);
-            console.log("channels="+socket.rooms);
-            //add the song to the db
-            add_song(params, socket.rooms[index]);
-
-            
-            for(var index = 0; index < socket.rooms.length; index++) {
-                if (socket.rooms[index] != socket.id){
-                    socket.broadcast.to(socket.rooms[index]).emit("add_song", params);
-                }
-                else{
-                    socket.emit("add_song", params);
-                }  
-            }
-        });
-
-         function add_song(song, channel_id){
-            client.get(channel_id, function (err, socket_info){
-                socket_info = JSON.parse(socket_info);
-                socket_info.player_state.playlist.push(song);
-                client.set(channel_id, JSON.stringify(socket_info));
+        socket.on('update_channel', function (data) {
+            client.get(socket.id, function (err, socket_info){
+                socket_info_dict = JSON.parse(socket_info);
+                socket_info_dict.player_state = data.channel_info;
+                client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
+                socket_info_dict.callback_id = data.callback_id;
+                io.sockets.emit("update_channel", socket_info_dict);
             });
-         }
+        });
      });
 }

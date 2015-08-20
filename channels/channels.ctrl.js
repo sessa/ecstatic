@@ -34,18 +34,17 @@ angular.module('ecstatic.channels')
         });
     }
 }])
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playerService', '$state', function($scope, soundcloudService, playerService, $state) {
+.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', function($scope, soundcloudService, playerServices, channelServices, $state) {
     // Gets your likes from Soundcloud
     soundcloudService.getFavorites().then(function(data){
         $scope.sc = data;
     });
 
     $scope.submit = function() {
-        console.log("submitted");
-        $state.go('tab.channels-player', {channel_id:playerService.player_state.channel_id}, {reload: true, notify:true});
+        $state.go('tab.channels-player', {channel_id: playerServices.channel_id}, {reload: true, notify:true});
     }
 
     $scope.add_to_playlist = function(source){
-        playerService.addToPlaylist(source);
+        channelServices.addToPlaylist(playerServices.channel_id, source);
     }
 }])
