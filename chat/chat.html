@@ -4,13 +4,32 @@ chat button
 ng-click in the button to run a function in the controller to send a message over the socket in sockets.services.js
 -->
 <div ng-controller="chatCtrl">
-
+<!--
 	<div class="list">
-	<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item">
-	 Anonymous: {{txt}}
-	  </ion-item>
+
+	  <div class="item item-input-inset">
+	    <label class="item-input-wrapper">
+	      <input type="text" ng-model="lineText" placeholder="Type your message..."/>
+	    </label>
+	    <button class="button button-light icon ion-android-send" ng-click="submitText(lineText); lineText=''"></button>
 	  </div>
 
-	<input type="text" ng-model="lineText" />
-	<button class="button" ng-click="submitText(lineText); lineText=''">Submit</button>
+	</div>
+-->
+
+	<div class="list">
+		<div class="item item-avatar">
+			<p> Welcome home. </p>
+		</div>
+		<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item item-avatar">
+			<img src="images/AppIconSquare_1024.png">
+			 Anonymous: {{txt}}
+		</ion-item>
+	</div>
+
+
+
+
+	
+	
 </div>

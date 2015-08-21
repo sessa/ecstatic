@@ -1,35 +1,55 @@
 
 <ion-view ng-controller="PlayerCtrl as controller">
   <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
-      <button class="button button-clear icon-right ion-chevron-right">Playlist</button></a></ion-nav-buttons>
-  <ion-content class="padding">
+      <button ng-click="controller.addSongs()" class="button button-clear icon-left ion-plus-circled padding"> Add songs</button></a>
+    <!--.bar.bar-subheader.bar-dark-->
+    <!--p {{controller.showPlayer}}-->
+    <!--p.padding There aren't any songs in your playlist.-->
+    <!--button.button.icon-left.ion-plus-circled.pull-right(ng-click="controller.addSongs()") Add songs	-->
+  </ion-nav-buttons>
+  <div class="bar bar-subheader">
     <ng-switch on="controller.showPlayer">
-      <div ng-switch-when="true"> 
+      <div ng-switch-when="true" class="padding"> 
         <videogular vg-theme="controller.theme" vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteItem()" vg-auto-play="controller.autoplay" class="list list-inset videogular-container audio">
+          <!-- -------- miniplayer-->
+          <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
           <div class="list"><a href="#" class="item item-thumbnail-left"><img src="images/AppIconSquare_1024.png"/>
               <h2>Now playing</h2>
               <p>{{trackTitle}}</p>
               <p>{{trackUser}}</p></a></div>
-          <vg-media vg-src="controller.sources" vg-type="audio"></vg-media>
-          <vg-controls class="item">
-            <vg-scrub-bar>
-              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-            </vg-scrub-bar>
-            <vg-volume>
-              <vg-mute-button></vg-mute-button>
-              <vg-volume-bar></vg-volume-bar>
-            </vg-volume>
-          </vg-controls>
+          <!-- -------- player-->
+          <!--vg-controls.item
+          vg-scrub-bar
+          	vg-scrub-bar-current-time
+          vg-volume
+          	vg-mute-button
+          	vg-volume-bar
+          
+          -->
         </videogular>
         <button ng-click="controller.nextSong()" class="button icon-left ion-ios-skipforward">Next song</button>
-        <button ng-click="controller.addSongs()" class="button icon-left ion-plus-circled">Add songs</button>
       </div>
       <div ng-switch-default="ng-switch-default"> 
-        <p>{{controller.showPlayer}}</p>
-        <p>There aren't any songs in your playlist.</p>
-        <button ng-click="controller.addSongs()">add songs</button>
+        <!--p {{controller.showPlayer}}-->
+        <p>There aren't any songs in your playlist.
+          <button ng-click="controller.addSongs()" class="button-clear"> Add songs?</button>
+        </p>
       </div>
     </ng-switch>
-    <div data-ng-include="" data-src="'chat/chat.html'"></div>
+  </div>
+  <ion-content>
+    <ion-scroll>
+      <div data-ng-include="" data-src="'chat/chat.html'"></div>
+    </ion-scroll>
+    <div ng-controller="chatCtrl" class="bar bar-footer">
+      <div class="list">
+        <div class="item item-input padding">
+          <div class="label-input-wrapper">
+            <input type="text" ng-model="lineText" placeholder="Type your message..."/>
+          </div>
+          <button ng-click="submitText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

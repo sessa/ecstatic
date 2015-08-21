@@ -1,16 +1,25 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
 		a(href="#/tab/channels/{{channel.channel_id}}")
-			button.button.button-clear.icon-right.ion-chevron-right Playlist
-	ion-content.padding
+			button.button.button-clear.icon-left.ion-plus-circled.padding(ng-click="controller.addSongs()")  Add songs
+		//.bar.bar-subheader.bar-dark
+		//p {{controller.showPlayer}}
+		//p.padding There aren't any songs in your playlist.
+		//button.button.icon-left.ion-plus-circled.pull-right(ng-click="controller.addSongs()") Add songs	
+
+	.bar.bar-subheader
 		ng-switch(on="controller.showPlayer")
-			div(ng-switch-when="true") 
+			
+			.padding(ng-switch-when="true") 
 				
 				videogular.list.list-inset(vg-theme="controller.theme", 
 					vg-player-ready="controller.onPlayerReady($API)", 
 					vg-complete="controller.onCompleteItem()", 
 					class="videogular-container audio" 
 					vg-auto-play="controller.autoplay")
+					
+					// -------- miniplayer
+					vg-media(vg-src="controller.sources", vg-type="audio")
 					.list
 						a.item.item-thumbnail-left(href="#")
 							img(src="images/AppIconSquare_1024.png")
@@ -18,8 +27,8 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							p {{trackTitle}}
 							p {{trackUser}}
 
-					vg-media(vg-src="controller.sources", vg-type="audio")
-					vg-controls.item
+					// -------- player
+					//vg-controls.item
 						vg-scrub-bar
 							vg-scrub-bar-current-time
 						vg-volume
@@ -27,10 +36,21 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							vg-volume-bar
 				
 				button.button.icon-left.ion-ios-skipforward(ng-click="controller.nextSong()") Next song
-				button.button.icon-left.ion-plus-circled(ng-click="controller.addSongs()") Add songs
+				
 
 			div(ng-switch-default) 
-				p {{controller.showPlayer}}
+				//p {{controller.showPlayer}}
+				
 				p There aren't any songs in your playlist.
-				button(ng-click="controller.addSongs()") add songs
-		div(data-ng-include="", data-src="'chat/chat.html'")
+					button.button-clear(ng-click="controller.addSongs()")  Add songs?
+	ion-content
+		
+		ion-scroll
+			div(data-ng-include="", data-src="'chat/chat.html'")
+
+		.bar.bar-footer(ng-controller="chatCtrl")
+			.list
+				.item.item-input.padding
+					.label-input-wrapper
+						input(type="text", ng-model="lineText", placeholder="Type your message...")
+					button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="submitText(lineText); lineText=''")
