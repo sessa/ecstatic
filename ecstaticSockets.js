@@ -9,6 +9,7 @@ request = require('request');
 port = 3001;
 async = require('async');
 config = require('./config/config.json');
+console.log("config.cacheBackend"+config.cacheBackend);
 client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
 proximity = require('geo-proximity').initialize(client);
 socket_number = 0;
