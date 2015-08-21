@@ -6,21 +6,16 @@ angular.module('ecstatic.player')
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }
-        $scope.getPlaylist = function(){
+        $scope.updatePlayer = function(){
             channelServices.getChannels().then(function (channels){
                 var channel = channelServices.getChannel(playerServices.channel_id);
                 var playlistLength = channel.playlist.length;
-                if(playlistLength === 0){
-                    console.log("playlistLength=0");
-                    $scope.showPlayer = false;
-                }
-                else{
-                    console.log("playlistLength>0");
-                    $scope.getPlayerState(channel);
+                if(playlistLength !== 0){
+                    $scope.showPlayer(channel);
                 }
             });
         }
-        $scope.getPlayerState = function(channel){
+        $scope.showPlayer = function(channel){
             $scope.API = null;
             $scope.currentItem = channel.playlistIndex;
             $scope.autoplay = true;
@@ -31,12 +26,9 @@ angular.module('ecstatic.player')
             $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
             var source = $scope.playlist[$scope.currentItem];
             $scope.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
-        
             $scope.showPlayer = true;
 
             $scope.updateView = function() {
-                console.log("$scope.currentItem="+$scope.currentItem);
-                console.log("channel.playlist[$scope.currentItem]"+JSON.stringify(channel.playlist[$scope.currentItem]));
                 $scope.trackTitle = channel.playlist[$scope.currentItem].title;
                 $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
             }
@@ -54,7 +46,6 @@ angular.module('ecstatic.player')
                 $scope.currentItem++;
                 if ($scope.currentItem >= $scope.playlist.length) $scope.currentItem= 0;
                 $scope.setItem($scope.currentItem);
-
             }
             $scope.setItem = function(index) {
                 $scope.API.stop();
@@ -64,6 +55,7 @@ angular.module('ecstatic.player')
                 $timeout($scope.API.play.bind($scope.API), 100);
             }
             $scope.nextSong = function() {
+                $scope.onCompleteItem();
                 localNextSong($scope);
                 playerServices.nextSongAction($scope.currentItem, playerServices.channel_id);
             }
@@ -71,14 +63,13 @@ angular.module('ecstatic.player')
                 localNextSong($scope);
             });
         }
-        $scope.getPlaylist();
+        $scope.updatePlayer();
 	}]
 )
 
 
 function localNextSong($scope){
     $scope.isCompleted = true;
-    $scope.currentItem++;
     $scope.updateView();
     if ($scope.currentItem >= $scope.playlist.length) $scope.currentItem= 0;
     $scope.setItem($scope.currentItem);
