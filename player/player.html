@@ -2,7 +2,7 @@
 <ion-view ng-controller="PlayerCtrl as controller">
   <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
       <button class="button button-clear icon-right ion-chevron-right">Playlist</button></a></ion-nav-buttons>
-  <ion-content class="padding">
+  <ion-content class="padding">{{numberOfUsers}}
     <ng-switch on="showPlayer">
       <div ng-switch-when="true"> 
         <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="list list-inset videogular-container audio">
@@ -29,7 +29,7 @@
         <p>{{controller.showPlayer}}</p>
         <p>There aren't any songs in your playlist.</p>
         <button ng-click="addSongs()">add songs</button>
-        <div data-ng-include="" data-src="'chat/chat.html'"></div>
+        <div data-ng-include="" data-src="'chat/chat.html'">		}</div>
       </div>
     </ng-switch>
   </ion-content>

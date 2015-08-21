@@ -1,15 +1,19 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", '$rootScope', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, $rootScope, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
+	["$sce", "$scope", 'userNumberEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
         playerServices.channel_id = $stateParams.channel_id;
         channelServices.joinChannel(playerServices.channel_id);
+        userNumberEventService.listen(function (event, userNumber){
+            $scope.numberOfUsers = userNumber;
+        });
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }
-        $scope.updatePlayer = function(){
+        $scope.render = function(){
             channelServices.getChannels().then(function (channels){
                 var channel = channelServices.getChannel(playerServices.channel_id);
+                $scope.numberOfUsers = Object.keys(channel.users).length;
                 var playlistLength = channel.playlist.length;
                 if(playlistLength !== 0){
                     $scope.showPlayer(channel);
@@ -64,7 +68,7 @@ angular.module('ecstatic.player')
                 localNextSong($scope);
             });
         }
-        $scope.updatePlayer();
+        $scope.render();
 	}]
 )
 

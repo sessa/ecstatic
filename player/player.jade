@@ -3,6 +3,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 		a(href="#/tab/channels/{{channel.channel_id}}")
 			button.button.button-clear.icon-right.ion-chevron-right Playlist
 	ion-content.padding
+		{{numberOfUsers}}
 		ng-switch(on="showPlayer")
 			div(ng-switch-when="true") 
 				
@@ -33,4 +34,4 @@ ion-view(ng-controller="PlayerCtrl as controller")
 				p {{controller.showPlayer}}
 				p There aren't any songs in your playlist.
 				button(ng-click="addSongs()") add songs
-				div(data-ng-include="", data-src="'chat/chat.html'")
+				div(data-ng-include="", data-src="'chat/chat.html'")		}

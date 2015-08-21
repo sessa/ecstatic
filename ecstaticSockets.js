@@ -111,21 +111,12 @@ exports.setupEcstaticSockets = function(app){
 
         //Joins an existing channel
         socket.on('join_channel', function (data) {
-            console.log("socket.id="+socket.id+"joining channel"+data.channel_id);
-            socket.join(data.channel_id);
+            if(socket.rooms.indexOf(data.channel_id) < 0){
+                socket.join(data.channel_id);
+                socket.broadcast.to(data.channel_id).emit("update");
+            }   
         });
         
-        //leaves an existing channel
-        socket.on('leave_channel', function (data){
-            console.log("leave_channel, data="+data);
-            socket.leave(data.channel_id);
-        });
-
-        socket.on('users', function (data) {
-            var clients = io.sockets.adapter.rooms[data.channel_id]; 
-            socket.emit("users", clients);
-        });
-
         socket.on('send_text', function (data) {
             client.get(data.channel_id, function (err, socket_info){
                 socket_info = JSON.parse(socket_info);

@@ -3,7 +3,7 @@ angular.module('ecstatic.player')
 .factory('playerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager){
 	var Service = {};
 	var channel_id = 0;
-
+	
 	Service.nextSongAction = function(playlistIndex, channel_id) {
 		var request = {
 			msg: "next_song_action",
