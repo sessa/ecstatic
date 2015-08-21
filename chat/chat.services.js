@@ -3,7 +3,7 @@ angular.module('ecstatic.chat')
 .factory('chatServices', ['$rootScope', 'socket', 'socketManager',  function($rootScope, socket, socketManager) {
     // We return this object to anything injecting our service
     var Service = {};
-
+    console.log("chatServices");
     socket.on('send_text', function (data) {
        console.log("added text from other user" + data);
        $rootScope.$broadcast('send_text', data);     

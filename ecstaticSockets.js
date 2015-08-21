@@ -131,6 +131,7 @@ exports.setupEcstaticSockets = function(app){
                 socket_info = JSON.parse(socket_info);
                 socket_info.player_state.chat.push(data.txt);
                 client.set(data.channel_id, JSON.stringify(socket_info));
+                console.log("broadcast send text"+data.channel_id);
                 socket.broadcast.to(data.channel_id).emit("send_text", data.txt);
             });
         });

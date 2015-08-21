@@ -3,6 +3,7 @@ angular.module('ecstatic.player')
 .controller('PlayerCtrl',
 	["$sce", "$scope", '$rootScope', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, $rootScope, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
         playerServices.channel_id = $stateParams.channel_id;
+        channelServices.joinChannel(playerServices.channel_id);
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }
