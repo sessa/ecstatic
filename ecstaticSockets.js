@@ -56,10 +56,8 @@ exports.setupEcstaticSockets = function(app){
                     'requestTime':new Date().getTime(), 
                     'channel_name': data.channel_name, 
                     'channel_id': socket.id, 
-                    'sources': [], 
-                    'chat': data.chat,
-                    'playlist': [],
-                    'soundcloudResources': []};
+                    'chat': [],
+                    'playlist': []};
                 client.set(socket.id, JSON.stringify(socket_info_dict));
 
                 //add the callback id and send it back
@@ -141,12 +139,12 @@ exports.setupEcstaticSockets = function(app){
             console.log("On server getting chat backlog");
             client.get(data.channel_id, function(err, socket_info) {
                 socket_info = JSON.parse(socket_info);
-                console.log(socket_info.player_state.chat.length);
                 socket.emit("chat_backlog", socket_info.player_state.chat);
             })
         });
 
         socket.on('update_channel', function (data) {
+            console.log("update_channel="+JSON.stringify(data));
             client.get(socket.id, function (err, socket_info){
                 socket_info_dict = JSON.parse(socket_info);
                 socket_info_dict.player_state = data.channel_info;

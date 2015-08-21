@@ -9,7 +9,7 @@
           <div class="list"><a href="#" class="item item-thumbnail-left"><img src="images/AppIconSquare_1024.png"/>
               <h2>Now playing</h2>
               <p>{{trackTitle}}</p>
-              <p>{{trackUser}}</p></a></div>
+              <p>{{trackUser}}  {{autoplay}}</p></a></div>
           <vg-media vg-src="sources" vg-type="audio"></vg-media>
           <vg-controls class="item">
             <vg-scrub-bar>
@@ -23,13 +23,14 @@
         </videogular>
         <button ng-click="nextSong()" class="button icon-left ion-ios-skipforward">Next song</button>
         <button ng-click="addSongs()" class="button icon-left ion-plus-circled">Add songs</button>
+        <div data-ng-include="" data-src="'chat/chat.html'"></div>
       </div>
       <div ng-switch-default="ng-switch-default"> 
         <p>{{controller.showPlayer}}</p>
         <p>There aren't any songs in your playlist.</p>
         <button ng-click="addSongs()">add songs</button>
+        <div data-ng-include="" data-src="'chat/chat.html'"></div>
       </div>
     </ng-switch>
-    <div data-ng-include="" data-src="'chat/chat.html'"></div>
   </ion-content>
 </ion-view>

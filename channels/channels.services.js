@@ -5,26 +5,9 @@ angular.module('ecstatic.channels')
   var Service = {};
   Service.channels = [];
 
-  Service.getPlayerState = function(channel_id) {
-    var request = {
-      msg: "channelList"
-    }
-
-    socket.on('channelList', function (data) {
-        Service.setChannels(data);
-        socketManager.listener(Service.getChannel(channel_id).player_state);
-    });
-
-    var promise = socketManager.sendRequest(request); 
-    return promise;
-  }
-
   Service.addToPlaylist = function(channel_id, source) {
-      console.log("addToPlaylist, source="+source);
       var channel = Service.getChannel(channel_id);
-      console.log("channel-"+JSON.stringify(channel));
-      channel.soundcloudResources.push(source);
-      channel.playlist.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
+      channel.playlist.push(source);
       var request = {
         msg: "update_channel",
         channel_info: channel
@@ -37,23 +20,6 @@ angular.module('ecstatic.channels')
         });
 
       socketManager.sendRequest(request); 
-  }
-
-  Service.getPlaylist = function(channel_id) {
-    var request = {
-      msg: "channelList"
-    }
-
-    socket.on('channelList', function (data) {
-      console.log("channellist returned");
-        Service.setChannels(data);
-        if(Service.getChannel(channel_id)){
-          socketManager.listener(Service.getChannel(channel_id).sources); 
-        }
-    });
-
-    var promise = socketManager.sendRequest(request); 
-    return promise;
   }
 
   Service.getChannels = function() {
@@ -82,6 +48,7 @@ angular.module('ecstatic.channels')
 
   Service.setChannels = function(channels) {
     var channelList = channels.channelList;
+    Service.channels = [];
     for(var index = 0; index < channelList.length; index++){
       if(channelList[index].player_state){
         Service.channels.push(channelList[index].player_state);
@@ -89,22 +56,18 @@ angular.module('ecstatic.channels')
     }
   }
   Service.getChannel = function(channel_id){
-    console.log("channel_id="+channel_id);
     for(var index = 0; index < Service.channels.length; index++){
       var channel = Service.channels[index];
       if(channel.channel_id == channel_id){
-        console.log("Service.channels[index]"+Service.channels[index]);
         return Service.channels[index];
       }
     }
   }
 
   Service.setChannel = function(channel){
-    console.log("setChannel, channel="+JSON.stringify(channel));
     for(var index = 0; index < Service.channels.length; index++){
       var localChannel = Service.channels[index];
       if(localChannel.channel_id == channel.channel_id){
-        console.log("channel.player_state.channel_id"+channel.channel_id);
         Service.channels[index].player_state = channel;
       }
     }
@@ -114,7 +77,6 @@ angular.module('ecstatic.channels')
 		var request = {
 			msg: "create_channel",
 			channel_name: channelName,
-      chat: []
 		}
 
 		//When create channel returns, add the data to the channelModel

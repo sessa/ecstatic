@@ -22,7 +22,6 @@ angular.module('ecstatic.channels')
     $scope.doRefresh();
 
     $scope.joinChannel = function(channel_id){
-        console.log("joinChannel="+channel_id);
         channelServices.joinChannel(channel_id);
     }
 }])

@@ -16,7 +16,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							img(src="images/AppIconSquare_1024.png")
 							h2 Now playing
 							p {{trackTitle}}
-							p {{trackUser}}
+							p {{trackUser}} 
 
 					vg-media(vg-src="sources", vg-type="audio")
 					vg-controls.item
@@ -28,9 +28,9 @@ ion-view(ng-controller="PlayerCtrl as controller")
 				
 				button.button.icon-left.ion-ios-skipforward(ng-click="nextSong()") Next song
 				button.button.icon-left.ion-plus-circled(ng-click="addSongs()") Add songs
-
+				div(data-ng-include="", data-src="'chat/chat.html'")
 			div(ng-switch-default) 
 				p {{controller.showPlayer}}
 				p There aren't any songs in your playlist.
 				button(ng-click="addSongs()") add songs
-		div(data-ng-include="", data-src="'chat/chat.html'")
+				div(data-ng-include="", data-src="'chat/chat.html'")
