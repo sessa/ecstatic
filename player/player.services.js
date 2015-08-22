@@ -11,6 +11,7 @@ angular.module('ecstatic.player')
 			playlistIndex: playlistIndex
 		}
 		socket.on('next_song_action', function (data) {
+			console.log("heard next_song_action");
 			$rootScope.$broadcast('nextSong');
 		});
 		var promise = socketManager.sendRequest(request); 

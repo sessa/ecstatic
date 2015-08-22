@@ -27,24 +27,16 @@ angular.module('ecstatic.player')
             $scope.playlist = channel.playlist;
             $scope.sources = [];
             $scope.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
-            $scope.trackTitle = channel.playlist[$scope.currentItem].title;
-            $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
-            var source = $scope.playlist[$scope.currentItem];
-            $scope.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
             $scope.showPlayer = true;
 
-            $scope.updateView = function() {
-                $scope.trackTitle = channel.playlist[$scope.currentItem].title;
-                $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
-            }
             $scope.onLoadMetaData = function(evt) {
                 $scope.API.seekTime($scope.delta, false);
+                $scope.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
             }
             $scope.onPlayerReady = function(API) {
                 $scope.API = API;
                 $scope.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
-                var track = $scope.playlist[$scope.currentItem];
-                $scope.sources.push(track);
+                $scope.setItem($scope.currentItem);
                 $scope.delta = (channel.requestTime - channel.timestamp)/1000;
             }
             $scope.onCompleteItem = function() {
@@ -57,28 +49,24 @@ angular.module('ecstatic.player')
                 $scope.API.stop();
                 $scope.currentItem = index;
                 $scope.sources = [];
-                $scope.sources.push($scope.playlist[index]);
+                var source = $scope.playlist[$scope.currentItem];
+                $scope.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
+                $scope.trackTitle = channel.playlist[$scope.currentItem].title;
+                $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
                 $timeout($scope.API.play.bind($scope.API), 100);
             }
             $scope.nextSong = function() {
+                console.log("nextSong Action");
                 $scope.onCompleteItem();
-                localNextSong($scope);
+                $scope.setItem($scope.currentItem);
                 playerServices.nextSongAction($scope.currentItem, playerServices.channel_id);
             }
             $scope.$on('nextSong', function(event, data) {
-                localNextSong($scope);
+                $scope.onCompleteItem();
+                $scope.setItem($scope.currentItem);
             });
         }
         $scope.render();
 	}]
 )
-
-
-function localNextSong($scope){
-    $scope.isCompleted = true;
-    $scope.updateView();
-    if ($scope.currentItem >= $scope.playlist.length) $scope.currentItem= 0;
-    $scope.setItem($scope.currentItem);
-
-}
 
