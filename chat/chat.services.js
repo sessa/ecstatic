@@ -1,25 +1,23 @@
 angular.module('ecstatic.chat')
 
-.factory('chatServices', ['$rootScope', 'socket', 'socketManager',  function($rootScope, socket, socketManager) {
+.factory('chatServices', ['$rootScope', 'socket', 'socketManager', 'chatEventServices',  function($rootScope, socket, socketManager, chatEventServices) {
     // We return this object to anything injecting our service
     var Service = {};
-    console.log("chatServices");
-    socket.on('send_text', function (data) {
-       console.log("added text from other user" + data);
-       $rootScope.$broadcast('send_text', data);     
-    })
-    socket.on('chat_backlog', function (data) {
-      $rootScope.$broadcast('chat_backlog', data);
-    })
+    Service.chat = [];
 
-    Service.sendText = function(text, channel_id) {
+    Service.sendText = function(chatText, channel_id) {
+      Service.chat.push(chatText);
       var request = {
         //msg: name of the api function
         msg: "send_text",
         channel_id: channel_id,
-        txt: text
+        txt: chatText
       }
-
+      socket.on('send_text', function (data) {
+        Service.chat.push(data);
+        console.log("added text from other user" + data);
+        chatEventServices.broadcastText(data);
+      })
       var promise = socketManager.sendRequest(request); 
       return promise;
     }
@@ -29,29 +27,20 @@ angular.module('ecstatic.chat')
         msg: "chat_backlog",
         channel_id: channel_id,
       }
+      socket.on('chat_backlog', function (data) {
+        Service.chat = data;
+        chatEventServices.broadcastBacklog(data)
+        //rootscope broadcast
+      })
       var promise = socketManager.sendRequest(request);
       return promise;
     }
     return Service;
   }])
 
-.factory('chatModel', ['$rootScope', 'chatServices', function($rootScope, chatServices) {
-  var Service = {};
-  Service.chat = [];
-
-  Service.add = function(txt) {
-    Service.chat.push(txt);
-    
-  }
-
-  Service.addChatBacklog = function(chat_backlog) {
-    Service.chat = chat_backlog;
-    return Service.chat;
-  }
-
-  Service.getAll = function(channel_id) {
-    chatServices.getChatBacklog(channel_id);
-    return Service.chat;
-  }
-  return Service;
-}])
+.service("chatEventServices", function ($rootScope){
+    this.broadcastBacklog = function(backlog) {$rootScope.$broadcast("send_chat_text", backlog);}
+    this.listenBacklog = function(callback) {$rootScope.$on("send_chat_text", callback)}
+    this.broadcastText = function(text) {$rootScope.$broadcast("send_text", text);}
+    this.listenText = function(callback) {$rootScope.$on("send_text", callback)}
+});
