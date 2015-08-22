@@ -37,14 +37,15 @@ angular.module('ecstatic.player')
                 $scope.trackTitle = channel.playlist[$scope.currentItem].title;
                 $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
             }
-
+            $scope.onLoadMetaData = function(evt) {
+                $scope.API.seekTime($scope.delta, false);
+            }
             $scope.onPlayerReady = function(API) {
+                $scope.API = API;
+                $scope.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
                 var track = $scope.playlist[$scope.currentItem];
                 $scope.sources.push(track);
-                $scope.API = API;
-                var delta = (channel.requestTime - channel.timestamp)/1000;
-                $scope.API.play();
-                API.seekTime(delta, false);
+                $scope.delta = (channel.requestTime - channel.timestamp)/1000;
             }
             $scope.onCompleteItem = function() {
                 $scope.isCompleted = true;
