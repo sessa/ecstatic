@@ -3,8 +3,11 @@ ion-view(ng-controller="AddSongsCtrl as controller", view-title="Create a Channe
 		button(ng-click="submit()") add songs
 	ion-content
 		ion-list(class="list")
-			ion-item(class="item", ng-repeat="source in sc track by $index")
-				button(ng-click="add_to_playlist(source)") Add
-				p Title: "{{source.title}}" 
-				p Artist: "{{source.user.username}}"
-				p Duration: "{{source.duration}}"
+			ion-item(class="item item-radio", ng-repeat="source in sc track by $index")
+				input(type="radio", name="group")
+				.item-content(ng-click="add_to_playlist(source)")
+					p Title: "{{source.title}}" 
+					p Artist: "{{source.user.username}}"
+					p Duration: "{{source.duration}}"
+				i.radio-icon.ion-checkmark
+				

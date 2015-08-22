@@ -1,36 +1,38 @@
 
 <ion-view ng-controller="PlayerCtrl as controller">
   <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
-      <button class="button button-clear icon-right ion-chevron-right">Playlist</button></a></ion-nav-buttons>
-  <ion-content class="padding">{{numberOfUsers}}
+      <button ng-click="addSongs()" class="button button-clear icon-left ion-plus-circled"> Add songs</button></a></ion-nav-buttons>
+  <div class="bar bar-subheader bar-energized">{{numberOfUsers}}
     <ng-switch on="showPlayer">
-      <div ng-switch-when="true"> 
-        <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="list list-inset videogular-container audio">
-          <div class="list"><a href="#" class="item item-thumbnail-left"><img src="images/AppIconSquare_1024.png"/>
-              <h2>Now playing</h2>
-              <p>{{trackTitle}}</p>
-              <p>{{trackUser}} </p></a></div>
+      <div ng-switch-when="true" class="miniplayer">				
+        <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="videogular-container audio">
           <vg-media vg-src="sources" vg-type="audio"></vg-media>
-          <vg-controls class="item">
-            <vg-scrub-bar>
-              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-            </vg-scrub-bar>
-            <vg-volume>
-              <vg-mute-button></vg-mute-button>
-              <vg-volume-bar></vg-volume-bar>
-            </vg-volume>
-          </vg-controls>
         </videogular>
-        <button ng-click="nextSong()" class="button icon-left ion-ios-skipforward">Next song</button>
-        <button ng-click="addSongs()" class="button icon-left ion-plus-circled">Add songs</button>
-        <div data-ng-include="" data-src="'chat/chat.html'"></div>
+        <div class="title">Currently playing: "{{trackTitle}}" </div>
+        <button ng-click="nextSong()" class="button button-clear icon-left ion-ios-skipforward pull-left"> Skip</button>
+        <!-- {{trackUser}} -->
+        <!--vg-scrub-bar-->
+        <!--	vg-scrub-bar-current-time-->
+        <!--vg-volume-->
+        <!--	vg-mute-button-->
+        <!--	vg-volume-bar-->
       </div>
-      <div ng-switch-default="ng-switch-default"> 
-        <p>{{controller.showPlayer}}</p>
-        <p>There aren't any songs in your playlist.</p>
-        <button ng-click="addSongs()">add songs</button>
-        <div data-ng-include="" data-src="'chat/chat.html'">		}</div>
+      <div ng-switch-default="ng-switch-default" class="emptyplayer"> 
+        <p class="title">There aren't any songs in your playlist.
+          <button ng-click="addSongs()" class="button-clear"> Add songs?</button>
+        </p>
       </div>
     </ng-switch>
+  </div>
+  <ion-content>
+    <ion-scroll>
+      <div data-ng-include="" data-src="'chat/chat.html'"></div>
+    </ion-scroll>
   </ion-content>
-</ion-view>
+  <div ng-controller="chatCtrl" class="message-box bar padding">
+    <div class="label-input-wrapper">
+      <input type="text" ng-model="lineText" placeholder="Type your message..."/>
+    </div>
+    <button ng-click="submitText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
+  </div>
+</ion-view>>>>>>>> origin/playlist
