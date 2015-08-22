@@ -25,7 +25,8 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			.emptyplayer(ng-switch-default) 
 				p.title There aren't any songs in your playlist.
 					button.button-clear(ng-click="addSongs()")  Add songs?
-	ion-content
+	ion-content.padding(has-subheader="true")
+		p ~:-D
 		ion-scroll
 			div(data-ng-include="", data-src="'chat/chat.html'")
 

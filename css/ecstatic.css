@@ -10,10 +10,9 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+/* the chat input field  */
 .message-box {
 	position: fixed!important;
 	bottom: 49px!important;
 	width: 100%;
 }
-
-.message-box
