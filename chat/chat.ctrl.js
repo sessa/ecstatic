@@ -1,23 +1,42 @@
 angular.module('ecstatic.chat')
 //on receive messages display them
 
-.controller('chatCtrl', ["$sce", "$scope", "chatServices","chatModel", "$stateParams",  function($sce, $scope, chatServices, chatModel, $stateParams) {
-	$scope.submitText = function(lineText){
-		chatModel.add(lineText);
+.controller('chatCtrl', ["$sce", "$scope", "chatServices", "$stateParams", "chatEventServices",  function($sce, $scope, chatServices, $stateParams, chatEventServices) {
+	$scope.chatLog = chatServices.getChatBacklog($stateParams.channel_id);
+	$scope.textPrompt = chatServices.getTextPrompt();
+	$scope.username = "";
+
+	$scope.sendText = function(lineText) {
 		chatServices.sendText(lineText, $stateParams.channel_id);
-
 	}
-	$scope.chatLog = chatModel.getAll($stateParams.channel_id);
 
-	$scope.$on('chat_backlog', function(event, data) {
-		if(data != undefined){
-			$scope.chatLog = chatModel.addChatBacklog(data);
+	$scope.sendName = function(name) {
+		chatServices.sendName(name);
+	}
+
+	$scope.enterText = function(lineText) {
+		console.log("entered text");
+		if($scope.username == ""){
+			$scope.sendName(lineText);
+		}else{
+			$scope.sendText(lineText);
 		}
-	})
+	}
 
-	$scope.$on('send_text', function(event, data) {
-		chatModel.add(data);
-	}) 
+	chatEventServices.listenBacklog(function (event, backlog) {
+		$scope.chatLog = backlog;
+	});
+
+	chatEventServices.listenText(function (event, text) {
+		$scope.chatlog = chatServices.getChatBacklog($stateParams.channel_id);
+	});
+
+	chatEventServices.listenName(function (event, name) {
+		$scope.username = name;
+		$scope.textPrompt = chatServices.getTextPrompt();
+
+	});
+
 
 }]);
 

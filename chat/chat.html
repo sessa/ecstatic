@@ -17,8 +17,8 @@ ng-click in the button to run a function in the controller to send a message ove
 -->
 	<div class="list">
 
-		<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item">
-			 Anonymous: {{txt}}
+		<ion-item scroll-item ng-repeat="line in chatLog track by $index" class="item">
+			 {{line.username}}: {{line.txt}}
 		</ion-item>
 	</div>
 	
