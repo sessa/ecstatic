@@ -22,31 +22,28 @@ angular.module('ecstatic.channels')
     $scope.doRefresh();
 
     $scope.joinChannel = function(channel_id){
-        console.log("joinChannel="+channel_id);
         channelServices.joinChannel(channel_id);
     }
 }])
 .controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'channelServices', '$state', function($scope, soundcloudService, channelServices, $state) {
 
-    $scope.create_channel = function() {
-        var habibi = $scope.channelName;
-        channelServices.createChannel(habibi).then(function(data) {
+    $scope.create_channel = function(channelName) {
+        channelServices.createChannel(channelName).then(function(data) {
             $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
         });
     }
 }])
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playerService', '$state', function($scope, soundcloudService, playerService, $state) {
+.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', function($scope, soundcloudService, playerServices, channelServices, $state) {
     // Gets your likes from Soundcloud
     soundcloudService.getFavorites().then(function(data){
         $scope.sc = data;
     });
 
     $scope.submit = function() {
-        console.log("submitted");
-        $state.go('tab.channels-player', {channel_id:playerService.player_state.channel_id}, {reload: true, notify:true});
+        $state.go('tab.channels-player', {channel_id: playerServices.channel_id}, {reload: true, notify:true});
     }
 
     $scope.add_to_playlist = function(source){
-        playerService.addToPlaylist(source);
+        channelServices.addToPlaylist(playerServices.channel_id, source);
     }
 }])

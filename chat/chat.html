@@ -14,22 +14,12 @@ ng-click in the button to run a function in the controller to send a message ove
 	    <button class="button button-light icon ion-android-send" ng-click="submitText(lineText); lineText=''"></button>
 	  </div>
 
-	</div>
 -->
-
 	<div class="list">
-		<div class="item item-avatar">
-			<p> Welcome home. </p>
-		</div>
-		<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item item-avatar">
-			<img src="images/AppIconSquare_1024.png">
+
+		<ion-item scroll-item ng-repeat="txt in chatLog track by $index" class="item">
 			 Anonymous: {{txt}}
 		</ion-item>
 	</div>
-
-
-
-
-	
 	
 </div>

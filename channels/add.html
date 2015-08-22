@@ -5,11 +5,13 @@
   </ion-nav-buttons>
   <ion-content>
     <ion-list class="list">
-      <ion-item ng-repeat="source in sc track by $index" class="item">
-        <button ng-click="add_to_playlist(source)">Add</button>
-        <p>Title: "{{source.title}}" </p>
-        <p>Artist: "{{source.user.username}}"</p>
-        <p>Duration: "{{source.duration}}"</p>
+      <ion-item ng-repeat="source in sc track by $index" class="item item-radio">
+        <input type="radio" name="group"/>
+        <div ng-click="add_to_playlist(source)" class="item-content">
+          <p>Title: "{{source.title}}" </p>
+          <p>Artist: "{{source.user.username}}"</p>
+          <p>Duration: "{{source.duration}}"</p>
+        </div><i class="radio-icon ion-checkmark"></i>
       </ion-item>
     </ion-list>
   </ion-content>
