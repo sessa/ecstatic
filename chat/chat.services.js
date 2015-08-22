@@ -8,7 +8,6 @@ angular.module('ecstatic.chat')
     Service.sendText = function(chatText, channel_id) {
       Service.chat.push(chatText);
       var request = {
-        //msg: name of the api function
         msg: "send_text",
         channel_id: channel_id,
         txt: chatText
@@ -30,7 +29,6 @@ angular.module('ecstatic.chat')
       socket.on('chat_backlog', function (data) {
         Service.chat = data;
         chatEventServices.broadcastBacklog(data)
-        //rootscope broadcast
       })
       var promise = socketManager.sendRequest(request);
       return promise;
