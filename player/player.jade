@@ -33,5 +33,5 @@ ion-view(ng-controller="PlayerCtrl as controller")
 	.message-box.bar.padding(ng-controller="chatCtrl")
 
 		.label-input-wrapper
-			input(type="text", ng-model="lineText", placeholder="Type your message...")
-		button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="submitText(lineText); lineText=''")
+			input(type="text", ng-model="lineText", placeholder="{{textPrompt}}")
+		button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")

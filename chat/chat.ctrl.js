@@ -3,8 +3,24 @@ angular.module('ecstatic.chat')
 
 .controller('chatCtrl', ["$sce", "$scope", "chatServices", "$stateParams", "chatEventServices",  function($sce, $scope, chatServices, $stateParams, chatEventServices) {
 	$scope.chatLog = chatServices.getChatBacklog($stateParams.channel_id);
-	$scope.submitText = function(lineText){
+	$scope.textPrompt = chatServices.getTextPrompt();
+	$scope.username = "";
+
+	$scope.sendText = function(lineText) {
 		chatServices.sendText(lineText, $stateParams.channel_id);
+	}
+
+	$scope.sendName = function(name) {
+		chatServices.sendName(name);
+	}
+
+	$scope.enterText = function(lineText) {
+		console.log("entered text");
+		if($scope.username == ""){
+			$scope.sendName(lineText);
+		}else{
+			$scope.sendText(lineText);
+		}
 	}
 
 	chatEventServices.listenBacklog(function (event, backlog) {
@@ -12,7 +28,13 @@ angular.module('ecstatic.chat')
 	});
 
 	chatEventServices.listenText(function (event, text) {
-		$scope.chatlog = chatServices.chat;
+		$scope.chatlog = chatServices.getChatBacklog($stateParams.channel_id);
+	});
+
+	chatEventServices.listenName(function (event, name) {
+		$scope.username = name;
+		$scope.textPrompt = chatServices.getTextPrompt();
+
 	});
 
 
