@@ -1,6 +1,6 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['userNumberEventService','socket', 'socketManager', 'playerServices','$sce', 'ConfigService', function(userNumberEventService, socket, socketManager, playerServices, $sce, ConfigService) {
+.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'socket', 'socketManager', 'playerServices','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, socket, socketManager, playerServices, $sce, ConfigService) {
 	// We return this object to anything injecting our service
 	var Service = {};
 	Service.channels = [];
@@ -12,11 +12,10 @@ angular.module('ecstatic.channels')
 		});
 	});
 	socket.on('update_channel', function (data) {
-		console.log("update_channel heard");
-		Service.setChannel(data);
-		socketManager.listener(data);
+		console.log("update_channel, data="+JSON.stringify(data));
+		Service.setChannel(data.player_state);
+		updatePlayerstateEventService.broadcast(data.player_state);
 	});
-
 
 	Service.addToPlaylist = function(channel_id, source) {
 		var channel = Service.getChannel(channel_id);
@@ -102,4 +101,8 @@ angular.module('ecstatic.channels')
 .service("userNumberEventService", function ($rootScope){
     this.broadcast = function(userNumber) {$rootScope.$broadcast("userNumber", userNumber); console.log("userNumber="+userNumber);}
     this.listen = function(callback) {$rootScope.$on("userNumber",callback)}
+})
+.service("updatePlayerstateEventService", function ($rootScope){
+    this.broadcast = function(playerstate) {$rootScope.$broadcast("playerstate", playerstate)}
+    this.listen = function(callback) {$rootScope.$on("playerstate",callback)}
 });

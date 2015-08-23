@@ -1,11 +1,15 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", 'userNumberEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
+	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
         playerServices.channel_id = $stateParams.channel_id;
         channelServices.joinChannel(playerServices.channel_id);
         userNumberEventService.listen(function (event, userNumber){
             $scope.numberOfUsers = userNumber;
+        });
+        updatePlayerstateEventService.listen(function (event, playerstate){
+            console.log("updatePlayerstateEventService, playerstate="+JSON.stringify(playerstate));
+            $scope.playlist = playerstate.playlist;
         });
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
@@ -50,13 +54,15 @@ angular.module('ecstatic.player')
                 $scope.currentItem = index;
                 $scope.sources = [];
                 var source = $scope.playlist[$scope.currentItem];
+                console.log("setItem, $source="+JSON.stringify(source));
                 $scope.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
-                $scope.trackTitle = channel.playlist[$scope.currentItem].title;
-                $scope.trackUser = channel.playlist[$scope.currentItem].user.username;
+                $scope.trackTitle = $scope.playlist[$scope.currentItem].title;
+                $scope.trackUser = $scope.playlist[$scope.currentItem].user.username;
                 $timeout($scope.API.play.bind($scope.API), 100);
             }
             $scope.nextSong = function() {
                 console.log("nextSong Action");
+                console.log("nextSong, $scope.playlist="+JSON.stringify($scope.playlist));
                 $scope.onCompleteItem();
                 $scope.setItem($scope.currentItem);
                 playerServices.nextSongAction($scope.currentItem, playerServices.channel_id);
