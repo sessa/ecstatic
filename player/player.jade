@@ -1,7 +1,6 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-		a(href="#/tab/channels/{{channel.channel_id}}")
-			button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
+		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
 	ion-header-bar.bar.bar-subheader.bar-energized
 		{{numberOfUsers}}
 		ng-switch(on="showPlayer")

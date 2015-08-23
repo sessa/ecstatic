@@ -11,6 +11,12 @@ angular.module('ecstatic.channels')
 			userNumberEventService.broadcast(Object.keys(channel.users).length);
 		});
 	});
+	socket.on('update_channel', function (data) {
+		console.log("update_channel heard");
+		Service.setChannel(data);
+		socketManager.listener(data);
+	});
+
 
 	Service.addToPlaylist = function(channel_id, source) {
 		var channel = Service.getChannel(channel_id);
@@ -21,11 +27,6 @@ angular.module('ecstatic.channels')
 			channel_info: channel
 		}
 
-		socket.on('update_channel', function (data) {
-			console.log("update");
-			Service.setChannel(data);
-			socketManager.listener(data);
-		});
 		socketManager.sendRequest(request); 
 	}
 
