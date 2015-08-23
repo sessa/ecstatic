@@ -9,6 +9,7 @@ request = require('request');
 port = 3001;
 async = require('async');
 config = require('./config/config.json');
+console.log("config.cacheBackend"+config.cacheBackend);
 client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
 proximity = require('geo-proximity').initialize(client);
 socket_number = 0;
@@ -120,10 +121,9 @@ exports.setupEcstaticSockets = function(app){
         socket.on('send_text', function (data) {
             client.get(data.channel_id, function (err, socket_info){
                 socket_info = JSON.parse(socket_info);
-                socket_info.player_state.chat.push(data.txt);
+                socket_info.player_state.chat.push(data);
                 client.set(data.channel_id, JSON.stringify(socket_info));
-                console.log("broadcast send text"+data.channel_id);
-                socket.broadcast.to(data.channel_id).emit("send_text", data.txt);
+                socket.broadcast.to(data.channel_id).emit("send_text", data);
             });
         });
 
