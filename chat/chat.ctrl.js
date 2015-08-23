@@ -5,6 +5,7 @@ angular.module('ecstatic.chat')
 	$scope.submitText = function(lineText){
 		chatModel.add(lineText);
 		chatServices.sendText(lineText, $stateParams.channel_id);
+
 	}
 	$scope.chatLog = chatModel.getAll($stateParams.channel_id);
 
@@ -16,6 +17,9 @@ angular.module('ecstatic.chat')
 
 	$scope.$on('send_text', function(event, data) {
 		chatModel.add(data);
-	})
+	}) 
 
 }]);
+
+
+

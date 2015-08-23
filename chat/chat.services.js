@@ -41,6 +41,7 @@ angular.module('ecstatic.chat')
 
   Service.add = function(txt) {
     Service.chat.push(txt);
+    
   }
 
   Service.addChatBacklog = function(chat_backlog) {
