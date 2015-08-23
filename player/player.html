@@ -2,7 +2,7 @@
 <ion-view ng-controller="PlayerCtrl as controller">
   <ion-nav-buttons side="secondary"><a href="#/tab/channels/{{channel.channel_id}}">
       <button ng-click="addSongs()" class="button button-clear icon-left ion-plus-circled"> Add songs</button></a></ion-nav-buttons>
-  <div class="bar bar-subheader bar-energized">{{numberOfUsers}}
+  <ion-header-bar class="bar bar-subheader bar-energized">{{numberOfUsers}}
     <ng-switch on="showPlayer">
       <div ng-switch-when="true" class="miniplayer">				
         <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="videogular-container audio">
@@ -23,16 +23,18 @@
         </p>
       </div>
     </ng-switch>
-  </div>
-  <ion-content>
-    <ion-scroll>
-      <div data-ng-include="" data-src="'chat/chat.html'"></div>
-    </ion-scroll>
+  </ion-header-bar>
+  <ion-content has-header="true" class="has-tabs has-footer">
+    <div ng-controller="chatCtrl">
+      <div class="list">
+        <ion-item ng-repeat="line in chatLog track by $index" class="scroll-item item">{{line.username}}: {{line.txt}}</ion-item>
+      </div>
+    </div>
   </ion-content>
-  <div ng-controller="chatCtrl" class="message-box bar padding">
+  <footer ng-controller="chatCtrl" class="message-box bar bar-footer sub-footer has-tabs">
     <div class="label-input-wrapper">
-      <input type="text" ng-model="lineText" placeholder="{{textPrompt}}"/>
+      <input type="text" ng-model="lineText" placeholder="{{textPrompt}}" class="padding"/>
     </div>
     <button ng-click="enterText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
-  </div>
-</ion-view>>>>>>>> origin/playlist
+  </footer>
+</ion-view>
