@@ -2,7 +2,6 @@ ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
 		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
 	ion-header-bar.bar.bar-subheader.bar-energized
-		{{numberOfUsers}}
 		ng-switch(on="showPlayer")
 			.miniplayer(ng-switch-when="true") 				
 				videogular(vg-theme="theme", 
@@ -27,6 +26,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					button.button-clear(ng-click="addSongs()")  Add songs?
 	ion-content.has-tabs.has-footer(has-header="true")
 		div(ng-controller="chatCtrl")
+			p There's {{numberOfUsers}} ecstatic(s) in this channel.
 			div(class="list")
 				ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
 					{{line.username}}: {{line.txt}}

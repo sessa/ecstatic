@@ -10,20 +10,11 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-/*
 .message-box {
 	position: fixed!important;
 	bottom: 49px!important;
 	width: 100%;
-}*/
-
-/* FIX */
-/*.has-footer.has-tabs {
-  bottom: 93px;
 }
-.has-tabs, .bar-footer.has-tabs {
-  bottom: 49px;
-}*/
 
 .has-footer.has-tabs {
   bottom: 99px !important;
@@ -32,4 +23,3 @@
 .sub-footer{
  bottom:49px !important;
 }
-

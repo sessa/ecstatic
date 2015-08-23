@@ -3,7 +3,7 @@
   <ion-nav-buttons side="secondary">
     <button ng-click="addSongs()" class="button button-clear icon-left ion-plus-circled"> Add songs</button>
   </ion-nav-buttons>
-  <ion-header-bar class="bar bar-subheader bar-energized">{{numberOfUsers}}
+  <ion-header-bar class="bar bar-subheader bar-energized">
     <ng-switch on="showPlayer">
       <div ng-switch-when="true" class="miniplayer">				
         <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="videogular-container audio">
@@ -27,6 +27,7 @@
   </ion-header-bar>
   <ion-content has-header="true" class="has-tabs has-footer">
     <div ng-controller="chatCtrl">
+      <p>There's {{numberOfUsers}} ecstatic(s) in this channel.</p>
       <div class="list">
         <ion-item ng-repeat="line in chatLog track by $index" class="scroll-item item">{{line.username}}: {{line.txt}}</ion-item>
       </div>
