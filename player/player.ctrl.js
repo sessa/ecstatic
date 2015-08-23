@@ -62,7 +62,6 @@ angular.module('ecstatic.player')
             }
             $scope.nextSong = function() {
                 console.log("nextSong Action");
-                console.log("nextSong, $scope.playlist="+JSON.stringify($scope.playlist));
                 $scope.onCompleteItem();
                 $scope.setItem($scope.currentItem);
                 playerServices.nextSongAction($scope.currentItem, playerServices.channel_id);
