@@ -32,6 +32,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					div(class="list")
 						ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
 							{{line.username}}: {{line.txt}}
+			ion-side-menu(side="right")
 
 	footer.message-box.bar.bar-footer.sub-footer.has-tabs(ng-controller="chatCtrl")
 
