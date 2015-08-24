@@ -46,10 +46,12 @@
         </div>
       </ion-content>
       <div ng-controller="chatCtrl" class="message-box">
-        <div class="label-input-wrapper pull-right">
-          <input type="text" ng-model="lineText" placeholder="{{textPrompt}}" class="padding"/>
-        </div>
-        <button ng-click="enterText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
+        <form>
+          <div class="label-input-wrapper pull-right">
+            <input type="search" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="padding"/>
+          </div>
+          <button ng-click="enterText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
+        </form>
       </div>
     </ion-side-menu>
   </ion-side-menus>

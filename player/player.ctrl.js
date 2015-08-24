@@ -11,6 +11,7 @@ angular.module('ecstatic.player')
             console.log("updatePlayerstateEventService, playerstate="+JSON.stringify(playerstate));
             $scope.playlist = playerstate.playlist;
         });
+
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }

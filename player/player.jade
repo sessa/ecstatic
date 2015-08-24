@@ -43,8 +43,8 @@ ion-view(ng-controller="PlayerCtrl as controller")
 						ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
 							{{line.username}}: {{line.txt}}
 			.message-box(ng-controller="chatCtrl")
-				.label-input-wrapper.pull-right
-					input.padding(type="text", ng-model="lineText", placeholder="{{textPrompt}}")
-				button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
+				form
+					.label-input-wrapper.pull-right
+						input.padding(type="search", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+					button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
 	
-
