@@ -1,31 +1,32 @@
-angular.module('ecstatic.player')
 
-.factory('playerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager){
-	var Service = {};
-	var channel_id = 0;
-	socket.on('next_song_action', function (data) {
-		console.log("heard next_song_action");
-		$rootScope.$broadcast('nextSong');
-	});
+// THE VIDEO THING MACHINE
 
-	Service.nextSongAction = function(playlistIndex, channel_id) {
-		var request = {
-			msg: "next_song_action",
-			channel_id: channel_id,
-			playlistIndex: playlistIndex
-		}
-		var promise = socketManager.sendRequest(request); 
-		return promise;
-	}
+.controller('VideoCtrl',
+    ["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
+        playerServices.channel_id = $stateParams.channel_id;
+        channelServices.joinChannel(playerServices.channel_id);
+        userNumberEventService.listen(function (event, userNumber){
+            $scope.numberOfUsers = userNumber;
+        });
+        updatePlayerstateEventService.listen(function (event, playerstate){
+            console.log("updatePlayerstateEventService, playerstate="+JSON.stringify(playerstate));
+            $scope.playlist = playerstate.playlist;
+        });
 
-	return Service;
-})
-
-
-.factory('showPlayerServices', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService){
-
-   var Service = {};
-
+        $scope.addSongs = function() {
+            $state.go('tab.channels-add');
+        }
+        $scope.render = function(){
+            channelServices.getChannels().then(function (channels){
+                var channel = channelServices.getChannel(playerServices.channel_id);
+                $scope.numberOfUsers = Object.keys(channel.users).length;
+                var playlistLength = channel.playlist.length;
+                if(playlistLength !== 0){
+                    $scope.showPlayer(channel);
+                }
+            });
+        }
+        $scope.showPlayer = function(channel){
             $scope.API = null;
             $scope.currentItem = channel.playlistIndex;
             $scope.autoplay = true;
@@ -34,23 +35,23 @@ angular.module('ecstatic.player')
             $scope.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
             $scope.showPlayer = true;
 
-            Service.onLoadMetaData = function(evt) {
+            $scope.onLoadMetaData = function(evt) {
                 $scope.API.seekTime($scope.delta, false);
                 $scope.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
             }
-            Service.onPlayerReady = function(API) {
+            $scope.onPlayerReady = function(API) {
                 $scope.API = API;
                 $scope.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
                 $scope.setItem($scope.currentItem);
                 $scope.delta = (channel.requestTime - channel.timestamp)/1000;
             }
-            Service.onCompleteItem = function() {
+            $scope.onCompleteItem = function() {
                 $scope.isCompleted = true;
                 $scope.currentItem++;
                 if ($scope.currentItem >= $scope.playlist.length) $scope.currentItem= 0;
                 $scope.setItem($scope.currentItem);
             }
-            Service.setItem = function(index) {
+            $scope.setItem = function(index) {
                 $scope.API.stop();
                 $scope.currentItem = index;
                 $scope.sources = [];
@@ -61,16 +62,18 @@ angular.module('ecstatic.player')
                 $scope.trackUser = $scope.playlist[$scope.currentItem].user.username;
                 $timeout($scope.API.play.bind($scope.API), 100);
             }
-            Service.nextSong = function() {
+            $scope.nextSong = function() {
                 console.log("nextSong Action");
                 $scope.onCompleteItem();
                 $scope.setItem($scope.currentItem);
                 playerServices.nextSongAction($scope.currentItem, playerServices.channel_id);
             }
-            Service.$on('nextSong', function(event, data) {
+            $scope.$on('nextSong', function(event, data) {
                 $scope.onCompleteItem();
                 $scope.setItem($scope.currentItem);
             });
+        }
+        $scope.render();
+    }]
+)
 
-            return Service;
-        })

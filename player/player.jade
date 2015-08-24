@@ -1,6 +1,6 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
+		a.button.button-clear.icon-left.ion-plus-circled(href="/add")  Add songs
 	ion-header-bar.bar.bar-subheader.bar-energized
 		ng-switch(on="showPlayer")
 
@@ -33,6 +33,22 @@ ion-view(ng-controller="PlayerCtrl as controller")
 		ion-side-menu-content
 			ion-content.has-tabs.has-footer(has-header="true")
 				button.button(menu-toggle="right") chatbox
+
+				.videogular-container(ng-controller="VideoCtrl as controller")
+					videogular(vg-theme="theme", 
+					vg-player-ready="onPlayerReady($API)", 
+					vg-complete="onCompleteItem()", 
+					class="videogular-container video" 
+					vg-auto-play="autoplay")
+					vg-media(vg-src="sources", vg-type="video")
+
+
+
+				//video.bgvid(autoplay muted)
+					source(src="loop.mp4" type="video/mp4")
+					source(src="loop2.mp4" type="video/mp4")
+					source(src="loop3.mp4" type="video/mp4")
+				
 				p hello.
 				p There's {{numberOfUsers}} ecstatic(s) in this channel.
 		ion-side-menu(side="right")

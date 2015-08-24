@@ -1,7 +1,7 @@
 angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
-	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
+	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', "showPlayerServices", function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService, showPlayerServices) {
         playerServices.channel_id = $stateParams.channel_id;
         channelServices.joinChannel(playerServices.channel_id);
         userNumberEventService.listen(function (event, userNumber){
@@ -15,17 +15,29 @@ angular.module('ecstatic.player')
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }
+        // shows you the player if there is a playlist, everytime the page loads.
         $scope.render = function(){
             channelServices.getChannels().then(function (channels){
                 var channel = channelServices.getChannel(playerServices.channel_id);
                 $scope.numberOfUsers = Object.keys(channel.users).length;
                 var playlistLength = channel.playlist.length;
                 if(playlistLength !== 0){
-                    $scope.showPlayer(channel);
+                    showPlayerServices(channel);
                 }
             });
         }
+
+        $scope.render();
+    }]
+)
+
+
+/*
+.controller('ShowPlayerCtrl',
+    ["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
+
         $scope.showPlayer = function(channel){
+
             $scope.API = null;
             $scope.currentItem = channel.playlistIndex;
             $scope.autoplay = true;
@@ -72,7 +84,7 @@ angular.module('ecstatic.player')
                 $scope.setItem($scope.currentItem);
             });
         }
-        $scope.render();
-	}]
+    	}]
 )
+*/
 
