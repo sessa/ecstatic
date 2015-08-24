@@ -1,9 +1,7 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-		a(href="#/tab/channels/{{channel.channel_id}}")
-			button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
-	.bar.bar-subheader.bar-energized
-		{{numberOfUsers}}
+		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
+	ion-header-bar.bar.bar-subheader.bar-energized
 		ng-switch(on="showPlayer")
 			.miniplayer(ng-switch-when="true") 				
 				videogular(vg-theme="theme", 
@@ -26,12 +24,16 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			.emptyplayer(ng-switch-default) 
 				p.title There aren't any songs in your playlist.
 					button.button-clear(ng-click="addSongs()")  Add songs?
-	ion-content
-		ion-scroll
-			div(data-ng-include="", data-src="'chat/chat.html'")
-
-	.message-box.bar.padding(ng-controller="chatCtrl")
+	ion-content.has-tabs.has-footer(has-header="true")
+		div(ng-controller="chatCtrl")
+			p There's {{numberOfUsers}} ecstatic(s) in this channel.
+			div(class="list")
+				ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
+					{{line.username}}: {{line.txt}}
+		video(id="videoElement")
+		script(type='text/javascript' src='webcam.js')
+	footer.message-box.bar.bar-footer.sub-footer.has-tabs(ng-controller="chatCtrl")
 		form
 			.label-input-wrapper
-				input(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+				input.padding(type="text", ng-model="lineText", placeholder="{{textPrompt}}")
 			button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")

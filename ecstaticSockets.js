@@ -142,7 +142,7 @@ exports.setupEcstaticSockets = function(app){
                 socket_info_dict.player_state = data.channel_info;
                 client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
                 socket_info_dict.callback_id = data.callback_id;
-                io.sockets.emit("update_channel", socket_info_dict);
+                socket.broadcast.to(data.channel_info.channel_id).emit("update");
             });
         });
      });

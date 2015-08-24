@@ -8,6 +8,11 @@ angular.module('ecstatic.chat')
     Service.chatPrompt = "Type Your Message...";
     Service.textPrompt = Service.namePrompt;
     Service.username = "";
+    socket.on('send_text', function (data) {
+      console.log("added text from other user" + data);
+      Service.chat.push(data);
+      chatEventServices.broadcastText(data);
+    })
 
     Service.getTextPrompt = function(){
       return Service.textPrompt;
@@ -22,11 +27,6 @@ angular.module('ecstatic.chat')
         txt: chatText,
         username: Service.username
       }
-      socket.on('send_text', function (data) {
-        console.log("added text from other user" + data);
-        Service.chat.push(data);
-        chatEventServices.broadcastText(data);
-      })
       var promise = socketManager.sendRequest(request); 
       chatEventServices.broadcastText(chatText);
       return promise;

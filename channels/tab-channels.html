@@ -5,8 +5,7 @@
     <ion-list>
       <ion-item><a href="#/tab/name-a-channel">Create a channel</a></ion-item>
       <ion-item ng-repeat="channel in channels" type="item-text-wrap" ng-click="joinChannel(channel.channel_id)" href="#/tab/player/{{channel.channel_id}}" class="item-remove-animate item-avatar item-icon-right"><img ng-src="{{channel.face}}"/>
-        <h2>{{channel.channel_name}}</h2>
-        <h2>{{channel.channel_id}}</h2><i class="icon ion-chevron-right icon-accessory"></i>
+        <h2>{{channel.channel_name}}</h2><i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
   </ion-content>

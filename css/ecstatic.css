@@ -16,4 +16,10 @@
 	width: 100%;
 }
 
-.message-box
+.has-footer.has-tabs {
+  bottom: 99px !important;
+}
+
+.sub-footer{
+ bottom:49px !important;
+}
