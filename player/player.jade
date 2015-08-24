@@ -3,6 +3,8 @@ ion-view(ng-controller="PlayerCtrl as controller")
 		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
 	ion-header-bar.bar.bar-subheader.bar-energized
 		ng-switch(on="showPlayer")
+
+			//if the player has songs in it
 			.miniplayer(ng-switch-when="true") 				
 				videogular(vg-theme="theme", 
 					vg-player-ready="onPlayerReady($API)", 
@@ -20,22 +22,29 @@ ion-view(ng-controller="PlayerCtrl as controller")
 				//	vg-mute-button
 				//	vg-volume-bar
 				
-				
+			//if the player is empty
 			.emptyplayer(ng-switch-default) 
 				p.title There aren't any songs in your playlist.
 					button.button-clear(ng-click="addSongs()")  Add songs?
-	ion-content.has-tabs.has-footer(has-header="true")
-		ion-side-menus
-			ion-side-menu-content
+
+	//ion-content.
+
+	ion-side-menus
+		ion-side-menu-content
+			ion-content.has-tabs.has-footer(has-header="true")
+				button.button(menu-toggle="right") chatbox
+				p hello.
+				p There's {{numberOfUsers}} ecstatic(s) in this channel.
+		ion-side-menu(side="right")
+			ion-content.has-tabs.has-footer(has-header="true")
+				button.button(menu-toggle="right") videobox
 				div(ng-controller="chatCtrl")
-					p There's {{numberOfUsers}} ecstatic(s) in this channel.
 					div(class="list")
 						ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
 							{{line.username}}: {{line.txt}}
-			ion-side-menu(side="right")
+			.message-box(ng-controller="chatCtrl")
+				.label-input-wrapper.pull-right
+					input.padding(type="text", ng-model="lineText", placeholder="{{textPrompt}}")
+				button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
+	
 
-	footer.message-box.bar.bar-footer.sub-footer.has-tabs(ng-controller="chatCtrl")
-
-		.label-input-wrapper
-			input.padding(type="text", ng-model="lineText", placeholder="{{textPrompt}}")
-		button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
