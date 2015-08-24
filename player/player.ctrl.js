@@ -7,6 +7,7 @@ angular.module('ecstatic.player')
         userNumberEventService.listen(function (event, userNumber){
             $scope.numberOfUsers = userNumber;
         });
+
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }

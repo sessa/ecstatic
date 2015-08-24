@@ -30,9 +30,11 @@
     </ion-scroll>
   </ion-content>
   <div ng-controller="chatCtrl" class="message-box bar padding">
-    <div class="label-input-wrapper">
-      <input type="text" ng-model="lineText" placeholder="{{textPrompt}}"/>
-    </div>
-    <button ng-click="enterText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
+    <form>
+      <div class="label-input-wrapper">
+        <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}"/>
+      </div>
+      <button ng-click="enterText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
+    </form>
   </div>
-</ion-view>>>>>>>> origin/playlist
+</ion-view>
