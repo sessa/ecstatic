@@ -45,6 +45,6 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			.message-box(ng-controller="chatCtrl")
 				form
 					.label-input-wrapper.pull-right
-						input.padding(type="search", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+						input.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
 					button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
-	
+		

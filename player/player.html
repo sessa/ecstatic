@@ -48,7 +48,7 @@
       <div ng-controller="chatCtrl" class="message-box">
         <form>
           <div class="label-input-wrapper pull-right">
-            <input type="search" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="padding"/>
+            <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="padding"/>
           </div>
           <button ng-click="enterText(lineText); lineText=''" class="button button-small button-light icon ion-android-send pull-right"></button>
         </form>
