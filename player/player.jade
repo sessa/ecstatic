@@ -25,11 +25,13 @@ ion-view(ng-controller="PlayerCtrl as controller")
 				p.title There aren't any songs in your playlist.
 					button.button-clear(ng-click="addSongs()")  Add songs?
 	ion-content.has-tabs.has-footer(has-header="true")
-		div(ng-controller="chatCtrl")
-			p There's {{numberOfUsers}} ecstatic(s) in this channel.
-			div(class="list")
-				ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
-					{{line.username}}: {{line.txt}}
+		ion-side-menus
+			ion-side-menu-content
+				div(ng-controller="chatCtrl")
+					p There's {{numberOfUsers}} ecstatic(s) in this channel.
+					div(class="list")
+						ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
+							{{line.username}}: {{line.txt}}
 
 	footer.message-box.bar.bar-footer.sub-footer.has-tabs(ng-controller="chatCtrl")
 
