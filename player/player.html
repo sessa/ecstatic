@@ -8,12 +8,12 @@
       <!--if the player has songs in it-->
       <div ng-switch-when="true">		
         <!--the player		-->
-        <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="videogular-container audio">
-          <vg-media vg-src="sources" vg-type="audio"></vg-media>
+        <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
+          <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
         </videogular>
-        <div class="current-song item item-thumbnail-left"><img src="{{trackCover}}"/>
-          <h2>{{trackTitle}}</h2>
-          <p>{{trackUser}}</p>
+        <div class="current-song item item-thumbnail-left"><img src="{{playerServicestrackCover}}"/>
+          <h2>{{playerServices.trackTitle}}</h2>
+          <p>{{playerServices.trackUser}}</p>
           <!--button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip-->
         </div>
       </div>
@@ -31,8 +31,8 @@
         <div class="padding">
           <div class="padding">
             <!-- Channel Announcements-->
-            <h1 ng-show="username">hi {{username}}! :)</h1>
-            <p>There's <span ng-hide="numberOfUsers">only you  </span><span ng-show="numberOfUsers">{{numberOfUsers}} other ecstatic(s) </span>in this channel. </p>
+            <h1 ng-show="playerServices.username">hi {{playerServices.username}}! :)</h1>
+            <p>There's <span ng-hide="playerServices.numberOfUsers">only you  </span><span ng-show="playerServices.numberOfUsers">{{playerServices.numberOfUsers}} other ecstatic(s) </span>in this channel. </p>
           </div>
           <!-- Channel discussion-->
           <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding">

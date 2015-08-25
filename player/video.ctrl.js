@@ -3,46 +3,79 @@ angular.module('ecstatic.video')
 // THE VIDEO THING MACHINE
 
 
+
 .controller('VideoCtrl',
-        ["$sce", function ($sce) {
-            var controller = this;
-            controller.API = null;
- 
-            controller.onPlayerReady = function(API) {
-                controller.API = API;
-                controller.setVideo();
-            };
+    ["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService',function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
+        playerServices.channel_id = $stateParams.channel_id;
+        channelServices.joinChannel(playerServices.channel_id);
+        userNumberEventService.listen(function (event, userNumber){
+            $scope.numberOfUsers = userNumber;
+        });
+        updatePlayerstateEventService.listen(function (event, playerstate){
+            console.log("updatePlayerstateEventService, playerstate="+JSON.stringify(playerstate));
+            $scope.playlist = playerstate.playlist;
+        });
 
-            controller.videos = [
-                {
-                    sources: [
-                        {src: $sce.trustAsResourceUrl("loop.mp4"), type: "video/mp4"}
-                    ]
-                },
-                {
-                    sources: [
-                        {src: $sce.trustAsResourceUrl("loop2.mp4"), type: "video/mp4"}
-                    ]
+        $scope.addSongs = function() {
+            $state.go('tab.channels-add');
+        }
+        $scope.render = function(){
+            channelServices.getChannels().then(function (channels){
+                var channel = channelServices.getChannel(playerServices.channel_id);
+                $scope.numberOfUsers = Object.keys(channel.users).length;
+                var playlistLength = channel.playlist.length;
+                if(playlistLength !== 0){
+                    $scope.showPlayer(channel);
                 }
-            ];   
+            });
+        }
+        $scope.showPlayer = function(channel){
+            $scope.API = null;
+            $scope.currentItem = channel.playlistIndex;
+            $scope.autoplay = true;
+            $scope.playlist = channel.playlist;
+            $scope.sources = [];
+            $scope.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
+            $scope.showPlayer = true;
 
-            controller.config = {
-                autoPlay: true,
-                sources: controller.videos[0].sources,
-                tracks: [
-                    {}
-                ],
-                theme: "bower_components/videogular-themes-default/videogular.css",
-                plugins: {
-                    poster: "#"
-                }
-            };
-
-            controller.setVideo = function(index) {
-                controller.API.stop();
-                controller.config.sources = controller.videos[index].sources;
-                $timeout(controller.API.play.bind(controller.API), 100);
-            };
-
-        }]
-    );
+            $scope.onLoadMetaData = function(evt) {
+                $scope.API.seekTime($scope.delta, false);
+                $scope.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
+            }
+            $scope.onPlayerReady = function(API) {
+                $scope.API = API;
+                $scope.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
+                $scope.setItem($scope.currentItem);
+                $scope.delta = (channel.requestTime - channel.timestamp)/1000;
+            }
+            $scope.onCompleteItem = function() {
+                $scope.isCompleted = true;
+                $scope.currentItem++;
+                if ($scope.currentItem >= $scope.playlist.length) $scope.currentItem= 0;
+                $scope.setItem($scope.currentItem);
+            }
+            $scope.setItem = function(index) {
+                $scope.API.stop();
+                $scope.currentItem = index;
+                $scope.sources = [];
+                var source = $scope.playlist[$scope.currentItem];
+                console.log("setItem, $source="+JSON.stringify(source));
+                $scope.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
+                $scope.trackTitle = $scope.playlist[$scope.currentItem].title;
+                $scope.trackUser = $scope.playlist[$scope.currentItem].user.username;
+                $timeout($scope.API.play.bind($scope.API), 100);
+            }
+            $scope.nextSong = function() {
+                console.log("nextSong Action");
+                $scope.onCompleteItem();
+                $scope.setItem($scope.currentItem);
+                playerServices.nextSongAction($scope.currentItem, playerServices.channel_id);
+            }
+            $scope.$on('nextSong', function(event, data) {
+                $scope.onCompleteItem();
+                $scope.setItem($scope.currentItem);
+            });
+        }
+        $scope.render();
+    }]
+)

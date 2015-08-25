@@ -1,5 +1,6 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
+
 		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
 
 	ion-header-bar.bar.bar-subheader.miniplayer
@@ -8,17 +9,17 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			//if the player has songs in it
 			div(ng-switch-when="true") 		
 				//the player		
-				videogular(vg-theme="theme", 
-					vg-player-ready="onPlayerReady($API)", 
-					vg-complete="onCompleteItem()", 
+				videogular(vg-theme="playerServices.theme", 
+					vg-player-ready="playerServices.onPlayerReady($API)", 
+					vg-complete="playerServices.onCompleteItem()", 
 					class="videogular-container audio" 
-					vg-auto-play="autoplay")
-					vg-media(vg-src="sources", vg-type="audio")
+					vg-auto-play="playerServices.autoplay")
+					vg-media(vg-src="playerServices.sources", vg-type="audio")
 
 				.current-song.item.item-thumbnail-left
-					img(src="{{trackCover}}")
-					h2 {{trackTitle}}
-					p {{trackUser}}
+					img(src="{{playerServicestrackCover}}")
+					h2 {{playerServices.trackTitle}}
+					p {{playerServices.trackUser}}
 					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
 			//if the player is empty
@@ -36,10 +37,10 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					.padding
 
 						// Channel Announcements
-						h1(ng-show="username") hi {{username}}! :)
+						h1(ng-show="playerServices.username") hi {{playerServices.username}}! :)
 						p There's 
-							span(ng-hide="numberOfUsers") only you  
-							span(ng-show="numberOfUsers"){{numberOfUsers}} other ecstatic(s) 
+							span(ng-hide="playerServices.numberOfUsers") only you  
+							span(ng-show="playerServices.numberOfUsers"){{playerServices.numberOfUsers}} other ecstatic(s) 
 							| in this channel. 
 
 					// Channel discussion
@@ -63,6 +64,5 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			ion-content.has-tabs.has-footer(has-header="true")
 				button.button(menu-toggle="right") videobox
 				div(ng-controller="chatCtrl")
-						
 
-			
+
