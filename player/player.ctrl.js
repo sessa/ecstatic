@@ -11,6 +11,14 @@ angular.module('ecstatic.player')
             console.log("updatePlayerstateEventService, playerstate="+JSON.stringify(playerstate));
             $scope.playlist = playerstate.playlist;
         });
+        
+        $scope.inputIsVisible = false;
+
+        $scope.showInput = function() {
+            $scope.inputIsVisible = true;
+        }
+
+
         $scope.addSongs = function() {
             $state.go('tab.channels-add');
         }
@@ -18,6 +26,7 @@ angular.module('ecstatic.player')
             channelServices.getChannels().then(function (channels){
                 var channel = channelServices.getChannel(playerServices.channel_id);
                 $scope.numberOfUsers = Object.keys(channel.users).length;
+                $scope.numberOfUsers = $scope.numberOfUsers-1;
                 var playlistLength = channel.playlist.length;
                 if(playlistLength !== 0){
                     $scope.showPlayer(channel);
@@ -58,6 +67,7 @@ angular.module('ecstatic.player')
                 $scope.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
                 $scope.trackTitle = $scope.playlist[$scope.currentItem].title;
                 $scope.trackUser = $scope.playlist[$scope.currentItem].user.username;
+                $scope.trackCover = $scope.playlist[$scope.currentItem].artwork_url;
                 $timeout($scope.API.play.bind($scope.API), 100);
             }
             $scope.nextSong = function() {

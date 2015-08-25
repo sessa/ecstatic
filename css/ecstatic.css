@@ -10,16 +10,46 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+.hidden {
+	display: none;
+	visibility: hidden;
+	width: 0;
+}
+
+.has-footer.has-tabs {
+	bottom: 105px !important;
+}
+
+.sub-footer{
+	bottom:49px !important;
+}
+
+.bar.miniplayer {
+	height: 50px;
+}
+
+.current-song.item-thumbnail-left img {
+	max-width: 48px;
+	max-height: 48px;
+}
+
 .message-box {
 	position: fixed!important;
 	bottom: 49px!important;
 	width: 100%;
+	border-top: 1px solid #aaa;
+	background-color: white;
 }
 
-.has-footer.has-tabs {
-  bottom: 99px !important;
+.chat-message.scroll-item {
+	border: none;
+	background-color: #eee;
+	margin: 0.5em 0 0.5em;
+	border-radius: 10px;
+	overflow: initial;
+    white-space: initial;
 }
 
-.sub-footer{
- bottom:49px !important;
+input.typeform  {
+	width: 100% ;
 }

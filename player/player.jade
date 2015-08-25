@@ -1,38 +1,68 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
 		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
-	ion-header-bar.bar.bar-subheader.bar-energized
+
+	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
-			.miniplayer(ng-switch-when="true") 				
+
+			//if the player has songs in it
+			div(ng-switch-when="true") 		
+				//the player		
 				videogular(vg-theme="theme", 
 					vg-player-ready="onPlayerReady($API)", 
 					vg-complete="onCompleteItem()", 
 					class="videogular-container audio" 
 					vg-auto-play="autoplay")
 					vg-media(vg-src="sources", vg-type="audio")
-	
-				.title Currently playing: "{{trackTitle}}" 
-				button.button.button-clear.icon-left.ion-ios-skipforward.pull-left(ng-click="nextSong()")  Skip
-				// {{trackUser}} 
-				//vg-scrub-bar
-				//	vg-scrub-bar-current-time
-				//vg-volume
-				//	vg-mute-button
-				//	vg-volume-bar
+
+				.current-song.item.item-thumbnail-left
+					img(src="{{trackCover}}")
+					h2 {{trackTitle}}
+					p {{trackUser}}
+					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
-				
-			.emptyplayer(ng-switch-default) 
+			//if the player is empty
+			div(ng-switch-default) 
 				p.title There aren't any songs in your playlist.
 					button.button-clear(ng-click="addSongs()")  Add songs?
-	ion-content.has-tabs.has-footer(has-header="true")
-		div(ng-controller="chatCtrl")
-			p There's {{numberOfUsers}} ecstatic(s) in this channel.
-			div(class="list")
-				ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
-					{{line.username}}: {{line.txt}}
 
-	footer.message-box.bar.bar-footer.sub-footer.has-tabs(ng-controller="chatCtrl")
 
-		.label-input-wrapper
-			input.padding(type="text", ng-model="lineText", placeholder="{{textPrompt}}")
-		button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
+	ion-side-menus
+		ion-side-menu-content(ng-controller="chatCtrl")
+
+			ion-content.has-tabs.has-footer(has-header="true")
+				
+				.padding
+					.padding
+
+						// Channel Announcements
+						h1(ng-show="username") hi {{username}}! :)
+						p There's 
+							span(ng-hide="numberOfUsers") only you  
+							span(ng-show="numberOfUsers"){{numberOfUsers}} other ecstatic(s) 
+							| in this channel. 
+
+					// Channel discussion
+					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
+						p {{line.username}}: {{line.txt}}
+	
+
+			.message-box.list.padding
+				
+				form.item-icon-right
+    
+					label.item-inset
+						input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+					
+					button.hidden(ng-click="enterText(lineText); lineText=''")
+					a(href="#")
+						i.icon.ion-camera
+
+
+		ion-side-menu(side="right")
+			ion-content.has-tabs.has-footer(has-header="true")
+				button.button(menu-toggle="right") videobox
+				div(ng-controller="chatCtrl")
+						
+
+			

@@ -36,7 +36,8 @@ var app = angular.module('ecstatic', [
       'ecstatic.chat',
       'ecstatic.channels',
       'ecstatic.config',
-      'ecstatic.feedback'
+      'ecstatic.feedback',
+      'ecstatic.video'
 ])
 
 .run(function($ionicPlatform) {
