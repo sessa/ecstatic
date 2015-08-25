@@ -43,8 +43,8 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							{{line.username}}: {{line.txt}}
 				div(ng-controller="CameraCtrl")
 					video(id="videoElement", height="192", width="256")
-					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraControl()")
-					input(type="file", name="video", accept="video/*" capture)
+					script(src="./node_modules/msr/MediaStreamRecorder.js")
+					//- button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraControl()")
 			.message-box(ng-controller="chatCtrl")
 				form
 					.label-input-wrapper.pull-right

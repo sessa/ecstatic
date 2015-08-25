@@ -46,8 +46,7 @@
         </div>
         <div ng-controller="CameraCtrl">
           <video id="videoElement" height="192" width="256"></video>
-          <button ng-click="cameraControl()" class="button button-small button-light icon ion-android-send pull-left"></button>
-          <input type="file" name="video" accept="video/*" capture="capture"/>
+          <script src="./node_modules/msr/MediaStreamRecorder.js"></script>
         </div>
       </ion-content>
       <div ng-controller="chatCtrl" class="message-box">

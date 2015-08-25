@@ -37,7 +37,8 @@ var app = angular.module('ecstatic', [
       'ecstatic.channels',
       'ecstatic.config',
       'ecstatic.feedback',
-      'ecstatic.camera'
+      'ecstatic.camera',
+      'MediaStreamRecorder'
 ])
 
 .run(function($ionicPlatform) {

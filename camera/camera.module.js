@@ -1,1 +1,1 @@
-angular.module('ecstatic.camera', [])
+angular.module('ecstatic.camera', ['MediaStreamRecorder'])
