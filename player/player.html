@@ -1,14 +1,14 @@
 
 <ion-view ng-controller="PlayerCtrl as controller">
-  <ion-nav-buttons side="secondary"><a href="/add" class="button button-clear icon-left ion-plus-circled"> Add songs</a></ion-nav-buttons>
+  <ion-nav-buttons side="secondary"><a href="#/tab/add" class="button button-clear icon-left ion-plus-circled"> Add songs</a></ion-nav-buttons>
   <ion-header-bar class="bar bar-subheader bar-energized">
     <ng-switch on="showPlayer">
       <!--if the player has songs in it-->
-      <div ng-switch-when="true" class="miniplayer">				
-        <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="videogular-container audio">
-          <vg-media vg-src="sources" vg-type="audio"></vg-media>
+      <div ng-switch-when="true" class="miniplayer">	
+        <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
+          <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
         </videogular>
-        <div class="title">Currently playing: "{{trackTitle}}" </div>
+        <div class="title">Currently playing: "{{playerServices.trackTitle}}" </div>
         <button ng-click="nextSong()" class="button button-clear icon-left ion-ios-skipforward pull-left"> Skip</button>
         <!-- {{trackUser}} -->
         <!--vg-scrub-bar-->
@@ -19,9 +19,7 @@
       </div>
       <!--if the player is empty-->
       <div ng-switch-default="ng-switch-default" class="emptyplayer"> 
-        <p class="title">There aren't any songs in your playlist.
-          <button ng-click="addSongs()" class="button-clear"> Add songs?</button>
-        </p>
+        <p class="title">There aren't any songs in your playlist.<a href="#/tab/add" class="button-clear"> Add songs?</a></p>
       </div>
     </ng-switch>
   </ion-header-bar>
@@ -30,10 +28,17 @@
     <ion-side-menu-content>
       <ion-content has-header="true" class="has-tabs has-footer">
         <button menu-toggle="right" class="button">chatbox</button>
-        <div ng-controller="VideoCtrl as controller" class="videogular-container">
-          <videogular vg-theme="theme" vg-player-ready="onPlayerReady($API)" vg-complete="onCompleteItem()" vg-auto-play="autoplay" class="videogular-container video"></videogular>
-          <vg-media vg-src="sources" vg-type="video"></vg-media>
-        </div>
+        <!--.videogular-container(ng-controller="VideoCtrl as controller")
+        videogular(vg-theme="theme", 
+        vg-player-ready="onPlayerReady($API)", 
+        vg-complete="onCompleteItem()", 
+        class="videogular-container video" 
+        vg-auto-play="autoplay")
+        vg-media(vg-src="sources", vg-type="video")
+        
+        
+        
+        -->
         <!--video.bgvid(autoplay muted)
         source(src="loop.mp4" type="video/mp4")
         source(src="loop2.mp4" type="video/mp4")
