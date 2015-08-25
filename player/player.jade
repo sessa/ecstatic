@@ -42,9 +42,8 @@ ion-view(ng-controller="PlayerCtrl as controller")
 						ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
 							{{line.username}}: {{line.txt}}
 				div(ng-controller="CameraCtrl")
-					video(id="videoElement", height="192", width="256")
-					script(src="./node_modules/msr/MediaStreamRecorder.js")
-					//- button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraControl()")
+					video(id="videoElement", height="192", width="256", loop)
+					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
 			.message-box(ng-controller="chatCtrl")
 				form
 					.label-input-wrapper.pull-right
