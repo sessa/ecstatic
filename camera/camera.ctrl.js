@@ -14,8 +14,8 @@ angular.module('ecstatic.camera')
 				started = false;
 				console.log("Closing Video");
 				$scope.endVideoClip();
-			}else{
 				cameraOn = false;
+			}else{
 				started = true;
 				console.log("Submitting Video");
 				$scope.startVideoClip();
