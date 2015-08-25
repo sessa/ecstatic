@@ -57,6 +57,7 @@ angular.module('ecstatic.player')
         Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
+        Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
         $timeout(Service.API.play.bind(Service.API), 100);
     }
     return Service;

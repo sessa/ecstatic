@@ -16,6 +16,10 @@
 	width: 0;
 }
 
+.nav-dark  {
+	border: none !important;
+}
+
 .has-footer.has-tabs {
 	bottom: 105px !important;
 }
@@ -25,12 +29,27 @@
 }
 
 .bar.miniplayer {
-	height: 50px;
+ 	color: white;
+ 	background-color: #333;
 }
 
-.current-song.item-thumbnail-left img {
-	max-width: 48px;
-	max-height: 48px;
+
+.current-song img {
+	max-width: 32px;
+	max-height: 32px;
+	float: left;
+}
+
+.current-song p {
+	position: absolute;
+	top: 0;
+	padding: 0 0 0 40px;
+	margin: 0;
+}
+
+.announcements,
+.announcements h1 {
+	color: white;
 }
 
 .message-box {
@@ -48,6 +67,7 @@
 	border-radius: 10px;
 	overflow: initial;
     white-space: initial;
+
 }
 
 input.typeform  {

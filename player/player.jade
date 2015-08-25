@@ -1,7 +1,7 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
 
-		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
+		
 
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
@@ -16,28 +16,33 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					vg-auto-play="playerServices.autoplay")
 					vg-media(vg-src="playerServices.sources", vg-type="audio")
 
-				.current-song.item.item-thumbnail-left
-					img(src="{{playerServicestrackCover}}")
-					h2 {{playerServices.trackTitle}}
-					p {{playerServices.trackUser}}
+				.current-song
+					img(src="{{playerServices.trackCover}}")
+					p  
+						strong {{playerServices.trackTitle}}
+						br
+						| {{playerServices.trackUser}}
+
+				
 					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
 			//if the player is empty
 			div(ng-switch-default) 
-				p.title There aren't any songs in your playlist.
-					button.button-clear(ng-click="addSongs()")  Add songs?
+				p.title There's no song in this playlist.
+				a.button.icon-left.ion-plus-round(href="#/tab/add") 
 
+			
 
 	ion-side-menus
-		ion-side-menu-content(ng-controller="chatCtrl")
+		ion-side-menu-content.gradient(ng-controller="chatCtrl")
 
 			ion-content.has-tabs.has-footer(has-header="true")
 				
-				.padding
-					.padding
+				.chatbox.padding
+					.announcements.padding
 
-						// Channel Announcements
-						h1(ng-show="playerServices.username") hi {{playerServices.username}}! :)
+						// Channel announcements
+						h1(ng-show="username") hi {{username}}! :)
 						p There's 
 							span(ng-hide="playerServices.numberOfUsers") only you  
 							span(ng-show="playerServices.numberOfUsers"){{playerServices.numberOfUsers}} other ecstatic(s) 
@@ -45,7 +50,9 @@ ion-view(ng-controller="PlayerCtrl as controller")
 
 					// Channel discussion
 					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-						p {{line.username}}: {{line.txt}}
+						p 
+							strong{{line.username}}: 
+							{{line.txt}}
 	
 
 			.message-box.list.padding
@@ -62,7 +69,9 @@ ion-view(ng-controller="PlayerCtrl as controller")
 
 		ion-side-menu(side="right")
 			ion-content.has-tabs.has-footer(has-header="true")
-				button.button(menu-toggle="right") videobox
-				div(ng-controller="chatCtrl")
+				//button.button(menu-toggle="right") close videobox
+				video(autoplay muted loop)
+					source(src="loop2.mp4")
+					
 
 
