@@ -1,0 +1,196 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'msr', '--save' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 verbose node symlink /usr/local/bin/node
+5 verbose install initial load of /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/package.json
+6 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/async/package.json
+7 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/aws-sdk/package.json
+8 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/chai/package.json
+9 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/cors/package.json
+10 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/express/package.json
+11 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/geo-proximity/package.json
+12 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt/package.json
+13 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt-contrib-jshint/package.json
+14 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt-coveralls/package.json
+15 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt-mocha-istanbul/package.json
+16 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/hbs/package.json
+17 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/hiredis/package.json
+18 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/istanbul/package.json
+19 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/jade/package.json
+20 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/mocha/package.json
+21 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/nodemailer/package.json
+22 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/redis/package.json
+23 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/request/package.json
+24 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/socket.io/package.json
+25 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/socket.io-client/package.json
+26 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/soundclouder/package.json
+27 info package.json grunt-coveralls@1.0.0 No license field.
+28 info package.json grunt-contrib-jshint@0.11.2 No license field.
+29 info package.json hiredis@0.3.0 No license field.
+30 info package.json hbs@3.0.1 No license field.
+31 info package.json grunt@0.4.5 No license field.
+32 info package.json redis@0.12.1 No license field.
+33 info package.json socket.io@1.3.6 No license field.
+34 info package.json soundclouder@0.8.1 No license field.
+35 verbose readDependencies loading dependencies from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/package.json
+36 silly cache add args [ 'msr', null ]
+37 verbose cache add spec msr
+38 silly cache add parsed spec { raw: 'msr',
+38 silly cache add   scope: null,
+38 silly cache add   name: 'msr',
+38 silly cache add   rawSpec: '',
+38 silly cache add   spec: '*',
+38 silly cache add   type: 'range' }
+39 silly addNamed msr@*
+40 verbose addNamed "*" is a valid semver range for msr
+41 silly addNameRange { name: 'msr', range: '*', hasData: false }
+42 silly mapToRegistry name msr
+43 silly mapToRegistry using default registry
+44 silly mapToRegistry registry https://registry.npmjs.org/
+45 silly mapToRegistry uri https://registry.npmjs.org/msr
+46 verbose addNameRange registry:https://registry.npmjs.org/msr not in flight; fetching
+47 verbose request uri https://registry.npmjs.org/msr
+48 verbose request no auth needed
+49 info attempt registry request try #1 at 12:05:19
+50 verbose request id cc38368a879aad7c
+51 http request GET https://registry.npmjs.org/msr
+52 http 200 https://registry.npmjs.org/msr
+53 silly get cb [ 200,
+53 silly get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+53 silly get     etag: '"9INB7VAEAOKGTIP8PZ1CNCM35"',
+53 silly get     'content-type': 'application/json',
+53 silly get     'cache-control': 'max-age=60',
+53 silly get     'content-length': '26675',
+53 silly get     'accept-ranges': 'bytes',
+53 silly get     date: 'Tue, 25 Aug 2015 16:05:19 GMT',
+53 silly get     via: '1.1 varnish',
+53 silly get     age: '0',
+53 silly get     connection: 'keep-alive',
+53 silly get     'x-served-by': 'cache-iad2134-IAD',
+53 silly get     'x-cache': 'MISS',
+53 silly get     'x-cache-hits': '0',
+53 silly get     'x-timer': 'S1440518719.258788,VS0,VE25',
+53 silly get     vary: 'Accept' } ]
+54 verbose get saving msr to /Users/davidhernon/.npm/registry.npmjs.org/msr/.cache.json
+55 silly addNameRange number 2 { name: 'msr', range: '*', hasData: true }
+56 silly addNameRange versions [ 'msr',
+56 silly addNameRange   [ '1.2.0',
+56 silly addNameRange     '1.2.1',
+56 silly addNameRange     '1.2.2',
+56 silly addNameRange     '1.2.3',
+56 silly addNameRange     '1.2.4',
+56 silly addNameRange     '1.2.5',
+56 silly addNameRange     '1.2.6',
+56 silly addNameRange     '1.2.7',
+56 silly addNameRange     '1.2.8' ] ]
+57 silly addNamed msr@1.2.8
+58 verbose addNamed "1.2.8" is a plain semver version for msr
+59 silly mapToRegistry name msr
+60 silly mapToRegistry using default registry
+61 silly mapToRegistry registry https://registry.npmjs.org/
+62 silly mapToRegistry uri https://registry.npmjs.org/msr
+63 verbose addRemoteTarball https://registry.npmjs.org/msr/-/msr-1.2.8.tgz not in flight; adding
+64 verbose addRemoteTarball [ 'https://registry.npmjs.org/msr/-/msr-1.2.8.tgz',
+64 verbose addRemoteTarball   'fcd347e745035b3df53526eaae7203110d7593ca' ]
+65 info retry fetch attempt 1 at 12:05:19
+66 info attempt registry request try #1 at 12:05:19
+67 http fetch GET https://registry.npmjs.org/msr/-/msr-1.2.8.tgz
+68 http fetch 200 https://registry.npmjs.org/msr/-/msr-1.2.8.tgz
+69 silly fetchAndShaCheck shasum fcd347e745035b3df53526eaae7203110d7593ca
+70 verbose addTmpTarball /var/folders/vh/yk_hsbbs1s752zl7ls4wb8fc0000gn/T/npm-37215-a66d6c68/registry.npmjs.org/msr/-/msr-1.2.8.tgz not in flight; adding
+71 verbose addTmpTarball already have metadata; skipping unpack for msr@1.2.8
+72 silly cache afterAdd msr@1.2.8
+73 verbose afterAdd /Users/davidhernon/.npm/msr/1.2.8/package/package.json not in flight; writing
+74 verbose afterAdd /Users/davidhernon/.npm/msr/1.2.8/package/package.json written
+75 silly install resolved [ { name: 'msr',
+75 silly install resolved     preferGlobal: true,
+75 silly install resolved     version: '1.2.8',
+75 silly install resolved     author:
+75 silly install resolved      { name: 'Muaz Khan',
+75 silly install resolved        email: 'muazkh@gmail.com',
+75 silly install resolved        url: 'http://www.muazkhan.com/' },
+75 silly install resolved     description: 'Cross-Browser recording of audio/video media streams; targets WebRTC/getUserMedia/WebAudio/etc. Works both on Chrome/Firefox/Opera on desktop & android.',
+75 silly install resolved     scripts: { start: 'node MediaStreamRecorder.js' },
+75 silly install resolved     main: './MediaStreamRecorder.js',
+75 silly install resolved     repository:
+75 silly install resolved      { type: 'git',
+75 silly install resolved        url: 'git+https://github.com/streamproc/MediaStreamRecorder.git' },
+75 silly install resolved     keywords:
+75 silly install resolved      [ 'recorder',
+75 silly install resolved        'audio-recorder',
+75 silly install resolved        'video-recorder',
+75 silly install resolved        'audio-recording',
+75 silly install resolved        'video-recording',
+75 silly install resolved        'recording',
+75 silly install resolved        'record',
+75 silly install resolved        'audio-video-recorder',
+75 silly install resolved        'gif-recorder',
+75 silly install resolved        'audio',
+75 silly install resolved        'video',
+75 silly install resolved        'gif',
+75 silly install resolved        'mediarecorder',
+75 silly install resolved        'media',
+75 silly install resolved        'client-side',
+75 silly install resolved        'webrtc',
+75 silly install resolved        'mediastreamrecorder',
+75 silly install resolved        'webrtc-library',
+75 silly install resolved        'library',
+75 silly install resolved        'javascript',
+75 silly install resolved        'chrome',
+75 silly install resolved        'firefox',
+75 silly install resolved        'opera',
+75 silly install resolved        'mediastreamrecorder.js',
+75 silly install resolved        'webrtc-experiment',
+75 silly install resolved        'javascript-library',
+75 silly install resolved        'muaz',
+75 silly install resolved        'muaz-khan',
+75 silly install resolved        'stereorecorder',
+75 silly install resolved        'mediarecorder',
+75 silly install resolved        'whammyrecorder',
+75 silly install resolved        'gifrecorder',
+75 silly install resolved        'multistreamrecorder' ],
+75 silly install resolved     analyze: false,
+75 silly install resolved     license: 'MIT',
+75 silly install resolved     bugs:
+75 silly install resolved      { url: 'https://github.com/streamproc/MediaStreamRecorder/issues',
+75 silly install resolved        email: 'muazkh@gmail.com' },
+75 silly install resolved     homepage: 'https://www.webrtc-experiment.com/msr/',
+75 silly install resolved     _from: 'msr@*',
+75 silly install resolved     _id: 'msr@1.2.8',
+75 silly install resolved     _shasum: 'fcd347e745035b3df53526eaae7203110d7593ca',
+75 silly install resolved     _npmVersion: '2.9.1',
+75 silly install resolved     _nodeVersion: '0.12.3',
+75 silly install resolved     _npmUser: { name: 'muaz-khan', email: 'muazkh@gmail.com' },
+75 silly install resolved     dist:
+75 silly install resolved      { shasum: 'fcd347e745035b3df53526eaae7203110d7593ca',
+75 silly install resolved        tarball: 'http://registry.npmjs.org/msr/-/msr-1.2.8.tgz' },
+75 silly install resolved     maintainers: [ [Object] ],
+75 silly install resolved     directories: {},
+75 silly install resolved     _resolved: 'https://registry.npmjs.org/msr/-/msr-1.2.8.tgz' } ]
+76 info install msr@1.2.8 into /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app
+77 info installOne msr@1.2.8
+78 verbose installOne of msr to /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app not in flight; installing
+79 warn locking Error: EACCES, open '/Users/davidhernon/.npm/_locks/msr-337cdad23c03771c.lock'
+79 warn locking     at Error (native)
+79 warn locking  /Users/davidhernon/.npm/_locks/msr-337cdad23c03771c.lock failed { [Error: EACCES, open '/Users/davidhernon/.npm/_locks/msr-337cdad23c03771c.lock']
+79 warn locking   errno: -13,
+79 warn locking   code: 'EACCES',
+79 warn locking   path: '/Users/davidhernon/.npm/_locks/msr-337cdad23c03771c.lock' }
+80 verbose stack Error: Attempt to unlock /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/msr, which hasn't been locked
+80 verbose stack     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:66:11)
+80 verbose stack     at cb (/usr/local/lib/node_modules/npm/lib/install.js:1017:5)
+80 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:1021:20
+80 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:40:9
+80 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+80 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+80 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+81 verbose cwd /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app
+82 error Darwin 14.1.0
+83 error argv "node" "/usr/local/bin/npm" "install" "msr" "--save"
+84 error node v0.12.4
+85 error npm  v2.10.1
+86 error Attempt to unlock /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/msr, which hasn't been locked
+87 error If you need help, you may report this error at:
+87 error     <https://github.com/npm/npm/issues>
+88 verbose exit [ 1, true ]
