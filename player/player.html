@@ -32,9 +32,9 @@
           <!-- Channel discussion-->
           <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding">
             <ng-switch on="line.hasVideo">
-              <div ng-switch-when="true">{{line.hasVideo}}<strong>{{line.username}}: </strong>{{line.txt}}
+              <div ng-switch-when="true">
                 <video src="{{getTrust(line.video)}}" autoplay="" loop=""></video>
-              </div>
+              </div><strong>{{line.username}}: </strong>{{line.txt}}
             </ng-switch>
           </div>
         </div>

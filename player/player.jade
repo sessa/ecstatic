@@ -50,10 +50,9 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
 						ng-switch(on="line.hasVideo")
 							div(ng-switch-when="true")
-								{{line.hasVideo}}
-								strong{{line.username}}: 
-								{{line.txt}}
 								video(src="{{getTrust(line.video)}}" autoplay="" loop="")
+							strong{{line.username}}: 
+							{{line.txt}}
 				div(ng-controller="CameraCtrl")
 					video(id="videoElement", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
