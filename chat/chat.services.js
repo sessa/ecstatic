@@ -1,6 +1,6 @@
 angular.module('ecstatic.chat')
 
-.factory('chatServices', ['$rootScope', 'socket', 'socketManager', 'chatEventServices',  function($rootScope, socket, socketManager, chatEventServices) {
+.factory('chatServices', ['$rootScope', 'socket', 'socketManager', 'chatEventServices', 'cameraServices', '$sce',  function($rootScope, socket, socketManager, chatEventServices, cameraServices, $sce) {
     // We return this object to anything injecting our service
     var Service = {};
     Service.chat = [];
@@ -20,13 +20,25 @@ angular.module('ecstatic.chat')
 
     Service.sendText = function(chatText, channel_id) {
       Service.chat.push(chatText);
+      console.log("here");
+      var video = cameraServices.getCurrentVideoClip();
 
       var request = {
         msg: "send_text",
         channel_id: channel_id,
         txt: chatText,
+        video: video,
         username: Service.username
       }
+
+      // if(video){
+      //   // var json = JSON.stringify(video);
+      //   // console.log(json);
+      //   // request.video = "<video src=\"" + JSON.stringify(video) + "\" loop ></video>";
+      //   request.video = $sce.trustAsResourceUrl(video);
+      //   console.log("request: " + $sce.trustAsResourceUrl(video));
+      // }
+
       var promise = socketManager.sendRequest(request); 
       chatEventServices.broadcastText(chatText);
       return promise;

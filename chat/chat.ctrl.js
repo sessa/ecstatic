@@ -6,6 +6,19 @@ angular.module('ecstatic.chat')
 	$scope.textPrompt = chatServices.getTextPrompt();
 	$scope.username = "";
 
+	$scope.getTrust = function(src) {
+		// return "<video src=\"" + $sce.trustAsResourceUrl(src) + "\" loop></video>";
+		return $sce.trustAsResourceUrl(src);
+	}
+
+	$scope.ifVideo = function(src) {
+		if(src){
+			return true;
+		}else{
+			false;
+		}
+	}
+
 	$scope.sendText = function(lineText) {
 		//cameraServices.getVideo()
 		chatServices.sendText(lineText, $stateParams.channel_id);

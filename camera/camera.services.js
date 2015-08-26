@@ -59,6 +59,16 @@ angular.module('ecstatic.camera')
 		return returnTempClip;
 	}
 
+	Service.getCurrentVideoClip = function() {
+		console.log("returning video");
+		if(videoClipURL){
+			return videoClipURL;
+		}else{
+			return;
+			// return {};
+		}
+	}
+
 	cameraEventServices.listenCameraStart( function (event, video) {
 		console.log("here");
 		Service.cameraStart(video);

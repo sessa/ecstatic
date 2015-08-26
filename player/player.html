@@ -31,7 +31,9 @@
           </div>
           <!-- Channel discussion-->
           <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding">
-            <p> <strong>{{line.username}}: </strong>{{line.txt}}</p>
+            <p> <strong>{{line.username}}: </strong>{{line.txt}}
+              <video src="{{getTrust(line.video)}}" autoplay="autoplay" loop="loop"></video>
+            </p>
           </div>
         </div>
         <div ng-controller="CameraCtrl">
