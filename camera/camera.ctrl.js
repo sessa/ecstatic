@@ -1,28 +1,29 @@
 angular.module('ecstatic.camera')
 
-.controller('CameraCtrl', function($scope) {
+.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', function($scope, cameraEventServices, cameraServices) {
 	// currently will only work in Chrome:
-	var blobURL;
+	// var blobURL;
 	var cameraOn = false;
 	var started = false;
 	var video;
-	var mediaRecorder;
+	// var mediaRecorder;
 
 	$scope.cameraButton = function() {
 		if(cameraOn){
 			if(started){
 				started = false;
 				console.log("Closing Video");
-				$scope.endVideoClip();
+				cameraServices.endVideoClip();
 			}else{
 				started = true;
 				console.log("Submitting Video");
-				$scope.startVideoClip();
+				// $scope.startVideoClip();
+				cameraServices.startVideoClip();
 			}
 		}else{
 			console.log("Turning on Camera");
-			//otherwise turn camera on and record
-			$scope.cameraControl();
+			$scope.initializeVideo();
+			cameraServices.cameraStart();
 		}
 	}
 
@@ -30,53 +31,10 @@ angular.module('ecstatic.camera')
 		video = document.getElementById('videoElement');
 	}
 
-	$scope.cameraControl = function() {
-		
-		window.navigator.getUserMedia = window.navigator.getUserMedia || window.navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia || window.navigator.msGetUserMedia || window.navigator.oGetUserMedia;
-		console.log(window.navigator.getUserMedia);
-
-		var success = function(stream){
-			cameraOn = true;
-			video = document.getElementById('videoElement');
-	      	video.src = webkitURL.createObjectURL(stream);
-	      	//Even if autoplay is true you need to call the play method
-	      	video.play();
-
-	      	mediaRecorder = new MediaStreamRecorder(stream);
-			mediaRecorder.mimeType = 'video/webm';
-
-		    mediaRecorder.width = 256;
-		    mediaRecorder.height = 192;
-
-		    mediaRecorder.ondataavailable = function (blob) {
-		        // POST/PUT "Blob" using FormData/XHR2
-		        blobURL = URL.createObjectURL(blob);
-		    };
-
-		}
-		var error = function(err){
-		      console.log(err)
-		}
-
-		window.navigator.getUserMedia({video: true}, success, error);
-	}
-
-	$scope.startVideoClip = function() {
-		mediaRecorder.start(10000);
-	}
-
-	$scope.endVideoClip = function() {
-		mediaRecorder.stop();
-		video.src = blobURL;
+	cameraEventServices.listenVideoSource(function (event, source) {
+		cameraOn = true;
+		video.src = source;
 		video.play();
-	}
+	});
 
-	$scope.submitVideoClip = function() {
-		var returnTempClip = blobURL;
-		mediaRecorder.clearOldRecordedFrames();
-		video.stop();
-		return returnTempClip;
-	}
-
-
-});
+}]);
