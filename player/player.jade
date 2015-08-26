@@ -1,51 +1,74 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-		button.button.button-clear.icon-left.ion-plus-circled(ng-click="addSongs()")  Add songs
-	ion-header-bar.bar.bar-subheader.bar-energized
+
+		
+
+	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
 
 			//if the player has songs in it
-			.miniplayer(ng-switch-when="true") 				
-				videogular(vg-theme="theme", 
-					vg-player-ready="onPlayerReady($API)", 
-					vg-complete="onCompleteItem()", 
+			div(ng-switch-when="true") 		
+				//the player		
+				videogular(vg-theme="playerServices.theme", 
+					vg-player-ready="playerServices.onPlayerReady($API)", 
+					vg-complete="playerServices.onCompleteItem()", 
 					class="videogular-container audio" 
-					vg-auto-play="autoplay")
-					vg-media(vg-src="sources", vg-type="audio")
-	
-				.title Currently playing: "{{trackTitle}}" 
-				button.button.button-clear.icon-left.ion-ios-skipforward.pull-left(ng-click="nextSong()")  Skip
-				// {{trackUser}} 
-				//vg-scrub-bar
-				//	vg-scrub-bar-current-time
-				//vg-volume
-				//	vg-mute-button
-				//	vg-volume-bar
+					vg-auto-play="playerServices.autoplay")
+					vg-media(vg-src="playerServices.sources", vg-type="audio")
+
+				.current-song
+					img(src="{{playerServices.trackCover}}")
+					p  
+						strong {{playerServices.trackTitle}}
+						br
+						| {{playerServices.trackUser}}
+
+				
+					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
 			//if the player is empty
-			.emptyplayer(ng-switch-default) 
-				p.title There aren't any songs in your playlist.
-					button.button-clear(ng-click="addSongs()")  Add songs?
-	//ion-content.
-	ion-side-menus
-		ion-side-menu-content
-			ion-content.has-tabs.has-footer(has-header="true")
-				button.button(menu-toggle="right") chatbox
-				p hello.
-				p There's {{numberOfUsers}} ecstatic(s) in this channel.
+			div(ng-switch-default) 
+				p.title There's no song in this playlist.
+				a.button.icon-left.ion-plus-round(href="#/tab/add") 
 
-		ion-side-menu(side="right")
+	ion-side-menus
+		ion-side-menu-content.gradient(ng-controller="chatCtrl")
+
 			ion-content.has-tabs.has-footer(has-header="true")
-				button.button(menu-toggle="right") videobox
-				div(ng-controller="chatCtrl")
-					div(class="list")
-						ion-item.scroll-item(ng-repeat="line in chatLog track by $index" class="item")
-							{{line.username}}: {{line.txt}}
+				
+				.chatbox.padding
+					.announcements.padding
+
+						// Channel announcements
+						h1(ng-show="username") hi {{username}}! :)
+						p There's 
+							span(ng-hide="playerServices.numberOfUsers") only you  
+							span(ng-show="playerServices.numberOfUsers"){{playerServices.numberOfUsers}} other ecstatic(s) 
+							| in this channel. 
+
+					// Channel discussion
+					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
+						p 
+							strong{{line.username}}: 
+							{{line.txt}}
+	
 				div(ng-controller="CameraCtrl")
 					video(id="videoElement", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
-			.message-box(ng-controller="chatCtrl")
-				form
-					.label-input-wrapper.pull-right
-						input.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
-					button.button.button-small.button-light.icon.ion-android-send.pull-right(ng-click="enterText(lineText); lineText=''")
+			.message-box.list.padding
+				
+				form.item-icon-right
+    
+					label.item-inset
+						input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+					
+					button.hidden(ng-click="enterText(lineText); lineText=''")
+					a(href="#")
+						i.icon.ion-camera
+
+
+		ion-side-menu(side="right")
+			ion-content.has-tabs.has-footer(has-header="true")
+				//button.button(menu-toggle="right") close videobox
+				video(autoplay muted loop)
+					source(src="loop2.mp4")

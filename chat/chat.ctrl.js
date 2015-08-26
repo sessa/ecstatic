@@ -7,6 +7,7 @@ angular.module('ecstatic.chat')
 	$scope.username = "";
 
 	$scope.sendText = function(lineText) {
+		//cameraServices.getVideo()
 		chatServices.sendText(lineText, $stateParams.channel_id);
 	}
 

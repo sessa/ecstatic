@@ -10,16 +10,81 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+.hidden {
+	display: none;
+	visibility: hidden;
+	width: 0;
+}
+
+.nav-dark  {
+	border: none !important;
+}
+
+.has-footer.has-tabs {
+	bottom: 105px !important;
+}
+
+.sub-footer{
+	bottom:49px !important;
+}
+
+.bar.miniplayer {
+ 	color: white;
+ 	background-color: #333;
+}
+
+
+.current-song img {
+	max-width: 32px;
+	max-height: 32px;
+	float: left;
+}
+
+.current-song p {
+	position: absolute;
+	top: 0;
+	padding: 0 0 0 40px;
+	margin: 0;
+}
+
+.announcements,
+.announcements h1 {
+	color: white;
+}
+
 .message-box {
 	position: fixed!important;
 	bottom: 49px!important;
 	width: 100%;
+	border-top: 1px solid #aaa;
+	background-color: white;
 }
 
-.has-footer.has-tabs {
-  bottom: 99px !important;
+.chat-message.scroll-item {
+	border: none;
+	background-color: #eee;
+	margin: 0.5em 0 0.5em;
+	border-radius: 10px;
+	overflow: initial;
+    white-space: initial;
+
 }
 
-.sub-footer{
- bottom:49px !important;
+input.typeform  {
+	width: 100% ;
+}
+
+video.bgvid { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(0%);
+    transform: translateX(-50%) translateY(0%);
+    background: url(polina.jpg) no-repeat;
+    background-size: cover; 
 }
