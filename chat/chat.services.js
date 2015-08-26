@@ -27,8 +27,13 @@ angular.module('ecstatic.chat')
         msg: "send_text",
         channel_id: channel_id,
         txt: chatText,
-        video: video,
+        hasVideo: false,
         username: Service.username
+      }
+
+      if(video){
+        request.video = video;
+        request.hasVideo = true;
       }
 
       // if(video){

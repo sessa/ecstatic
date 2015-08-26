@@ -48,13 +48,16 @@ ion-view(ng-controller="PlayerCtrl as controller")
 
 					// Channel discussion
 					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-						p 
-							strong{{line.username}}: 
-							{{line.txt}}
-							video(src="{{getTrust(line.video)}}" autoplay loop)
-							//- script
-								//- <video src=\"\"blob:http%3A//localhost%3A3001/0459f719-cf6e-42be-87a1-3c844d41b538\"" loop></video>
-	
+						p
+							{{line.hasVideo}}
+							ng-switch(on="line.hasVideo")
+								div(ng-switch-when="true")
+									video(src="{{getTrust(line.video)}}" autoplay="" loop="")
+									strong{{line.username}}: 
+									{{line.txt}}
+								div(ng-switch-default)
+									strong{{line.username}}: 
+									{{line.txt}}
 				div(ng-controller="CameraCtrl")
 					video(id="videoElement", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
