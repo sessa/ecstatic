@@ -14,7 +14,6 @@ angular.module('ecstatic.camera')
 				started = false;
 				console.log("Closing Video");
 				$scope.endVideoClip();
-				cameraOn = false;
 			}else{
 				started = true;
 				console.log("Submitting Video");
@@ -70,6 +69,13 @@ angular.module('ecstatic.camera')
 		mediaRecorder.stop();
 		video.src = blobURL;
 		video.play();
+	}
+
+	$scope.submitVideoClip = function() {
+		var returnTempClip = blobURL;
+		mediaRecorder.clearOldRecordedFrames();
+		video.stop();
+		return returnTempClip;
 	}
 
 
