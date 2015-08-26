@@ -31,14 +31,11 @@
           </div>
           <!-- Channel discussion-->
           <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding">
-            <p>{{line.hasVideo}}
-              <ng-switch on="line">
-                <div ng-switch-when="true">
-                  <video src="{{getTrust(line.video)}}" autoplay="" loop=""></video><strong>{{line.username}}: </strong>{{line.txt}}
-                </div>
-                <div ng-switch-default="ng-switch-default"><strong>{{line.username}}: </strong>{{line.txt}}</div>
-              </ng-switch>
-            </p>
+            <ng-switch on="line.hasVideo">
+              <div ng-switch-when="true">{{line.hasVideo}}<strong>{{line.username}}: </strong>{{line.txt}}
+                <video src="{{getTrust(line.video)}}" autoplay="" loop=""></video>
+              </div>
+            </ng-switch>
           </div>
         </div>
         <div ng-controller="CameraCtrl">
