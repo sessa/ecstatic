@@ -88,3 +88,16 @@ video.bgvid {
     background: url(polina.jpg) no-repeat;
     background-size: cover; 
 }
+
+.ecstatic-alert {
+	position: absolute;
+	left: 50%;
+	margin-left: -100px;
+	top: 10%;
+	z-index: 10;
+	border: 0;
+	background-color: white;
+	width: 200px;
+	border-radius: 5px;
+	text-align: center;
+}

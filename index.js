@@ -36,6 +36,7 @@ squad_app.get('/soundcloud/callback', function(req, res) {
     console.log("caught");
   	res.render('soundcloud/callback');
 });
+
 squad_app.post('/feedback', function(req, res) {
 console.log("Result: "+ req.body.dname);
    /* var name = req.body.name;

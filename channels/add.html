@@ -1,17 +1,19 @@
 
 <ion-view ng-controller="AddSongsCtrl as controller" view-title="">
-  <ion-nav-buttons side="secondary">
-    <button ng-click="submit()">Add selected songs</button>
-  </ion-nav-buttons>
+  <ion-nav-buttons side="secondary"></ion-nav-buttons>
   <ion-content>
+    <div ng-show="song-added" class="ecstatic-alert">
+      <p class="padding">Song added to the playlist!</p>
+    </div>
     <ion-list class="list">
-      <ion-item ng-repeat="source in sc track by $index" class="item item-radio">
-        <input type="radio" name="group"/>
-        <div ng-click="add_to_playlist(source)" class="item-content">
+      <ion-item ng-repeat="source in sc track by $index">
+        <div class="item-content item-button-right item-thumbnail-left"><img src="{{source.artwork_url}}" class="padding"/>
           <p>Title: "{{source.title}}" </p>
           <p>Artist: "{{source.user.username}}"</p>
           <p>Duration: "{{source.duration}}"</p>
-        </div><i class="radio-icon ion-checkmark"></i>
+          <button ng-click="mediapicker_actionsheet(source)" class="button button-clear"><i class="icon ion-more"></i></button>
+        </div>
+        <!--	add_to_playlist(source)-->
       </ion-item>
     </ion-list>
   </ion-content>

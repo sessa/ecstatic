@@ -1,1 +1,1 @@
-angular.module('ecstatic.mediapicker', [])
+angular.module('ecstatic.mediapicker', ['ionic'])

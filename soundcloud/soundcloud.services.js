@@ -20,6 +20,8 @@ angular.module('ecstatic.soundcloud')
             });
           });
         });
+
+
         
         return defer.promise;
       }

@@ -1,8 +1,6 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
 
-		
-
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
 
@@ -16,28 +14,31 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					vg-auto-play="playerServices.autoplay")
 					vg-media(vg-src="playerServices.sources", vg-type="audio")
 
-				.current-song
+				.current-song.item-button-right
+					
 					img(src="{{playerServices.trackCover}}")
 					p
 						strong {{playerServices.trackTitle}}
 						br
 						| {{playerServices.trackUser}}
-
-				
+					
+					a 
+						button.button(ng-click="go('#/tab/add')")
+							i.icon.ion-plus-round
 					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
 			//if the player is empty
 			div(ng-switch-default) 
 				p.title There's no song in this playlist.
 				a.button.icon-left.ion-plus-round(href="#/tab/add") 
-
 			
 
 	ion-side-menus
 		ion-side-menu-content.gradient(ng-controller="chatCtrl")
 
 			ion-content.has-tabs.has-footer(has-header="true")
-				
+
+
 				.chatbox.padding
 					.announcements.padding
 
