@@ -54,7 +54,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 							strong{{line.username}}: 
 							{{line.txt}}
 				div(ng-controller="CameraCtrl")
-					video(id="videoElement", height="192", width="256", loop)
+					video(id="videoElement", ng-hide="{{$scope.hide}}", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
 			.message-box.list.padding
 				

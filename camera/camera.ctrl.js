@@ -6,6 +6,7 @@ angular.module('ecstatic.camera')
 	var cameraOn = false;
 	var started = false;
 	var video;
+	$scope.hide = false;
 	// var mediaRecorder;
 
 	$scope.cameraButton = function() {
@@ -35,6 +36,7 @@ angular.module('ecstatic.camera')
 		cameraOn = true;
 		video.src = source;
 		video.play();
+		$scope.hide = true;
 	});
 
 }]);
