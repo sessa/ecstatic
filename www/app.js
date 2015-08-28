@@ -38,7 +38,6 @@ var app = angular.module('ecstatic', [
       'ecstatic.config',
       'ecstatic.feedback',
       'ecstatic.camera',
-      'ecstatic.video',
       'ecstatic.mediapicker'
 ])
 
