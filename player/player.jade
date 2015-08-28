@@ -1,6 +1,7 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-
+		a.button.button-light(href="#/tab/add") 
+			i.icon.ion-plus-round
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
 
@@ -22,15 +23,12 @@ ion-view(ng-controller="PlayerCtrl as controller")
 						br
 						| {{playerServices.trackUser}}
 					
-					a 
-						button.button(ng-click="go('#/tab/add')")
-							i.icon.ion-plus-round
-					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
+
+					button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
 			//if the player is empty
 			div(ng-switch-default) 
 				p.title There's no song in this playlist.
-				a.button.icon-left.ion-plus-round(href="#/tab/add") 
 			
 
 	ion-side-menus
@@ -45,15 +43,15 @@ ion-view(ng-controller="PlayerCtrl as controller")
 						// Channel announcements
 						h1(ng-show="username") hi {{username}}! :)
 						p There's 
-							span(ng-hide="playerServices.numberOfUsers") only you  
-							span(ng-show="playerServices.numberOfUsers"){{playerServices.numberOfUsers}} other ecstatic(s) 
+							span(ng-hide="numberOfUsers") only you  
+							span(ng-show="numberOfUsers") {{numberOfUsers}} other ecstatic(s)
 							| in this channel. 
 
 					// Channel discussion
 					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
 						p 
-							strong{{line.username}}: 
-							{{line.txt}}
+							strong {{line.username}}: 
+							| {{line.txt}}
 	
 
 			.message-box.list.padding

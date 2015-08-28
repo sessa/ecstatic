@@ -1,8 +1,9 @@
 ion-view(ng-controller="AddSongsCtrl as controller", view-title="")
 	ion-nav-buttons(side="secondary")
-	ion-content
-		.ecstatic-alert(ng-show="song_added")
-			p.padding Song added to the playlist!
+	ion-header-bar.bar.bar-subheader.miniplayer(ng-show="song_added")
+		p.padding Song added to the playlist!		
+	ion-content.has-header
+
 		ion-list(class="list")
 			ion-item(ng-repeat="source in sc track by $index")
 				

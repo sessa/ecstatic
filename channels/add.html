@@ -1,10 +1,10 @@
 
 <ion-view ng-controller="AddSongsCtrl as controller" view-title="">
   <ion-nav-buttons side="secondary"></ion-nav-buttons>
-  <ion-content>
-    <div ng-show="song-added" class="ecstatic-alert">
-      <p class="padding">Song added to the playlist!</p>
-    </div>
+  <ion-header-bar ng-show="song_added" class="bar bar-subheader miniplayer">
+    <p class="padding">Song added to the playlist!		</p>
+  </ion-header-bar>
+  <ion-content class="has-header">
     <ion-list class="list">
       <ion-item ng-repeat="source in sc track by $index">
         <div class="item-content item-button-right item-thumbnail-left"><img src="{{source.artwork_url}}" class="padding"/>
