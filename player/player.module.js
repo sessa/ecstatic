@@ -1,4 +1,5 @@
 angular.module('ecstatic.player', [
+	'ionic',
 	'ecstatic.channels',
 	'ecstatic.sockets',       
 	'com.2fdevs.videogular',

@@ -25,25 +25,12 @@ angular.module('ecstatic.channels')
         channelServices.joinChannel(channel_id);
     }
 }])
+
 .controller('NameChannelCtrl', ['$scope', 'soundcloudService', 'channelServices', '$state', function($scope, soundcloudService, channelServices, $state) {
 
     $scope.create_channel = function(channelName) {
         channelServices.createChannel(channelName).then(function(data) {
             $state.go('tab.channels-player', {channel_id:data.player_state.channel_id});
         });
-    }
-}])
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', function($scope, soundcloudService, playerServices, channelServices, $state) {
-    // Gets your likes from Soundcloud
-    soundcloudService.getFavorites().then(function(data){
-        $scope.sc = data;
-    });
-
-    $scope.submit = function() {
-        $state.go('tab.channels-player', {channel_id: playerServices.channel_id}, {reload: true, notify:true});
-    }
-
-    $scope.add_to_playlist = function(source){
-        channelServices.addToPlaylist(playerServices.channel_id, source);
     }
 }])

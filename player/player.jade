@@ -1,8 +1,7 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-
-		
-
+		a.button.button-light(href="#/tab/add") 
+			i.icon.ion-plus-round
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
 
@@ -16,34 +15,35 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					vg-auto-play="playerServices.autoplay")
 					vg-media(vg-src="playerServices.sources", vg-type="audio")
 
-				.current-song
+				.current-song.item-button-right
+					
 					img(src="{{playerServices.trackCover}}")
-					p  
+					p
 						strong {{playerServices.trackTitle}}
 						br
 						| {{playerServices.trackUser}}
+					
 
-				
-					//button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
+					button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
 				
 			//if the player is empty
 			div(ng-switch-default) 
 				p.title There's no song in this playlist.
-				a.button.icon-left.ion-plus-round(href="#/tab/add") 
 
 	ion-side-menus
 		ion-side-menu-content.gradient(ng-controller="chatCtrl")
 
 			ion-content.has-tabs.has-footer(has-header="true")
-				
+
+
 				.chatbox.padding
 					.announcements.padding
 
 						// Channel announcements
 						h1(ng-show="username") hi {{username}}! :)
 						p There's 
-							span(ng-hide="playerServices.numberOfUsers") only you  
-							span(ng-show="playerServices.numberOfUsers"){{playerServices.numberOfUsers}} other ecstatic(s) 
+							span(ng-hide="numberOfUsers") only you  
+							span(ng-show="numberOfUsers") {{numberOfUsers}} other ecstatic(s)
 							| in this channel. 
 
 					// Channel discussion
@@ -56,6 +56,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 				div(ng-controller="CameraCtrl")
 					video(id="videoElement", ng-hide="{{$scope.hide}}", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
+
 			.message-box.list.padding
 				
 				form.item-icon-right
