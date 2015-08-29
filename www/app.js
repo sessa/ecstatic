@@ -38,7 +38,9 @@ var app = angular.module('ecstatic', [
       'ecstatic.config',
       'ecstatic.feedback',
       'ecstatic.camera',
-      'ecstatic.mediapicker'
+      'ecstatic.countdown',
+      'ecstatic.mediapicker',
+      'ecstatic.create',
 ])
 
 .run(function($ionicPlatform) {
@@ -92,12 +94,12 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.name-a-channel', {
-      url: '/name-a-channel',
+    .state('tab.create', {
+      url: '/create',
       views: {
         'tab-channels': {
-          templateUrl: 'channels/name-a-channel.html',
-          controller: 'NameChannelCtrl'
+          templateUrl: 'create/create.html',
+          controller: 'CreateChannelCtrl'
         }
       }
     })
@@ -109,11 +111,11 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.channels-add', {
-      url: '/add',
+    .state('tab.channels-mediapicker', {
+      url: '/mediapicker',
       views: {
         'tab-channels': {
-          templateUrl: 'channels/add.html',
+          templateUrl: 'mediapicker/mediapicker.html',
         }
       }
     })

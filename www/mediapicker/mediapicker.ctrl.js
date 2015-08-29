@@ -1,6 +1,6 @@
 angular.module('ecstatic.mediapicker')
 
-.controller('AddSongsCtrl', ['$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', function($scope, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout) {
+.controller('MediapickerCtrl', ['$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', function($scope, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout) {
 
     var source;
     $scope.song_added = false;
