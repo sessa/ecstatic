@@ -2,11 +2,12 @@
 'use strict';
 
 // Declare variables used
-var app, express, events, cors, client, io, async, socket, config, http, server;
+var app, express, events, cors, bodyParser, client, io, async, socket, config, http, server, nodemailer, smtpTransport;
 config = require('./config/config.json');
 client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
 express = require('express');
 cors = require('cors');
+bodyParser = require('body-parser')
 app = express();
 app.set('views', __dirname + '/');
 app.set('view engine', "jade"); 
@@ -16,6 +17,13 @@ app.use(cors());
 async = require('async');
 server = require('http').Server(app);
 io = require('socket.io')(server);
+nodemailer = require('nodemailer');
+smtpTransport = require('nodemailer-smtp-transport');
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
 
 // Handle new messages
 io.sockets.on('connection', function (socket) {
@@ -138,6 +146,7 @@ io.sockets.on('connection', function (socket) {
             socket.broadcast.to(data.channel_info.channel_id).emit("update");
         });
     });
+
  });
 
 //routes
@@ -145,11 +154,40 @@ app.get('/soundcloud/callback', function(req, res) {
     console.log("caught");
     res.render('soundcloud/callback');
 });
+
 app.route('/*')
 .get(function(req, res) {
   res.render('index')
 });
+
 server.listen(app.get('port'), function(req, res) {
  console.log('Server listening at ' + app.get('port'));
 });
 
+//nodemailer
+app.post('/feedback', urlencodedParser, function(req, res){
+    var transporter = nodemailer.createTransport(smtpTransport({
+        host: 'smtp.mailgun.org',
+        port: 25,
+        auth: {
+            user: 'postmaster@sandboxe5272feb9c3c4b3c88e6e69d8379de8f.mailgun.org',
+            pass: '062303775835e3826aa39a0d60902ac0'
+            }
+        }));
+
+    var mailOptions = {
+        from: req.body.name + ' &lt;' + req.body.email + '&gt;', //grab form data from the request body object
+        to: 'jonathan@silentdiscosquad.com', // list of receivers
+        subject: 'Ecstatic App Feedback', // Subject line
+        text: req.body.message // plaintext body
+        };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+        }else{
+            console.log('Message sent: ' + info.response);
+            res.redirect('#/tab/feedback/thankyou');
+        }
+        });
+  });
