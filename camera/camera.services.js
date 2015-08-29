@@ -26,6 +26,19 @@ angular.module('ecstatic.camera')
 
 		    //callback for mediaRecorder when it is done processing
 		    mediaRecorder.ondataavailable = function (blob) {
+				//USED FOR AWS
+				var AWS = require('aws-sdk');
+				var s3 = new AWS.S3();
+				var params = {Bucket: 'silentdiscosquad', Key: 'Test File', Body: blob};
+				s3.putObject(params, function(err, data) {
+					if (err)       
+					{
+					console.log(err);     
+					} else {
+					console.log("Successfully uploaded data to myBucket/myKey");   
+					}
+
+				});
 		        videoClipURL = URL.createObjectURL(blob);
 		        cameraEventServices.broadcastVideoSource(videoClipURL);
 		        mediaRecorder.stop();
