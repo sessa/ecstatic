@@ -2,7 +2,9 @@
 'use strict';
 
 // Declare variables used
-var app, express, events, cors, bodyParser, client, io, async, socket, config, http, server, nodemailer, smtpTransport;
+
+var app, express, events, cors, bodyParser, client, io, async, socket, config, http, server, nodemailer, smtpTransport, aws, s3;
+
 config = require('./config/config.json');
 client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
 express = require('express');
@@ -23,7 +25,8 @@ smtpTransport = require('nodemailer-smtp-transport');
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-
+aws = require('aws-sdk');
+s3 = new aws.S3();
 
 // Handle new messages
 io.sockets.on('connection', function (socket) {
@@ -58,6 +61,7 @@ io.sockets.on('connection', function (socket) {
                 'requestTime':new Date().getTime(), 
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
+                'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
             client.set(socket.id, JSON.stringify(socket_info_dict));
@@ -94,6 +98,19 @@ io.sockets.on('connection', function (socket) {
             callback(null, parsed);
         });
     }
+
+    function send_video_to_s3(key, video){
+        var params = {Bucket: 'ecstatic-videos', Key: key, Body: video};
+        s3.putObject(params, function(err, data) {
+            if (err)       
+            {
+                console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
+            } else {
+                console.log("Successfully uploaded data to myBucket/myKey");   
+            }
+
+        });
+    }
     
     socket.on('next_song_action', function (data) {
         console.log("next_song, data="+JSON.stringify(data));
@@ -121,15 +138,26 @@ io.sockets.on('connection', function (socket) {
     
     socket.on('send_text', function (data) {
         client.get(data.channel_id, function (err, socket_info){
+            //Recieve text, send key to array and video to S3
+            send_video_to_s3(data.video_key, data.video);
+            console.log("data.video_key"+data.video_key);
+            //Remove video buffer from data
+            var parsed_data = {
+                // channel_id: data.channel_id,
+                txt: data.txt,
+                hasVideo: data.hasVideo,
+                video_key: data.video_key,
+                username: data.username,
+            };
             socket_info = JSON.parse(socket_info);
-            socket_info.player_state.chat.push(data);
+            // console.log("send text - " + JSON.stringify(parsed_data));
+            socket_info.player_state.chat.push(parsed_data);
             client.set(data.channel_id, JSON.stringify(socket_info));
-            socket.broadcast.to(data.channel_id).emit("send_text", data);
+            socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
         });
     });
 
     socket.on('chat_backlog', function (data) {
-        console.log("On server getting chat backlog");
         client.get(data.channel_id, function(err, socket_info) {
             socket_info = JSON.parse(socket_info);
             socket.emit("chat_backlog", socket_info.player_state.chat);
@@ -137,7 +165,6 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('update_channel', function (data) {
-        console.log("update_channel="+JSON.stringify(data));
         client.get(socket.id, function (err, socket_info){
             var socket_info_dict = JSON.parse(socket_info);
             socket_info_dict.player_state = data.channel_info;

@@ -6,6 +6,7 @@ angular.module('ecstatic.camera')
 	var mediaRecorder;
 	var videoSource;
 	var videoClipURL;
+	var current_blob;
 	var vidHeight = 192;
 	var vidWidth = 256;
 
@@ -21,11 +22,11 @@ angular.module('ecstatic.camera')
 	      	mediaRecorder = new MediaStreamRecorder(stream);
 			mediaRecorder.mimeType = 'video/webm';
 
-		    // mediaRecorder.width = vidHeight;
-		    // mediaRecorder.height = vidWidth;
-
 		    //callback for mediaRecorder when it is done processing
 		    mediaRecorder.ondataavailable = function (blob) {
+		    	//save current video buffer as blob
+		    	current_blob = blob;
+		    	//for chat window, create local http link to clip and broadcast this
 		        videoClipURL = URL.createObjectURL(blob);
 		        cameraEventServices.broadcastVideoSource(videoClipURL);
 		        mediaRecorder.stop();
@@ -40,6 +41,9 @@ angular.module('ecstatic.camera')
 		//start streaming
 		window.navigator.getUserMedia({video: true}, success, error);
 	}
+	Service.clearVideo = function(){
+      	mediaRecorder.clearOldRecordedFrames()
+    }
 
 	Service.startVideoClip = function() {
 		mediaRecorder.clearOldRecordedFrames()
@@ -52,33 +56,17 @@ angular.module('ecstatic.camera')
 		cameraEventServices.broadcastVideoSource(videoClipURL);
 	}
 
-	Service.submitVideoClip = function() {
-		var returnTempClip = blobURL;
-		mediaRecorder.clearOldRecordedFrames();
-		video.stop();
-		return returnTempClip;
-	}
-
-	Service.getCurrentVideoClip = function() {
-		console.log("returning video");
-		if(videoClipURL){
-			return videoClipURL;
-		}else{
+	Service.getCurrentBlob = function() {
+		if(current_blob)
+			return current_blob;
+		else
 			return;
-			// return {};
-		}
 	}
 
 	cameraEventServices.listenCameraStart( function (event, video) {
 		console.log("here");
 		Service.cameraStart(video);
 	});
-
-	//var video
-
-	//function getVideo()
-
-	//save Video(video)
 
 	return Service;
 })

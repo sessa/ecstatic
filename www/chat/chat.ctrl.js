@@ -1,26 +1,17 @@
 angular.module('ecstatic.chat')
 //on receive messages display them
 
-.controller('chatCtrl', ["$sce", "$scope", "chatServices", "$stateParams", "chatEventServices", "$ionicScrollDelegate", function($sce, $scope, chatServices, $stateParams, chatEventServices, $ionicScrollDelegate) {
+.controller('chatCtrl', ["$sce", "$scope", "chatServices", "$stateParams", "cameraServices","chatEventServices", "$ionicScrollDelegate", function($sce, $scope, chatServices, $stateParams,cameraServices, chatEventServices, $ionicScrollDelegate) {
 	$scope.chatLog = chatServices.getChatBacklog($stateParams.channel_id);
 	$scope.textPrompt = chatServices.getTextPrompt();
 	$scope.username = "";
 
-	$scope.getTrust = function(src) {
-		// return "<video src=\"" + $sce.trustAsResourceUrl(src) + "\" loop></video>";
-		return $sce.trustAsResourceUrl(src);
-	}
-
-	$scope.ifVideo = function(src) {
-		if(src){
-			return true;
-		}else{
-			false;
-		}
-	}
+	$scope.getUrl = function (initial_url) {
+      console.log("https://s3.amazonaws.com/ecstatic-videos" + initial_url);
+      return $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/" + initial_url);
+    }
 
 	$scope.sendText = function(lineText) {
-		//cameraServices.getVideo()
 		chatServices.sendText(lineText, $stateParams.channel_id);
 	}
 
@@ -34,6 +25,7 @@ angular.module('ecstatic.chat')
 			$scope.sendName(lineText);
 		}else{
 			$scope.sendText(lineText);
+			cameraServices.clearVideo();
 		}
 	}
 
@@ -49,11 +41,9 @@ angular.module('ecstatic.chat')
 		$ionicScrollDelegate.scrollBottom();
 	});
 
-
 	chatEventServices.listenName(function (event, name) {
 		$scope.username = name;
 		$scope.textPrompt = chatServices.getTextPrompt();
-
 	});
 
 

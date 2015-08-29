@@ -1,6 +1,6 @@
 ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
-		a.button.button-light(href="#/tab/add") 
+		a.button.button-light(href="#/tab/mediapicker") 
 			i.icon.ion-plus-round
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
@@ -50,13 +50,12 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
 						ng-switch(on="line.hasVideo")
 							div(ng-switch-when="true")
-								video(src="{{getTrust(line.video)}}" autoplay="" loop="")
+								video(src="{{getUrl(line.video_key)}}" autoplay="" loop="")
 							strong{{line.username}}: 
 							{{line.txt}}
 				div(ng-controller="CameraCtrl")
-					video(id="videoElement", ng-hide="{{$scope.hide}}", height="192", width="256", loop)
+					video(id="videoElement", ng-hide="{{hide}}", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
-
 			.message-box.list.padding
 				
 				form.item-icon-right
@@ -67,7 +66,6 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					button.hidden(ng-click="enterText(lineText); lineText=''")
 					a(href="#")
 						i.icon.ion-camera
-
 
 		ion-side-menu(side="right")
 			ion-content.has-tabs.has-footer(has-header="true")

@@ -27,6 +27,7 @@ mixpanel.init("3cc8de265eae4e9f76364871a4ae56e7", {
 var app = angular.module('ecstatic', [
       'ngSanitize',
       'ngAnimate',
+      'timer',
       'ionic',
       'ecstatic.player',
       'ecstatic.playlist',
@@ -38,8 +39,8 @@ var app = angular.module('ecstatic', [
       'ecstatic.config',
       'ecstatic.feedback',
       'ecstatic.camera',
-      'ecstatic.video',
-      'ecstatic.mediapicker'
+      'ecstatic.mediapicker',
+      'ecstatic.create',
 ])
 
 .run(function($ionicPlatform) {
@@ -93,12 +94,30 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.name-a-channel', {
-      url: '/name-a-channel',
+    .state('tab.create', {
+      url: '/create',
       views: {
         'tab-channels': {
-          templateUrl: 'channels/name-a-channel.html',
-          controller: 'NameChannelCtrl'
+          templateUrl: 'create/setName/setName.html',
+          controller: 'setNameCtrl'
+        }
+      }
+    })
+    .state('tab.channels-setTimer', {
+      url: '/setTimer/channelName:channelName/',
+      views: {
+        'tab-channels': {
+          templateUrl: 'create/setTimer/setTimer.html',
+          controller: 'setTimerCtrl'
+        }
+      }
+    })
+    .state('tab.channels-countdown', {
+      url: '/countdown/channel_id:channel_id/',
+      views: {
+        'tab-channels': {
+          templateUrl: 'create/countdown/countdown.html',
+          controller: 'CountdownCtrl'
         }
       }
     })
@@ -110,11 +129,11 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.channels-add', {
-      url: '/add',
+    .state('tab.channels-mediapicker', {
+      url: '/mediapicker',
       views: {
         'tab-channels': {
-          templateUrl: 'channels/add.html',
+          templateUrl: 'mediapicker/mediapicker.html',
         }
       }
     })

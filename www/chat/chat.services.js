@@ -9,40 +9,40 @@ angular.module('ecstatic.chat')
     Service.textPrompt = Service.namePrompt;
     Service.username = "";
     socket.on('send_text', function (data) {
-      console.log("added text from other user" + data);
+      console.log("added text from other user" + JSON.stringify(data));
       Service.chat.push(data);
+      console.log("Data from server" + data.video_key);
       chatEventServices.broadcastText(data);
-    })
+    });
+
+    Service.getUrl = function (initial_url) {
+      console.log("https://s3.amazonaws.com/ecstatic-videos/" + initial_url);
+      return "https://s3.amazonaws.com/ecstatic-videos/" + initial_url;
+    }
 
     Service.getTextPrompt = function(){
       return Service.textPrompt;
     }
-
     Service.sendText = function(chatText, channel_id) {
       Service.chat.push(chatText);
-      console.log("here");
-      var video = cameraServices.getCurrentVideoClip();
+      var blob = cameraServices.getCurrentBlob();
+
+      var key = "" + Service.username + "_" + (new Date()).getTime() + ".webm";
+      console.log("key="+key);
 
       var request = {
         msg: "send_text",
         channel_id: channel_id,
         txt: chatText,
         hasVideo: false,
-        username: Service.username
+        username: Service.username,
+        video_key: key
       }
 
-      if(video){
-        request.video = video;
+      if(blob){
+        request.video = blob;
         request.hasVideo = true;
       }
-
-      // if(video){
-      //   // var json = JSON.stringify(video);
-      //   // console.log(json);
-      //   // request.video = "<video src=\"" + JSON.stringify(video) + "\" loop ></video>";
-      //   request.video = $sce.trustAsResourceUrl(video);
-      //   console.log("request: " + $sce.trustAsResourceUrl(video));
-      // }
 
       var promise = socketManager.sendRequest(request); 
       chatEventServices.broadcastText(chatText);
