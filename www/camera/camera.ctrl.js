@@ -15,6 +15,8 @@ angular.module('ecstatic.camera')
 				started = false;
 				console.log("Closing Video");
 				cameraServices.endVideoClip();
+				$scope.hide = true;
+				console.log("scope.hide changed");
 			}else{
 				started = true;
 				console.log("Submitting Video");

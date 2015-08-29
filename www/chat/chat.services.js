@@ -23,7 +23,6 @@ angular.module('ecstatic.chat')
     Service.getTextPrompt = function(){
       return Service.textPrompt;
     }
-
     Service.sendText = function(chatText, channel_id) {
       Service.chat.push(chatText);
       var blob = cameraServices.getCurrentBlob();
