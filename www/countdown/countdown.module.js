@@ -1,1 +1,1 @@
-angular.module('ecstatic.countdown', [])
+angular.module('ecstatic.countdown', ['timer'])

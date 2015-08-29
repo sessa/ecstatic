@@ -56,8 +56,6 @@ ion-view(ng-controller="PlayerCtrl as controller")
 				div(ng-controller="CameraCtrl")
 					video(id="videoElement", ng-hide="{{$scope.hide}}", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
-
-					timer(end-time="1440816222000"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
 			.message-box.list.padding
 				
 				form.item-icon-right

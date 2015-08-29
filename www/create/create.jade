@@ -10,8 +10,9 @@ ion-view(view-title="")
 					button.button.button-positive.button-full(ng-click="create_channel(channelName)", ng-init="channelName=random_name") Create {{channelName}}
 		.row.row-center
 			.col
-				.list.list-inset
-					label.item.item-input.padding(ng-controller="CountdownCtrl")
-						input(type="time", ng-model="startTime", placeholder="HH:mm")
-					button.button.button-positive.button-full(ng-click="create_channel(channelName)", ng-init="channelName=random_name") Create {{channelName}}
-
+				.list.list-inset(ng-controller="CountdownCtrl")
+					label.item.item-input.padding
+						input(type="number", ng-model="startTimeHours", min=0, placeholder="How many hours till the event starts?")
+					label.item.item-input.padding
+						input(type="number", ng-model="startTimeMinutes", min=0, max=59, placeholder="How many minutes till the event starts?")
+					button.button.button-positive.button-full(ng-click="create_timer(startTimeHours, startTimeMinutes, channelName)", ng-init="channelName=random_name") Create {{channelName}}

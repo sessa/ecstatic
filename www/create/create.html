@@ -15,11 +15,14 @@
     </div>
     <div class="row row-center">
       <div class="col">
-        <div class="list list-inset">
-          <label ng-controller="CountdownCtrl" class="item item-input padding">
-            <input type="time" ng-model="startTime" placeholder="HH:mm"/>
+        <div ng-controller="CountdownCtrl" class="list list-inset">
+          <label class="item item-input padding">
+            <input type="number" ng-model="startTimeHours" min="0" placeholder="How many hours till the event starts?"/>
           </label>
-          <button ng-click="create_channel(channelName)" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
+          <label class="item item-input padding">
+            <input type="number" ng-model="startTimeMinutes" min="0" max="59" placeholder="How many minutes till the event starts?"/>
+          </label>
+          <button ng-click="create_timer(startTimeHours, startTimeMinutes, channelName)" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
         </div>
       </div>
     </div>

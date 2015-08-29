@@ -138,6 +138,15 @@ var app = angular.module('ecstatic', [
         }
       }
     })
+    .state('tab.channels-countdown', {
+      url: '/countdown/channel_id:channel_id/startTime:startTime/',
+      views: {
+        'tab-channels': {
+          templateUrl: 'countdown/countdown.html',
+          controller: 'CountdownCtrl'
+        }
+      }
+    })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
