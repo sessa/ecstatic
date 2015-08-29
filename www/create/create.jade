@@ -11,7 +11,7 @@ ion-view(view-title="")
 		.row.row-center
 			.col
 				.list.list-inset
-					label.item.item-input.padding(ng-controller="CreateChannelCtrl")
+					label.item.item-input.padding(ng-controller="CountdownCtrl")
 						input(type="time", ng-model="startTime", placeholder="HH:mm")
 					button.button.button-positive.button-full(ng-click="create_channel(channelName)", ng-init="channelName=random_name") Create {{channelName}}
 

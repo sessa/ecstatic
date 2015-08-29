@@ -27,6 +27,7 @@ mixpanel.init("3cc8de265eae4e9f76364871a4ae56e7", {
 var app = angular.module('ecstatic', [
       'ngSanitize',
       'ngAnimate',
+      'timer',
       'ionic',
       'ecstatic.player',
       'ecstatic.playlist',

@@ -2,7 +2,6 @@ ion-view(ng-controller="PlayerCtrl as controller")
 	ion-nav-buttons(side="secondary")
 		a.button.button-light(href="#/tab/mediapicker") 
 			i.icon.ion-plus-round
-	span(class="countdown")
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
 
@@ -58,6 +57,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					video(id="videoElement", ng-hide="{{$scope.hide}}", height="192", width="256", loop)
 					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
 
+					timer(end-time="1440816222000"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
 			.message-box.list.padding
 				
 				form.item-icon-right
@@ -68,7 +68,6 @@ ion-view(ng-controller="PlayerCtrl as controller")
 					button.hidden(ng-click="enterText(lineText); lineText=''")
 					a(href="#")
 						i.icon.ion-camera
-
 
 		ion-side-menu(side="right")
 			ion-content.has-tabs.has-footer(has-header="true")
