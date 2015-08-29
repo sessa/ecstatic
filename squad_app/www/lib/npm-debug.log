@@ -1,0 +1,196 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'angular-cookies' ]
+2 info using npm@2.10.1
+3 info using node@v0.12.4
+4 verbose node symlink /usr/local/bin/node
+5 verbose install initial load of /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/package.json
+6 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/angular-cookies/package.json
+7 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/async/package.json
+8 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/aws-sdk/package.json
+9 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/chai/package.json
+10 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/cors/package.json
+11 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/express/package.json
+12 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/geo-proximity/package.json
+13 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt/package.json
+14 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt-contrib-jshint/package.json
+15 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt-coveralls/package.json
+16 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/grunt-mocha-istanbul/package.json
+17 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/hbs/package.json
+18 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/hiredis/package.json
+19 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/istanbul/package.json
+20 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/jade/package.json
+21 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/mocha/package.json
+22 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/nodemailer/package.json
+23 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/redis/package.json
+24 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/request/package.json
+25 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/socket.io/package.json
+26 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/socket.io-client/package.json
+27 verbose installManyTop reading scoped package data from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/soundclouder/package.json
+28 info package.json grunt@0.4.5 No license field.
+29 info package.json grunt-contrib-jshint@0.11.2 No license field.
+30 info package.json grunt-coveralls@1.0.0 No license field.
+31 info package.json hbs@3.0.1 No license field.
+32 info package.json hiredis@0.3.0 No license field.
+33 info package.json redis@0.12.1 No license field.
+34 info package.json socket.io@1.3.6 No license field.
+35 info package.json soundclouder@0.8.1 No license field.
+36 verbose readDependencies loading dependencies from /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/package.json
+37 verbose install angular-cookies is installed as 1.4.4
+38 silly cache add args [ 'angular-cookies', null ]
+39 verbose cache add spec angular-cookies
+40 silly cache add parsed spec { raw: 'angular-cookies',
+40 silly cache add   scope: null,
+40 silly cache add   name: 'angular-cookies',
+40 silly cache add   rawSpec: '',
+40 silly cache add   spec: '*',
+40 silly cache add   type: 'range' }
+41 silly addNamed angular-cookies@*
+42 verbose addNamed "*" is a valid semver range for angular-cookies
+43 silly addNameRange { name: 'angular-cookies', range: '*', hasData: false }
+44 silly mapToRegistry name angular-cookies
+45 silly mapToRegistry using default registry
+46 silly mapToRegistry registry https://registry.npmjs.org/
+47 silly mapToRegistry uri https://registry.npmjs.org/angular-cookies
+48 verbose addNameRange registry:https://registry.npmjs.org/angular-cookies not in flight; fetching
+49 verbose request uri https://registry.npmjs.org/angular-cookies
+50 verbose request no auth needed
+51 info attempt registry request try #1 at 17:50:29
+52 verbose request id 46b77202eef2174c
+53 verbose etag "1P4FMC1FNDVO7T1UKMZYD0K3B"
+54 http request GET https://registry.npmjs.org/angular-cookies
+55 http 304 https://registry.npmjs.org/angular-cookies
+56 silly get cb [ 304,
+56 silly get   { date: 'Fri, 21 Aug 2015 21:50:29 GMT',
+56 silly get     via: '1.1 varnish',
+56 silly get     'cache-control': 'max-age=60',
+56 silly get     etag: '"1P4FMC1FNDVO7T1UKMZYD0K3B"',
+56 silly get     age: '0',
+56 silly get     connection: 'keep-alive',
+56 silly get     'x-served-by': 'cache-iad2142-IAD',
+56 silly get     'x-cache': 'HIT',
+56 silly get     'x-cache-hits': '1',
+56 silly get     'x-timer': 'S1440193829.502240,VS0,VE13',
+56 silly get     vary: 'Accept' } ]
+57 verbose etag https://registry.npmjs.org/angular-cookies from cache
+58 verbose get saving angular-cookies to /Users/davidhernon/.npm/registry.npmjs.org/angular-cookies/.cache.json
+59 silly addNameRange number 2 { name: 'angular-cookies', range: '*', hasData: true }
+60 silly addNameRange versions [ 'angular-cookies',
+60 silly addNameRange   [ '1.2.20',
+60 silly addNameRange     '1.2.0',
+60 silly addNameRange     '1.2.1',
+60 silly addNameRange     '1.2.2',
+60 silly addNameRange     '1.2.3',
+60 silly addNameRange     '1.2.4',
+60 silly addNameRange     '1.2.5',
+60 silly addNameRange     '1.2.6',
+60 silly addNameRange     '1.2.7',
+60 silly addNameRange     '1.2.8',
+60 silly addNameRange     '1.2.9',
+60 silly addNameRange     '1.2.10',
+60 silly addNameRange     '1.2.11',
+60 silly addNameRange     '1.2.12',
+60 silly addNameRange     '1.2.13',
+60 silly addNameRange     '1.2.14',
+60 silly addNameRange     '1.2.15',
+60 silly addNameRange     '1.2.16',
+60 silly addNameRange     '1.2.17',
+60 silly addNameRange     '1.2.18',
+60 silly addNameRange     '1.2.19',
+60 silly addNameRange     '1.3.0-rc.5',
+60 silly addNameRange     '1.3.0',
+60 silly addNameRange     '1.3.1',
+60 silly addNameRange     '1.3.2',
+60 silly addNameRange     '1.3.3',
+60 silly addNameRange     '1.3.4-build.3588',
+60 silly addNameRange     '1.2.27',
+60 silly addNameRange     '1.3.4',
+60 silly addNameRange     '1.3.5',
+60 silly addNameRange     '1.3.6',
+60 silly addNameRange     '1.3.7',
+60 silly addNameRange     '1.2.28',
+60 silly addNameRange     '1.3.8',
+60 silly addNameRange     '1.4.0-beta.0',
+60 silly addNameRange     '1.3.9',
+60 silly addNameRange     '1.3.10',
+60 silly addNameRange     '1.4.0-beta.1',
+60 silly addNameRange     '1.4.0-beta.2',
+60 silly addNameRange     '1.3.11',
+60 silly addNameRange     '1.4.0-beta.3',
+60 silly addNameRange     '1.3.12',
+60 silly addNameRange     '1.3.13',
+60 silly addNameRange     '1.4.0-beta.4',
+60 silly addNameRange     '1.3.14',
+60 silly addNameRange     '1.4.0-beta.5',
+60 silly addNameRange     '1.4.0-beta.6',
+60 silly addNameRange     '1.3.15',
+60 silly addNameRange     '1.4.0-rc.0',
+60 silly addNameRange     '1.4.0-rc.1',
+60 silly addNameRange     '1.4.0-rc.2',
+60 silly addNameRange     '1.4.0',
+60 silly addNameRange     '1.3.16',
+60 silly addNameRange     '1.4.1',
+60 silly addNameRange     '1.4.2',
+60 silly addNameRange     '1.3.17',
+60 silly addNameRange     '1.4.3',
+60 silly addNameRange     '1.4.4',
+60 silly addNameRange     '1.3.18' ] ]
+61 silly addNamed angular-cookies@1.4.4
+62 verbose addNamed "1.4.4" is a plain semver version for angular-cookies
+63 silly cache afterAdd angular-cookies@1.4.4
+64 verbose afterAdd /Users/davidhernon/.npm/angular-cookies/1.4.4/package/package.json not in flight; writing
+65 verbose afterAdd /Users/davidhernon/.npm/angular-cookies/1.4.4/package/package.json written
+66 silly install resolved [ { name: 'angular-cookies',
+66 silly install resolved     version: '1.4.4',
+66 silly install resolved     description: 'AngularJS module for cookies',
+66 silly install resolved     main: 'index.js',
+66 silly install resolved     scripts: { test: 'echo "Error: no test specified" && exit 1' },
+66 silly install resolved     repository:
+66 silly install resolved      { type: 'git',
+66 silly install resolved        url: 'git+https://github.com/angular/angular.js.git' },
+66 silly install resolved     keywords: [ 'angular', 'framework', 'browser', 'cookies', 'client-side' ],
+66 silly install resolved     author:
+66 silly install resolved      { name: 'Angular Core Team',
+66 silly install resolved        email: 'angular-core+npm@google.com' },
+66 silly install resolved     license: 'MIT',
+66 silly install resolved     bugs: { url: 'https://github.com/angular/angular.js/issues' },
+66 silly install resolved     homepage: 'http://angularjs.org',
+66 silly install resolved     gitHead: '403fb80270bb2fd8f044c8ccdc8486d83f7c334e',
+66 silly install resolved     _id: 'angular-cookies@1.4.4',
+66 silly install resolved     _shasum: '64cbe5bec38ca872cd225f732c68bf47ce00d31d',
+66 silly install resolved     _from: 'angular-cookies@*',
+66 silly install resolved     _npmVersion: '2.0.2',
+66 silly install resolved     _nodeVersion: '0.10.26',
+66 silly install resolved     _npmUser: { name: 'angularcore', email: 'angular-core+npm@google.com' },
+66 silly install resolved     maintainers: [ [Object], [Object] ],
+66 silly install resolved     dist:
+66 silly install resolved      { shasum: '64cbe5bec38ca872cd225f732c68bf47ce00d31d',
+66 silly install resolved        tarball: 'http://registry.npmjs.org/angular-cookies/-/angular-cookies-1.4.4.tgz' },
+66 silly install resolved     directories: {},
+66 silly install resolved     _resolved: 'https://registry.npmjs.org/angular-cookies/-/angular-cookies-1.4.4.tgz',
+66 silly install resolved     readme: 'ERROR: No README data found!' } ]
+67 info install angular-cookies@1.4.4 into /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app
+68 info installOne angular-cookies@1.4.4
+69 verbose installOne of angular-cookies to /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app not in flight; installing
+70 warn locking Error: EACCES, open '/Users/davidhernon/.npm/_locks/angular-cookies-b9439b68013c09d5.lock'
+70 warn locking     at Error (native)
+70 warn locking  /Users/davidhernon/.npm/_locks/angular-cookies-b9439b68013c09d5.lock failed { [Error: EACCES, open '/Users/davidhernon/.npm/_locks/angular-cookies-b9439b68013c09d5.lock']
+70 warn locking   errno: -13,
+70 warn locking   code: 'EACCES',
+70 warn locking   path: '/Users/davidhernon/.npm/_locks/angular-cookies-b9439b68013c09d5.lock' }
+71 verbose stack Error: Attempt to unlock /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/angular-cookies, which hasn't been locked
+71 verbose stack     at unlock (/usr/local/lib/node_modules/npm/lib/utils/locker.js:66:11)
+71 verbose stack     at cb (/usr/local/lib/node_modules/npm/lib/install.js:1017:5)
+71 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:1021:20
+71 verbose stack     at /usr/local/lib/node_modules/npm/lib/utils/locker.js:40:9
+71 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+71 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+71 verbose stack     at FSReqWrap.oncomplete (fs.js:95:15)
+72 verbose cwd /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/lib
+73 error Darwin 14.1.0
+74 error argv "node" "/usr/local/bin/npm" "install" "angular-cookies"
+75 error node v0.12.4
+76 error npm  v2.10.1
+77 error Attempt to unlock /Users/davidhernon/Coding/Ecstatic/EcstaticEB/squad_app/node_modules/angular-cookies, which hasn't been locked
+78 error If you need help, you may report this error at:
+78 error     <https://github.com/npm/npm/issues>
+79 verbose exit [ 1, true ]
