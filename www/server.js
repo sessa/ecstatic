@@ -52,6 +52,7 @@ io.sockets.on('connection', function (socket) {
                 'requestTime':new Date().getTime(), 
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
+                'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
             client.set(socket.id, JSON.stringify(socket_info_dict));
@@ -129,20 +130,19 @@ io.sockets.on('connection', function (socket) {
     socket.on('send_text', function (data) {
         client.get(data.channel_id, function (err, socket_info){
             //Recieve text, send key to array and video to S3
-            var video_url = send_video_to_s3(data.video_key, data.video);
+            send_video_to_s3(data.video_key, data.video);
+            console.log("data.video_key"+data.video_key);
             //Remove video buffer from data
-            console.log("video url: " + video_url);
             var parsed_data = {
                 // channel_id: data.channel_id,
                 txt: data.txt,
                 hasVideo: data.hasVideo,
                 video_key: data.video_key,
                 username: data.username,
-                video_url: video_url
             };
             socket_info = JSON.parse(socket_info);
             // console.log("send text - " + JSON.stringify(parsed_data));
-            socket_info.player_state.chat.push(data);
+            socket_info.player_state.chat.push(parsed_data);
             client.set(data.channel_id, JSON.stringify(socket_info));
             socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
         });

@@ -1,1 +1,1 @@
-angular.module('ecstatic.create', [])
+angular.module('ecstatic.create', ['timer'])

@@ -6,14 +6,6 @@ angular.module('ecstatic.chat')
 	$scope.textPrompt = chatServices.getTextPrompt();
 	$scope.username = "";
 
-	// $scope.ifVideo = function(src) {
-	// 	if(src){
-	// 		return true;
-	// 	}else{
-	// 		false;
-	// 	}
-	// }
-
 	$scope.getUrl = function (initial_url) {
       console.log("https://s3.amazonaws.com/ecstatic-videos" + initial_url);
       return $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/" + initial_url);
@@ -51,7 +43,6 @@ angular.module('ecstatic.chat')
 	chatEventServices.listenName(function (event, name) {
 		$scope.username = name;
 		$scope.textPrompt = chatServices.getTextPrompt();
-
 	});
 
 

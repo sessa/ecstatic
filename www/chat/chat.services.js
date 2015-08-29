@@ -9,13 +9,14 @@ angular.module('ecstatic.chat')
     Service.textPrompt = Service.namePrompt;
     Service.username = "";
     socket.on('send_text', function (data) {
-      console.log("added text from other user" + data);
+      console.log("added text from other user" + JSON.stringify(data));
       Service.chat.push(data);
+      console.log("Data from server" + data.video_key);
       chatEventServices.broadcastText(data);
-    })
+    });
 
     Service.getUrl = function (initial_url) {
-      console.log("https://s3.amazonaws.com/ecstatic-videos" + initial_url);
+      console.log("https://s3.amazonaws.com/ecstatic-videos/" + initial_url);
       return "https://s3.amazonaws.com/ecstatic-videos/" + initial_url;
     }
 
@@ -28,7 +29,7 @@ angular.module('ecstatic.chat')
       var blob = cameraServices.getCurrentBlob();
 
       var key = "" + Service.username + "_" + (new Date()).getTime() + ".webm";
-
+      console.log("key="+key);
 
       var request = {
         msg: "send_text",
