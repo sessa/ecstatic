@@ -37,8 +37,7 @@ io.sockets.on('connection', function (socket) {
                     socket.leave(key);
                 }
             }
-        }
-    
+        }            
         client.get(socket.id, function (err, socket_info){
             //create a new playerstate and save it
             var socket_info_dict = JSON.parse(socket_info);
@@ -50,6 +49,7 @@ io.sockets.on('connection', function (socket) {
                 'requestTime':new Date().getTime(), 
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
+                'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
             client.set(socket.id, JSON.stringify(socket_info_dict));

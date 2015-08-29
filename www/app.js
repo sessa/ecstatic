@@ -39,7 +39,6 @@ var app = angular.module('ecstatic', [
       'ecstatic.config',
       'ecstatic.feedback',
       'ecstatic.camera',
-      'ecstatic.countdown',
       'ecstatic.mediapicker',
       'ecstatic.create',
 ])
@@ -99,8 +98,26 @@ var app = angular.module('ecstatic', [
       url: '/create',
       views: {
         'tab-channels': {
-          templateUrl: 'create/create.html',
-          controller: 'CreateChannelCtrl'
+          templateUrl: 'create/setName/setName.html',
+          controller: 'setNameCtrl'
+        }
+      }
+    })
+    .state('tab.channels-setTimer', {
+      url: '/setTimer/channelName:channelName/',
+      views: {
+        'tab-channels': {
+          templateUrl: 'create/setTimer/setTimer.html',
+          controller: 'setTimerCtrl'
+        }
+      }
+    })
+    .state('tab.channels-countdown', {
+      url: '/countdown/channel_id:channel_id/',
+      views: {
+        'tab-channels': {
+          templateUrl: 'create/countdown/countdown.html',
+          controller: 'CountdownCtrl'
         }
       }
     })
@@ -135,15 +152,6 @@ var app = angular.module('ecstatic', [
         'tab-feedback': {
           templateUrl: 'feedback/feedback.html',
           controller: 'FeedbackCtrl'
-        }
-      }
-    })
-    .state('tab.channels-countdown', {
-      url: '/countdown/channel_id:channel_id/startTime:startTime/',
-      views: {
-        'tab-channels': {
-          templateUrl: 'countdown/countdown.html',
-          controller: 'CountdownCtrl'
         }
       }
     })
