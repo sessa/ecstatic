@@ -1,0 +1,13 @@
+ion-view(view-title='Feedback')
+	ion-content
+		.list
+			label.item.item-input.padding
+				input(type="text", placeholder="First Name")
+			label.item.item-input.padding
+				input(type="email", placeholder="E-mail")
+			label.item.item-input.padding
+				input(type="text", placeholder="Comment")
+			button.button.button-positive.button-full(ng-click="create_channel()", ng-init="channelName=random_name") Send
+			
+		
+			
