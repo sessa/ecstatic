@@ -1,0 +1,25 @@
+/bower_components/*
+/.sass-cache/*
+*.DS_Store
+/stylesheets/*
+fabfile.py*
+sds/config.json
+media/
+*.pyc
+sds.log
+sds/migrations/*
+myauth/migrations/*
+ecstatic_geo/*
+node_modules/*
+coverage
+sds/settings/__init__.py
+local/
+dump.rdb
+node_modules
+/ionic
+config/config.json
+
+# Elastic Beanstalk Files
+!.elasticbeanstalk/config.yml
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -1,0 +1,12 @@
+ion-view(view-title='Channels')
+	ion-content
+		ion-refresher(pulling-text="Pull to refresh", on-refresh="doRefresh()")
+		ion-list
+			ion-item
+				a(href="#/tab/create") Create a channel
+
+			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='channel in channels', type='item-text-wrap', ng-click="joinChannel(channel.channel_id)", href='#/tab/player/{{channel.channel_id}}')
+				img(ng-src='{{channel.face}}')
+				h2 {{channel.channel_name}}
+				i.icon.ion-chevron-right.icon-accessory
+				
