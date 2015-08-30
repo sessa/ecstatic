@@ -20,7 +20,6 @@ angular.module('ecstatic.player')
 	}
 
     Service.setChannel = function(channel) {
-        Service.API = null;
         Service.currentItem = channel.playlistIndex;
         Service.autoplay = true;
         Service.playlist = channel.playlist;
