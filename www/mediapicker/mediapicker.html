@@ -2,7 +2,7 @@
 <ion-view ng-controller="MediapickerCtrl as controller" view-title="">
   <ion-nav-buttons side="secondary"></ion-nav-buttons>
   <ion-header-bar ng-show="song_added" class="bar bar-subheader miniplayer">
-    <p class="padding">Song added to the playlist!		</p>
+    <p class="padding">Song added to the playlist!</p>
   </ion-header-bar>
   <ion-content class="has-header">
     <ion-list class="list">
@@ -13,7 +13,6 @@
           <p>Duration: "{{source.duration}}"</p>
           <button ng-click="mediapicker_actionsheet(source)" class="button button-clear"><i class="icon ion-more"></i></button>
         </div>
-        <!--	add_to_playlist(source)-->
       </ion-item>
     </ion-list>
   </ion-content>

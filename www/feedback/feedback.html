@@ -1,17 +1,17 @@
 
 <ion-view view-title="Feedback">
-  <ion-content>
-    <div class="list">
+  <ion-content><br/><br/>
+    <form action="/feedback" method="post" class="list">
       <label class="item item-input padding">
-        <input type="text" placeholder="First Name"/>
+        <input ng-model="name" id="name" name="name" type="text" placeholder="First Name"/>
       </label>
       <label class="item item-input padding">
-        <input type="email" placeholder="E-mail"/>
+        <input ng-model="email" id="email" name="email" type="email" placeholder="E-mail"/>
       </label>
       <label class="item item-input padding">
-        <input type="text" placeholder="Comment"/>
+        <input ng-model="message" id="message" name="message" type="text" placeholder="Message"/>
       </label>
-      <button ng-click="create_channel()" ng-init="channelName=random_name" class="button button-positive button-full">Send</button>
-    </div>
+      <input type="submit" value="send" class="button button-positive button-full"/>
+    </form>
   </ion-content>
 </ion-view>
