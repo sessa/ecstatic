@@ -90,18 +90,6 @@ io.sockets.on('connection', function (socket) {
         });
     }
 
-    function send_video_to_s3(key, video){
-        var params = {Bucket: 'ecstatic-videos', Key: key, Body: video};
-        s3.putObject(params, function(err, data) {
-            if (err)       
-            {
-                console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
-            } else {
-                console.log("Successfully uploaded data to myBucket/myKey");   
-            }
-
-        });
-    }
     
     socket.on('next_song_action', function (data) {
         console.log("next_song, data="+JSON.stringify(data));
@@ -129,22 +117,44 @@ io.sockets.on('connection', function (socket) {
     
     socket.on('send_text', function (data) {
         client.get(data.channel_id, function (err, socket_info){
-            //Recieve text, send key to array and video to S3
-            send_video_to_s3(data.video_key, data.video);
+            
             console.log("data.video_key"+data.video_key);
-            //Remove video buffer from data
-            var parsed_data = {
-                // channel_id: data.channel_id,
-                txt: data.txt,
-                hasVideo: data.hasVideo,
-                video_key: data.video_key,
-                username: data.username,
-            };
-            socket_info = JSON.parse(socket_info);
-            // console.log("send text - " + JSON.stringify(parsed_data));
-            socket_info.player_state.chat.push(parsed_data);
-            client.set(data.channel_id, JSON.stringify(socket_info));
-            socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
+            //if there is a video, send video to S3
+            if(data.video_key){
+                var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
+                s3.putObject(params, function(err, s3data) {
+                    if (err)       
+                    {
+                        console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
+                    } else {
+                        console.log("Successfully uploaded data to myBucket/myKey"); 
+                        var parsed_data = {
+                            txt: data.txt,
+                            hasVideo: data.hasVideo,
+                            video_key: data.video_key,
+                            username: data.username,
+                        }
+                        socket_info = JSON.parse(socket_info);
+                        socket_info.player_state.chat.push(parsed_data);
+                        console.log("setting video in chat = "+JSON.stringify(parsed_data));
+                        client.set(data.channel_id, JSON.stringify(socket_info));
+                        socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
+
+                    }
+                });
+            }
+            else{
+                var parsed_data = {
+                    txt: data.txt,
+                    hasVideo: data.hasVideo,
+                    username: data.username,
+                }
+                socket_info = JSON.parse(socket_info);
+                // console.log("send text - " + JSON.stringify(parsed_data));
+                socket_info.player_state.chat.push(parsed_data);
+                client.set(data.channel_id, JSON.stringify(socket_info));
+                socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
+            }
         });
     });
 

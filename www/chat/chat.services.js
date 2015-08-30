@@ -25,10 +25,6 @@ angular.module('ecstatic.chat')
     }
     Service.sendText = function(chatText, channel_id) {
       Service.chat.push(chatText);
-      var blob = cameraServices.getCurrentBlob();
-
-      var key = "" + Service.username + "_" + (new Date()).getTime() + ".webm";
-      console.log("key="+key);
 
       var request = {
         msg: "send_text",
@@ -36,11 +32,11 @@ angular.module('ecstatic.chat')
         txt: chatText,
         hasVideo: false,
         username: Service.username,
-        video_key: key
       }
 
-      if(blob){
-        request.video = blob;
+      if(cameraServices.getCurrentBlob()){
+        request.video_key = "" + Service.username + "_" + (new Date()).getTime() + ".webm";
+        request.video = cameraServices.getCurrentBlob();
         request.hasVideo = true;
       }
 
