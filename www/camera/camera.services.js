@@ -1,6 +1,6 @@
 angular.module('ecstatic.camera')
 
-.factory('cameraServices', function(cameraEventServices) {
+.factory('cameraServices', function(cameraEventServices, playerServices, socketManager) {
 	var Service = {};
 
 	var mediaRecorder;
@@ -58,6 +58,20 @@ angular.module('ecstatic.camera')
 		else
 			return;
 	}
+
+	Service.sendVideo = function() {
+      var request = {
+        msg: "send_video",
+        channel_id: playerServices.channel_id,
+        username: Service.username,
+        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".webm",
+        video: Service.getCurrentBlob(),
+        hasVideo: true,
+      }
+
+      var promise = socketManager.sendRequest(request); 
+      return promise;
+    }
 
 	cameraEventServices.listenCameraStart( function (event, video) {
 		console.log("here");
