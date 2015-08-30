@@ -1,0 +1,9 @@
+
+<!--the player		-->
+<videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
+  <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
+</videogular>
+<div class="current-song item-button-right"><img src="{{playerServices.trackCover}}"/>
+  <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p>
+  <button ng-click="nextSong()" class="button button-clear icon-left ion-ios-skipforward"> Skip</button>
+</div>

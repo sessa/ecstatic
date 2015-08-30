@@ -2,11 +2,14 @@
 'use strict';
 
 // Declare variables used
-var app, express, events, cors, client, io, async, socket, config, http, server, aws,s3;
+
+var app, express, events, cors, bodyParser, client, io, async, socket, config, http, server, nodemailer, smtpTransport, aws, s3;
+
 config = require('./config/config.json');
 client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
 express = require('express');
 cors = require('cors');
+bodyParser = require('body-parser')
 app = express();
 app.set('views', __dirname + '/');
 app.set('view engine', "jade"); 
@@ -16,6 +19,12 @@ app.use(cors());
 async = require('async');
 server = require('http').Server(app);
 io = require('socket.io')(server);
+nodemailer = require('nodemailer');
+smtpTransport = require('nodemailer-smtp-transport');
+
+// create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 aws = require('aws-sdk');
 s3 = new aws.S3();
 
@@ -90,18 +99,6 @@ io.sockets.on('connection', function (socket) {
         });
     }
 
-    function send_video_to_s3(key, video){
-        var params = {Bucket: 'ecstatic-videos', Key: key, Body: video};
-        s3.putObject(params, function(err, data) {
-            if (err)       
-            {
-                console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
-            } else {
-                console.log("Successfully uploaded data to myBucket/myKey");   
-            }
-
-        });
-    }
     
     socket.on('next_song_action', function (data) {
         console.log("next_song, data="+JSON.stringify(data));
@@ -129,22 +126,43 @@ io.sockets.on('connection', function (socket) {
     
     socket.on('send_text', function (data) {
         client.get(data.channel_id, function (err, socket_info){
-            //Recieve text, send key to array and video to S3
-            send_video_to_s3(data.video_key, data.video);
+            
             console.log("data.video_key"+data.video_key);
-            //Remove video buffer from data
-            var parsed_data = {
-                // channel_id: data.channel_id,
-                txt: data.txt,
-                hasVideo: data.hasVideo,
-                video_key: data.video_key,
-                username: data.username,
-            };
-            socket_info = JSON.parse(socket_info);
-            // console.log("send text - " + JSON.stringify(parsed_data));
-            socket_info.player_state.chat.push(parsed_data);
-            client.set(data.channel_id, JSON.stringify(socket_info));
-            socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
+            //if there is a video, send video to S3
+            if(data.video_key){
+                var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
+                s3.putObject(params, function(err, s3data) {
+                    if (err)       
+                    {
+                        console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
+                    } else {
+                        console.log("Successfully uploaded data to myBucket/myKey"); 
+                        var parsed_data = {
+                            txt: data.txt,
+                            hasVideo: data.hasVideo,
+                            video_key: data.video_key,
+                            username: data.username,
+                        }
+                        socket_info = JSON.parse(socket_info);
+                        socket_info.player_state.chat.push(parsed_data);
+                        client.set(data.channel_id, JSON.stringify(socket_info));
+                        socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
+                        socket.emit("send_text", parsed_data);
+                    }
+                });
+            }
+            //else just send the text
+            else{
+                var parsed_data = {
+                    txt: data.txt,
+                    hasVideo: data.hasVideo,
+                    username: data.username,
+                }
+                socket_info = JSON.parse(socket_info);
+                socket_info.player_state.chat.push(parsed_data);
+                client.set(data.channel_id, JSON.stringify(socket_info));
+                socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
+            }
         });
     });
 
@@ -164,6 +182,7 @@ io.sockets.on('connection', function (socket) {
             socket.broadcast.to(data.channel_info.channel_id).emit("update");
         });
     });
+
  });
 
 //routes
@@ -171,11 +190,40 @@ app.get('/soundcloud/callback', function(req, res) {
     console.log("caught");
     res.render('soundcloud/callback');
 });
+
 app.route('/*')
 .get(function(req, res) {
   res.render('index')
 });
+
 server.listen(app.get('port'), function(req, res) {
  console.log('Server listening at ' + app.get('port'));
 });
 
+//nodemailer
+app.post('/feedback', urlencodedParser, function(req, res){
+    var transporter = nodemailer.createTransport(smtpTransport({
+        host: 'smtp.mailgun.org',
+        port: 25,
+        auth: {
+            user: 'postmaster@sandboxe5272feb9c3c4b3c88e6e69d8379de8f.mailgun.org',
+            pass: '062303775835e3826aa39a0d60902ac0'
+            }
+        }));
+
+    var mailOptions = {
+        from: req.body.name + ' &lt;' + req.body.email + '&gt;', //grab form data from the request body object
+        to: 'jonathan@silentdiscosquad.com', // list of receivers
+        subject: 'Ecstatic App Feedback', // Subject line
+        text: req.body.message // plaintext body
+        };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            console.log(error);
+        }else{
+            console.log('Message sent: ' + info.response);
+            res.redirect('#/tab/feedback/thankyou');
+        }
+        });
+  });

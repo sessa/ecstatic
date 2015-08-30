@@ -155,6 +155,16 @@ var app = angular.module('ecstatic', [
         }
       }
     })
+    .state('tab.feedback-thankyou', {
+      url: '/feedback/thankyou',
+      views: {
+        'tab-feedback': {
+          templateUrl: 'feedback/thankyou.html',
+          controller: 'FeedbackCtrl'
+        }
+      }
+    })    
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
 });

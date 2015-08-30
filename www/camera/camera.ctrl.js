@@ -35,6 +35,10 @@ angular.module('ecstatic.camera')
 
 	cameraEventServices.listenVideoSource(function (event, source) {
 		cameraOn = true;
+		//console.log("event="+JSON.stringify(event));
+		console.log("source="+JSON.stringify(source));
+		console.log("video="+JSON.stringify(video));
+		video = document.getElementById('videoElement');
 		video.src = source;
 		video.play();
 		$scope.hide = true;

@@ -18,6 +18,7 @@ dump.rdb
 node_modules
 /ionic
 config/config.json
+npm-debug.log
 
 # Elastic Beanstalk Files
 !.elasticbeanstalk/config.yml

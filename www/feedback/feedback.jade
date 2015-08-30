@@ -1,13 +1,12 @@
 ion-view(view-title='Feedback')
 	ion-content
-		.list
+		br
+		br
+		form.list(action='/feedback', method="post")
 			label.item.item-input.padding
-				input(type="text", placeholder="First Name")
+				input(ng-model="name", id="name", name="name", type="text", placeholder="First Name")
 			label.item.item-input.padding
-				input(type="email", placeholder="E-mail")
+				input(ng-model="email", id="email", name="email", type="email", placeholder="E-mail")
 			label.item.item-input.padding
-				input(type="text", placeholder="Comment")
-			button.button.button-positive.button-full(ng-click="create_channel()", ng-init="channelName=random_name") Send
-			
-		
-			
+				input(ng-model="message", id="message", name="message", type="text", placeholder="Message")
+			input.button.button-positive.button-full(type="submit", value="send") 

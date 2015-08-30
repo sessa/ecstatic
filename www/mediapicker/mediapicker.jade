@@ -1,7 +1,7 @@
 ion-view(ng-controller="MediapickerCtrl as controller", view-title="")
 	ion-nav-buttons(side="secondary")
 	ion-header-bar.bar.bar-subheader.miniplayer(ng-show="song_added")
-		p.padding Song added to the playlist!		
+		p.padding Song added to the playlist!
 	ion-content.has-header
 
 		ion-list(class="list")
@@ -14,7 +14,3 @@ ion-view(ng-controller="MediapickerCtrl as controller", view-title="")
 					p Duration: "{{source.duration}}"
 					button.button.button-clear(ng-click="mediapicker_actionsheet(source)")
 						i.icon.ion-more
-				
-
-				
-				//	add_to_playlist(source)
