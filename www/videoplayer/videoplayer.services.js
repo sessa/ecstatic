@@ -13,7 +13,7 @@ angular.module('ecstatic.videoplayer')
         Service.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
     }
     Service.onLoadMetaData = function(evt) {
-        console.log("onLoadMetaData, evt="+JSON.stringify(evt));
+        console.log("onLoadMetaData, Service.deltat="+Service.delta);
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
     }

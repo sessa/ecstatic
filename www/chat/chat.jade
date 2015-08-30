@@ -15,7 +15,7 @@ ion-side-menu.gradient(ng-controller="chatCtrl")
 					{{line.txt}}
 		div(ng-controller="CameraCtrl")
 			video(id="videoElement", ng-hide="{{hide}}", height="192", width="256", loop)
-			button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
+			button.button.button-small.button-light.icon.ion-ios-videocam.pull-left(ng-click="cameraButton()")
 			button(ng-click="sendVideo()")
 	.message-box.list.padding
 		
