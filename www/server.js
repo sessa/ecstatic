@@ -136,13 +136,13 @@ io.sockets.on('connection', function (socket) {
                         }
                         socket_info = JSON.parse(socket_info);
                         socket_info.player_state.chat.push(parsed_data);
-                        console.log("setting video in chat = "+JSON.stringify(parsed_data));
                         client.set(data.channel_id, JSON.stringify(socket_info));
                         socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
-
+                        socket.emit("send_text", parsed_data);
                     }
                 });
             }
+            //else just send the text
             else{
                 var parsed_data = {
                     txt: data.txt,
@@ -150,7 +150,6 @@ io.sockets.on('connection', function (socket) {
                     username: data.username,
                 }
                 socket_info = JSON.parse(socket_info);
-                // console.log("send text - " + JSON.stringify(parsed_data));
                 socket_info.player_state.chat.push(parsed_data);
                 client.set(data.channel_id, JSON.stringify(socket_info));
                 socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
