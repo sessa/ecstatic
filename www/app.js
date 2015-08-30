@@ -41,6 +41,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.camera',
       'ecstatic.mediapicker',
       'ecstatic.create',
+      'ecstatic.videoplayer',
 ])
 
 .run(function($ionicPlatform) {
