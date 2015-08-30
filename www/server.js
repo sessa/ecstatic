@@ -61,6 +61,7 @@ io.sockets.on('connection', function (socket) {
                 'requestTime':new Date().getTime(), 
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
+                'cliplist': [],
                 'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
@@ -123,46 +124,42 @@ io.sockets.on('connection', function (socket) {
             socket.broadcast.to(data.channel_id).emit("update");
         }   
     });
-    
+    socket.on('send_video', function (data){
+        console.log("heard send_vide");
+        //if there is a video, send video to S3
+        client.get(data.channel_id, function (err, socket_info){
+            var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
+            s3.putObject(params, function(err, s3data) {
+                if (err)       
+                {
+                    console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
+                } else {
+                    console.log("Successfully uploaded data to myBucket/myKey"); 
+                    var parsed_data = {
+                        hasVideo: data.hasVideo,
+                        video_key: data.video_key,
+                        username: data.username,
+                    }
+                    socket_info = JSON.parse(socket_info);
+                    socket_info.player_state.cliplist.push(parsed_data);
+                    client.set(data.channel_id, JSON.stringify(socket_info));
+                    socket.broadcast.to(data.channel_id).emit("send_video", parsed_data);
+                    socket.emit("send_video", parsed_data);
+                }
+            });
+        });
+    });
+
     socket.on('send_text', function (data) {
         client.get(data.channel_id, function (err, socket_info){
-            
-            console.log("data.video_key"+data.video_key);
-            //if there is a video, send video to S3
-            if(data.video_key){
-                var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
-                s3.putObject(params, function(err, s3data) {
-                    if (err)       
-                    {
-                        console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
-                    } else {
-                        console.log("Successfully uploaded data to myBucket/myKey"); 
-                        var parsed_data = {
-                            txt: data.txt,
-                            hasVideo: data.hasVideo,
-                            video_key: data.video_key,
-                            username: data.username,
-                        }
-                        socket_info = JSON.parse(socket_info);
-                        socket_info.player_state.chat.push(parsed_data);
-                        client.set(data.channel_id, JSON.stringify(socket_info));
-                        socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
-                        socket.emit("send_text", parsed_data);
-                    }
-                });
+            var parsed_data = {
+                txt: data.txt,
+                username: data.username,
             }
-            //else just send the text
-            else{
-                var parsed_data = {
-                    txt: data.txt,
-                    hasVideo: data.hasVideo,
-                    username: data.username,
-                }
-                socket_info = JSON.parse(socket_info);
-                socket_info.player_state.chat.push(parsed_data);
-                client.set(data.channel_id, JSON.stringify(socket_info));
-                socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
-            }
+            socket_info = JSON.parse(socket_info);
+            socket_info.player_state.chat.push(parsed_data);
+            client.set(data.channel_id, JSON.stringify(socket_info));
+            socket.broadcast.to(data.channel_id).emit("send_text", parsed_data);
         });
     });
 

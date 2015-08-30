@@ -15,11 +15,6 @@ angular.module('ecstatic.chat')
       chatEventServices.broadcastText(data);
     });
 
-    Service.getUrl = function (initial_url) {
-      console.log("https://s3.amazonaws.com/ecstatic-videos/" + initial_url);
-      return "https://s3.amazonaws.com/ecstatic-videos/" + initial_url;
-    }
-
     Service.getTextPrompt = function(){
       return Service.textPrompt;
     }
@@ -30,14 +25,7 @@ angular.module('ecstatic.chat')
         msg: "send_text",
         channel_id: channel_id,
         txt: chatText,
-        hasVideo: false,
         username: Service.username,
-      }
-
-      if(cameraServices.getCurrentBlob()){
-        request.video_key = "" + Service.username + "_" + (new Date()).getTime() + ".webm";
-        request.video = cameraServices.getCurrentBlob();
-        request.hasVideo = true;
       }
 
       var promise = socketManager.sendRequest(request); 

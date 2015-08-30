@@ -37,7 +37,6 @@ angular.module('ecstatic.chat')
 	//re-render the chatlog with new text
 	chatEventServices.listenText(function (event, text) {
 		$scope.chatlog = chatServices.getChatBacklog($stateParams.channel_id);
-		console.log("chatEventServices.listenText heard text"+JSON.stringify($scope.chatLog));
 		$ionicScrollDelegate.scrollBottom();
 	});
 

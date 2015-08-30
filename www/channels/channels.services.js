@@ -4,7 +4,7 @@ angular.module('ecstatic.channels')
 	// We return this object to anything injecting our service
 	var Service = {};
 	Service.channels = [];
-			console.log("registered update");
+
 	//This function updates the number of users, and the playlist when songs are added.
 	socket.on('update', function () {
 		Service.getChannels().then(function (data){

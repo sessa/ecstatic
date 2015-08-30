@@ -29,6 +29,9 @@ angular.module('ecstatic.camera')
 		}
 	}
 
+	$scope.sendVideo = function() {
+		cameraServices.sendVideo();
+	}
 	$scope.initializeVideo = function () {
 		video = document.getElementById('videoElement');
 	}

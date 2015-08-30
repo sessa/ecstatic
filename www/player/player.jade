@@ -6,9 +6,11 @@ ion-view(ng-controller="PlayerCtrl as controller")
 		ng-switch(on="showPlayer")
 			//if the player has songs in it
 			div(ng-switch-when="true") 		
-				include ./audioplayer.jade
+				include ./audioplayer/audioplayer.jade
 			//if the player is empty
 			div(ng-switch-default) 
 				p.title There's no song in this playlist.
-	//Side-Menu chat
-	include ./chat.jade
+	ion-side-menus
+		include ../videoplayer/videoplayer.jade
+		//Side-Menu chat
+		include ../chat/chat.jade
