@@ -10,9 +10,8 @@ ion-side-menu-content.gradient(ng-controller="chatCtrl" has-header="true")
 					| in this channel. 
 			// Channel discussion
 			.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-				ng-switch(on="line.hasVideo")
-					strong{{line.username}}: 
-					{{line.txt}}
+				strong{{line.username}}: 
+				{{line.txt}}
 	.message-box.list.padding		
 		form.item-icon-right
 			label.item-inset
