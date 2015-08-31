@@ -41,10 +41,6 @@ angular.module('ecstatic.camera')
 		//start streaming
 		window.navigator.getUserMedia({video: true}, success, error);
 	}
-	Service.clearVideo = function(){
-      	mediaRecorder.clearOldRecordedFrames()
-    }
-
 	Service.startVideoClip = function() {
 		mediaRecorder.clearOldRecordedFrames()
 		cameraEventServices.broadcastVideoSource(videoSource);

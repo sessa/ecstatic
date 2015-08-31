@@ -1,4 +1,3 @@
-div 
-	p break
-	p break
-timer(ng-attr-countdown="startTime" interval="1000" finish-callback="finished()"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
+ion-view
+	timer(end-time="startTime"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
+	include ../../player/chat.jade

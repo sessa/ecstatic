@@ -25,7 +25,6 @@ angular.module('ecstatic.chat')
 			$scope.sendName(lineText);
 		}else{
 			$scope.sendText(lineText);
-			cameraServices.clearVideo();
 		}
 	}
 
