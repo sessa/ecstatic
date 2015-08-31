@@ -3,19 +3,15 @@ angular.module('ecstatic.videoplayer')
 .controller('VideoCtrl',
 	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
 
-        updatePlayerstateEventService.listen(function (event, playerstate){
-            console.log("updatePlayerstateEventService, playerstate="+JSON.stringify(playerstate));
-            $scope.videoplayerServices.cliplist = playerstate.cliplist;
-            $scope.render();
-        });
-
 	    socket.on('send_video', function (data) {
     	    console.log("added video" + JSON.stringify(data));
             channelServices.getChannels().then(function (channels){
                 var channel = channelServices.getChannel($stateParams.channel_id);
-                channel.cliplist.push(data);
+                videoplayerServices.setChannel(channel);
+                if($scope.cliplistLength == 0){
+                    $scope.render();
+                }
             });
-	        //chatEventServices.broadcastText(data);
 	    });
 
         $scope.videoplayerServices = videoplayerServices;
@@ -25,8 +21,8 @@ angular.module('ecstatic.videoplayer')
                 var channel = channelServices.getChannel($stateParams.channel_id);
                 $scope.numberOfUsers = Object.keys(channel.users).length;
                 $scope.numberOfUsers = $scope.numberOfUsers-1;
-                var cliplistLength = channel.cliplist.length;
-                if(cliplistLength !== 0){
+                $scope.cliplistLength = channel.cliplist.length;
+                if($scope.cliplistLength !== 0){
                     console.log("render");
                     videoplayerServices.setChannel(channel);
                     $scope.showVideoplayer = true;
@@ -35,4 +31,8 @@ angular.module('ecstatic.videoplayer')
             });
         }
         $scope.render();
-}]);
+}])
+.service("videoEventServices", function ($rootScope){
+    this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
+    this.listen = function(callback) {$rootScope.$on("videoAdded",callback)}
+})
