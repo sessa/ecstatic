@@ -4,71 +4,11 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			i.icon.ion-plus-round
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
-
 			//if the player has songs in it
 			div(ng-switch-when="true") 		
-				//the player		
-				videogular(vg-theme="playerServices.theme", 
-					vg-player-ready="playerServices.onPlayerReady($API)", 
-					vg-complete="playerServices.onCompleteItem()", 
-					class="videogular-container audio" 
-					vg-auto-play="playerServices.autoplay")
-					vg-media(vg-src="playerServices.sources", vg-type="audio")
-
-				.current-song.item-button-right
-					
-					img(src="{{playerServices.trackCover}}")
-					p
-						strong {{playerServices.trackTitle}}
-						br
-						| {{playerServices.trackUser}}
-					
-
-					button.button.button-clear.icon-left.ion-ios-skipforward(ng-click="nextSong()")  Skip
-				
+				include ./audioplayer.jade
 			//if the player is empty
 			div(ng-switch-default) 
 				p.title There's no song in this playlist.
-
-	ion-side-menus
-		ion-side-menu-content.gradient(ng-controller="chatCtrl")
-
-			ion-content.has-tabs.has-footer(has-header="true")
-
-
-				.chatbox.padding
-					.announcements.padding
-
-						// Channel announcements
-						h1(ng-show="username") hi {{username}}! :)
-						p There's 
-							span(ng-hide="numberOfUsers") only you  
-							span(ng-show="numberOfUsers") {{numberOfUsers}} other ecstatic(s)
-							| in this channel. 
-
-					// Channel discussion
-					.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-						ng-switch(on="line.hasVideo")
-							div(ng-switch-when="true")
-								video(src="{{getUrl(line.video_key)}}" autoplay="" loop="")
-							strong{{line.username}}: 
-							{{line.txt}}
-				div(ng-controller="CameraCtrl")
-					video(id="videoElement", ng-hide="{{hide}}", height="192", width="256", loop)
-					button.button.button-small.button-light.icon.ion-android-send.pull-left(ng-click="cameraButton()")
-			.message-box.list.padding
-				
-				form.item-icon-right
-    
-					label.item-inset
-						input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
-					
-					button.hidden(ng-click="enterText(lineText); lineText=''")
-					a(href="#")
-						i.icon.ion-camera
-
-		ion-side-menu(side="right")
-			ion-content.has-tabs.has-footer(has-header="true")
-				//button.button(menu-toggle="right") close videobox
-				video(autoplay muted loop)
-					source(src="loop2.mp4")
+	//Side-Menu chat
+	include ./chat.jade
