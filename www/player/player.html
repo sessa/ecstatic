@@ -21,7 +21,7 @@
     </ng-switch>
   </ion-header-bar>
   <ion-side-menus>
-    <ion-side-menu side="right" ng-controller="VideoCtrl">
+    <ion-side-menu side="left" ng-controller="VideoCtrl">
       <ion-content has-header="true" class="has-tabs has-footer">
         <ng-switch on="showVideoplayer">
           <!--if the player has songs in it-->
@@ -34,8 +34,7 @@
         </ng-switch>
       </ion-content>
     </ion-side-menu>
-    <!--Side-Menu chat-->
-    <ion-side-menu ng-controller="chatCtrl" class="gradient">
+    <ion-side-menu-content ng-controller="chatCtrl" has-header="true" class="gradient">
       <ion-content has-header="true" class="has-tabs has-footer">
         <div class="chatbox padding">
           <div class="announcements padding">
@@ -48,20 +47,28 @@
             <ng-switch on="line.hasVideo"><strong>{{line.username}}: </strong>{{line.txt}}</ng-switch>
           </div>
         </div>
-        <div ng-controller="CameraCtrl">
-          <video id="videoElement" ng-hide="{{hide}}" height="192" width="256" loop="loop"></video>
-          <button ng-click="cameraButton()" class="button button-small button-light icon ion-ios-videocam pull-left"></button>
-          <button ng-click="sendVideo()"></button>
-        </div>
       </ion-content>
-      <div class="message-box list padding">
+      <div class="message-box list padding">		
         <form class="item-icon-right">
           <label class="item-inset">
             <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="typeform padding"/>
           </label>
-          <button ng-click="enterText(lineText); lineText=''" class="hidden"></button><a href="#"><i class="icon ion-camera"></i></a>
+          <button ng-click="enterText(lineText); lineText=''" class="hidden"></button>
         </form>
       </div>
+    </ion-side-menu-content>
+    <ion-side-menu side="right" ng-controller="CameraCtrl" ng-init="doSomething()">
+      <ion-content has-header="true" class="has-tabs has-footer">
+        <div class="chatbox padding">
+          <div class="announcements padding">
+            <video id="videoElement" ng-hide="{{hide}}" height="192" width="256" loop="loop"></video>
+            <button on-release="onRelease()" on-hold="onHold()">Take Video</button>
+            <button ng-click="sendVideo()">SendVideo()</button>
+            <button ng-click="showCamera()">showCamera()</button>
+            <button ng-click="deleteClip()">deleteClip()</button>
+          </div>
+        </div>
+      </ion-content>
     </ion-side-menu>
   </ion-side-menus>
 </ion-view>

@@ -12,7 +12,10 @@ angular.module('ecstatic.chat')
     }
 
 	$scope.sendText = function(lineText) {
-		chatServices.sendText(lineText, $stateParams.channel_id);
+		//if there is anything to send, then send it.
+		if(lineText){
+			chatServices.sendText(lineText, $stateParams.channel_id);
+		}
 	}
 
 	$scope.sendName = function(name) {

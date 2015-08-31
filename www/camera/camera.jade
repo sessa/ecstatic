@@ -1,0 +1,10 @@
+ion-side-menu(side="right", ng-controller="CameraCtrl", ng-init="doSomething()")
+	ion-content.has-tabs.has-footer(has-header="true")
+		.chatbox.padding
+			.announcements.padding
+				video(id="videoElement", ng-hide="{{hide}}", height="192", width="256", loop)
+				button(on-release="onRelease()" on-hold="onHold()") Take Video
+				button(ng-click="sendVideo()") SendVideo()
+				button(ng-click="showCamera()") showCamera()
+				button(ng-click="deleteClip()") deleteClip()
+
