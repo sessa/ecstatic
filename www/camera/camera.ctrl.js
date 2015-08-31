@@ -14,7 +14,10 @@ angular.module('ecstatic.camera')
 		cameraServices.startVideoClip();
 	}
 	$scope.sendVideo = function() {
-		cameraServices.sendVideo();
+		//check if there is anything to send.
+		if(cameraServices.getCurrentBlob()){
+			cameraServices.sendVideo();
+		}
 	}
 	$scope.showCamera = function () {
 		cameraServices.cameraStart();
