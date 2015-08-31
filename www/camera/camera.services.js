@@ -42,7 +42,6 @@ angular.module('ecstatic.camera')
 		window.navigator.getUserMedia({video: true}, success, error);
 	}
 	Service.startVideoClip = function() {
-		mediaRecorder.clearOldRecordedFrames()
 		cameraEventServices.broadcastVideoSource(videoSource);
 		mediaRecorder.start(10000);
 	}
@@ -52,6 +51,10 @@ angular.module('ecstatic.camera')
 		cameraEventServices.broadcastVideoSource(videoClipURL);
 	}
 
+	Service.deleteCurrentBlob = function() {
+		current_blob = "";
+
+	}
 	Service.getCurrentBlob = function() {
 		if(current_blob)
 			return current_blob;
