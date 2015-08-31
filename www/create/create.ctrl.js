@@ -21,6 +21,7 @@ angular.module('ecstatic.create')
 		var channel = channelServices.getChannel($stateParams.channel_id); 
 		var milliSinceEpoch = new Date().getTime();
 		$scope.startTime = parseInt((channel.start_time - milliSinceEpoch)/1000);
+		console.log("$scope.startTime"+$scope.startTime);
 		$rootScope.$broadcast('timer-set-countdown', $scope.startTime);
 		
 		$scope.finished = function(){
