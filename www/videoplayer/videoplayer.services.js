@@ -13,18 +13,14 @@ angular.module('ecstatic.videoplayer')
         Service.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
     }
     Service.onLoadMetaData = function(evt) {
-        console.log("onLoadMetaData, Service.deltat="+Service.delta);
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
     }
     Service.onVideoplayerReady = function(API) {
-        console.log("onVideoplayerReady");
         Service.API = API;
         Service.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
-        console.log("Service.currentItem"+Service.currentItem);
         Service.setItem(Service.currentItem);
         Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
-        console.log("delta="+Service.delta);
     }
     Service.onCompleteItem = function() {
         Service.isCompleted = true;
@@ -39,8 +35,10 @@ angular.module('ecstatic.videoplayer')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.cliplist[Service.currentItem];
-        console.log("setItem, $source="+JSON.stringify(source));
         Service.sources.push({src: $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+source.video_key), type: "video/webm"});
+        $timeout(Service.API.play.bind(Service.API), 10);
+        $timeout(Service.API.play.bind(Service.API), 25);
+        $timeout(Service.API.play.bind(Service.API), 50);
         $timeout(Service.API.play.bind(Service.API), 100);
     }
     return Service;
