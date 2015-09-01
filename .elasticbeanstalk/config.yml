@@ -1,5 +1,5 @@
 branch-defaults:
-  master:
+  ionicdeploy:
     environment: Squad-dev
 global:
   application_name: Squad
