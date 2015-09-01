@@ -1,14 +1,15 @@
 angular.module('ecstatic.sockets')
 
-.factory('socket', ['socketFactory','ConfigService', function (socketFactory, ConfigService) {
+.factory('socket', ['socketFactory','ConfigService', '$location', function (socketFactory, ConfigService, $location) {
 	return socketFactory({
-		ioSocket: io.connect(ConfigService.getConfig().apiBackend)
+		ioSocket: io.connect($location.absUrl())
 	});
 }])
 
-.factory('socketManager', ['$q', '$rootScope', 'socket', function($q, $rootScope, socket) {
+.factory('socketManager', ['$q', '$rootScope', 'socket', '$location', function($q, $rootScope, socket, $location) {
 		// We return this object to anything injecting our service
 		var Service = {};
+		console.log("$location.absUrl()"+$location.absUrl());
 		// Keep all pending requests here until they get responses
 		var callbacks = {};
 		// Create a unique callback ID to map requests to responses

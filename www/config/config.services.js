@@ -2,14 +2,16 @@ angular.module('ecstatic.config', [])
 
 .factory('ConfigService', ['$http', '$q', '$rootScope', function ($http, $q, $rootScope) {
 	var Service = {};
-	Service.configData = {};
 
 	Service.getConfig = function(){
-		$http.get('config/config.json')
+		var defer = $q.defer();
+
+		$http.get('soundcloudClientId')
 			.success(function (data){
-		      	Service.configData = data;
-	    	});
-	    return Service.configData;
+				defer.resolve(data);
+			});
+		return defer.promise;
 	}
+
 	return Service;
 }]);

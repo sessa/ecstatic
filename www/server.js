@@ -6,7 +6,7 @@
 var app, express, events, cors, bodyParser, client, io, async, socket, config, http, server, nodemailer, smtpTransport, aws, s3;
 
 config = require('./config/config.json');
-client = require('redis').createClient(6379, config.cacheBackend, {no_ready_check: true});
+client = require('redis').createClient(6379, process.env.cache, {no_ready_check: true});
 express = require('express');
 cors = require('cors');
 bodyParser = require('body-parser')
@@ -186,6 +186,10 @@ io.sockets.on('connection', function (socket) {
 app.get('/soundcloud/callback', function(req, res) {
     console.log("caught");
     res.render('soundcloud/callback');
+});
+
+app.get('/soundcloudClientId', function(req, res) {
+    res.json({"soundcloudClientId": process.env.soundcloudClientId});
 });
 
 app.route('/*')
