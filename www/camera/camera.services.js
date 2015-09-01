@@ -76,6 +76,17 @@ angular.module('ecstatic.camera')
       return promise;
     }
 
+    Service.sendVideo = function(video) {
+    	var request = {
+	    	msg: "send_video",
+	        channel_id: playerServices.channel_id,
+	        username: Service.username,
+	        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".webm",
+	        video: Service.getCurrentBlob(),
+	        hasVideo: true,
+    	}
+    }
+
 	cameraEventServices.listenCameraStart( function (event, video) {
 		console.log("here");
 		Service.cameraStart(video);

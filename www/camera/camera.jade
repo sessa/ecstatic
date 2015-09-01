@@ -7,4 +7,6 @@ ion-side-menu(side="right", ng-controller="CameraCtrl", ng-init="doSomething()")
 				button(ng-click="sendVideo()") SendVideo()
 				button(ng-click="showCamera()") showCamera()
 				button(ng-click="deleteClip()") deleteClip()
-
+				form(ng-submit="submit()")
+					input(type="file" ng-model="video" accept="video/*" capture)
+					input(type="submit" value="iOS Send Video" ng-click="sendVideo()")

@@ -14,11 +14,19 @@ angular.module('ecstatic.camera')
 		cameraServices.startVideoClip();
 	}
 	$scope.sendVideo = function() {
-		//check if there is anything to send.
+		//check if there is anything to send form mobile
 		if(cameraServices.getCurrentBlob()){
 			cameraServices.sendVideo();
+		}else if($scope.video){
+			cameraServices.sendVideo(video);
 		}
 	}
+
+	$scope.sendVideoMobile = function() {
+		//grab the video from mobile phone and send it to Services
+
+	}
+
 	$scope.showCamera = function () {
 		cameraServices.cameraStart();
 	}
