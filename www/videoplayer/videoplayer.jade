@@ -1,12 +1,9 @@
-ion-side-menu(side="left", ng-controller="VideoCtrl")
-	ion-content.has-tabs.has-footer(has-header="true")
-		ng-switch(on="showVideoplayer")
-			//if the player has songs in it
-			div(ng-switch-when="true") 		
-				p coo coo ca choo
-				videogular(vg-theme="videoplayerServices.theme", 
-				vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
-				vg-complete="videoplayerServices.onCompleteItem()", 
-				class="videogular-container video" 
-				vg-auto-play="videoplayerServices.autoplay")
-					vg-media(vg-src="videoplayerServices.sources", vg-type="video")
+div(ng-controller="VideoCtrl")
+	ng-switch(on="showVideoplayer")
+		//if the player has songs in it
+		div(ng-switch-when="true") 		
+			videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
+			vg-complete="videoplayerServices.onCompleteItem()", 
+			class="videogular-container video" 
+			vg-auto-play="videoplayerServices.autoplay")
+				vg-media.vg-media(vg-src="videoplayerServices.sources", vg-type="video")

@@ -1,12 +1,44 @@
-ion-view(view-title='Channels')
-	ion-content
+ion-view(view-title='ecstatic')
+	ion-content.gradient
 		ion-refresher(pulling-text="Pull to refresh", on-refresh="doRefresh()")
 		ion-list
-			ion-item
-				a(href="#/tab/create") Create a channel
 
-			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='channel in channels', type='item-text-wrap', ng-click="joinChannel(channel.channel_id)", href='#/tab/player/{{channel.channel_id}}')
-				img(ng-src='{{channel.face}}')
-				h2 {{channel.channel_name}}
-				i.icon.ion-chevron-right.icon-accessory
-				
+			ion-item.card.community
+				ion-list
+					ion-item.item-avatar
+						img(ng-src='images/cities/mtl-logo.png')
+						
+						h2 Montréal
+						span 2,300 ecstatics
+					ion-item.channel.item-thumbnail-channel-left.item-icon-right(href="#")
+						img(ng-src='images/channels/mcgillx1-poster-small.png')
+						h2 McGill X-1 2015 
+						h2 Demo Day 
+						h3 rmfrstar &amp; kizma
+						span 500 views 
+						span | 
+						span Sept 9th
+						i.icon.ion-android-more-vertical(ng-click="#")
+					ion-item.channel.item-thumbnail-channel-left.item-icon-right(href="#")
+						img(ng-src='images/channels/piknic-poster-small.png')
+						h2 Piknic Electronik 
+						h2 Dancy Sundays
+						h3 Daft Punk
+						span 9M views 
+						span | 
+						span Today
+						i.icon.ion-android-more-vertical(ng-click="#")
+					ion-item.channel.item-thumbnail-channel-left.item-icon-right(ng-repeat='channel in channels', type='item-text-wrap', ng-click="joinChannel(channel.channel_id)", href='#/tab/player/{{channel.channel_id}}')
+						img(ng-src='{{channel.poster}}')
+						h2 {{channel.channel_name}}
+						h2 
+						h3 
+						span  
+						span 
+						span 
+						i.icon.ion-android-more-vertical(ng-click="#")
+
+	.bar.bar-footer.bar-dark.footer-button
+		a.button.button-full.button-clear(href="#/tab/create") Create a channel
+
+

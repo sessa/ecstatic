@@ -1,7 +1,7 @@
 
-<ion-view ng-controller="PlayerCtrl as controller">
+<ion-view ng-controller="PlayerCtrl as controller" ng-init="showChat=true; showTV=false; showRec=false; recording=true">
   <ion-nav-buttons side="secondary"><a href="#/tab/mediapicker" class="button button-light"> <i class="icon ion-plus-round"></i></a></ion-nav-buttons>
-  <ion-header-bar class="bar bar-subheader miniplayer">
+  <ion-header-bar ng-hide="recording" class="bar bar-subheader miniplayer">
     <ng-switch on="showPlayer">
       <!--if the player has songs in it-->
       <div ng-switch-when="true">		
@@ -20,55 +20,47 @@
       </div>
     </ng-switch>
   </ion-header-bar>
-  <ion-side-menus>
-    <ion-side-menu side="left" ng-controller="VideoCtrl">
-      <ion-content has-header="true" class="has-tabs has-footer">
+  <div has-header="true" ng-class="[has-tabs, has-footer]">
+    <ion-content ng-show="showTV" ng-controller="VideoCtrl" scroll="false" class="TV">
+      <div ng-controller="VideoCtrl">
         <ng-switch on="showVideoplayer">
           <!--if the player has songs in it-->
           <div ng-switch-when="true">		
-            <p>coo coo ca choo</p>
-            <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-              <vg-media vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
+            <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
+              <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media"></vg-media>
             </videogular>
           </div>
         </ng-switch>
-      </ion-content>
-    </ion-side-menu>
-    <ion-side-menu-content ng-controller="chatCtrl" has-header="true" class="gradient">
-      <ion-content has-header="true" class="has-tabs has-footer">
-        <div class="chatbox padding">
-          <div class="announcements padding">
-            <!-- Channel announcements-->
-            <h1 ng-show="username">hi {{username}}! :)</h1>
-            <p>There's <span ng-hide="numberOfUsers">only you  </span><span ng-show="numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
-          </div>
-          <!-- Channel discussion-->
-          <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding">
-            <ng-switch on="line.hasVideo"><strong>{{line.username}}: </strong>{{line.txt}}</ng-switch>
-          </div>
-        </div>
-      </ion-content>
-      <div class="message-box list padding">		
-        <form class="item-icon-right">
-          <label class="item-inset">
-            <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="typeform padding"/>
-          </label>
-          <button ng-click="enterText(lineText); lineText=''" class="hidden"></button>
-        </form>
       </div>
-    </ion-side-menu-content>
-    <ion-side-menu side="right" ng-controller="CameraCtrl" ng-init="doSomething()">
-      <ion-content has-header="true" class="has-tabs has-footer">
-        <div class="chatbox padding">
-          <div class="announcements padding">
-            <video id="videoElement" ng-hide="{{hide}}" height="192" width="256" loop="loop"></video>
-            <button on-release="onRelease()" on-hold="onHold()">Take Video</button>
-            <button ng-click="sendVideo()">SendVideo()</button>
-            <button ng-click="showCamera()">showCamera()</button>
-            <button ng-click="deleteClip()">deleteClip()</button>
-          </div>
-        </div>
-      </ion-content>
-    </ion-side-menu>
-  </ion-side-menus>
+    </ion-content>
+    <ion-content ng-show="showRec" ng-controller="CameraCtrl as camera" ng-init="showCamera()" scroll="false" class="camera">
+      <video id="videoElement" height="568" width="320" loop="loop"></video>
+      <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b trash"></button>
+      <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza pizza"></button>
+      <div id="rec-button-holder">
+        <svg width="200" height="200" class="svg">
+          <!--circle.ring(cx=100, cy=100, r=50)-->
+        </svg>
+        <button on-release="onRelease();" on-hold="onHold()" class="rec-gesture"></button>
+      </div>
+    </ion-content>
+    <ion-content ng-show="showChat" ng-controller="chatCtrl as chat" class="has-header chatbox padding gradient">
+      <!-- Channel announcements-->
+      <h1 ng-show="username">hi {{username}}! :)</h1>
+      <p>There's <span ng-hide="chat.numberOfUsers">only you  </span><span ng-show="chat.numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
+      <!-- Channel discussion-->
+      <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding"><strong>{{line.username}}:</strong>{{line.txt}}</div>
+    </ion-content>
+  </div>
+  <div class="chat-input">
+    <div ng-show="showChat" ng-controller="chatCtrl as chat" class="message-box list padding">
+      <form>
+        <label class="item-inset">
+          <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="typeform padding"/>
+        </label>
+        <button ng-click="enterText(lineText); lineText=''" class="hidden"></button>
+      </form>
+    </div>
+    <div class="chat-tabs tabs tabs-icon-only"><a ng-click="showTV=true; showRec=false; showChat=false;" class="tab-item"><i class="icon ion-ios-film"></i></a><a ng-click="showTV=false; showRec=true; showChat=false;" class="tab-item"><i class="icon ion-ios-videocam"></i></a><a ng-click="showTV=false; showRec=false; showChat=true;" class="tab-item"><i class="icon ion-chatbubbles"></i></a></div>
+  </div>
 </ion-view>
