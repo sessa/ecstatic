@@ -54,7 +54,7 @@
 
 .message-box {
 	position: fixed!important;
-	bottom: 49px!important;
+	bottom: 29px!important;
 	width: 100%;
 	border-top: 1px solid #aaa;
 	background-color: white;
@@ -74,20 +74,6 @@ input.typeform  {
 	width: 100% ;
 }
 
-video.bgvid { 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -webkit-transform: translateX(-50%) translateY(0%);
-    transform: translateX(-50%) translateY(0%);
-    background: url(polina.jpg) no-repeat;
-    background-size: cover; 
-}
 
 div.footer-button a.button.button-full {
     width:100%;
@@ -115,3 +101,166 @@ div.footer-button a.button.button-full {
     max-height: 80px;
     width: 100%;
     height: 100%; }
+
+.chat-tabs {
+	border-top: none;
+}
+
+
+
+/* the record button */
+#rec-button-holder {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: auto;
+    height: auto;
+    z-index: 100;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+circle.rec-button {
+	width:44px;height:44px;
+	border-radius:50px;
+	fill: #DF0000;
+}
+
+.rec-gesture {
+	width: 55px;
+	height: 55px;
+	border-radius: 50px;
+	border: 2px solid white;
+	background-color: white;
+  opacity: 0.3;
+	position: fixed;
+	bottom: 84px;
+	left: 50%;
+  margin-left: -28px;
+
+}
+
+.camera-icons.trash {
+	position: fixed;
+	top: 50px;
+	left: 5px;
+	color: white!important;
+}
+
+.camera-icons.pizza {
+	position: fixed;
+	bottom: 50px;
+	right: 5px;
+	color: white!important;
+}
+
+
+.svg {
+  margin: 24px auto;
+  display: block;
+  -webkit-animation: svg-rotate 8000ms linear infinite;
+          animation: svg-rotate 8000ms linear infinite;
+}
+
+circle.ring {
+  fill: transparent;
+  stroke: #DF0000;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 0, 301.59289;
+  -webkit-animation: stroke-dash 2000ms linear infinite, stroke-width 2000ms linear infinite, stroke-color 8000ms steps(4) infinite;
+          animation: stroke-dash 2000ms linear infinite, stroke-width 2000ms linear infinite, stroke-color 8000ms steps(4) infinite;
+}
+
+@-webkit-keyframes svg-rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes svg-rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes stroke-width {
+  0%, 100% {
+    stroke-width: 0;
+  }
+  45%, 55% {
+    stroke-width: 2;
+  }
+  50% {
+    stroke-width: 4;
+  }
+}
+@keyframes stroke-width {
+  0%, 100% {
+    stroke-width: 0;
+  }
+  45%, 55% {
+    stroke-width: 2;
+  }
+  50% {
+    stroke-width: 4;
+  }
+}
+@-webkit-keyframes stroke-dash {
+  0% {
+    stroke-dasharray: 0, 301.59289;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 301.59289, 0;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 301.59289, 301.59289;
+    stroke-dashoffset: -301.59289;
+  }
+}
+@keyframes stroke-dash {
+  0% {
+    stroke-dasharray: 0, 301.59289;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 301.59289, 0;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 301.59289, 301.59289;
+    stroke-dashoffset: -301.59289;
+  }
+}
+@-webkit-keyframes stroke-color {
+  from {
+    stroke: #DF0000;
+  }
+}
+@keyframes stroke-color {
+  from {
+    stroke: #DF0000;
+  }
+}
+
+
+
+video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 300%!important;
+    max-height: 300%!important;
+    width: auto!important;
+    height: auto!important;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: black;
+  	background-size: cover;
+  	transition: 1s opacity;
+}

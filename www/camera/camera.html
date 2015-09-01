@@ -1,14 +1,10 @@
 
-<ion-side-menu side="right" ng-controller="CameraCtrl" ng-init="doSomething()">
-  <ion-content has-header="true" class="has-tabs has-footer">
-    <div class="chatbox padding">
-      <div class="announcements padding">
-        <video id="videoElement" ng-hide="{{hide}}" height="192" width="256" loop="loop"></video>
-        <button on-release="onRelease()" on-hold="onHold()">Take Video</button>
-        <button ng-click="sendVideo()">SendVideo()</button>
-        <button ng-click="showCamera()">showCamera()</button>
-        <button ng-click="deleteClip()">deleteClip()</button>
-      </div>
-    </div>
-  </ion-content>
-</ion-side-menu>
+<video id="videoElement" height="568" width="320" loop="loop"></video>
+<button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b trash"></button>
+<button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza pizza"></button>
+<div id="rec-button-holder">
+  <svg width="200" height="200" class="svg">
+    <!--circle.ring(cx=100, cy=100, r=50)-->
+  </svg>
+  <button on-release="onRelease();" on-hold="onHold()" class="rec-gesture"></button>
+</div>
