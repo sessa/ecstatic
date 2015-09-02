@@ -5,6 +5,7 @@
       <div class="announcements padding">
         <!-- Channel announcements-->
         <h1 ng-show="username">hi {{username}}! :)</h1>
+        <button ng-controller="videolistCtrl" href="/videolist/channelName:{{channel_id}}"></button>
         <p>There's <span ng-hide="numberOfUsers">only you  </span><span ng-show="numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
       </div>
       <!-- Channel discussion-->

@@ -3,6 +3,7 @@ angular.module('ecstatic.chat')
 
 .controller('chatCtrl', ["$sce", "$scope", "chatServices", "$stateParams", "cameraServices","chatEventServices", "$ionicScrollDelegate", function($sce, $scope, chatServices, $stateParams,cameraServices, chatEventServices, $ionicScrollDelegate) {
 	$scope.chatLog = chatServices.getChatBacklog($stateParams.channel_id);
+	$scope.channel_id = $stateParams.channel_id;
 	$scope.textPrompt = chatServices.getTextPrompt();
 	$scope.username = "";
 

@@ -4,6 +4,7 @@ ion-side-menu-content.gradient(ng-controller="chatCtrl" has-header="true")
 			.announcements.padding
 				// Channel announcements
 				h1(ng-show="username") hi {{username}}! :)
+				button(ng-controller="videolistCtrl", href="/videolist/channelName:{{channel_id}}")
 				p There's 
 					span(ng-hide="numberOfUsers") only you  
 					span(ng-show="numberOfUsers") {{numberOfUsers}} other ecstatic(s)

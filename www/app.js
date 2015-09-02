@@ -42,6 +42,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.mediapicker',
       'ecstatic.create',
       'ecstatic.videoplayer',
+      'ecstatic.videolist',
 ])
 
 .run(function($ionicPlatform) {
@@ -138,15 +139,6 @@ var app = angular.module('ecstatic', [
         }
       }
     })
-    .state('tab.playlist', {
-      url: '/player/:channel_id/playlist',
-      views: {
-        'tab-channels': {
-          templateUrl: 'player/playlist.html',
-          controller: 'PlaylistCtrl'
-        }
-      }
-    })    
     .state('tab.feedback', {
       url: '/feedback',
       views: {
@@ -162,6 +154,15 @@ var app = angular.module('ecstatic', [
         'tab-feedback': {
           templateUrl: 'feedback/thankyou.html',
           controller: 'FeedbackCtrl'
+        }
+      }
+    })    
+    .state('tab.videolist', {
+      url: '/videolist/channel_id:channel_id/',
+      views: {
+        'tab-channels': {
+          templateUrl: 'videolist/videolist.html',
+          controller: 'videolistCtrl'
         }
       }
     })    

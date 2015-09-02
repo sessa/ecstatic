@@ -6,10 +6,10 @@ angular.module('ecstatic.soundcloud')
 
       Service.getFavorites = function() {
         ConfigService.getConfig().then(function (data) {
-          console.log("getFavorites, getConfig(), data="+JSON.stringify(data));
+          console.log("getFavorites," + $location.absUrl().split(':8100')[0]+':3001/soundcloud/callback');
           SC.initialize({
               client_id: data.soundcloudClientId,
-              redirect_uri: $location.absUrl().split('#')[0]+"soundcloud/callback"
+              redirect_uri: $location.absUrl().split(':8100')[0]+':3001/soundcloud/callback'
           });
 
           // initiate auth popup

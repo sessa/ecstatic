@@ -1,0 +1,7 @@
+ion-view(view-title="videolist")
+	ion-content
+		ion-list
+			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='video in videolist', type='item-text-wrap', ng-click="activate(video)")
+				h2 {{video.video_key}}
+				i.icon.ion-chevron-right.icon-accessory
+				
