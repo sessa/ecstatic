@@ -1,6 +1,6 @@
 
 <ion-view view-title="Feedback">
-  <ion-content><br/><br/>
+  <ion-content>
     <form action="/feedback" method="post" class="list">
       <label class="item item-input padding">
         <input ng-model="name" id="name" name="name" type="text" placeholder="First Name"/>
@@ -11,7 +11,7 @@
       <label class="item item-input padding">
         <input ng-model="message" id="message" name="message" type="text" placeholder="Message"/>
       </label>
-      <input type="submit" value="send" class="button button-positive button-full"/>
+      <button type="submit" value="send" class="button button-positive button-full">Send</button>
     </form>
   </ion-content>
 </ion-view>

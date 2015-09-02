@@ -1,8 +1,10 @@
-ion-view(view-title='ecstatic')
+ion-view(view-title='Channels')
+	ion-nav-buttons(side="secondary")
+		a.button.button-large.icon-left.gradient(href="#/app/create")
+			i.icon.ion-plus-round
 	ion-content.gradient
-		ion-refresher(pulling-text="Pull to refresh", on-refresh="doRefresh()")
+		ion-refresher(pulling-text="~:D", on-refresh="doRefresh()")
 		ion-list
-
 			ion-item.card.community
 				ion-list
 					ion-item.item-avatar
@@ -38,7 +40,7 @@ ion-view(view-title='ecstatic')
 						span 
 						i.icon.ion-android-more-vertical(ng-click="#")
 
-	.bar.bar-footer.bar-dark.footer-button
-		a.button.button-full.button-clear(href="#/tab/create") Create a channel
 
+
+	
 

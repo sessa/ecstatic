@@ -33,6 +33,32 @@
  	background-color: #333;
 }
 
+.timer-input {
+  font-size: 3em!important;
+  min-height: 2em;
+  margin-top: 0.5em;
+  margin-left: -0.5em;
+  width: 3em;
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+::-webkit-input-placeholder {
+  padding-top: 15px;
+  padding-left: 5px;
+}
+
+.starting-time.label{
+
+  text-transform: uppercase;
+  font-weight: 200;
+    margin-left: -0.5em;
+}
 
 .current-song img {
 	max-width: 32px;
@@ -263,4 +289,12 @@ video {
     background-color: black;
   	background-size: cover;
   	transition: 1s opacity;
+}
+
+.bar-ecstatic {
+  background-color: #E45C4F;
+  border: white 1px solid;
+}
+.bar-ecstatic a h1{
+  color: white!important;
 }

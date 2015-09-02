@@ -61,7 +61,7 @@ var app = angular.module('ecstatic', [
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-  $ionicConfigProvider.views.maxCache(0);
+  //$ionicConfigProvider.views.maxCache(0);
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -69,97 +69,98 @@ var app = angular.module('ecstatic', [
   $stateProvider
 
   // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
+    .state('app', {
+    url: '/app',
     abstract: true,
-    templateUrl: 'index/tabs.html'
+    templateUrl: 'index/menu.html'
   })
 
   // Each tab has its own nav history stack:
 
-  .state('tab.home', {
+  .state('app.home', {
     url: '/home',
     views: {
-      'tab-home': {
+      'menuContent': {
         templateUrl: 'home/home.html',
         controller: 'HomeCtrl'
       }
     }
   })
-  .state('tab.channels', {
+
+  .state('app.channels', {
       url: '/channels',
       views: {
-        'tab-channels': {
-          templateUrl: 'channels/tab-channels.html',
+        'menuContent': {
+          templateUrl: 'channels/channel-list.html',
           controller: 'ChannelsCtrl'
         }
       }
     })
-    .state('tab.create', {
+    .state('app.create', {
       url: '/create',
       views: {
-        'tab-channels': {
+        'menuContent': {
           templateUrl: 'create/setName/setName.html',
           controller: 'setNameCtrl'
         }
       }
     })
-    .state('tab.channels-setTimer', {
+    .state('app.channels-setTimer', {
       url: '/setTimer/channelName:channelName/',
       views: {
-        'tab-channels': {
+        'menuContent': {
           templateUrl: 'create/setTimer/setTimer.html',
           controller: 'setTimerCtrl'
         }
       }
     })
-    .state('tab.channels-countdown', {
+    .state('app.channels-countdown', {
       url: '/countdown/channel_id:channel_id/',
       views: {
-        'tab-channels': {
+        'menuContent': {
           templateUrl: 'create/countdown/countdown.html',
           controller: 'CountdownCtrl'
         }
       }
     })
-    .state('tab.channels-player', {
+    .state('app.channels-player', {
       url: '/player/:channel_id',
       views: {
-        'tab-channels': {
+        'menuContent': {
           templateUrl: 'player/player.html'
         }
       }
     })
-    .state('tab.channels-mediapicker', {
+    .state('app.channels-mediapicker', {
       url: '/mediapicker',
       views: {
-        'tab-channels': {
+        'menuContent': {
           templateUrl: 'mediapicker/mediapicker.html',
         }
       }
     })
-    .state('tab.playlist', {
+    .state('app.playlist', {
       url: '/player/:channel_id/playlist',
       views: {
-        'tab-channels': {
+        'menuContent': {
           templateUrl: 'player/playlist.html',
           controller: 'PlaylistCtrl'
         }
       }
     })    
-    .state('tab.feedback', {
+    .state('app.feedback', {
       url: '/feedback',
       views: {
-        'tab-feedback': {
-          templateUrl: 'feedback/feedback.html',
+        'menuContent': {
+          templateUrl: '../feedback/feedback.html',
           controller: 'FeedbackCtrl'
         }
       }
     })
-    .state('tab.feedback-thankyou', {
+    .state('app.feedback-thankyou', {
       url: '/feedback/thankyou',
       views: {
-        'tab-feedback': {
+        'menuContent': {
           templateUrl: 'feedback/thankyou.html',
           controller: 'FeedbackCtrl'
         }
@@ -167,6 +168,6 @@ var app = angular.module('ecstatic', [
     })    
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/channels');
+  $urlRouterProvider.otherwise('app/home');
 });
 
