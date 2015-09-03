@@ -8,5 +8,5 @@ ion-side-menu(side="left", ng-controller="VideoCtrl")
 				vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
 				vg-complete="videoplayerServices.onCompleteItem()", 
 				class="videogular-container video" 
-				vg-auto-play="true")
+				vg-auto-play="videoplayerServices.autoplay")
 					vg-media(vg-src="videoplayerServices.sources", vg-type="video")

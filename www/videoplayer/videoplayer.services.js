@@ -13,24 +13,23 @@ angular.module('ecstatic.videoplayer')
         Service.channel = channel
         Service.sources = [];
         Service.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+        Service.loadVideoSources();
+    }
 
-        //preload sources
-        for(var i=0; i < channel.cliplist.length; i++){
+    Service.loadVideoSources = function(){
+        for(var i=0; i < Service.channel.cliplist.length; i++){
             console.log("item");
-            var format = "video/" + channel.cliplist[i].format;
-            console.log("src for index: " + channel.cliplist[i].video_key);
+            var format = "video/" + Service.channel.cliplist[i].format;
             videos[i] = [
                 {
                     sources: [
-                        {src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+channel.cliplist[i].video_key), type: format}
+                        {src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+Service.channel.cliplist[i].video_key), type: format}
                     ]
                 }
             ];
         }
-
-        console.log(JSON.stringify(videos));
-
     }
+
     Service.onLoadMetaData = function(evt) {
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
@@ -50,8 +49,8 @@ angular.module('ecstatic.videoplayer')
 
     Service.setItem = function(index) {
         Service.API.stop();
-        Service.sources = videos[index][0].sources;
-        Service.API.play.bind(Service.API);
+        Service.sources = videos[index][0].sources;    
+        $timeout(Service.API.play.bind(Service.API), 100);
     }
     
     return Service;
