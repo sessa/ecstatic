@@ -8,10 +8,8 @@
         <button ng-click="sendVideo()">SendVideo()</button>
         <button ng-click="showCamera()">showCamera()</button>
         <button ng-click="deleteClip()">deleteClip()</button>
-        <form ng-submit="submit()">
-          <input type="file" ng-model="video" accept="video/*" capture="capture"/>
-          <input type="submit" value="iOS Send Video" ng-click="sendVideo()"/>
-        </form>
+        <input type="file" id="fileinput"/>
+        <button ng-click="add()">Add</button>
       </div>
     </div>
   </ion-content>

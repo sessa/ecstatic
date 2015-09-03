@@ -35,7 +35,8 @@ angular.module('ecstatic.videoplayer')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.cliplist[Service.currentItem];
-        Service.sources.push({src: $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+source.video_key), type: "video/webm"});
+        var type = "video/" + source.format;
+        Service.sources.push({src: $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+source.video_key), type: type});
         $timeout(Service.API.play.bind(Service.API), 10);
         $timeout(Service.API.play.bind(Service.API), 25);
         $timeout(Service.API.play.bind(Service.API), 50);

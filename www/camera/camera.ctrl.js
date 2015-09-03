@@ -5,7 +5,19 @@ angular.module('ecstatic.camera')
 	// var blobURL;
 	var video;
 	$scope.hide = false;
-	// var mediaRecorder;
+	var file;
+	
+	document.getElementById('fileinput').addEventListener('change', function(){
+		file = this.files[0];
+		console.log("name : " + file.name);
+		console.log("size : " + file.size);
+		console.log("type : " + file.type);
+		console.log("date : " + file.lastModified);
+	}, false);
+
+	$scope.add = function() {
+		cameraServices.sendMobileVideo(file);
+	}
 
 	$scope.onRelease = function() {
 		cameraServices.endVideoClip();
@@ -18,13 +30,15 @@ angular.module('ecstatic.camera')
 		if(cameraServices.getCurrentBlob()){
 			cameraServices.sendVideo();
 		}else if($scope.video){
-			cameraServices.sendVideo(video);
+			console.log("has mobile video");
+			cameraServices.sendVideo($scope.mobileVideo);
+		}else{
+			console.log("no video");
 		}
 	}
 
-	$scope.sendVideoMobile = function() {
-		//grab the video from mobile phone and send it to Services
-
+	$scope.sendMobileVideo = function(video) {
+		cameraServices.sendMobileVideo(video);
 	}
 
 	$scope.showCamera = function () {
