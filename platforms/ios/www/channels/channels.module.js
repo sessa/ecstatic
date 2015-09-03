@@ -1,1 +1,0 @@
-angular.module('ecstatic.channels', ['ecstatic.sockets', 'ecstatic.player'])
