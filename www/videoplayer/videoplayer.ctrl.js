@@ -4,7 +4,7 @@ angular.module('ecstatic.videoplayer')
 	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
 
 	    socket.on('send_video', function (data) {
-    	    console.log("added video" + JSON.stringify(data));
+    	    // console.log("added video" + JSON.stringify(data));
             channelServices.getChannels().then(function (channels){
                 var channel = channelServices.getChannel($stateParams.channel_id);
                 videoplayerServices.setChannel(channel);
