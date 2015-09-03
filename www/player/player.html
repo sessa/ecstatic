@@ -43,9 +43,7 @@
             <p>There's <span ng-hide="numberOfUsers">only you  </span><span ng-show="numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
           </div>
           <!-- Channel discussion-->
-          <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding">
-            <ng-switch on="line.hasVideo"><strong>{{line.username}}: </strong>{{line.txt}}</ng-switch>
-          </div>
+          <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding"><strong>{{line.username}}: </strong>{{line.txt}}</div>
         </div>
       </ion-content>
       <div class="message-box list padding">		
@@ -66,6 +64,8 @@
             <button ng-click="sendVideo()">SendVideo()</button>
             <button ng-click="showCamera()">showCamera()</button>
             <button ng-click="deleteClip()">deleteClip()</button>
+            <input type="file" id="fileinput"/>
+            <button ng-click="add()">Add</button>
           </div>
         </div>
       </ion-content>
