@@ -6,8 +6,6 @@ angular.module('ecstatic.chat')
 	$scope.textPrompt = chatServices.getTextPrompt();
 	$scope.username = "";
 
-	console.log("PLEASE PRINT THIS MESSAGE");
-
 	$scope.getUrl = function (initial_url) {
       console.log("https://s3.amazonaws.com/ecstatic-videos" + initial_url);
       return $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/" + initial_url);
