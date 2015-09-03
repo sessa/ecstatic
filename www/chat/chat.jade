@@ -4,11 +4,11 @@ ion-side-menu-content.gradient(ng-controller="chatCtrl" has-header="true")
 			.announcements.padding
 				// Channel announcements
 				h1(ng-show="username") hi {{username}}! :)
-				button(ng-controller="videolistCtrl", href="/videolist/channelName:{{channel_id}}")
 				p There's 
 					span(ng-hide="numberOfUsers") only you  
 					span(ng-show="numberOfUsers") {{numberOfUsers}} other ecstatic(s)
 					| in this channel. 
+				a(ng-controller="videolistCtrl", ng-click="goToVideolist()") button
 			// Channel discussion
 			.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
 				strong{{line.username}}: 

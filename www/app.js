@@ -157,8 +157,8 @@ var app = angular.module('ecstatic', [
         }
       }
     })    
-    .state('tab.videolist', {
-      url: '/videolist/channel_id:channel_id/',
+    .state('tab.channels-videolist', {
+      url: '/videolist/',
       views: {
         'tab-channels': {
           templateUrl: 'videolist/videolist.html',

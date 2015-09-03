@@ -2,7 +2,7 @@
 <ion-view view-title="videolist">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="video in videolist" type="item-text-wrap" ng-click="activate(video)" class="item-remove-animate item-avatar item-icon-right">
+      <ion-item ng-repeat="video in channel.cliplist" type="item-text-wrap" ng-click="activate(video)" class="item-remove-animate item-avatar item-icon-right">
         <h2>{{video.video_key}}</h2><i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>

@@ -1,10 +1,13 @@
 angular.module('ecstatic.videolist')
 
 .controller('videolistCtrl',
-	['channelServices', '$stateParams', function(channelServices, $stateParams) {
+	['channelServices', '$stateParams', '$scope', '$state', 'playerServices', function(channelServices, $stateParams, $scope, $state, playerServices) {
+	$scope.goToVideolist = function(){
+		$state.go('tab.channels-videolist');
+	}
     channelServices.getChannels().then(function (channels){
-        var channel = channelServices.getChannel($stateParams.channel_id);
-
+    	console.log("playerServices.channel_id"+playerServices.channel_id);
+        $scope.channel = channelServices.getChannel(playerServices.channel_id);
 		console.log("channel.cliplist"+JSON.stringify(channel.cliplist));
 		console.log("channel"+JSON.stringify(channel));		
 	});
