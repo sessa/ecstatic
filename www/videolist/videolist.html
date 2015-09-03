@@ -2,8 +2,11 @@
 <ion-view view-title="videolist">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="video in channel.cliplist" type="item-text-wrap" ng-click="activate(video)" class="item-remove-animate item-avatar item-icon-right">
-        <h2>{{video.video_key}}</h2><i class="icon ion-chevron-right icon-accessory"></i>
+      <ion-item ng-repeat="clip in cliplist" type="item-text-wrap" ng-click="activate(video)" class="item-remove-animate item-avatar item-icon-right">
+        <h2>{{clip.video_key}}</h2>
+        <video width="320" height="240" controls="controls">
+          <source src="{{clip.src}}" type="video/mp4"/>
+        </video><i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
   </ion-content>

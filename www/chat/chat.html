@@ -5,7 +5,7 @@
       <div class="announcements padding">
         <!-- Channel announcements-->
         <h1 ng-show="username">hi {{username}}! :)</h1>
-        <p>There's <span ng-hide="numberOfUsers">only you  </span><span ng-show="numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p><a ng-controller="videolistCtrl" ng-click="goToVideolist()">button</a>
+        <p>There's <span ng-hide="numberOfUsers">only you  </span><span ng-show="numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p><a ng-click="goToVideolist()">button</a>
       </div>
       <!-- Channel discussion-->
       <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding"><strong>{{line.username}}: </strong>{{line.txt}}</div>
