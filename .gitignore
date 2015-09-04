@@ -19,7 +19,7 @@ node_modules
 /ionic
 config/config.json
 npm-debug.log
-
+/platforms
 # Elastic Beanstalk Files
 !.elasticbeanstalk/config.yml
 !.elasticbeanstalk/*.cfg.yml

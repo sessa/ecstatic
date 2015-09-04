@@ -3,6 +3,10 @@ angular.module('ecstatic.player')
 .factory('playerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout){
 	var Service = {};
 	var channel_id = 0;
+    Service.soundcloudClientId = 0;
+    ConfigService.getConfig().then(function (data){
+         Service.soundcloudClientId = data.soundcloudClientId;
+    });
 
 	socket.on('next_song_action', function (data) {
 		console.log("heard next_song_action");
@@ -52,8 +56,7 @@ angular.module('ecstatic.player')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.playlist[Service.currentItem];
-        console.log("setItem, $source="+JSON.stringify(source));
-        Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+ConfigService.getConfig().soundcloudClientId), type: "audio/"+source.original_format});
+        Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+Service.soundcloudClientId), type: "audio/"+source.original_format});
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
