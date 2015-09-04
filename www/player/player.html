@@ -8,12 +8,12 @@
         <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
           <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
         </videogular><img src="{{playerServices.trackCover}}"/>
-        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><a ui-sref="mediapicker" class="button button-full button-dark"> Add songs</a>
+        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><a ui-sref="channel.mediapicker" class="button button-full button-dark">Add songs</a><a href="#" class="button button-full button-dark">Modify the playlist</a><br/>
         <button ng-click="nextSong()" class="button button-full button-dark"> Skip this song</button>
       </div>
       <!--if the player is empty-->
-      <div ng-switch-default="ng-switch-default"> 
-        <p class="title">There's no song in this playlist.</p><a href="#/mediapicker" class="button button-light"><i class="icon ion-plus-round"></i></a>
+      <div ng-switch-default="ng-switch-default" class="card padding">
+        <p class="title">There's no song in this playlist.</p><a ui-sref="channel.mediapicker" class="button button-full button-dark">Add songs</a>
       </div>
     </ng-switch>
   </ion-content>

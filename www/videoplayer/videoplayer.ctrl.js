@@ -1,7 +1,7 @@
 angular.module('ecstatic.videoplayer')
 
 .controller('VideoCtrl',
-	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
+	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "$ionicActionSheet", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, $ionicActionSheet, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
 
 	    socket.on('send_video', function (data) {
     	    console.log("added video" + JSON.stringify(data));
@@ -31,6 +31,31 @@ angular.module('ecstatic.videoplayer')
             });
         }
         $scope.render();
+        $scope.videoplayer_actionsheet = function(source) {
+                   source = source;
+                   var hideSheet = $ionicActionSheet.show({
+                     titleText: '',
+                     buttons: [
+                       { text: 'Record/Upload a video' },
+                       { text: 'Modify the video list' },
+                     ],
+                     cancelText: 'Cancel',
+
+                     cancel: function() {
+                          hideSheet();
+                        },
+                     buttonClicked: function(index) {
+                        switch(index){
+                            case 0 :
+                                $state.go('channel.camera');
+                                return true;
+                            case 1 :
+                                $state.go('channel.videoplayer');
+                                return true;
+                        }
+                     }
+                   });
+            }
 }])
 .service("videoEventServices", function ($rootScope){
     this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}

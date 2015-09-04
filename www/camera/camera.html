@@ -1,10 +1,19 @@
 
-<video id="videoElement" height="568" width="320" loop="loop"></video>
-<button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b trash"></button>
-<button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza pizza"></button>
-<div id="rec-button-holder">
-  <svg width="200" height="200" class="svg">
-    <!--circle.ring(cx=100, cy=100, r=50)-->
-  </svg>
-  <button on-release="onRelease();" on-hold="onHold()" class="rec-gesture"></button>
-</div>
+<ion-view>
+  <ion-content class="hasfooter">
+    <video id="videoElement" height="568" width="320" loop="loop"></video>
+    <!--button.button.button-large.button-clear.camera-icons.icon.ion-ios-more.side-menu-icon(ng-click="camera_actionsheet()")-->
+    <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b trash"></button>
+    <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza pizza"></button>
+    <div id="rec-button-holder">
+      <svg width="200" height="200" class="svg">
+        <!--circle.ring(cx=100, cy=100, r=50)-->
+      </svg>
+      <button on-release="onRelease();" on-hold="onHold()" class="rec-gesture"></button>
+    </div>
+    <!--.padding.camera-menu
+    a.button.button-block.button-dark(ui-sref="channel.videoplayer") Upload/Record a video
+    a.button.button-block.button-dark(href="#") Modify the video list
+    -->
+  </ion-content>
+</ion-view>

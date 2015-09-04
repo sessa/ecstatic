@@ -43,4 +43,5 @@ angular.module('ecstatic.camera')
 		$scope.hide = true;
 	});
 
+
 }]);

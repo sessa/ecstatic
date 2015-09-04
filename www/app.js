@@ -149,10 +149,14 @@ var app = angular.module('ecstatic', [
 
                     // a list of the user's likes on Soundcloud
 
-                    .state('mediapicker', {
+                    .state('channel.mediapicker', {
                         url: '/mediapicker',
-                        templateUrl: 'mediapicker/mediapicker.html',
-                        controller: 'MediapickerCtrl'
+                        views: {
+                          'channel-player': {
+                            templateUrl: 'mediapicker/mediapicker.html',
+                            controller: 'MediapickerCtrl'
+                          }
+                        }
                     })
 
             //         // a modifiable playlist for the music player
@@ -168,23 +172,31 @@ var app = angular.module('ecstatic', [
                   'channel-videoplayer': {
                     templateUrl: 'videoplayer/videoplayer.html',
                     controller: 'VideoCtrl'
-
                   }
                 }
             })
-            //         // the output of the user's main camera and a record button
+                    // the output of the user's main camera and a record button
 
-            //         .state('tv.camera', {
-            //             url: '/camera',
-            //             templateUrl: 'camera/camera.html'
-            //         })
+                    .state('channel.camera', {
+                        url: '/camera',
+                        views: {
+                          'channel-videoplayer': {
+                            templateUrl: 'camera/camera.html',
+                            controller: 'CameraCtrl'
+                          }
+                        }
+                    })
 
-            //         // a modifiable playlist for the video player
+                    // a modifiable playlist for the video player
 
-            //         .state('tv.videolist', {
-            //             url: '/videolist',
-            //             templateUrl: 'videolist/videolist.html'
-            //         })
+                    // .state('channel.videoplayer.videolist', {
+                    //     url: '/videolist',
+                    //     views: {
+                    //       'channel-videoplayer@': {
+                    //         templateUrl: 'videolist/videolist.html'
+                    //       }
+                    //     templateUrl: 'videolist/videolist.html'
+                    // })
 
             // the third tab : a chatroom
 

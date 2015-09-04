@@ -132,6 +132,10 @@ div.footer-button a.button.button-full {
 	border-top: none;
 }
 
+.camera-menu {
+
+  z-index: 200;
+}
 
 
 /* the record button */
@@ -141,7 +145,7 @@ div.footer-button a.button.button-full {
     left: 50%;
     width: auto;
     height: auto;
-    z-index: 100;
+    z-index: 200;
     transform: translateX(-50%);
     text-align: center;
 }
@@ -150,6 +154,7 @@ circle.rec-button {
 	width:44px;height:44px;
 	border-radius:50px;
 	fill: #DF0000;
+  z-index: 200;
 }
 
 .rec-gesture {
@@ -163,19 +168,27 @@ circle.rec-button {
 	bottom: 84px;
 	left: 50%;
   margin-left: -28px;
+  z-index: 200;
 
+}
+
+.side-menu-icon {
+  position: fixed;
+  top: 30px;
+  right: 5px;
+  color: white!important;
 }
 
 .camera-icons.trash {
 	position: fixed;
-	top: 50px;
+	top: 20px;
 	left: 5px;
 	color: white!important;
 }
 
 .camera-icons.pizza {
 	position: fixed;
-	bottom: 50px;
+	bottom: 100px;
 	right: 5px;
 	color: white!important;
 }
@@ -273,7 +286,7 @@ circle.ring {
 }
 
 
-/*video { 
+video { 
     position: fixed;
     top: 50%;
     left: 50%;
@@ -288,7 +301,7 @@ circle.ring {
     background-color: black;
   	background-size: cover;
   	transition: 1s opacity;
-}*/
+}
 
 .card.tv{
   height: 50vh;
@@ -307,7 +320,7 @@ circle.ring {
   z-index: 101;
 }
 
-video { 
+/*video { 
     top: 50%;
     left: 50%;
     min-width: 100vh;
@@ -321,7 +334,7 @@ video {
     background-color: black;
     background-size: cover;
     transition: 1s opacity;
-}
+}*/
 
 .bar-ecstatic {
   background-color: #E45C4F;
