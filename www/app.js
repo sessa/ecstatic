@@ -44,6 +44,13 @@ var app = angular.module('ecstatic', [
       'ecstatic.videoplayer',
       'ecstatic.videolist',
 ])
+.constant('ApiEndpoint', {
+  url: 'http://localhost:8100/api'
+})
+// For the real endpoint, we'd use this
+// .constant('ApiEndpoint', {
+//  url: 'http://cors.api.com/api'
+// })
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

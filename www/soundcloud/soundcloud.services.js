@@ -6,7 +6,7 @@ angular.module('ecstatic.soundcloud')
 
       Service.getFavorites = function() {
         ConfigService.getConfig().then(function (data) {
-          var redirect_uri = $location.absUrl().split(':')[0]+ ':' + $location.absUrl().split(':')[1] +':3001/soundcloud/callback';
+          var redirect_uri = ApiEndpoint.url+'/soundcloud/callback';
           console.log("redirect_uri+"+redirect_uri);
           console.log("data.soundcloudClientId+"+data.soundcloudClientId);
           SC.initialize({
