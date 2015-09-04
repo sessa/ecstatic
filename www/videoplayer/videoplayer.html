@@ -1,9 +1,13 @@
 
 <ion-view>
   <ion-content scroll="false" class="gradient has-header">
-    <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-      <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media"></vg-media>
-    </videogular>
+    <ng-switch on="showVideoplayer">
+      <div ng-switch-when="true">
+        <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
+          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media"></vg-media>
+        </videogular>
+      </div>
+    </ng-switch>
     <button ng-click="videoplayer_actionsheet()" class="button button-large button-clear camera-icons icon ion-ios-more side-menu-icon"></button>
     <!--.padding
     a.button.button-block.button-dark(ui-sref="channel.camera({ reload: true })") Upload/Record a video

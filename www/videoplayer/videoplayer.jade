@@ -1,12 +1,12 @@
 ion-view
 	ion-content.gradient.has-header(scroll="false")
-
-	
-		videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
-		vg-complete="videoplayerServices.onCompleteItem()", 
-		class="videogular-container video" 
-		vg-auto-play="videoplayerServices.autoplay")
-			vg-media.vg-media(vg-src="videoplayerServices.sources", vg-type="video")
+		ng-switch(on="showVideoplayer")
+			div(ng-switch-when="true")
+				videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
+				vg-complete="videoplayerServices.onCompleteItem()", 
+				class="videogular-container video" 
+				vg-auto-play="videoplayerServices.autoplay")
+					vg-media.vg-media(vg-src="videoplayerServices.sources", vg-type="video")
 		button.button.button-large.button-clear.camera-icons.icon.ion-ios-more.side-menu-icon(ng-click="videoplayer_actionsheet()")
 		
 

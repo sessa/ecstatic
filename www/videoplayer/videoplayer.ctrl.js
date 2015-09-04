@@ -15,6 +15,7 @@ angular.module('ecstatic.videoplayer')
 	    });
 
         $scope.videoplayerServices = videoplayerServices;
+        $scope.showVideoplayer = false;
         // shows you the player if there is a playlist, everytime the page loads.
         $scope.render = function(){
             channelServices.getChannels().then(function (channels){

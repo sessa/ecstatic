@@ -15,7 +15,7 @@ angular.module('ecstatic.camera')
 
 		var success = function(stream){
 			//setup the streaming video source and return it
-	      	videoSource = webkitURL.createObjectURL(stream);
+	      	videoSource = URL.createObjectURL(stream);
 	      	cameraEventServices.broadcastVideoSource(videoSource);
 
 	      	//set up the recording feature

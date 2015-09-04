@@ -1,9 +1,7 @@
 ion-view
-	ion-content.hasfooter
+	ion-content.hasfooter.gradient
 
-		
 		video(id="videoElement", height="568", width="320", loop)
-		//button.button.button-large.button-clear.camera-icons.icon.ion-ios-more.side-menu-icon(ng-click="camera_actionsheet()")
 		
 		button.button.button-large.button-clear.camera-icons.icon.ion-trash-b.trash(ng-click="deleteClip()")
 		button.button.button-large.button-clear.camera-icons.icon.ion-pizza.pizza(ng-click="sendVideo()")
@@ -11,7 +9,3 @@ ion-view
 			svg.svg(width=200, height=200)
 				//circle.ring(cx=100, cy=100, r=50)
 			button.rec-gesture(on-release="onRelease();", on-hold="onHold()")
-		
-		//.padding.camera-menu
-			a.button.button-block.button-dark(ui-sref="channel.videoplayer") Upload/Record a video
-			a.button.button-block.button-dark(href="#") Modify the video list
