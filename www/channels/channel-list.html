@@ -1,6 +1,6 @@
 
 <ion-view view-title="Channels">
-  <ion-nav-buttons side="secondary"><a href="#/app/create" class="button button-large icon-left gradient"><i class="icon ion-plus-round"></i></a></ion-nav-buttons>
+  <ion-nav-buttons side="secondary"><a href="#/setName" class="button button-large icon-left gradient"><i class="icon ion-plus-round"></i></a></ion-nav-buttons>
   <ion-content class="gradient">
     <ion-refresher pulling-text="~:D" on-refresh="doRefresh()"></ion-refresher>
     <ion-list>
@@ -19,7 +19,7 @@
             <h2>Dancy Sundays</h2>
             <h3>Daft Punk</h3><span>9M views </span><span>| </span><span>Today</span><i ng-click="#" class="icon ion-android-more-vertical"></i>
           </ion-item>
-          <ion-item ng-repeat="channel in channels" type="item-text-wrap" ng-click="joinChannel(channel.channel_id)" href="#/tab/player/{{channel.channel_id}}" class="channel item-thumbnail-channel-left item-icon-right"><img ng-src="{{channel.poster}}"/>
+          <ion-item ng-repeat="channel in channels" type="item-text-wrap" ng-click="joinChannel(channel.channel_id)" href="#/channel/{{channel.channel_id}}/videoplayer" class="channel item-thumbnail-channel-left item-icon-right"><img ng-src="{{channel.poster}}"/>
             <h2>{{channel.channel_name}}</h2>
             <h2> </h2>
             <h3> </h3><span> </span><span> </span><span> </span><i ng-click="#" class="icon ion-android-more-vertical"></i>

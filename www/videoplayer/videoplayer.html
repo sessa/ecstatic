@@ -1,11 +1,26 @@
 
-<div ng-controller="VideoCtrl">
-  <ng-switch on="showVideoplayer">
-    <!--if the player has songs in it-->
-    <div ng-switch-when="true">		
+<ion-view has-header="false">
+  <ion-content scroll="false" class="gradient">
+    <div class="card tv">
       <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
         <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media"></vg-media>
       </videogular>
+      <canvas>
+        <button id="rec" class="button">Upload/Record a video	</button>
+      </canvas>
     </div>
-  </ng-switch>
-</div>
+    <div class="card">
+      <p class="padding"><strong>Jonathan: </strong>Hi!</p>
+    </div>
+    <div class="card">
+      <p class="padding"><strong>Martin: </strong>Hullo</p>
+    </div>
+  </ion-content>
+  <script id="templates/popover.html" type="text/ng-template">
+    <ion-popover-view>
+      <ion-content>
+        <div class="list"><a href="#" class="item">Upload/Record a video</a><a href="#" class="item">Modify the loop list</a></div>
+      </ion-content>
+    </ion-popover-view>
+  </script>
+</ion-view>

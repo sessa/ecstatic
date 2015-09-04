@@ -220,7 +220,7 @@ app.post('/feedback', urlencodedParser, function(req, res){
             console.log(error);
         }else{
             console.log('Message sent: ' + info.response);
-            res.redirect('#/tab/feedback/thankyou');
+            res.redirect('#/app/feedback/thankyou');
         }
         });
   });

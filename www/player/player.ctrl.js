@@ -13,7 +13,7 @@ angular.module('ecstatic.player')
             $scope.render();
         });
         $scope.addSongs = function() {
-            $state.go('tab.channels-add');
+            $state.go('app.channels-add');
         }
         $scope.playerServices = playerServices;
         // shows you the player if there is a playlist, everytime the page loads.

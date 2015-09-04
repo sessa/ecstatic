@@ -1,6 +1,7 @@
 ion-view(view-title='Channels')
+
 	ion-nav-buttons(side="secondary")
-		a.button.button-large.icon-left.gradient(href="#/app/create")
+		a.button.button-large.icon-left.gradient(href="#/setName")
 			i.icon.ion-plus-round
 	ion-content.gradient
 		ion-refresher(pulling-text="~:D", on-refresh="doRefresh()")
@@ -30,7 +31,7 @@ ion-view(view-title='Channels')
 						span | 
 						span Today
 						i.icon.ion-android-more-vertical(ng-click="#")
-					ion-item.channel.item-thumbnail-channel-left.item-icon-right(ng-repeat='channel in channels', type='item-text-wrap', ng-click="joinChannel(channel.channel_id)", href='#/tab/player/{{channel.channel_id}}')
+					ion-item.channel.item-thumbnail-channel-left.item-icon-right(ng-repeat='channel in channels', type='item-text-wrap', ng-click="joinChannel(channel.channel_id)", href='#/channel/{{channel.channel_id}}/videoplayer')
 						img(ng-src='{{channel.poster}}')
 						h2 {{channel.channel_name}}
 						h2 

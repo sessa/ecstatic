@@ -1,66 +1,20 @@
 
-<ion-view ng-controller="PlayerCtrl as controller" ng-init="showChat=true; showTV=false; showRec=false; recording=true">
-  <ion-nav-buttons side="secondary"><a href="#/tab/mediapicker" class="button button-light"> <i class="icon ion-plus-round"></i></a></ion-nav-buttons>
-  <ion-header-bar ng-hide="recording" class="bar bar-subheader miniplayer">
+<ion-view>
+  <ion-content class="gradient">
     <ng-switch on="showPlayer">
       <!--if the player has songs in it-->
-      <div ng-switch-when="true">		
+      <div ng-switch-when="true" class="card padding">
         <!--the player		-->
         <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
           <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
-        </videogular>
-        <div class="current-song item-button-right"><img src="{{playerServices.trackCover}}"/>
-          <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p>
-          <button ng-click="nextSong()" class="button button-clear icon-left ion-ios-skipforward"> Skip</button>
-        </div>
+        </videogular><img src="{{playerServices.trackCover}}"/>
+        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><a ui-sref="mediapicker" class="button button-full button-dark"> Add songs</a>
+        <button ng-click="nextSong()" class="button button-full button-dark"> Skip this song</button>
       </div>
       <!--if the player is empty-->
       <div ng-switch-default="ng-switch-default"> 
-        <p class="title">There's no song in this playlist.</p>
+        <p class="title">There's no song in this playlist.</p><a href="#/mediapicker" class="button button-light"><i class="icon ion-plus-round"></i></a>
       </div>
     </ng-switch>
-  </ion-header-bar>
-  <div has-header="true" ng-class="[has-tabs, has-footer]">
-    <ion-content ng-show="showTV" ng-controller="VideoCtrl" scroll="false" class="TV">
-      <div ng-controller="VideoCtrl">
-        <ng-switch on="showVideoplayer">
-          <!--if the player has songs in it-->
-          <div ng-switch-when="true">		
-            <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-              <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media"></vg-media>
-            </videogular>
-          </div>
-        </ng-switch>
-      </div>
-    </ion-content>
-    <ion-content ng-show="showRec" ng-controller="CameraCtrl as camera" ng-init="showCamera()" scroll="false" class="camera">
-      <video id="videoElement" height="568" width="320" loop="loop"></video>
-      <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b trash"></button>
-      <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza pizza"></button>
-      <div id="rec-button-holder">
-        <svg width="200" height="200" class="svg">
-          <!--circle.ring(cx=100, cy=100, r=50)-->
-        </svg>
-        <button on-release="onRelease();" on-hold="onHold()" class="rec-gesture"></button>
-      </div>
-    </ion-content>
-    <ion-content ng-show="showChat" ng-controller="chatCtrl as chat" class="has-header chatbox padding gradient">
-      <!-- Channel announcements-->
-      <h1 ng-show="username">hi {{username}}! :)</h1>
-      <p>There's <span ng-hide="chat.numberOfUsers">only you  </span><span ng-show="chat.numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
-      <!-- Channel discussion-->
-      <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding"><strong>{{line.username}}:</strong>{{line.txt}}</div>
-    </ion-content>
-  </div>
-  <div class="chat-input">
-    <div ng-show="showChat" ng-controller="chatCtrl as chat" class="message-box list padding">
-      <form>
-        <label class="item-inset">
-          <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="typeform padding"/>
-        </label>
-        <button ng-click="enterText(lineText); lineText=''" class="hidden"></button>
-      </form>
-    </div>
-    <div class="chat-tabs tabs tabs-icon-only"><a ng-click="showTV=true; showRec=false; showChat=false;" class="tab-item"><i class="icon ion-ios-film"></i></a><a ng-click="showTV=false; showRec=true; showChat=false;" class="tab-item"><i class="icon ion-ios-videocam"></i></a><a ng-click="showTV=false; showRec=false; showChat=true;" class="tab-item"><i class="icon ion-chatbubbles"></i></a></div>
-  </div>
+  </ion-content>
 </ion-view>

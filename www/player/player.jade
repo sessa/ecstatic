@@ -1,40 +1,33 @@
-ion-view(ng-controller="PlayerCtrl as controller", ng-init="showChat=true; showTV=false; showRec=false; recording=true")
-	ion-nav-buttons(side="secondary")
-		a.button.button-light(href="#/tab/mediapicker") 
-			i.icon.ion-plus-round
-	ion-header-bar.bar.bar-subheader.miniplayer(ng-hide="recording")
+ion-view
+	ion-content.gradient
+
+
+	
 		ng-switch(on="showPlayer")
+
 			//if the player has songs in it
-			div(ng-switch-when="true") 		
-				include ./audioplayer/audioplayer.jade
+			.card.padding(ng-switch-when="true")
+
+				//the player		
+				videogular(vg-theme="playerServices.theme", 
+					vg-player-ready="playerServices.onPlayerReady($API)", 
+					vg-complete="playerServices.onCompleteItem()", 
+					class="videogular-container audio" 
+					vg-auto-play="playerServices.autoplay")
+					vg-media(vg-src="playerServices.sources", vg-type="audio")
+				
+				
+				img(src="{{playerServices.trackCover}}")
+				p
+					strong {{playerServices.trackTitle}}
+					br
+					| {{playerServices.trackUser}}
+						
+				a.button.button-full.button-dark(ui-sref="mediapicker")  Add songs
+				button.button.button-full.button-dark(ng-click="nextSong()")  Skip this song
+					
 			//if the player is empty
 			div(ng-switch-default) 
 				p.title There's no song in this playlist.
-
-	div(has-header="true", ng-class="[has-tabs, has-footer]")
-
-			ion-content.TV(ng-show="showTV", ng-controller="VideoCtrl", scroll="false")
-				include ../videoplayer/videoplayer.jade
-
-			ion-content.camera(ng-show="showRec", ng-controller="CameraCtrl as camera", ng-init="showCamera()", scroll="false")
-					
-				include ../camera/camera.jade
-
-			ion-content.has-header.chatbox.padding.gradient(ng-show="showChat", ng-controller="chatCtrl as chat")
-
-				include ../chat/chat.jade
-
-		.chat-input
-			.message-box.list.padding(ng-show="showChat", ng-controller="chatCtrl as chat")
-				form
-					label.item-inset
-						input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
-					button.hidden(ng-click="enterText(lineText); lineText=''")
-			
-			.chat-tabs.tabs.tabs-icon-only
-				a.tab-item(ng-click="showTV=true; showRec=false; showChat=false;")
-					i.icon.ion-ios-film
-				a.tab-item(ng-click="showTV=false; showRec=true; showChat=false;")
-					i.icon.ion-ios-videocam
-				a.tab-item(ng-click="showTV=false; showRec=false; showChat=true;")
-					i.icon.ion-chatbubbles
+				a.button.button-light(href="#/mediapicker")
+					i.icon.ion-plus-round

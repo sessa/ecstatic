@@ -1,11 +1,10 @@
 angular.module('ecstatic.create')
 
 
-
 .controller('setNameCtrl', function($scope, channelServices, $state) {
     $scope.nameChannel = function(channelName) {
-    	//$scope.channelName = channelName;
-        $state.go('app.channels-setTimer', {channelName:channelName});
+    	$scope.channelName = channelName;
+        $state.go('setTimer', {channelName:channelName});
     }
 })
 .controller('setTimerCtrl', function($scope, channelServices, $state, $stateParams){
@@ -15,7 +14,7 @@ angular.module('ecstatic.create')
 		var milliSinceEpoch = new Date().getTime();
 		var starterTime = (hours*3600000+mins*60000)+milliSinceEpoch;
 		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
-            $state.go('app.channels-countdown', {channel_id:data.player_state.channel_id});
+            $state.go('channel.player', {channel_id:data.player_state.channel_id});
     	});
 	}
 })
@@ -29,7 +28,7 @@ angular.module('ecstatic.create')
 		
 		$scope.finished = function(){
 			console.log("finished");
-			$state.go('app.channels-player', {channel_id:$stateParams.channel_id});
+			$state.go('app.channel.player', {channel_id:$stateParams.channel_id});
 		}	
 		if($scope.startTime < 0 ){
 			$scope.finished();
