@@ -7,11 +7,10 @@
       <p>There's <span ng-hide="chat.numberOfUsers">only you  </span><span ng-show="chat.numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
     </div>
     <!-- Channel discussion-->
-    <div class="chat-message scroll-item padding"><strong>jonathan: </strong>hi!</div>
     <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding"><strong>{{line.username}}:</strong>{{line.txt}}</div>
   </ion-content>
   <ion-footer has-footer="true" class="chat-input">
-    <div ng-show="showChat" ng-controller="chatCtrl as chat" class="message-box list padding">
+    <div class="message-box list padding">
       <form>
         <label class="item-inset">
           <input type="search" ng-model="lineText" ng-enter="enterText(lineText); lineText=''" placeholder="{{textPrompt}}" class="typeform padding"/>
