@@ -13,6 +13,18 @@ angular.module('ecstatic.player')
 		$rootScope.$broadcast('nextSong');
 	});
 
+    Service.getSocketId = function() {
+        var request = {
+            msg: "get_socket_id",
+        }
+        socket.on('get_socket_id', function (data) {
+            socketManager.listener(data);
+        });
+
+        var promise = socketManager.sendRequest(request); 
+        return promise;
+    }
+
 	Service.nextSongAction = function(playlistIndex, channel_id) {
 		var request = {
 			msg: "next_song_action",

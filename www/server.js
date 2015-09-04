@@ -36,6 +36,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('disconnect', function () {
         console.log("heard disconnect");
     });
+    socket.on('get_socket_id', function (data) {
+        socket.emit("get_socket_id", {"socket_id": socket.id, "callback_id":data.callback_id});
+    });
 
     //creates a new room
     socket.on('create_channel', function (data) {    
