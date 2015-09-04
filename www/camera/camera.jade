@@ -1,11 +1,11 @@
 ion-view
-	ion-content.hasfooter.gradient
+	ion-content.has-header.gradient
 
-		video(id="videoElement", height="568", width="320", loop)
+		video(id="videoElement" loop)
 		
-		button.button.button-large.button-clear.camera-icons.icon.ion-trash-b.trash(ng-click="deleteClip()")
-		button.button.button-large.button-clear.camera-icons.icon.ion-pizza.pizza(ng-click="sendVideo()")
-		#rec-button-holder
-			svg.svg(width=200, height=200)
-				//circle.ring(cx=100, cy=100, r=50)
-			button.rec-gesture(on-release="onRelease();", on-hold="onHold()")
+		button.button.button-large.button-clear.camera-icons.icon.ion-trash-b(ng-click="deleteClip()")
+		button.button.button-large.button-clear.camera-icons.icon.ion-pizza(ng-click="sendVideo()")
+		
+		//svg.svg(width=200, height=200)
+			//circle.ring(cx=100, cy=100, r=50)
+		button.button.button-large(on-release="onRelease();", on-hold="onHold()") Rec
