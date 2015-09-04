@@ -13,6 +13,10 @@ angular.module('ecstatic.videoplayer')
             });
 	    });
 
+        $scope.ended = function(){
+            console.log("ended");
+        }
+
         $scope.videoplayerServices = videoplayerServices;
         // shows you the player if there is a playlist, everytime the page loads.
         $scope.render = function(){
@@ -26,10 +30,12 @@ angular.module('ecstatic.videoplayer')
                     videoplayerServices.setChannel(channel);
                     $scope.showVideoplayer = true;
                     $scope.videoplayerServices = videoplayerServices;
+
                 }
             });
         }
         $scope.render();
+
 }])
 .service("videoEventServices", function ($rootScope){
     this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}

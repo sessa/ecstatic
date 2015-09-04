@@ -1,13 +1,15 @@
 
-<ion-side-menu side="left" ng-controller="VideoCtrl">
+<ion-side-menu side="left" ng-controller="VideoCtrl as ctrl">
   <ion-content has-header="true" class="has-tabs has-footer">
     <ng-switch on="showVideoplayer">
       <!--if the player has songs in it-->
       <div ng-switch-when="true">		
         <p>coo coo ca choo</p>
-        <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-          <vg-media vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
-        </videogular>
+        <video width="320" height="240" oncanplay="ctrl.ended()" autoplay="autoplay">
+          <source src="{{videoplayerServices.testclip1.src}}" type="video/mp4"/>
+        </video>
+        <p>{{videoplayerServices.sources}}</p>
+        <p>{{ended}}</p>
       </div>
     </ng-switch>
   </ion-content>
