@@ -1,6 +1,6 @@
 angular.module('ecstatic.camera')
 
-.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', function($scope, cameraEventServices, cameraServices) {
+.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', function($scope, cameraEventServices, cameraServices, $ionicHistory) {
 	// currently will only work in Chrome:
 	// var blobURL;
 	var video;
@@ -23,6 +23,8 @@ angular.module('ecstatic.camera')
 		if(cameraServices.getCurrentBlob()){
 			cameraServices.sendVideo();
 		}
+		$ionicHistory.goBack();
+		console.log("i didnt navigate!");
 	}
 	$scope.showCamera = function () {
 		cameraServices.cameraStart();

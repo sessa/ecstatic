@@ -289,7 +289,7 @@ circle.ring {
 
 video { 
     position: fixed;
-    top: 50%;
+    top: 1%;
     left: 50%;
     min-width: 100%;
     min-height: 100%;
@@ -301,6 +301,7 @@ video {
   	background-size: cover;
   	transition: 1s opacity;
 }
+
 
 .bar-ecstatic {
   background-color: #E45C4F;

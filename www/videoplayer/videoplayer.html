@@ -1,6 +1,6 @@
 
 <ion-view>
-  <ion-content scroll="false" class="gradient has-header">
+  <ion-content scroll="false" class="has-header">
     <ng-switch on="showVideoplayer">
       <div ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
