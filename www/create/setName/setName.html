@@ -1,15 +1,16 @@
 
 <ion-view view-title="">
-  <ion-content>
+  <ion-content class="gradient">
     <p></p>
     <div class="row"></div>
     <div class="row row-center">
       <div class="col">
-        <div class="list list-inset">
+        <div class="list list-inset card padding">
+          <h4>What is the channel's name?</h4>
           <label class="item item-input padding">
-            <input type="text" placeholder="What do you want to call you channel?" ng-model="channelName"/>
+            <input type="text" placeholder="Type a name here." ng-model="channelName"/>
           </label>
-          <button ng-click="nameChannel(channelName)" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
+          <button ng-click="nameChannel(channelName)" ng-init="channelName=random_name" class="button button-dark button-full icon-right ion-chevron-right">Choose starting time</button>
         </div>
       </div>
     </div>

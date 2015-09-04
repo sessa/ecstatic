@@ -33,6 +33,32 @@
  	background-color: #333;
 }
 
+.timer-input {
+  font-size: 3em!important;
+  min-height: 2em;
+  margin-top: 0.5em;
+  margin-left: -0.5em;
+  width: 3em;
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+::-webkit-input-placeholder {
+  padding-top: 15px;
+  padding-left: 5px;
+}
+
+.starting-time.label{
+
+  text-transform: uppercase;
+  font-weight: 200;
+    margin-left: -0.5em;
+}
 
 .current-song img {
 	max-width: 32px;
@@ -247,8 +273,7 @@ circle.ring {
 }
 
 
-
-video { 
+/*video { 
     position: fixed;
     top: 50%;
     left: 50%;
@@ -263,4 +288,49 @@ video {
     background-color: black;
   	background-size: cover;
   	transition: 1s opacity;
+}*/
+
+.card.tv{
+  height: 50vh;
+}
+
+.card.tv canvas{
+  background-color: red;
+  width: 100%;
+  top: 49px;
+  height: 50%;
+  z-index: 100;
+  position: absolute;
+}
+
+#rec {
+  z-index: 101;
+}
+
+video { 
+    top: 50%;
+    left: 50%;
+    min-width: 100vh;
+    min-height: 100vh;
+    max-width: 300%!important;
+    max-height: 300%!important;
+    width: auto!important;
+    height: auto!important;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: black;
+    background-size: cover;
+    transition: 1s opacity;
+}
+
+.bar-ecstatic {
+  background-color: #E45C4F;
+  border: white 1px solid;
+}
+.bar-ecstatic a h1{
+  color: white!important;
+}
+
+.transparent {
+  background: none!important;
 }

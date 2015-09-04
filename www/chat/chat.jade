@@ -1,10 +1,25 @@
-// Channel announcements
-h1(ng-show="username") hi {{username}}! :)
-p There's 
-	span(ng-hide="chat.numberOfUsers") only you  
-	span(ng-show="chat.numberOfUsers") {{numberOfUsers}} other ecstatic(s)
-	| in this channel. 
-// Channel discussion
-.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-	strong {{line.username}}:
-	| {{line.txt}}
+ion-view(ng-controller="ChatCtrl as controller")
+	ion-content.has-header.gradient.padding(has-header="true")
+		// Channel announcements
+
+		.padding.chat-message.scroll-item
+			h1(ng-show="username") hi {{username}}! :)
+			p There's 
+				span(ng-hide="chat.numberOfUsers") only you  
+				span(ng-show="chat.numberOfUsers") {{numberOfUsers}} other ecstatic(s)
+				| in this channel. 
+		// Channel discussion
+		.chat-message.scroll-item.padding
+			strong jonathan: 
+			| hi!
+		.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
+			strong {{line.username}}:
+			| {{line.txt}}
+	ion-footer.chat-input(has-footer="true")
+
+		.message-box.list.padding(ng-show="showChat", ng-controller="chatCtrl as chat")
+			form
+				label.item-inset
+					input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+				button.hidden(ng-click="enterText(lineText); lineText=''")
+			
