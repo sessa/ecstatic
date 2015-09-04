@@ -42,6 +42,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.mediapicker',
       'ecstatic.create',
       'ecstatic.videoplayer',
+      'ecstatic.videolist',
 ])
 
 .run(function($ionicPlatform) {
@@ -134,7 +135,6 @@ var app = angular.module('ecstatic', [
         templateUrl: 'channels/channel-tabs.html'
 
     })
-
             // the first tab : a music player
 
             .state('channel.player', {

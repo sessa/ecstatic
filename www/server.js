@@ -128,7 +128,6 @@ io.sockets.on('connection', function (socket) {
         }   
     });
     socket.on('send_video', function (data){
-        console.log("heard send_vide");
         //if there is a video, send video to S3
         client.get(data.channel_id, function (err, socket_info){
             var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
@@ -142,7 +141,9 @@ io.sockets.on('connection', function (socket) {
                         hasVideo: data.hasVideo,
                         video_key: data.video_key,
                         username: data.username,
+                        format: data.format
                     }
+                    console.log(JSON.stringify(parsed_data));
                     socket_info = JSON.parse(socket_info);
                     socket_info.player_state.cliplist.push(parsed_data);
                     client.set(data.channel_id, JSON.stringify(socket_info));
