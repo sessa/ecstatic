@@ -1,6 +1,13 @@
 
 <ion-view>
   <ion-content class="gradient">
+    <div ng-controller="CountdownCtrl">
+      <ng-switch on="showCountdown">
+        <div ng-switch-when="true">
+          <timer ng-attr-countdown="startTime" interval="1000" finish-callback="finished()">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
+        </div>
+      </ng-switch>
+    </div>
     <ng-switch on="showPlayer">
       <!--if the player has songs in it-->
       <div ng-switch-when="true" class="card padding">
