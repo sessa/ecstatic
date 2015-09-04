@@ -1,11 +1,13 @@
 ion-view(view-title='Channels')
 
 	ion-nav-buttons(side="secondary")
-		a.button.button-large.icon-left.gradient(href="#/setName")
-			i.icon.ion-plus-round
-	ion-content.gradient
+
+	ion-content.gradient.padding
 		ion-refresher(pulling-text="~:D", on-refresh="doRefresh()")
 		ion-list
+
+			a.button.button-block.icon-left(href="#/setName") Create a channel
+
 			ion-item.card.community
 				ion-list
 					ion-item.item-avatar
