@@ -18,21 +18,24 @@ angular.module('ecstatic.create')
     	});
 	}
 })
-.controller('CountdownCtrl', function($scope, channelServices, $stateParams, $state, $rootScope) {
-	channelServices.getChannels().then(function(data) {
-		var channel = channelServices.getChannel($stateParams.channel_id); 
-		var milliSinceEpoch = new Date().getTime();
-		$scope.startTime = parseInt((channel.start_time - milliSinceEpoch)/1000);
-		$rootScope.$broadcast('timer-set-countdown', $scope.startTime);
-		$scope.showCountdown = true;
-		$scope.finished = function(){
-			console.log("finished");
-			$scope.showCountdown = false;
-			//$scope.$apply();
-			//$state.go('app.channel.player', {channel_id:$stateParams.channel_id});
-		}	
-		if($scope.startTime < 1 ){
-			$scope.finished();
-		}
+.controller('CountdownCtrl', function(playerServices, $scope, channelServices, $stateParams, $state, $rootScope) {
+	channelServices.getChannels().then(function (data) {
+		playerServices.getSocketId().then(function (s) {
+			var channel = channelServices.getChannel($stateParams.channel_id); 
+			var milliSinceEpoch = new Date().getTime();
+			$scope.startTime = parseInt((channel.start_time - milliSinceEpoch)/1000);
+			$rootScope.$broadcast('timer-set-countdown', $scope.startTime);
+            //if()
+			$scope.showCountdown = true;
+			$scope.finished = function(){
+				console.log("finished");
+				$scope.showCountdown = false;
+				//$scope.$apply();
+				//$state.go('app.channel.player', {channel_id:$stateParams.channel_id});
+			}	
+			if($scope.startTime < 1 ){
+				$scope.finished();
+			}
+		});
 	});
 });
