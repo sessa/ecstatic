@@ -1,3 +1,4 @@
+
 .gradient {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
 	background: #F29537; /* Old browsers */
@@ -292,49 +293,14 @@ video {
     left: 50%;
     min-width: 100%;
     min-height: 100%;
-    max-width: 300%!important;
-    max-height: 300%!important;
     width: auto!important;
     height: auto!important;
     z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(0%);
     background-color: black;
   	background-size: cover;
   	transition: 1s opacity;
 }
-
-.card.tv{
-  height: 50vh;
-}
-
-.card.tv canvas{
-  background-color: red;
-  width: 100%;
-  top: 49px;
-  height: 50%;
-  z-index: 100;
-  position: absolute;
-}
-
-#rec {
-  z-index: 101;
-}
-
-/*video { 
-    top: 50%;
-    left: 50%;
-    min-width: 100vh;
-    min-height: 100vh;
-    max-width: 300%!important;
-    max-height: 300%!important;
-    width: auto!important;
-    height: auto!important;
-    z-index: -100;
-    transform: translateX(-50%) translateY(-50%);
-    background-color: black;
-    background-size: cover;
-    transition: 1s opacity;
-}*/
 
 .bar-ecstatic {
   background-color: #E45C4F;
