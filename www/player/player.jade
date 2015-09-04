@@ -1,7 +1,9 @@
 ion-view
 	ion-content.gradient
 		div(ng-controller="CountdownCtrl")
-			timer(ng-show="isVisible", ng-attr-countdown="startTime" interval="1000" finish-callback="finished()"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
+			ng-switch(on="showCountdown")
+				div(ng-switch-when="true")
+					timer(ng-attr-countdown="startTime" interval="1000" finish-callback="finished()"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
 		ng-switch(on="showPlayer")
 
 			//if the player has songs in it
