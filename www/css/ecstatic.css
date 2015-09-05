@@ -176,8 +176,6 @@ circle.rec-button {
 
 
 
-
-
 .vertical-screen:first-child, #videoElement, vg-media:first-child { 
     position: fixed;
     top: 1%;
@@ -191,7 +189,6 @@ circle.rec-button {
     background-size: cover;
     transition: 1s opacity;
 }
-
 
 
 
@@ -229,10 +226,18 @@ circle.rec-button {
 .videolist-icon {
   position: fixed;
   top: 40px;
-  right: 5px;
+  right: 0;
   color: white!important;
   z-index: 999;
 }
+.fullscreen-icon {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  color: white!important;
+  z-index: 999;
+}
+
 
 
 

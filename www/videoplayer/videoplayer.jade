@@ -19,9 +19,9 @@ ion-view
 
 	ion-footer
 		a.button.button-large.button-clear.camera-icons.icon.ion-android-list.videolist-icon(ui-sref="channel.videolist")
+		button.button.button-large.button-clear.camera-icons.icon.ion-arrow-expand.fullscreen-icon(ng-click="videoplayerServices.API.toggleFullScreen()")
 		br
 		br
 		br
 		a.button.button-assertive.icon.ion-videocamera.round-icon.camera-icon(ui-sref="channel.camera")
-		br
-		button.button.button-small.button-clear(ng-click="videoplayerServices.API.toggleFullScreen()") toggleFullScreen
+		
