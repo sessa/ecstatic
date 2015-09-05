@@ -1,19 +1,15 @@
 
 <ion-view>
-  <ion-content scroll="true" class="darkbg has-header">
+  <ion-content scroll="true" class="darkbg has-header"><a ui-sref="channel.videolist" class="button button-large button-clear camera-icons icon ion-android-list side-menu-icon"></a><a ui-sref="channel.camera" class="button button-assertive icon ion-videocamera record-icon round-icon"></a>
     <ng-switch on="showVideoplayer">
       <div ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media fullscreen-vid"></vg-media>
+          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media vertical-screen"></vg-media>
         </videogular>
       </div>
       <div ng-switch-default="ng-switch-default" class="padding">
         <h2 class="novideoyet-text">no video yet :(</h2>
       </div>
-    </ng-switch><a ui-sref="channel.videolist" class="button button-large button-clear camera-icons icon ion-android-list side-menu-icon"></a><a ui-sref="channel.camera" class="button button-assertive icon ion-videocamera record-icon round"></a>
-    <!--.padding
-    a.button.button-block.button-dark(ui-sref="channel.camera({ reload: true })") Upload/Record a video
-    a.button.button-block.button-dark(href="#") Modify the video list
-    -->
+    </ng-switch>
   </ion-content>
 </ion-view>

@@ -30,32 +30,7 @@ angular.module('ecstatic.videoplayer')
                 }
             });
         }
-        // $scope.render();
-        $scope.videoplayer_actionsheet = function(source) {
-                   source = source;
-                   var hideSheet = $ionicActionSheet.show({
-                     titleText: '',
-                     buttons: [
-                       { text: 'Record/Upload a video' },
-                       { text: 'Modify the video list' },
-                     ],
-                     cancelText: 'Cancel',
-
-                     cancel: function() {
-                          hideSheet();
-                        },
-                     buttonClicked: function(index) {
-                        switch(index){
-                            case 0 :
-                                $state.go('channel.camera');
-                                return true;
-                            case 1 :
-                                $state.go('channel.videolist');
-                                return true;
-                        }
-                     }
-                   });
-            }
+        $scope.render();
 }])
 .service("videoEventServices", function ($rootScope){
     this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
