@@ -10,17 +10,19 @@
     </div>
     <ng-switch on="showPlayer">
       <!--if the player has songs in it-->
-      <div ng-switch-when="true" class="card padding">
-        <!--the player		-->
+      <div ng-switch-when="true" class="padding center-text player-view">
+        <!--the player	-->
         <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
           <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
-        </videogular><img src="{{playerServices.trackCover}}"/>
-        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><a ui-sref="channel.mediapicker" class="button button-full button-dark">Add songs</a><a ui-sref="channel.playlist" class="button button-full button-dark">Modify the playlist</a><br/>
-        <button ng-click="nextSong()" class="button button-full button-dark"> Skip this song</button>
+        </videogular><br/><br/><br/><img src="{{playerServices.trackCover}}" class="cover-art"/>
+        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><br/><a ui-sref="channel.mediapicker" class="button button-dark">Add songs</a>
+        <!--a.button.button-full.button-dark(ui-sref="channel.playlist") Modify the playlist--><br/><br/>
+        <button ng-click="nextSong()" class="button button-clear"> Skip this song</button><br/>
       </div>
-      <!--if the player is empty-->
-      <div ng-switch-default="ng-switch-default" class="card padding">
-        <p class="title">There's no song in this playlist.</p><a ui-sref="channel.mediapicker" class="button button-full button-dark">Add songs</a>
+      <!--if the player is empty--><br/><br/><br/><br/>
+      <div ng-switch-default="ng-switch-default" class="card padding center-text"><br/>
+        <h3 class="title">Oh, wait.</h3>
+        <p>There's no song in this playlist.</p><br/><a ui-sref="channel.mediapicker" class="button button-dark">Add songs!</a><br/><br/>
       </div>
     </ng-switch>
   </ion-content>
