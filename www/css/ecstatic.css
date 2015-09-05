@@ -178,7 +178,7 @@ circle.rec-button {
 
 
 
-.vertical-screen video { 
+.vertical-screen:first-child, #videoElement, vg-media:first-child { 
     position: fixed;
     top: 1%;
     left: 50%;
@@ -214,7 +214,19 @@ circle.rec-button {
   background-color: #222222;
 }
 
-.side-menu-icon {
+.emptyvideoplayer {
+  text-align: center;
+}
+
+
+.camera-icon {
+  position: fixed;
+  top: 70vh;
+  left: 50%;
+  margin-left: -1.5em;
+}
+
+.videolist-icon {
   position: fixed;
   top: 40px;
   right: 5px;
@@ -222,10 +234,6 @@ circle.rec-button {
   z-index: 999;
 }
 
-.record-icon {
-  color: white!important;
-  z-index: 999;
-}
 
 
 /* channel.camera */

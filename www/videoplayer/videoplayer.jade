@@ -1,21 +1,27 @@
 ion-view
 	ion-content.darkbg.has-header(scroll="true")
-		a.button.button-large.button-clear.camera-icons.icon.ion-android-list.side-menu-icon(ui-sref="channel.videolist")
-		a.button.button-assertive.icon.ion-videocamera.record-icon.round-icon(ui-sref="channel.camera")
-		
-		ng-switch(on="showVideoplayer")
 
+		ng-switch(on="showVideoplayer")
 			
-			
-			div(ng-switch-when="true")
+			.active-videoplayer(ng-switch-when="true")
 				videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
 				vg-complete="videoplayerServices.onCompleteItem()", 
 				class="videogular-container video" 
 				vg-auto-play="videoplayerServices.autoplay")
-					vg-media.vg-media.vertical-screen(vg-src="videoplayerServices.sources", vg-type="video")
-			
-	
-			div(ng-switch-default).padding
-			
 
-				h2.novideoyet-text no video yet :(
+					vg-media.vg-media.vertical-screen(vg-src="videoplayerServices.sources", vg-type="video")
+
+
+			.empty-videoplayer(ng-switch-default)
+				.padding
+
+					h2.novideoyet-text no video yet :(
+
+	ion-footer
+		a.button.button-large.button-clear.camera-icons.icon.ion-android-list.videolist-icon(ui-sref="channel.videolist")
+		br
+		br
+		br
+		a.button.button-assertive.icon.ion-videocamera.round-icon.camera-icon(ui-sref="channel.camera")
+		br
+		button.button.button-small.button-clear(ng-click="videoplayerServices.API.toggleFullScreen()") toggleFullScreen
