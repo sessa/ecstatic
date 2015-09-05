@@ -14,9 +14,9 @@ angular.module('ecstatic.channels')
 		});
 	});
 
+
 	Service.addToPlaylist = function(channel_id, source) {
 		var channel = Service.getChannel(channel_id);
-		console.log("addToPlaylist");
 		channel.playlist.push(source);
 
 		var request = {

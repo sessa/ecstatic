@@ -23,8 +23,9 @@ angular.module('ecstatic.player')
                 $scope.numberOfUsers = Object.keys(channel.users).length;
                 $scope.numberOfUsers = $scope.numberOfUsers-1;
                 var playlistLength = channel.playlist.length;
+                console.log("render")
                 if(playlistLength !== 0){
-                    console.log("render");
+                    console.log("render playlistLength !== 0");
                     playerServices.setChannel(channel);
                     $scope.showPlayer = true;
                     $scope.playerServices = playerServices;

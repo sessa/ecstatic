@@ -181,6 +181,7 @@ io.sockets.on('connection', function (socket) {
             client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
             socket_info_dict.callback_id = data.callback_id;
             socket.broadcast.to(data.channel_info.channel_id).emit("update");
+            socket.emit("update");
         });
     });
 
