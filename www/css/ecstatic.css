@@ -173,12 +173,36 @@ circle.rec-button {
 
 }
 
+.novideoyet-text{
+  padding-top: 30vh;
+  color: white;
+  text-align: center
+}
+
+
+.round {
+  border-radius: 50%;
+}
+
+.darkbg {
+  background-color: #222222;
+}
+
 .side-menu-icon {
   position: fixed;
-  top: 30px;
+  top: 40px;
   right: 5px;
   color: white!important;
 }
+
+.record-icon {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  margin-left: -35px;
+  color: white!important;
+}
+
 
 .camera-icons.trash {
 	position: fixed;
@@ -295,7 +319,6 @@ circle.ring {
     min-height: 100%;
     width: auto!important;
     height: auto!important;
-    z-index: -100;
     transform: translateX(-50%) translateY(0%);
     background-color: black;
   	background-size: cover;

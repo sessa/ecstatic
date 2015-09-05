@@ -1,5 +1,5 @@
 ion-view(view-title="videolist")
-	ion-content
+	ion-content.gradient
 		ion-list
 			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='clip in cliplist', type='item-text-wrap', ng-click="activate(video)")
 				h2 {{clip.video_key}}

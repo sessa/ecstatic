@@ -30,7 +30,7 @@ angular.module('ecstatic.videoplayer')
                 }
             });
         }
-        $scope.render();
+        // $scope.render();
         $scope.videoplayer_actionsheet = function(source) {
                    source = source;
                    var hideSheet = $ionicActionSheet.show({

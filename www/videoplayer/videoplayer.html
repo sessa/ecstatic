@@ -1,6 +1,6 @@
 
 <ion-view>
-  <ion-content scroll="false" class="has-header">
+  <ion-content scroll="true" class="darkbg has-header">
     <ng-switch on="showVideoplayer">
       <div ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
@@ -9,7 +9,11 @@
       </div>
     </ng-switch>
     <button ng-click="videoplayer_actionsheet()" class="button button-large button-clear camera-icons icon ion-ios-more side-menu-icon"></button>
-    <button ng-click="videoplayerServices.API.toggleFullScreen()">toggleFullScreen</button>
+    <button ng-click="videoplayerServices.API.toggleFullScreen()">toggleFullScreen
+      <div ng-switch-default="ng-switch-default" class="padding">
+        <h2 class="novideoyet-text">no video yet :(</h2>
+      </div>
+    </button><a ui-sref="channel.videolist" class="button button-large button-clear camera-icons icon ion-android-list side-menu-icon"></a><a ui-sref="channel.camera" class="button button-assertive icon ion-videocamera record-icon round"></a>
     <!--.padding
     a.button.button-block.button-dark(ui-sref="channel.camera({ reload: true })") Upload/Record a video
     a.button.button-block.button-dark(href="#") Modify the video list

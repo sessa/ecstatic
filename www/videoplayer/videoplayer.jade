@@ -1,5 +1,5 @@
 ion-view
-	ion-content.has-header(scroll="false")
+	ion-content.darkbg.has-header(scroll="true")
 		ng-switch(on="showVideoplayer")
 			div(ng-switch-when="true")
 				videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
@@ -9,6 +9,16 @@ ion-view
 					vg-media.vg-media.fullscreen-vid(vg-src="videoplayerServices.sources", vg-type="video")
 		button.button.button-large.button-clear.camera-icons.icon.ion-ios-more.side-menu-icon(ng-click="videoplayer_actionsheet()")
 		button(ng-click="videoplayerServices.API.toggleFullScreen()") toggleFullScreen
+	
+			div(ng-switch-default).padding
+				
+
+				h2.novideoyet-text no video yet :(
+
+		a.button.button-large.button-clear.camera-icons.icon.ion-android-list.side-menu-icon(ui-sref="channel.videolist")
+		a.button.button-assertive.icon.ion-videocamera.record-icon.round(ui-sref="channel.camera")
+		
+
 
 		//.padding
 			a.button.button-block.button-dark(ui-sref="channel.camera({ reload: true })") Upload/Record a video
