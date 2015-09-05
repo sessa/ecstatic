@@ -4,7 +4,7 @@
     <ng-switch on="showVideoplayer">
       <div ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media"></vg-media>
+          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media fullscreen-vid"></vg-media>
         </videogular>
       </div>
     </ng-switch>
