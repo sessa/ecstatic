@@ -8,7 +8,7 @@ ion-view
 				vg-auto-play="videoplayerServices.autoplay")
 					vg-media.vg-media.fullscreen-vid(vg-src="videoplayerServices.sources", vg-type="video")
 		button.button.button-large.button-clear.camera-icons.icon.ion-ios-more.side-menu-icon(ng-click="videoplayer_actionsheet()")
-		
+		button(ng-click="videoplayerServices.API.toggleFullScreen()") toggleFullScreen
 
 		//.padding
 			a.button.button-block.button-dark(ui-sref="channel.camera({ reload: true })") Upload/Record a video
