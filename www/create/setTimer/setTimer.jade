@@ -6,13 +6,13 @@ ion-view(view-title="{{channelName}}")
 			br
 			h2 Commencing in...
 			
-			.row
+			.row.set-timer
 				.col
-					input.timer-input.padding(type="number", ng-model="startTimeHours", min=0, placeholder="0")
+					input.set-timer(type="number", ng-model="startTimeHours", min=0, placeholder="0")
 				.col
 					
 				.col
-					input.timer-input.padding(type="number", ng-model="startTimeMinutes", min=0, max=59, placeholder="0")
+					input.set-timer(type="number", ng-model="startTimeMinutes", min=0, max=59, placeholder="0")
 			.row
 				.col
 					span.starting-time.label hours

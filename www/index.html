@@ -5,8 +5,7 @@
   <title>Ecstatic</title>
   <base href="/">
   <!-- external imports-->
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:400,200,100" type="text/css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,100" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:700,300,400" rel="stylesheet" type="text/css">
   <!-- internal imports-->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
   <!-- cordova script (this will be a 404 during development)-->
@@ -83,14 +82,14 @@
       <ion-nav-view animation="slide-left-right"></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="left" enable-menu-with-back-views="false">
-      <ion-header-bar class="bar-dark">
-        <h1 class="title"></h1>
-      </ion-header-bar>
       <ion-content>
-        <ion-list>
-          <ion-item menu-close href="#/home">Home</ion-item>
-          <ion-item menu-close href="#/channels">Channels</ion-item>
-          <ion-item menu-close href="#/feedback">Feedback</ion-item>
+        <ion-list class="ecstatic-menu">
+          <ion-item class="center-text">Ecstatic v1.5</ion-item>
+          <ion-item menu-close href="#/home"><i class="icon ion-android-home"></i> 
+            Home
+          </ion-item>
+          <ion-item menu-close href="#/channels"> <i class="icon ion-radio-waves"></i> Channels</ion-item>
+          <ion-item menu-close href="#/feedback"> <i class="icon ion-clipboard"></i> Feedback</ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>

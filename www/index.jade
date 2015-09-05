@@ -6,8 +6,7 @@ head
 	base(href='/')
 
 	// external imports
-	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Raleway:400,200,100', type='text/css')
-	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400,100', type='text/css')
+	link(href='https://fonts.googleapis.com/css?family=Nunito:700,300,400' rel='stylesheet' type='text/css')
 	
 	// internal imports
 	script(src='lib/ionic/js/ionic.bundle.js')
@@ -86,10 +85,17 @@ body(ng-app='ecstatic')
 
 
 		ion-side-menu(side="left", enable-menu-with-back-views="false")
-			ion-header-bar.bar-dark
-				h1.title
+
 			ion-content
-				ion-list
-					ion-item(menu-close, href="#/home") Home
-					ion-item(menu-close, href="#/channels") Channels
-					ion-item(menu-close, href="#/feedback") Feedback
+				ion-list.ecstatic-menu
+					ion-item.center-text Ecstatic v1.5
+					ion-item(menu-close, href="#/home")
+						i.icon.ion-android-home
+						|  
+						| Home
+					ion-item(menu-close, href="#/channels") 
+						i.icon.ion-radio-waves
+						|  Channels
+					ion-item(menu-close, href="#/feedback") 
+						i.icon.ion-clipboard
+						|  Feedback
