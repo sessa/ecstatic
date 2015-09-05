@@ -1,3 +1,38 @@
+/* Fonts */
+
+body, .ionic-body {
+  font-family: 'Nunito', sans-serif!important;}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 500;
+  font-family: 'Nunito', sans-serif!important;}
+
+input, button, select, textarea {
+  font-family: 'Nunito', sans-serif!important; }
+
+input, button, select, textarea {
+  font-family: 'Nunito', sans-serif!important; }
+
+
+row.set-timer {
+  text-align: center;
+}
+
+input.create-channel {
+   font-size: 2em;
+   height: 2em;
+   padding: 0;
+   margin: 0.4em 0 0;
+   line-height: 2em;
+   border-bottom: 1px solid #333;
+}
+
+input.set-timer {
+   font-size: 4em;
+   min-height: 3em;
+   margin: 0;
+   line-height: 4em;
+}
 
 .gradient {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
@@ -49,16 +84,11 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
-::-webkit-input-placeholder {
-  padding-top: 15px;
-  padding-left: 5px;
-}
-
 .starting-time.label{
 
   text-transform: uppercase;
   font-weight: 200;
-    margin-left: -0.5em;
+  margin-left: -0.5em;
 }
 
 .current-song img {
