@@ -1,13 +1,13 @@
 
 <ion-view>
-  <ion-content scroll="true" class="darkbg has-header">
+  <ion-content scroll="false" class="darkbg has-header">
     <ng-switch on="showVideoplayer">
-      <div ng-switch-when="true" class="active-videoplayer">
+      <div id="active-videoplayer" ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media vertical-screen"></vg-media>
+          <vg-media id="videoplayer-container" vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
         </videogular>
       </div>
-      <div ng-switch-default="ng-switch-default" class="empty-videoplayer">
+      <div id="empty-videoplayer" ng-switch-default="ng-switch-default">
         <div class="padding">
           <h2 class="novideoyet-text">no video yet :(</h2>
         </div>
