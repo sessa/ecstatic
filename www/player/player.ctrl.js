@@ -46,10 +46,6 @@ angular.module('ecstatic.player')
         });
 
         $scope.render();
-
-
-
-
     }]
 )
 

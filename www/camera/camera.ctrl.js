@@ -1,6 +1,6 @@
 angular.module('ecstatic.camera')
 
-.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', function($scope, cameraEventServices, cameraServices, $ionicHistory) {
+.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams) {
 	// currently will only work in Chrome:
 	// var blobURL;
 	var video;
@@ -35,15 +35,14 @@ angular.module('ecstatic.camera')
 	$scope.sendVideo = function() {
 		//check if there is anything to send form mobile
 		if(cameraServices.getCurrentBlob()){
-			cameraServices.sendVideo();
+			cameraServices.sendVideo($stateParams.channel_id);
 		}else if($scope.video){
 			console.log("has mobile video");
-			cameraServices.sendVideo($scope.mobileVideo);
+			cameraServices.sendVideo($stateParams.channel_id, $scope.mobileVideo);
 		}else{
 			console.log("no video");
 		}
 		$ionicHistory.goBack();
-		console.log("i didnt navigate!");
 	}
 
 	$scope.sendMobileVideo = function(video) {

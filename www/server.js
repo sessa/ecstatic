@@ -124,10 +124,11 @@ io.sockets.on('connection', function (socket) {
     socket.on('join_channel', function (data) {
         if(socket.rooms.indexOf(data.channel_id) < 0){
             socket.join(data.channel_id);
-            socket.broadcast.to(data.channel_id).emit("update");
+            send_update(data.channel_id);
         }   
     });
     socket.on('send_video', function (data){
+        console.log("send_video, data.channel_id"+data.channel_id);
         //if there is a video, send video to S3
         client.get(data.channel_id, function (err, socket_info){
             var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
@@ -143,12 +144,14 @@ io.sockets.on('connection', function (socket) {
                         username: data.username,
                         format: data.format
                     }
-                    console.log(JSON.stringify(parsed_data));
-                    socket_info = JSON.parse(socket_info);
-                    socket_info.player_state.cliplist.push(parsed_data);
-                    client.set(data.channel_id, JSON.stringify(socket_info));
-                    socket.broadcast.to(data.channel_id).emit("send_video", parsed_data);
-                    socket.emit("send_video", parsed_data);
+
+                    //add the clip to redis
+                    var info_with_clip = JSON.parse(socket_info)
+                    info_with_clip.player_state.cliplist.push(parsed_data);
+                    client.set(data.channel_id, JSON.stringify(info_with_clip));
+
+                    //tell everyone the state changed
+                    send_update(data.channel_id);
                 }
             });
         });
@@ -180,11 +183,14 @@ io.sockets.on('connection', function (socket) {
             socket_info_dict.player_state = data.channel_info;
             client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
             socket_info_dict.callback_id = data.callback_id;
-            socket.broadcast.to(data.channel_info.channel_id).emit("update");
-            socket.emit("update");
+            send_update(data.channel_info.channel_id);
         });
     });
 
+    function send_update(channel_id){
+        socket.broadcast.to(channel_id).emit("update", {channel_id: channel_id});
+        socket.emit("update", {channel_id: channel_id});
+    }
  });
 
 //routes

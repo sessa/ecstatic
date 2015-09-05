@@ -64,10 +64,10 @@ angular.module('ecstatic.camera')
 
 	//Unfortunately, due to how the server strips out some fields, if you make changes below you need to also change them in server.js
 	//This is really stupid design that I guess I will fix, we probably dont care that our packets have slightly more text anyway
-	Service.sendVideo = function() {
+	Service.sendVideo = function(channel_id) {
       var request = {
         msg: "send_video",
-        channel_id: playerServices.channel_id,
+        channel_id: channel_id,
         username: Service.username,
         video_key: "" + Service.username + "_" + (new Date()).getTime() + ".webm",
         video: Service.getCurrentBlob(),
@@ -79,10 +79,10 @@ angular.module('ecstatic.camera')
       return promise;
     }
 
-    Service.sendMobileVideo = function(video) {
+    Service.sendMobileVideo = function(channel_id, video) {
     	var request = {
 	    	msg: "send_video",
-	        channel_id: playerServices.channel_id,
+	        channel_id: channel_id,
 	        username: Service.username,
 	        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".mp4",
 	        video: video,

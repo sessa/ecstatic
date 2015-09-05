@@ -1,16 +1,17 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'socket', 'socketManager', 'playerServices','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, socket, socketManager, playerServices, $sce, ConfigService) {
+.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'videoEventServices', 'socket', 'socketManager', 'playerServices','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, videoEventServices, socket, socketManager, playerServices, $sce, ConfigService) {
 	// We return this object to anything injecting our service
 	var Service = {};
 	Service.channels = [];
 
 	//This function updates the number of users, and the playlist when songs are added.
-	socket.on('update', function () {
+	socket.on('update', function (info) {
 		Service.getChannels().then(function (data){
-			var channel = Service.getChannel(playerServices.channel_id);
+			var channel = Service.getChannel(info.channel_id);
 			userNumberEventService.broadcast(Object.keys(channel.users).length);
 			updatePlayerstateEventService.broadcast(channel);
+			videoEventServices.broadcast(channel.cliplist);
 		});
 	});
 
@@ -87,6 +88,7 @@ angular.module('ecstatic.channels')
 
 		//When create channel returns, add the data to the channelModel
 		socket.on('create_channel', function (data) {
+			console.log("create_channel, data="+JSON.stringify(data));
 			Service.channels.push(data.player_state);
 			playerServices.channel_id = data.player_state.channel_id;
 			socketManager.listener(data);

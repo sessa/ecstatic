@@ -55,3 +55,7 @@ angular.module('ecstatic.videoplayer')
     
     return Service;
 })
+.service("videoEventServices", function ($rootScope){
+    this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
+    this.listen = function(callback) {$rootScope.$on("videoAdded",callback)}
+})
