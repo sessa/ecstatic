@@ -277,23 +277,25 @@ circle.rec-button {
 }
 
 
-.camera-icon {
-  position: fixed;
-  top: 70vh;
-  left: 50%;
-  margin-left: -1.5em;
-}
-
-.videolist-icon {
+.fullscreen-icon {
   position: fixed;
   top: 40px;
   right: 0;
   color: white!important;
   z-index: 999;
 }
-.fullscreen-icon {
+
+.videolist-icon {
   position: fixed;
   top: 80px;
+  right: 0;
+  color: white!important;
+  z-index: 999;
+}
+
+.camera-icon {
+  position: fixed;
+  top: 120px;
   right: 0;
   color: white!important;
   z-index: 999;
