@@ -9,25 +9,36 @@ angular.module('ecstatic.videoplayer')
     Service.setChannel = function(channel) {
         Service.currentItem = channel.playlistIndex;
         Service.autoplay = true;
-        Service.cliplist = channel.cliplist;
-        Service.channel = channel
-        Service.sources = [];
+        Service.channel = channel;
         Service.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css"
         Service.loadVideoSources();
     }
 
     Service.loadVideoSources = function(){
-        for(var i=0; i < Service.channel.cliplist.length; i++){
-            console.log("item");
-            var format = "video/" + Service.channel.cliplist[i].format;
-            videos[i] = [
-                {
-                    sources: [
-                        {src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+Service.channel.cliplist[i].video_key), type: format}
-                    ]
-                }
-            ];
+        var cliplist = Service.channel.cliplist;
+        for(var i=0; i < cliplist.length; i++){
+            if(cliplist[i].isActive){
+                console.log("loadVideoSources, cliplist[i]="+JSON.stringify(cliplist[i]));
+                console.log("loadVideoSources, [i]="+i);
+                videos[i] = [
+                    {
+                        sources: [
+                            {src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+cliplist[i].video_key), type: cliplist[i].type}
+                        ]
+                    }
+                ];
+            }
         }
+    }
+
+    Service.getNumberOfActiveClips = function(cliplist){
+        var numberOfActiveClips = 0;
+        for(var i=0; i < cliplist.length; i++){
+            if(cliplist[i].isActive){
+                numberOfActiveClips++;
+            }
+        }
+        return numberOfActiveClips;
     }
 
     Service.onLoadMetaData = function(evt) {
@@ -38,16 +49,19 @@ angular.module('ecstatic.videoplayer')
         Service.API = API;
         Service.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
         Service.setItem(Service.currentItem);
+        console.log("onVideoplayerReady, Service.setItem()");
         Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
     }
     Service.onCompleteItem = function() {
         Service.currentItem++;
         Service.delta = 0;
-        if (Service.currentItem >= Service.cliplist.length) Service.currentItem= 0;
+        if (Service.currentItem >= videos.length) Service.currentItem= 0;
         Service.setItem(Service.currentItem);
     }
 
     Service.setItem = function(index) {
+        console.log("setItem, index="+index);
+        console.log("setItem, videos[index][0].sources="+JSON.stringify(videos[index][0].sources));
         Service.API.stop();
         Service.sources = videos[index][0].sources;    
         $timeout(Service.API.play.bind(Service.API), 100);
