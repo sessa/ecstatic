@@ -237,6 +237,29 @@ circle.rec-button {
 
 
 
+.record-button {
+  color: red!important;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  margin: -1em;
+  max-width: 1em;
+  height: 44px!important;
+  width: 44px!important;
+  background-color: red;
+  border: none;
+}
+
+.record-button-label {
+  color: red!important;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  margin-left: -4em;
+
+}
+
+
 #videoElement, #videoplayer-container > video { 
     position: fixed;
     top: 0;
