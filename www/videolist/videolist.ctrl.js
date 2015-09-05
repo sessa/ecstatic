@@ -23,8 +23,3 @@ angular.module('ecstatic.videolist')
 		console.log("channel"+JSON.stringify(channel));		
 	});
 }])
-
-.service("videolistEventServices", function ($rootScope){
-    this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
-    this.listen = function(callback) {$rootScope.$on("videoAdded",callback)}
-})

@@ -1,38 +1,27 @@
 angular.module('ecstatic.videoplayer')
 
-.controller('VideoCtrl',
-	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "$ionicActionSheet", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, $ionicActionSheet, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
+.controller('VideoCtrl', ["$scope", "$stateParams", "videoplayerServices", 'channelServices', 'videoEventServices', function($scope,  $stateParams, videoplayerServices, channelServices, videoEventServices) {
 
-	    socket.on('send_video', function (data) {
-            channelServices.getChannels().then(function (channels){
-                var channel = channelServices.getChannel($stateParams.channel_id);
-                videoplayerServices.setChannel(channel);
-                if($scope.cliplistLength == 0){
-                    $scope.render();
-                }
-            });
-	    });
-
-        $scope.videoplayerServices = videoplayerServices;
-        $scope.showVideoplayer = false;
-        // shows you the player if there is a playlist, everytime the page loads.
-        $scope.render = function(){
-            channelServices.getChannels().then(function (channels){
-                var channel = channelServices.getChannel($stateParams.channel_id);
-                $scope.numberOfUsers = Object.keys(channel.users).length;
-                $scope.numberOfUsers = $scope.numberOfUsers-1;
-                $scope.cliplistLength = channel.cliplist.length;
-                if($scope.cliplistLength !== 0){
-                    console.log("render");
-                    videoplayerServices.setChannel(channel);
-                    $scope.showVideoplayer = true;
-                    $scope.videoplayerServices = videoplayerServices;
-                }
-            });
-        }
+    videoEventServices.listen(function (event, cliplist){
+        console.log("videoEventServices, cliplist="+JSON.stringify(cliplist));
+        $scope.videoplayerServices.cliplist = cliplist;
         $scope.render();
+    });
+
+    $scope.render = function() {
+        channelServices.getChannels().then(function (channels){
+            $scope.videoplayerServices = videoplayerServices;
+            $scope.showVideoplayer = false;
+            var channel = channelServices.getChannel($stateParams.channel_id);
+            $scope.cliplistLength = channel.cliplist.length;
+            console.log("render, cliplistLength="+$scope.cliplistLength);
+            if($scope.cliplistLength !== 0){
+                console.log("render cliplist");
+                videoplayerServices.setChannel(channel);
+                $scope.showVideoplayer = true;
+                $scope.videoplayerServices = videoplayerServices;
+            }
+        });
+    }
+    $scope.render();
 }])
-.service("videoEventServices", function ($rootScope){
-    this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
-    this.listen = function(callback) {$rootScope.$on("videoAdded",callback)}
-})
