@@ -1,12 +1,26 @@
-ion-view(view-title="")
-	ion-content
-		p How many hours till the event starts? (or do you want to get funky right now?)
-		.row
-		.row.row-center
-			.col
-				.list.list-inset
-					label.item.item-input.padding
-						input(type="number", ng-model="startTimeHours", min=0, placeholder="Hours")
-					label.item.item-input.padding
-						input(type="number", ng-model="startTimeMinutes", min=0, max=59, placeholder="Minutes")
-					button.button.button-positive.button-full(ng-click="setTimer(startTimeHours, startTimeMinutes)", ng-init="channelName=random_name") Create {{channelName}}
+ion-view(view-title="{{channelName}}")
+	ion-content.gradient
+		
+
+		.list.list-inset.card.padding(style="text-align: center") 
+			br
+			h2 Commencing in...
+			
+			.row
+				.col
+					input.timer-input.padding(type="number", ng-model="startTimeHours", min=0, placeholder="0")
+				.col
+					
+				.col
+					input.timer-input.padding(type="number", ng-model="startTimeMinutes", min=0, max=59, placeholder="0")
+			.row
+				.col
+					span.starting-time.label hours
+				.col
+					span.starting-time.label and
+				.col
+					span.starting-time.label minutes
+			br
+			br
+			
+			button.button.button-dark.button-full(ng-click="setTimer(startTimeHours, startTimeMinutes)", ng-init="channelName=random_name") Create {{channelName}}

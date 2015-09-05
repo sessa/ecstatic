@@ -1,14 +1,20 @@
 
-<ion-side-menu side="left" ng-controller="VideoCtrl">
-  <ion-content has-header="true" class="has-tabs has-footer">
+<ion-view>
+  <ion-content scroll="true" class="darkbg has-header">
     <ng-switch on="showVideoplayer">
-      <!--if the player has songs in it-->
-      <div ng-switch-when="true">		
-        <p>coo coo ca choo</p>
-        <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-          <vg-media vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
+      <div ng-switch-when="true" class="active-videoplayer">
+        <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
+          <vg-media vg-src="videoplayerServices.sources" vg-type="video" class="vg-media vertical-screen"></vg-media>
         </videogular>
+      </div>
+      <div ng-switch-default="ng-switch-default" class="empty-videoplayer">
+        <div class="padding">
+          <h2 class="novideoyet-text">no video yet :(</h2>
+        </div>
       </div>
     </ng-switch>
   </ion-content>
-</ion-side-menu>
+  <ion-footer><a ui-sref="channel.videolist" class="button button-large button-clear camera-icons icon ion-android-list videolist-icon"></a>
+    <button ng-click="videoplayerServices.API.toggleFullScreen()" class="button button-large button-clear camera-icons icon ion-arrow-expand fullscreen-icon"></button><br/><br/><br/><a ui-sref="channel.camera" class="button button-assertive icon ion-videocamera round-icon camera-icon"></a>
+  </ion-footer>
+</ion-view>

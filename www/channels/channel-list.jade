@@ -1,0 +1,24 @@
+ion-view(view-title='Channels')
+
+	ion-nav-buttons(side="secondary")
+
+	ion-content.gradient.padding
+		ion-refresher(pulling-text="~:D", on-refresh="doRefresh()")
+		ion-list
+
+			a.button.button-block.icon-left(href="#/setName") Create a channel
+
+			ion-item.channel.item-thumbnail-channel-left.item-icon-right(ng-repeat='channel in channels', type='item-text-wrap', ng-click="joinChannel(channel.channel_id)", href='#/channel/{{channel.channel_id}}/videoplayer')
+				img(ng-src='images/channels/empty-poster-small.png')
+				h2 {{channel.channel_name}}
+				h2 
+				h3 
+				span  
+				span 
+				span 
+				i.icon.ion-chevron-right(ng-click="#")
+
+
+
+
+

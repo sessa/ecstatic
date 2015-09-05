@@ -36,6 +36,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('disconnect', function () {
         console.log("heard disconnect");
     });
+    socket.on('get_socket_id', function (data) {
+        socket.emit("get_socket_id", {"socket_id": socket.id, "callback_id":data.callback_id});
+    });
 
     //creates a new room
     socket.on('create_channel', function (data) {    
@@ -178,6 +181,7 @@ io.sockets.on('connection', function (socket) {
             client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
             socket_info_dict.callback_id = data.callback_id;
             socket.broadcast.to(data.channel_info.channel_id).emit("update");
+            socket.emit("update");
         });
     });
 
@@ -225,7 +229,7 @@ app.post('/feedback', urlencodedParser, function(req, res){
             console.log(error);
         }else{
             console.log('Message sent: ' + info.response);
-            res.redirect('#/tab/feedback/thankyou');
+            res.redirect('#/app/feedback/thankyou');
         }
         });
   });

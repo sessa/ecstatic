@@ -71,8 +71,25 @@ head
 
 // THE APP
 body(ng-app='ecstatic')
-	ion-nav-bar.bar-dark
 
-		ion-nav-back-button
+	ion-side-menus(enable-menu-with-back-views="false")
+		ion-side-menu-content(ng-controller="NavCtrl")
+			ion-nav-bar.bar-dark
+				ion-nav-back-button
 
-	ion-nav-view
+				ion-nav-buttons(side="left")
+					button.button.button-icon.button-clear.ion-navicon(ng-click="showMenu()", menu-toggle="left")
+				ion-nav-buttons(side="right")
+					//button.button.button-icon.button-clear.ion-android-more-vertical(ng-click="")
+
+			ion-nav-view(animation="slide-left-right")
+
+
+		ion-side-menu(side="left", enable-menu-with-back-views="false")
+			ion-header-bar.bar-dark
+				h1.title
+			ion-content
+				ion-list
+					ion-item(menu-close, href="#/home") Home
+					ion-item(menu-close, href="#/channels") Channels
+					ion-item(menu-close, href="#/feedback") Feedback

@@ -61,113 +61,168 @@ var app = angular.module('ecstatic', [
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-  $ionicConfigProvider.views.maxCache(0);
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
+.controller('NavCtrl', function($scope, $ionicSideMenuDelegate, $ionicPopover) {
+
+    $scope.showMenu = function () {
+      $ionicSideMenuDelegate.toggleLeft();
+    };
+    
+})
+
+/*  States.js */
+
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+  $ionicConfigProvider.views.maxCache(3);
+
   $stateProvider
 
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'index/tabs.html'
-  })
+    // ecstatic & it's navigation menu
 
-  // Each tab has its own nav history stack:
+    // a static bulletin board with the latest updates of the production-ready branch
 
-  .state('tab.home', {
-    url: '/home',
-    views: {
-      'tab-home': {
+    .state('home', {
+        url: '/home',
         templateUrl: 'home/home.html',
         controller: 'HomeCtrl'
-      }
-    }
-  })
-  .state('tab.channels', {
-      url: '/channels',
-      views: {
-        'tab-channels': {
-          templateUrl: 'channels/tab-channels.html',
-          controller: 'ChannelsCtrl'
-        }
-      }
     })
-    .state('tab.create', {
-      url: '/create',
-      views: {
-        'tab-channels': {
-          templateUrl: 'create/setName/setName.html',
-          controller: 'setNameCtrl'
-        }
-      }
-    })
-    .state('tab.channels-setTimer', {
-      url: '/setTimer/channelName:channelName/',
-      views: {
-        'tab-channels': {
-          templateUrl: 'create/setTimer/setTimer.html',
-          controller: 'setTimerCtrl'
-        }
-      }
-    })
-    .state('tab.channels-countdown', {
-      url: '/countdown/channel_id:channel_id/',
-      views: {
-        'tab-channels': {
-          templateUrl: 'create/countdown/countdown.html',
-          controller: 'CountdownCtrl'
-        }
-      }
-    })
-    .state('tab.channels-player', {
-      url: '/player/:channel_id',
-      views: {
-        'tab-channels': {
-          templateUrl: 'player/player.html'
-        }
-      }
-    })
-    .state('tab.channels-mediapicker', {
-      url: '/mediapicker',
-      views: {
-        'tab-channels': {
-          templateUrl: 'mediapicker/mediapicker.html',
-        }
-      }
-    })
-    .state('tab.feedback', {
-      url: '/feedback',
-      views: {
-        'tab-feedback': {
-          templateUrl: 'feedback/feedback.html',
-          controller: 'FeedbackCtrl'
-        }
-      }
-    })
-    .state('tab.feedback-thankyou', {
-      url: '/feedback/thankyou',
-      views: {
-        'tab-feedback': {
-          templateUrl: 'feedback/thankyou.html',
-          controller: 'FeedbackCtrl'
-        }
-      }
-    })    
-    .state('tab.channels-videolist', {
-      url: '/videolist/',
-      views: {
-        'tab-channels': {
-          templateUrl: 'videolist/videolist.html',
-          controller: 'videolistCtrl'
-        }
-      }
-    })    
 
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+    // a list of all channels on the server
+
+    .state('channels', {
+        url: '/channels',
+        templateUrl: 'channels/channel-list.html',
+        controller: 'ChannelsCtrl'
+    })
+
+            // a form that sets the name of the channel
+
+            .state('setName', {
+                url: '/setName',
+                templateUrl: 'create/setName/setName.html',
+                controller: 'setNameCtrl'
+            })
+
+            // a form that sets the time left before the music starts
+
+            .state('setTimer', {
+                url: '/setTimer',
+                templateUrl: 'create/setTimer/setTimer.html',
+                controller: 'setTimerCtrl'
+            })
+
+    // a feedback form that sends an e-mail to jonathan at silentdiscosquad dot com
+
+    .state('feedback', {
+        url: '/feedback',
+        templateUrl: 'feedback/feedback.html',
+        controller: 'FeedbackCtrl'
+    })
+
+            // a thank you note
+
+            .state('feedback.thankyou', {
+                url: '/thankyou',
+                templateUrl: 'feedback/thankyou.html',
+                controller: 'FeedbackCtrl'
+            })
+
+    // a channel 
+
+    .state('channel', {
+        url: '/channel/:channel_id',
+        abstract: true,
+        templateUrl: 'channels/channel-tabs.html'
+
+    })
+            // the first tab : a music player
+
+            .state('channel.player', {
+                url: '/player',
+                views: {
+                  'channel-player': {
+                    templateUrl: 'player/player.html',
+                    controller: 'PlayerCtrl'
+                  }
+                }
+            })
+
+                    // a list of the user's likes on Soundcloud
+
+                    .state('channel.mediapicker', {
+                        url: '/mediapicker',
+                        views: {
+                          'channel-player': {
+                            templateUrl: 'mediapicker/mediapicker.html',
+                            controller: 'MediapickerCtrl'
+                          }
+                        }
+                    })
+
+                    // a modifiable playlist for the music player
+
+                    .state('channel.playlist', {
+                      url: '/playlist',
+                      views: {
+                        'channel-player': {
+                          templateUrl: 'playlist/playlist.html',
+                          controller: 'PlaylistCtrl'
+                        }
+                      }
+                    })
+
+            // the second tab : a video player
+
+            .state('channel.videoplayer', {
+                url: '/videoplayer',
+                views: {
+                  'channel-videoplayer': {
+                    templateUrl: 'videoplayer/videoplayer.html',
+                    controller: 'VideoCtrl'
+                  }
+                }
+            })
+                    // the output of the user's main camera and a record button
+
+                    .state('channel.camera', {
+                        url: '/camera',
+                        views: {
+                          'channel-videoplayer': {
+                            templateUrl: 'camera/camera.html',
+                            controller: 'CameraCtrl'
+                          }
+                        }
+                    })
+
+                    // a modifiable playlist for the video player
+
+                    .state('channel.videolist', {
+                        url: '/videolist',
+                        views: {
+                          'channel-videoplayer': {
+                            templateUrl: 'videolist/videolist.html',
+                            controller: 'videolistCtrl'
+                          }
+                        }
+                    })
+
+            // the third tab : a chatroom
+
+            .state('channel.chat', {
+                url: '/chat',
+                views: {
+                  'channel-chat': {
+                    templateUrl: 'chat/chat.html',
+                    controller: 'ChatCtrl'
+                  }
+                }
+            })
+
+            //         // a list of all users in this channel
+
+            //         //.state('', {
+            //         //})
+    
+    $urlRouterProvider.otherwise('channels');
 });
-

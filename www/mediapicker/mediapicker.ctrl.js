@@ -9,7 +9,6 @@ angular.module('ecstatic.mediapicker')
         $scope.sc = data;
     });
 
-
     // Show a menu when you choose a song from Soundcloud
     $scope.mediapicker_actionsheet = function(source) {
            source = source;
@@ -36,11 +35,14 @@ angular.module('ecstatic.mediapicker')
 
     $scope.add_to_playlist = function(source){
         channelServices.addToPlaylist(playerServices.channel_id, source);
-        console.log("added to playlist");
+
+        //Show Feedback for adding songs
         $scope.song_added = true;
-        setTimeout(function() {console.log("timer over"); $scope.song_added = false; console.log("timer over"); $scope.$apply();},3250);
-        
-        
+
+        setTimeout(function() {
+             $scope.song_added = false; 
+             $scope.$apply();
+         },3250);
     } 
 }])
 

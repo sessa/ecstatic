@@ -1,7 +1,7 @@
 angular.module('ecstatic.videoplayer')
 
 .controller('VideoCtrl',
-	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
+	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "$ionicActionSheet", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, $ionicActionSheet, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
 
 	    socket.on('send_video', function (data) {
             channelServices.getChannels().then(function (channels){
@@ -14,6 +14,7 @@ angular.module('ecstatic.videoplayer')
 	    });
 
         $scope.videoplayerServices = videoplayerServices;
+        $scope.showVideoplayer = false;
         // shows you the player if there is a playlist, everytime the page loads.
         $scope.render = function(){
             channelServices.getChannels().then(function (channels){
