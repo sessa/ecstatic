@@ -50,7 +50,7 @@ angular.module('ecstatic.videoplayer')
                                 $state.go('channel.camera');
                                 return true;
                             case 1 :
-                                $state.go('channel.videoplayer');
+                                $state.go('channel.videolist');
                                 return true;
                         }
                      }

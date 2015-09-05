@@ -8,7 +8,6 @@ ion-view(ng-controller="ChatCtrl as controller")
 				span(ng-hide="chat.numberOfUsers") only you  
 				span(ng-show="chat.numberOfUsers") {{numberOfUsers}} other ecstatic(s)
 				| in this channel. 
-			a(ng-click="goToVideolist()") button
 		// Channel discussion
 		.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
 			strong {{line.username}}:

@@ -189,14 +189,15 @@ var app = angular.module('ecstatic', [
 
                     // a modifiable playlist for the video player
 
-                    // .state('channel.videoplayer.videolist', {
-                    //     url: '/videolist',
-                    //     views: {
-                    //       'channel-videoplayer@': {
-                    //         templateUrl: 'videolist/videolist.html'
-                    //       }
-                    //     templateUrl: 'videolist/videolist.html'
-                    // })
+                    .state('channel.videolist', {
+                        url: '/videolist',
+                        views: {
+                          'channel-videoplayer': {
+                            templateUrl: 'videolist/videolist.html',
+                            controller: 'videolistCtrl'
+                          }
+                        }
+                    })
 
             // the third tab : a chatroom
 

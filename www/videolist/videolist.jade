@@ -3,7 +3,7 @@ ion-view(view-title="videolist")
 		ion-list
 			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='clip in cliplist', type='item-text-wrap', ng-click="activate(video)")
 				h2 {{clip.video_key}}
-				video(width="320" height="240" controls)
+				video(width="320" height="240" controls autoplay=true)
 					source(src="{{clip.src}}" type="video/mp4")
 				i.icon.ion-chevron-right.icon-accessory
 				
