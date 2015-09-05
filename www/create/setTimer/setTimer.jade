@@ -1,6 +1,9 @@
 ion-view(view-title="{{channelName}}")
 	ion-content.gradient
 		
+		.loader-center(ng-if="!doneLoading")
+			.loader
+				i.icon.ion-loading-c
 
 		.list.list-inset.card.padding(style="text-align: center") 
 			br

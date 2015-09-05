@@ -1,6 +1,9 @@
 
 <ion-view view-title="{{channelName}}">
   <ion-content class="gradient">
+    <div ng-if="!doneLoading" class="loader-center">
+      <div class="loader"><i class="icon ion-loading-c"></i></div>
+    </div>
     <div style="text-align: center" class="list list-inset card padding"> <br/>
       <h2>Commencing in...</h2>
       <div class="row">
