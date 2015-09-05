@@ -107,7 +107,7 @@ var app = angular.module('ecstatic', [
             // a form that sets the time left before the music starts
 
             .state('setTimer', {
-                url: '/setTimer',
+                url: '/setTimer:channelName',
                 templateUrl: 'create/setTimer/setTimer.html',
                 controller: 'setTimerCtrl'
             })
