@@ -176,9 +176,9 @@ circle.rec-button {
 
 
 
-.vertical-screen:first-child, #videoElement, vg-media:first-child { 
+#videoElement, #videoplayer-container > video { 
     position: fixed;
-    top: 1%;
+    top: 0;
     left: 50%;
     min-width: 100%;
     min-height: 100%;

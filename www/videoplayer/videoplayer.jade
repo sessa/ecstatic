@@ -1,18 +1,18 @@
 ion-view
-	ion-content.darkbg.has-header(scroll="true")
+	ion-content.darkbg.has-header(scroll="false")
 
 		ng-switch(on="showVideoplayer")
 			
-			.active-videoplayer(ng-switch-when="true")
+			#active-videoplayer(ng-switch-when="true")
 				videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
 				vg-complete="videoplayerServices.onCompleteItem()", 
 				class="videogular-container video" 
 				vg-auto-play="videoplayerServices.autoplay")
 
-					vg-media.vg-media.vertical-screen(vg-src="videoplayerServices.sources", vg-type="video")
+					vg-media#videoplayer-container(vg-src="videoplayerServices.sources", vg-type="video")
 
 
-			.empty-videoplayer(ng-switch-default)
+			#empty-videoplayer(ng-switch-default)
 				.padding
 
 					h2.novideoyet-text no video yet :(
