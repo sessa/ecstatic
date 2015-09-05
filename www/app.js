@@ -120,12 +120,13 @@ var app = angular.module('ecstatic', [
         controller: 'FeedbackCtrl'
     })
 
-            // // a thank you note
+            // a thank you note
 
-            // .state('feedback.thankyou', {
-            //     url: '/thankyou',
-            //     templateUrl: 'feedback/thankyou.html'
-            // })
+            .state('feedback.thankyou', {
+                url: '/thankyou',
+                templateUrl: 'feedback/thankyou.html',
+                controller: 'FeedbackCtrl'
+            })
 
     // a channel 
 
@@ -159,10 +160,17 @@ var app = angular.module('ecstatic', [
                         }
                     })
 
-            //         // a modifiable playlist for the music player
+                    // a modifiable playlist for the music player
 
-            //         //.state('', {
-            //         //})
+                    .state('channel.playlist', {
+                      url: '/playlist',
+                      views: {
+                        'channel-player': {
+                          templateUrl: 'playlist/playlist.html',
+                          controller: 'PlaylistCtrl'
+                        }
+                      }
+                    })
 
             // the second tab : a video player
 

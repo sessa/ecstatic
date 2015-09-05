@@ -4,14 +4,16 @@
   <ion-header-bar ng-show="song_added" class="bar bar-subheader miniplayer">
     <p class="padding">Song added to the playlist!</p>
   </ion-header-bar>
-  <ion-content class="has-header">
-    <ion-list class="list">
-      <ion-item ng-repeat="source in sc track by $index">
+  <ion-content class="gradient padding has-header">
+    <ion-list class="card list">
+      <ion-item ng-repeat="source in sc track by $index" ng-click="add_to_playlist(source)">
         <div class="item-content item-button-right item-thumbnail-left"><img src="{{source.artwork_url}}" class="padding"/>
           <p>Title: "{{source.title}}" </p>
           <p>Artist: "{{source.user.username}}"</p>
           <p>Duration: "{{source.duration}}"</p>
-          <button ng-click="mediapicker_actionsheet(source)" class="button button-clear"><i class="icon ion-more"></i></button>
+          <!-- a "..." button that opens a menu with secondary options for that song-->
+          <!--button.button.button-clear(ng-click="mediapicker_actionsheet(source)")i.icon.ion-more
+          -->
         </div>
       </ion-item>
     </ion-list>
