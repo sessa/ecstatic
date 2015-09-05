@@ -7,15 +7,24 @@ angular.module('ecstatic.create')
         $state.go('setTimer', {channelName:channelName});
     }
 })
-.controller('setTimerCtrl', function($scope, channelServices, $state, $stateParams){
+.controller('setTimerCtrl', function($scope, channelServices, $ionicLoading, $state, $stateParams){
+
     $scope.setTimer = function(hours, mins) {
     	hours = typeof hours !== 'undefined' ? hours : 0;
     	mins = typeof mins !== 'undefined' ? mins : 0;
 		var milliSinceEpoch = new Date().getTime();
 		var starterTime = (hours*3600000+mins*60000)+milliSinceEpoch;
+
+		$ionicLoading.show({
+			template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
+		});
+		setTimeout(function(){ 
 		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
+
+			$ionicLoading.hide();
             $state.go('channel.player', {channel_id:data.player_state.channel_id});
     	});
+    	 }, 500);
 	}
 })
 .controller('CountdownCtrl', function(countdownEventService, playerServices, $scope, channelServices, $stateParams, $state, $rootScope) {

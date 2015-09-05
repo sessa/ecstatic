@@ -237,6 +237,29 @@ circle.rec-button {
 
 
 
+.record-button {
+  color: red!important;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  margin: -1em;
+  max-width: 1em;
+  height: 44px!important;
+  width: 44px!important;
+  background-color: red;
+  border: none;
+}
+
+.record-button-label {
+  color: red!important;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  margin-left: -4em;
+
+}
+
+
 #videoElement, #videoplayer-container > video { 
     position: fixed;
     top: 0;
@@ -277,23 +300,25 @@ circle.rec-button {
 }
 
 
-.camera-icon {
-  position: fixed;
-  top: 70vh;
-  left: 50%;
-  margin-left: -1.5em;
-}
-
-.videolist-icon {
+.fullscreen-icon {
   position: fixed;
   top: 40px;
   right: 0;
   color: white!important;
   z-index: 999;
 }
-.fullscreen-icon {
+
+.videolist-icon {
   position: fixed;
   top: 80px;
+  right: 0;
+  color: white!important;
+  z-index: 999;
+}
+
+.camera-icon {
+  position: fixed;
+  top: 120px;
   right: 0;
   color: white!important;
   z-index: 999;

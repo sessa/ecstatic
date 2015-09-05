@@ -1,13 +1,20 @@
 angular.module('ecstatic.mediapicker')
 
-.controller('MediapickerCtrl', ['$window', '$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', function($window, $scope, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout) {
+.controller('MediapickerCtrl', ['$window', '$scope', '$ionicLoading', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', function($window, $scope, $ionicLoading, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout) {
     var source;
     $scope.song_added = false;
 
     // Gets your likes from Soundcloud
-    soundcloudService.getFavorites().then(function(data){
-        $scope.sc = data;
+    $ionicLoading.show({
+        template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
     });
+    setTimeout(function(){     
+        soundcloudService.getFavorites().then(function(data){
+
+            $ionicLoading.hide();
+            $scope.sc = data;
+        });
+    }, 500);
 
     // Show a menu when you choose a song from Soundcloud
     $scope.mediapicker_actionsheet = function(source) {
