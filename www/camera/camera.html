@@ -2,12 +2,12 @@
 <ion-view>
   <ion-content class="has-header gradient">
     <video id="videoElement" loop="loop"></video>
-    <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b"></button>
-    <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza"></button>
+    <!--button.button.button-large.button-clear.camera-icons.icon.ion-trash-b(ng-click="deleteClip()")-->
+    <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-pizza pizza"></button>
     <!--svg.svg(width=200, height=200)//circle.ring(cx=100, cy=100, r=50)
     -->
     <button on-release="onRelease();" on-hold="onHold()" class="button button-large">Rec</button>
-    <input type="file" id="fileinput"/>
-    <button ng-click="add()">Add</button>
+    <!--input(type="file" id="fileinput")-->
+    <!--button(ng-click="add()") Add-->
   </ion-content>
 </ion-view>

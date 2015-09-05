@@ -9,13 +9,14 @@ angular.module('ecstatic.camera')
 	// var mediaRecorder;
 	var file;
 	
-	document.getElementById('fileinput').addEventListener('change', function(){
-		file = this.files[0];
-		console.log("name : " + file.name);
-		console.log("size : " + file.size);
-		console.log("type : " + file.type);
-		console.log("date : " + file.lastModified);
-	}, false);
+	// david's code dont touch this mother fucker
+	// document.getElementById('fileinput').addEventListener('change', function(){
+	// 	file = this.files[0];
+	// 	console.log("name : " + file.name);
+	// 	console.log("size : " + file.size);
+	// 	console.log("type : " + file.type);
+	// 	console.log("date : " + file.lastModified);
+	// }, false);
 
 	$scope.add = function() {
 		cameraServices.sendMobileVideo(file);
