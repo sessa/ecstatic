@@ -4,7 +4,7 @@ angular.module('ecstatic.videolist')
 	['$sce', 'channelServices', '$stateParams', '$scope', '$state', 'playerServices', function($sce, channelServices, $stateParams, $scope, $state, playerServices) {
     channelServices.getChannels().then(function (channels){
 
-        var channel = channelServices.getChannel(playerServices.channel_id);
+        var channel = channelServices.getChannel($stateParams.channel_id);
         $scope.cliplist = [];
 
         for (var i = 0; i < channel.cliplist.length; i++){

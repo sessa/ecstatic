@@ -1,6 +1,6 @@
 angular.module('ecstatic.mediapicker')
 
-.controller('MediapickerCtrl', ['$window', '$scope', '$ionicLoading', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', function($window, $scope, $ionicLoading, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout) {
+.controller('MediapickerCtrl', ['$window', '$scope', '$ionicLoading', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', '$stateParams', function($window, $scope, $ionicLoading, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout, $stateParams) {
     var source;
     $scope.song_added = false;
 
@@ -41,7 +41,7 @@ angular.module('ecstatic.mediapicker')
     }
 
     $scope.add_to_playlist = function(source){
-        channelServices.addToPlaylist(playerServices.channel_id, source);
+        channelServices.addToPlaylist($stateParams.channel_id, source);
 
         //Show Feedback for adding songs
         $scope.song_added = true;
