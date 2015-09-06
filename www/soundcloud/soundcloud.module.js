@@ -1,1 +1,1 @@
-angular.module('ecstatic.soundcloud', ['ecstatic.config'])
+angular.module('ecstatic.soundcloud', ['ecstatic.config', 'ngStorage'])
