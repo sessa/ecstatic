@@ -1,13 +1,20 @@
 angular.module('ecstatic.mediapicker')
 
-.controller('MediapickerCtrl', ['$window', '$scope', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', function($window, $scope, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout) {
+.controller('MediapickerCtrl', ['$window', '$scope', '$ionicLoading', 'soundcloudService', 'playerServices', 'channelServices', '$state', '$ionicActionSheet', '$timeout', '$stateParams', function($window, $scope, $ionicLoading, soundcloudService, playerServices, channelServices, $state, $ionicActionSheet, $timeout, $stateParams) {
     var source;
     $scope.song_added = false;
 
     // Gets your likes from Soundcloud
-    soundcloudService.getFavorites().then(function(data){
-        $scope.sc = data;
+    $ionicLoading.show({
+        template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
     });
+    setTimeout(function(){     
+        soundcloudService.getFavorites().then(function(data){
+
+            $ionicLoading.hide();
+            $scope.sc = data;
+        });
+    }, 500);
 
     // Show a menu when you choose a song from Soundcloud
     $scope.mediapicker_actionsheet = function(source) {
@@ -34,7 +41,7 @@ angular.module('ecstatic.mediapicker')
     }
 
     $scope.add_to_playlist = function(source){
-        channelServices.addToPlaylist(playerServices.channel_id, source);
+        channelServices.addToPlaylist($stateParams.channel_id, source);
 
         //Show Feedback for adding songs
         $scope.song_added = true;

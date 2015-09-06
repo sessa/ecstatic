@@ -76,3 +76,7 @@ angular.module('ecstatic.player')
     }
     return Service;
 })
+.service("countdownEventService", function ($rootScope){
+    this.broadcast = function() {$rootScope.$broadcast("countdownFinished");}
+    this.listen = function(callback) {$rootScope.$on("countdownFinished",callback)}
+})
