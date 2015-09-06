@@ -5,7 +5,7 @@ angular.module('ecstatic.config', [])
 
 	Service.getConfig = function(){
 		var defer = $q.defer();
-		$http.get($location.absUrl().split(':')[0]+ ':' + $location.absUrl().split(':')[1] +':3001/soundcloudClientId')
+		$location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2] +'/soundcloudClientId')
 			.success(function (data){
 				defer.resolve(data);
 			});
