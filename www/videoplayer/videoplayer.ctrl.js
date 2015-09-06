@@ -1,7 +1,22 @@
 angular.module('ecstatic.videoplayer')
 
 .controller('VideoCtrl',
-	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket) {
+	["$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "videoplayerServices","playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', 'socket', 'videoVisibleEventServices', function($sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, videoplayerServices, playerServices, $state, $timeout, channelServices, ConfigService, socket, videoVisibleEventServices) {
+
+        // $scope.hidden = true;
+        // $scope.hidden2 = false;
+
+        videoVisibleEventServices.listenVisibleVideo(function (event, video_visible) {
+            if(video_visible == 0){
+                console.log("video changed to 0");
+                $scope.hidden = false;
+                $scope.hidden2 = true;
+            }else{
+                console.log("video changed to 1");
+                $scope.hidden = true;
+                $scope.hidden2 = false;
+            }
+        });
 
 	    socket.on('send_video', function (data) {
             channelServices.getChannels().then(function (channels){

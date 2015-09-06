@@ -3,10 +3,16 @@ ion-side-menu(side="left", ng-controller="VideoCtrl")
 		ng-switch(on="showVideoplayer")
 			//if the player has songs in it
 			div(ng-switch-when="true") 		
-				p coo coo ca choo
 				videogular(vg-theme="videoplayerServices.theme", 
-				vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
-				vg-complete="videoplayerServices.onCompleteItem()", 
-				class="videogular-container video" 
+				vg-player-ready="videoplayerServices.onVideoplayerOneReady($API)", 
+				vg-complete="videoplayerServices.onCompleteItemOne()", 
+				class="videogular-container video",
 				vg-auto-play="videoplayerServices.autoplay")
-					vg-media(vg-src="videoplayerServices.sources", vg-type="video")
+					vg-media(vg-src="videoplayerServices.sources_one", vg-type="video")
+				p coo coo cachoo
+				videogular(vg-theme="videoplayerServices.theme", 
+				vg-player-ready="videoplayerServices.onVideoplayerTwoReady($API)",
+				vg-complete="videoplayerServices.onCompleteItemTwo()", 
+				class="videogular-container video",
+				vg-auto-play="videoplayerServices.autoplay")
+					vg-media(vg-src="videoplayerServices.sources_two", vg-type="video")

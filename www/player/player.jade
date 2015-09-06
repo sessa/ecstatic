@@ -4,7 +4,7 @@ ion-view(ng-controller="PlayerCtrl as controller")
 			i.icon.ion-plus-round
 	ion-header-bar.bar.bar-subheader.miniplayer
 		ng-switch(on="showPlayer")
-			//if the player has songs in it
+			//if the player has songs in ion-nav-buttons
 			div(ng-switch-when="true") 		
 				include ./audioplayer/audioplayer.jade
 			//if the player is empty
