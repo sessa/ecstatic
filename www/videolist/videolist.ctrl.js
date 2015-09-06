@@ -22,8 +22,8 @@ angular.module('ecstatic.videolist')
 		console.log("channel.cliplist"+JSON.stringify($scope.cliplist));
 		console.log("channel"+JSON.stringify(channel));		
 	});
-    $scope.activateClip = function(clip){
+    $scope.toggleClip = function(clip){
         console.log("clip="+JSON.stringify(clip));
-        channelServices.setActiveClip($stateParams.channel_id, clip);
+        channelServices.toggleClip($stateParams.channel_id, clip);
     }
 }])

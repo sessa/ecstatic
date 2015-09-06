@@ -29,13 +29,23 @@ angular.module('ecstatic.channels')
 		socketManager.sendRequest(request); 
 	}
 
-	Service.setActiveClip = function(channel_id, clip) {
+	Service.toggleClip = function(channel_id, clip) {
 		var channel = Service.getChannel(channel_id);
 		for(var i = 0; i < channel.cliplist.length; i++){
 			if(channel.cliplist[i].video_key === clip.video_key){
-				clip.isActive = true;
-				channel.cliplist[i] = clip;
-				break;
+				console.log("toggleClip");
+				if(clip.isActive){
+									console.log("toggleClip, isActive = false now");
+					clip.isActive = false;
+					channel.cliplist[i] = clip;
+					break;
+				}
+				else{
+														console.log("toggleClip, isActive = true now");
+					clip.isActive = true;
+					channel.cliplist[i] = clip;
+					break;
+				}
 			}
 		}
 

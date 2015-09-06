@@ -2,7 +2,7 @@
 <ion-view view-title="videolist">
   <ion-content class="gradient">
     <ion-list>
-      <ion-item ng-repeat="clip in cliplist" type="item-text-wrap" ng-click="activateClip(clip)" class="item-remove-animate item-avatar item-icon-right">
+      <ion-item ng-repeat="clip in cliplist" type="item-text-wrap" ng-click="toggleClip(clip)" class="item-remove-animate item-avatar item-icon-right">
         <h2>{{clip.video_key}}
           <video width="320" height="240" controls="controls" autoplay="autoplay" loop="loop">
             <source src="{{clip.src}}" type="video/mp4"/>
