@@ -3,7 +3,7 @@
   <ion-nav-buttons side="secondary"><a href="#/tab/mediapicker" class="button button-light"> <i class="icon ion-plus-round"></i></a></ion-nav-buttons>
   <ion-header-bar class="bar bar-subheader miniplayer">
     <ng-switch on="showPlayer">
-      <!--if the player has songs in ion-nav-buttons-->
+      <!--if the player has songs in it-->
       <div ng-switch-when="true">		
         <!--the player		-->
         <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
@@ -26,12 +26,9 @@
         <ng-switch on="showVideoplayer">
           <!--if the player has songs in it-->
           <div ng-switch-when="true">		
-            <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerOneReady($API)" vg-complete="videoplayerServices.onCompleteItemOne()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-              <vg-media vg-src="videoplayerServices.sources_one" vg-type="video"></vg-media>
-            </videogular>
-            <p>coo coo cachoo</p>
-            <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerTwoReady($API)" vg-complete="videoplayerServices.onCompleteItemTwo()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-              <vg-media vg-src="videoplayerServices.sources_two" vg-type="video"></vg-media>
+            <p>coo coo ca choo</p>
+            <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
+              <vg-media vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
             </videogular>
           </div>
         </ng-switch>
