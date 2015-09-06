@@ -5,8 +5,11 @@
       <!--if the player has songs in it-->
       <div ng-switch-when="true">		
         <p>coo coo ca choo</p>
-        <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
-          <vg-media vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
+        <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerOneReady($API)" vg-complete="videoplayerServices.onCompleteItemOne()" ng-hide="hidden" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
+          <vg-media vg-src="videoplayerServices.sources_one" vg-type="video"></vg-media>
+        </videogular>
+        <videogular vg-theme="videoplayerServices.theme" vg-player-ready="videoplayerServices.onVideoplayerTwoReady($API)" vg-complete="videoplayerServices.onCompleteItemTwo()" ng-hide="hidden2" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
+          <vg-media vg-src="videoplayerServices.sources_two" vg-type="video"></vg-media>
         </videogular>
       </div>
     </ng-switch>
