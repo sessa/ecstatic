@@ -6,15 +6,13 @@ ion-side-menu(side="left", ng-controller="VideoCtrl")
 				p coo coo ca choo
 				videogular(vg-theme="videoplayerServices.theme", 
 				vg-player-ready="videoplayerServices.onVideoplayerOneReady($API)", 
-				vg-complete="videoplayerServices.onCompleteItemOne()", 
-				ng-hide="hidden",
-				class="videogular-container video",
-				vg-auto-play="videoplayerServices.autoplay")
+				vg-complete="videoplayerServices.onCompleteVideo()", 
+				ng-hide="hide_video_one",
+				class="videogular-container video")
 					vg-media(vg-src="videoplayerServices.sources_one", vg-type="video")
 				videogular(vg-theme="videoplayerServices.theme", 
 				vg-player-ready="videoplayerServices.onVideoplayerTwoReady($API)",
-				vg-complete="videoplayerServices.onCompleteItemTwo()", 
-				ng-hide="hidden2",
-				class="videogular-container video",
-				vg-auto-play="videoplayerServices.autoplay")
+				vg-complete="videoplayerServices.onCompleteVideo()", 
+				ng-hide="hide_video_two",
+				class="videogular-container video")
 					vg-media(vg-src="videoplayerServices.sources_two", vg-type="video")

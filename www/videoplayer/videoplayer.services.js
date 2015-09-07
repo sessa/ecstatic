@@ -10,7 +10,8 @@ angular.module('ecstatic.videoplayer')
     Service.API_two;
     var visible_video = 0;
     Service.currentItem = 0;
-    var firstime = true;
+    Service.video_one_index = 0;
+    Service.video_two_index = 1;
 
     Service.setChannel = function(channel) {
         Service.currentItem = channel.playlistIndex;
@@ -36,103 +37,49 @@ angular.module('ecstatic.videoplayer')
         }
     }
 
-    Service.onLoadMetaData = function(evt) {
-        // Service.API.seekTime(Service.delta, false);
-        // Service.API_one.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
-        // Service.API.seekTime(Service.delta, false);
-        Service.API_two.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
-    }
     Service.onVideoplayerOneReady = function(API) {
-        console.log("setting api");
         Service.API_one = API;
-        // Service.API_one.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
-        // Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
     }
 
     Service.onVideoplayerTwoReady = function(API) {
-        console.log("onplayerready");
         Service.API_two = API;
-        // Service.API_two.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
-        Service.setItem(Service.currentItem);
-        // Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
+        Service.initializeVideos();
     }
 
-    Service.onCompleteItemOne = function() {
-        console.log("complete");
-        if(visible_video!=0){
-        //     // Service.API_one.play();
-            return;
+    Service.onCompleteVideo = function() {
+        if(visible_video == 0){
+            //Video One completed
+            Service.switchVisiblePlayer();
+            $timeout(Service.API_two.play.bind(Service.API_two), 100);
+            Service.video_one_index = (Service.video_one_index + 2)%videos.length;
+            Service.setItemOne(Service.video_one_index);
+        }else if(visible_video == 1){
+            //Video Two completed
+            Service.switchVisiblePlayer();
+            $timeout(Service.API_one.play.bind(Service.API_one), 100);
+            Service.video_two_index = (Service.video_two_index + 2)%videos.length;
+            Service.setItemTwo(Service.video_two_index);
         }
-        // //hide this player, show second player, set source of player one and play
-        $timeout(Service.API_two.play.bind(Service.API_two), 100);
-        // //switch 2 hidden
-        Service.switchVisiblePlayer();
-        
-        Service.currentItem += 2;
-        Service.setItemOne(Service.currentItem);
-        Service.currentItem = Service.currentItem % videos.length;
-
-        // Service.switchVisiblePlayer();
-        // Service.currentItem = Service.currentItem + 2;
-        // if (Service.currentItem >= Service.cliplist.length) Service.currentItem= 0;
-        // Service.setItem(Service.currentItem);
     }
-
-    Service.onCompleteItemTwo = function() {
-        if(visible_video!=1){
-            // Service.API_two.stop();
-            // $timeout(Service.API_two.play.bind(Service.API_two), 100);
-            // Service.API_two.play();
-            return;
-        }
-        //hide two, show one, set source of two and play
-        $timeout(Service.API_one.play.bind(Service.API_one), 100);
-        Service.switchVisiblePlayer();
-
-
-        // Service.currentItem += 2;
-        Service.setItemTwo(Service.currentItem);
-        // Service.currentItem = Service.currentItem % videos.length;
-        // Service.currentItem += 1;
-        
-        // Service.currentItem = Service.currentItem + 2;
-        // if (Service.currentItem >= Service.cliplist.length) Service.currentItem= 0;
-        // Service.setItem(Service.currentItem);
-    }
-// 
-    Service.setItem = function(index) {
-        console.log("setItem");
+ 
+    Service.initializeVideos = function() {
         Service.API_one.stop();
         Service.API_two.stop();
-        Service.sources_one = videos[index][0].sources;
-        // console.log("source: " + JSON.stringify(Service.sources_one));
-        Service.sources_two = videos[(index+1)%(videos.length)][0].sources; 
+        Service.sources_one = videos[0][0].sources;
+        Service.sources_two = videos[1%(videos.length)][0].sources; 
         $timeout(Service.API_one.play.bind(Service.API_one), 100);
-        // $timeout(Service.API_two.play.bind(Service.API_two), 100);
-        // Service.API_one.play();
     }
 
     Service.setItemOne = function(index) {
-        console.log("hello?");
         Service.API_one.stop();
-        // console.log("index: " + (index));
-        Service.sources_one = videos[index%videos.length][0].sources;
+        Service.sources_one = videos[(index)%videos.length][0].sources;
         Service.API_one.mediaElement[0].load();
-        if(firstime){
-            console.log("its the first time");
-            firsttime = false;
-            $timeout(Service.API_one.play.bind(Service.API_one), 100);
-        }
-        // $timeout(Service.API_one.play.bind(Service.API_one), 100);
-
     }
 
     Service.setItemTwo = function(index) {
         Service.API_two.stop();
-        // console.log("undeffed: " + (index)%videos.length);
-        Service.sources_two = videos[(index+1)%videos.length][0].sources;
+        Service.sources_two = videos[(index)%videos.length][0].sources;
         Service.API_two.mediaElement[0].load();
-        // $timeout(Service.API_two.play.bind(Service.API_two), 100);
     }
 
     Service.switchVisiblePlayer = function() {

@@ -2,18 +2,22 @@ angular.module('ecstatic.videoplayer')
 
 .controller('VideoCtrl', ["$scope", "$stateParams", "videoplayerServices", 'channelServices', 'videoEventServices', 'videoVisibleEventServices', function($scope,  $stateParams, videoplayerServices, channelServices, videoEventServices, videoVisibleEventServices) {
 
-        // $scope.hidden = true;
-        // $scope.hidden2 = false;
+        $scope.hide_video_one = false;
+        $scope.hide_video_two = true;
+
+        videoEventServices.listen(function (event, cliplist){
+            $scope.videoplayerServices.cliplist = cliplist;
+            $scope.render();
+        });
 
         videoVisibleEventServices.listenVisibleVideo(function (event, video_visible) {
+
             if(video_visible == 0){
-                console.log("video changed to 0");
-                $scope.hidden = false;
-                $scope.hidden2 = true;
+                $scope.hide_video_one = false;
+                $scope.hide_video_two = true;
             }else{
-                console.log("video changed to 1");
-                $scope.hidden = true;
-                $scope.hidden2 = false;
+                $scope.hide_video_two = false;
+                $scope.hide_video_one = true;
             }
         });
 
