@@ -1,13 +1,12 @@
 
 <ion-view ng-controller="ChatCtrl as controller" cache-view="false">
-  <ion-content has-header="true" class="has-header gradient padding">
-    <!-- Channel announcements-->
-    <div class="padding chat-message scroll-item">
-      <h1 ng-show="username">hi {{username}}! :)</h1>
-      <p>There's <span ng-hide="chat.numberOfUsers">only you  </span><span ng-show="chat.numberOfUsers">{{numberOfUsers}} other ecstatic(s)</span>in this channel. </p>
-    </div>
+  <ion-content has-header="true" class="has-header has-footer gradient padding">
     <!-- Channel discussion-->
-    <div ng-repeat="line in chatLog track by $index" class="chat-message scroll-item padding"><strong>{{line.username}}:</strong>{{line.txt}}</div>
+    <div ng-repeat="line in chatLog track by $index">
+      <div class="chat-message scroll-item padding"><strong>{{line.username}}:</strong> 
+        {{line.txt}}
+      </div><br/>
+    </div>
   </ion-content>
   <ion-footer has-footer="true" class="chat-input">
     <div class="message-box list padding">

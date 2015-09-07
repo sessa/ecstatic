@@ -142,7 +142,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .message-box {
 	position: fixed!important;
-	bottom: 29px!important;
+	bottom: 40px!important;
 	width: 100%;
 	border-top: 1px solid #aaa;
 	background-color: white;
@@ -150,12 +150,16 @@ input[type=number]::-webkit-outer-spin-button {
 
 .chat-message.scroll-item {
 	border: none;
-	background-color: #eee;
+	background-color: #fff;
 	margin: 0.5em 0 0.5em;
-	border-radius: 10px;
+	border-radius: 15px;
 	overflow: initial;
-    white-space: initial;
+  white-space: initial;
+  display: inline-block;
+}
 
+.chat-message.scroll-item.me {
+float: right;
 }
 
 input.typeform  {

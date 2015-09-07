@@ -1,17 +1,13 @@
 ion-view(ng-controller="ChatCtrl as controller", cache-view="false" )
-	ion-content.has-header.gradient.padding(has-header="true")
-		// Channel announcements
+	ion-content.has-header.has-footer.gradient.padding(has-header="true")
 
-		.padding.chat-message.scroll-item
-			h1(ng-show="username") hi {{username}}! :)
-			p There's 
-				span(ng-hide="chat.numberOfUsers") only you  
-				span(ng-show="chat.numberOfUsers") {{numberOfUsers}} other ecstatic(s)
-				| in this channel. 
 		// Channel discussion
-		.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-			strong {{line.username}}:
-			| {{line.txt}}
+		div(ng-repeat="line in chatLog track by $index")
+			.chat-message.scroll-item.padding
+				strong {{line.username}}:
+				|  
+				| {{line.txt}}
+			br
 	ion-footer.chat-input(has-footer="true")
 
 		.message-box.list.padding
