@@ -1,7 +1,7 @@
 ion-view
 	ion-content.gradient
 
-		ng-switch(on="showPlayer")
+		ng-switch(on="showPlayer", ng-controller="PlayerCtrl")
 
 			//if the player has songs in it
 			.padding.center-text.player-view(ng-switch-when="true")

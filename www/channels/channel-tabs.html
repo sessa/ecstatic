@@ -25,7 +25,7 @@
         <ion-nav-view name="player">
           <ion-view>
             <ion-content class="gradient">
-              <ng-switch on="showPlayer">
+              <ng-switch on="showPlayer" ng-controller="PlayerCtrl">
                 <!--if the player has songs in it-->
                 <div ng-switch-when="true" class="padding center-text player-view">
                   <!--the player	-->
@@ -50,7 +50,7 @@
         <ion-nav-view name="videoplayer">
           <ion-view>
             <ion-content scroll="false" class="darkbg has-header">
-              <ng-switch on="showVideoplayer">
+              <ng-switch on="showVideoplayer" ng-controller="VideoCtrl">
                 <div id="active-videoplayer" ng-switch-when="true">
                   <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
                     <vg-media id="videoplayer-container" vg-src="videoplayerServices.sources" vg-type="video"></vg-media>

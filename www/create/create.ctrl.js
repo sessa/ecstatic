@@ -32,22 +32,28 @@ angular.module('ecstatic.create')
 	}
 })
 .controller('CountdownCtrl', function(countdownEventService, playerServices, $scope, channelServices, $stateParams, $state, $rootScope) {
-	playerServices.getSocketId().then(function (s) {
-		var channel = channelServices.getChannel($stateParams.channel_id); 
+	$scope.$watch('dataReady',function(ready){
+        if (ready){ startController() }
+    });
+
+    function startController() {
+    	console.log("$stateParams.channel_id"+$stateParams.channel_id);
+    	var channel = channelServices.getChannel($stateParams.channel_id); 
+    	console.log("channel="+JSON.stringify(channel));
 		var milliSinceEpoch = new Date().getTime();
 		$scope.startTime = parseInt((channel.start_time - milliSinceEpoch)/1000);
 		$rootScope.$broadcast('timer-set-countdown', $scope.startTime);
-        //if()
 		$scope.showCountdown = true;
+		
 		$scope.finished = function(){
 			console.log("finished");
 			$scope.showCountdown = false;
 			countdownEventService.broadcast();
-			$scope.$apply();
 			//$state.go('app.channel.player', {channel_id:$stateParams.channel_id});
 		}	
+
 		if($scope.startTime < 1 ){
 			$scope.finished();
 		}
-	});
+    }
 });

@@ -26,6 +26,7 @@ mixpanel.init("3cc8de265eae4e9f76364871a4ae56e7", {
 
 var app = angular.module('ecstatic', [
       'ngSanitize',
+      'ngStorage',
       'ngAnimate',
       'timer',
       'ionic',
@@ -45,7 +46,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.videolist',
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, channelServices, $stateParams) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -59,6 +60,21 @@ var app = angular.module('ecstatic', [
       StatusBar.styleLightContent();
     }
   });
+  $rootScope.dataReady = false;
+  var channelsLoaded = false;
+  channelServices.getChannels().then( function (data){
+    channelsLoaded = true;
+    if($stateParams.channel_id){
+      channelServices.joinChannel($stateParams.channel_id);
+    }
+  });
+
+  $rootScope.$watch( 
+    function(){return channelsLoaded},
+    function(ready){$rootScope.dataReady = ready; console.log(ready)}
+  );
+
+
 })
 
 
