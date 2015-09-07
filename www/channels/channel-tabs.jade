@@ -1,10 +1,20 @@
-ion-tabs.tabs-background-dark.tabs-color-light.tabs-color-light-positive
+div(ng-controller="CountdownCtrl as controller")
+	div(ng-show="showCountdown")
+		include ../create/countdown/countdown.jade
 
-	ion-tab(ui-sref="channel.player", icon-off="ion-music-note", icon-on="ion-music-note")
-		ion-nav-view(name="channel-player")
 
-	ion-tab(ui-sref="channel.videoplayer", icon-off="ion-social-youtube", icon-on="ion-social-youtube")
-		ion-nav-view(name="channel-videoplayer")
+	div(ng-hide="showCountdown")
+		ion-tabs.channel-tabs
+			ion-tab(icon-off="ion-music-note", icon-on="ion-music-note")
+				ion-nav-view(name="tabs")
+					include ../player/player.jade
 
-	ion-tab(ui-sref="channel.chat", icon-off="ion-chatbubble", icon-on="ion-chatbubble")
-		ion-nav-view(name="channel-chat")
+			ion-tab(icon-off="ion-social-youtube", icon-on="ion-social-youtube")
+				ion-nav-view(name="tabs")
+					include ../videoplayer/videoplayer.jade
+
+			ion-tab(icon-off="ion-chatbubble", icon-on="ion-chatbubble")
+				ion-nav-view(name="tabs")
+					include ../chat/chat.jade
+
+

@@ -235,6 +235,27 @@ circle.rec-button {
 
 }
 
+.countdown-container {
+  text-align: center;
+  width: 100%;
+  padding-top: 20vh;
+  color: white;
+}
+
+timer {
+  font-size: 5em;
+
+}
+
+.countdown-container p {
+  font-size: 1.5em;
+}
+
+
+
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
+    color: #CE5F84;
+}
 
 
 .record-button {
@@ -439,3 +460,13 @@ circle.ring {
   }
 }
 
+
+.channel-tabs {
+  transition: bottom 0.25s ease;
+}
+
+
+body.channel-tabs-slide-away {
+    .channel-tabs {
+        bottom: 0;
+    }

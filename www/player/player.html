@@ -1,13 +1,6 @@
 
 <ion-view>
   <ion-content class="gradient">
-    <div ng-controller="CountdownCtrl">
-      <ng-switch on="showCountdown">
-        <div ng-switch-when="true">
-          <timer ng-attr-countdown="startTime" interval="1000" finish-callback="finished()">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>
-        </div>
-      </ng-switch>
-    </div>
     <ng-switch on="showPlayer">
       <!--if the player has songs in it-->
       <div ng-switch-when="true" class="padding center-text player-view">
@@ -19,10 +12,10 @@
         <!--a.button.button-full.button-dark(ui-sref="channel.playlist") Modify the playlist--><br/><br/>
         <button ng-click="nextSong()" class="button button-clear"> Skip this song</button><br/>
       </div>
-      <!--if the player is empty--><br/><br/><br/><br/>
+      <!--if the player is empty--><br/>
       <div ng-switch-default="ng-switch-default" class="card padding center-text"><br/>
         <h3 class="title">Oh, wait.</h3>
-        <p>There's no song in this playlist.</p><br/><a ui-sref="channel.mediapicker" class="button button-dark">Add songs!</a><br/><br/>
+        <p>There's no song in this playlist.</p><br/><a ui-sref="channel.mediapicker" class="button button-dark">Add songs</a>
       </div>
     </ng-switch>
   </ion-content>

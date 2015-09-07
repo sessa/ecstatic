@@ -8,6 +8,7 @@ angular.module('ecstatic.player')
             $scope.numberOfUsers = userNumber;
         });
         countdownEventService.listen(function(event){
+            console.log("countdownFinished");
             $scope.countdownFinished = true;
             $scope.render();
         });
