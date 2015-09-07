@@ -22,7 +22,7 @@
   <div ng-hide="showCountdown">
     <ion-tabs class="channel-tabs">
       <ion-tab icon-off="ion-music-note" icon-on="ion-music-note">
-        <ion-nav-view name="tabs">
+        <ion-nav-view name="player">
           <ion-view>
             <ion-content class="gradient">
               <ng-switch on="showPlayer">
@@ -32,7 +32,7 @@
                   <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
                     <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
                   </videogular><br/><br/><br/><img src="{{playerServices.trackCover}}" class="cover-art"/>
-                  <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><br/><a ui-sref="channel.mediapicker" class="button button-dark">Add songs</a>
+                  <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><br/><a ui-sref="mediapicker" class="button button-dark">Add songs</a>
                   <!--a.button.button-full.button-dark(ui-sref="channel.playlist") Modify the playlist--><br/><br/>
                   <button ng-click="nextSong()" class="button button-clear"> Skip this song</button><br/>
                 </div>
@@ -47,7 +47,7 @@
         </ion-nav-view>
       </ion-tab>
       <ion-tab icon-off="ion-social-youtube" icon-on="ion-social-youtube">
-        <ion-nav-view name="tabs">
+        <ion-nav-view name="videoplayer">
           <ion-view>
             <ion-content scroll="false" class="darkbg has-header">
               <ng-switch on="showVideoplayer">
@@ -70,7 +70,7 @@
         </ion-nav-view>
       </ion-tab>
       <ion-tab icon-off="ion-chatbubble" icon-on="ion-chatbubble">
-        <ion-nav-view name="tabs">
+        <ion-nav-view name="chat">
           <ion-view ng-controller="ChatCtrl as controller" cache-view="false">
             <ion-content has-header="true" class="has-header has-footer gradient padding">
               <!-- Channel discussion-->

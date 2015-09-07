@@ -8,7 +8,7 @@
         <videogular vg-theme="playerServices.theme" vg-player-ready="playerServices.onPlayerReady($API)" vg-complete="playerServices.onCompleteItem()" vg-auto-play="playerServices.autoplay" class="videogular-container audio">
           <vg-media vg-src="playerServices.sources" vg-type="audio"></vg-media>
         </videogular><br/><br/><br/><img src="{{playerServices.trackCover}}" class="cover-art"/>
-        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><br/><a ui-sref="channel.mediapicker" class="button button-dark">Add songs</a>
+        <p><strong>{{playerServices.trackTitle}}</strong><br/>{{playerServices.trackUser}}</p><br/><a ui-sref="mediapicker" class="button button-dark">Add songs</a>
         <!--a.button.button-full.button-dark(ui-sref="channel.playlist") Modify the playlist--><br/><br/>
         <button ng-click="nextSong()" class="button button-clear"> Skip this song</button><br/>
       </div>
