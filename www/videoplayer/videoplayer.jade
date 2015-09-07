@@ -1,7 +1,7 @@
 ion-view
 	ion-content.darkbg.has-header(scroll="false")
 
-		ng-switch(on="showVideoplayer")
+		ng-switch(on="showVideoplayer", ng-controller="VideoCtrl")
 			
 			#active-videoplayer(ng-switch-when="true")
 				videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
