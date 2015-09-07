@@ -1,12 +1,15 @@
 ion-view
 	ion-content.darkbg.has-header(scroll="false")
-		.vertical-screen
-			video(id="videoElement" loop)
-		
-		button.button.button-large.button-clear.camera-icons.icon.ion-trash-b(ng-click="deleteClip()")
-		button.button.button-large.button-clear.camera-icons.icon.ion-checkmark-circled.pizza(ng-click="sendVideo()")
-		a.button.round-icon.record-button(on-release="onRelease();", on-hold="onHold()")
-		.record-button-label (Press &amp; Hold to Rec)
-
-		//input(type="file" id="fileinput")
-		//button(ng-click="add()") Add
+		div
+			.vertical-screen
+				input(type="file" id="fileinput")
+				button(ng-click="add()") Add
+				//- video(ng-show="file" id="videoElement" loop)
+		div(ng-show="onDesktop")
+			.vertical-screen
+				video(id="videoElement" loop)
+			
+			button.button.button-large.button-clear.camera-icons.icon.ion-trash-b(ng-click="deleteClip()")
+			button.button.button-large.button-clear.camera-icons.icon.ion-checkmark-circled.pizza(ng-click="sendVideo()")
+			a.button.round-icon.record-button(on-release="onRelease();", on-hold="onHold()")
+			.record-button-label (Press &amp; Hold to Rec)

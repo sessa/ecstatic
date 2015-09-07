@@ -1,13 +1,19 @@
 
 <ion-view>
   <ion-content scroll="false" class="darkbg has-header">
-    <div class="vertical-screen">
-      <video id="videoElement" loop="loop"></video>
+    <div>
+      <div class="vertical-screen">
+        <input type="file" id="fileinput"/>
+        <button ng-click="add()">Add</button>
+      </div>
     </div>
-    <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b"></button>
-    <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-checkmark-circled pizza"></button><a on-release="onRelease();" on-hold="onHold()" class="button round-icon record-button"></a>
-    <div class="record-button-label">(Press &amp; Hold to Rec)</div>
-    <!--input(type="file" id="fileinput")-->
-    <!--button(ng-click="add()") Add-->
+    <div ng-show="onDesktop">
+      <div class="vertical-screen">
+        <video id="videoElement" loop="loop"></video>
+      </div>
+      <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b"></button>
+      <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-checkmark-circled pizza"></button><a on-release="onRelease();" on-hold="onHold()" class="button round-icon record-button"></a>
+      <div class="record-button-label">(Press &amp; Hold to Rec)</div>
+    </div>
   </ion-content>
 </ion-view>
