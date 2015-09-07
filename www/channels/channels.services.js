@@ -1,6 +1,6 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'videoEventServices', 'socket', 'socketManager', 'playerServices','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, videoEventServices, socket, socketManager, playerServices, $sce, ConfigService) {
+.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'videoEventServices', 'socket', 'socketManager','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, videoEventServices, socket, socketManager, $sce, ConfigService) {
 	// We return this object to anything injecting our service
 	var Service = {};
 	Service.channels = [];
@@ -90,7 +90,6 @@ angular.module('ecstatic.channels')
 		socket.on('create_channel', function (data) {
 			console.log("create_channel, data="+JSON.stringify(data));
 			Service.channels.push(data.player_state);
-			playerServices.channel_id = data.player_state.channel_id;
 			socketManager.listener(data);
 		});
 		// Storing in a variable for clarity on what sendRequest returns

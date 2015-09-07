@@ -2,8 +2,26 @@ angular.module('ecstatic.player')
 
 .controller('PlayerCtrl',
 	['countdownEventService', "$sce", "$scope", 'userNumberEventService', 'updatePlayerstateEventService', "$stateParams", "playerServices", "$state", "$timeout", 'channelServices', 'ConfigService', function(countdownEventService, $sce, $scope, userNumberEventService, updatePlayerstateEventService, $stateParams, playerServices, $state, $timeout, channelServices, ConfigService) {
-        playerServices.channel_id = $stateParams.channel_id;
-        channelServices.joinChannel(playerServices.channel_id);
+        $scope.$watch('dataReady',function(ready){
+            if (ready){ startController(); }
+        });
+
+        function startController(){
+            var channel = channelServices.getChannel($stateParams.channel_id);
+            $scope.numberOfUsers = Object.keys(channel.users).length;
+            $scope.numberOfUsers = $scope.numberOfUsers-1;
+            var playlistLength = channel.playlist.length;
+            console.log("render");
+            if(playlistLength !== 0 && $scope.countdownFinished){
+                console.log("render playlistLength !== 0");
+                playerServices.setChannel(channel);
+                $scope.showPlayer = true;
+                $scope.playerServices = playerServices;
+            }
+        }
+    
+
+        channelServices.joinChannel($stateParams.channel_id);
         userNumberEventService.listen(function (event, userNumber){
             $scope.numberOfUsers = userNumber;
         });
@@ -22,26 +40,11 @@ angular.module('ecstatic.player')
         }
         $scope.playerServices = playerServices;
         // shows you the player if there is a playlist, everytime the page loads.
-        $scope.render = function(){
-            channelServices.getChannels().then(function (channels){
-                var channel = channelServices.getChannel(playerServices.channel_id);
-                $scope.numberOfUsers = Object.keys(channel.users).length;
-                $scope.numberOfUsers = $scope.numberOfUsers-1;
-                var playlistLength = channel.playlist.length;
-                console.log("render");
-                if(playlistLength !== 0 && $scope.countdownFinished){
-                    console.log("render playlistLength !== 0");
-                    playerServices.setChannel(channel);
-                    $scope.showPlayer = true;
-                    $scope.playerServices = playerServices;
-                }
-            });
-        }
         
         $scope.nextSong = function() {
             console.log("nextSong Action, $scope.playerServices.currentItem"+$scope.playerServices.currentItem);
             $scope.playerServices.onCompleteItem();
-            playerServices.nextSongAction($scope.playerServices.currentItem, playerServices.channel_id);
+            playerServices.nextSongAction($scope.playerServices.currentItem, $stateParams.channel_id);
 
         }
 
@@ -49,8 +52,6 @@ angular.module('ecstatic.player')
             $scope.playerServices.onCompleteItem();
             $scope.playerServices.setItem(playerServices.currentItem);
         });
-
-        $scope.render();
     }]
 )
 
