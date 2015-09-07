@@ -7,7 +7,7 @@ angular.module('ecstatic.create')
         $state.go('setTimer', {channelName:channelName});
     }
 })
-.controller('setTimerCtrl', function($scope, channelServices, $ionicLoading, $state, $stateParams){
+.controller('setTimerCtrl', function($scope, channelServices, $ionicLoading, $state, $ionicHistory, $stateParams){
 
     $scope.setTimer = function(hours, mins) {
     	hours = typeof hours !== 'undefined' ? hours : 0;
@@ -22,6 +22,10 @@ angular.module('ecstatic.create')
 		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
 
 			$ionicLoading.hide();
+		    $ionicHistory.nextViewOptions({
+		      disableAnimate: false,
+		      disableBack: true
+		    });
             $state.go('channel', {channel_id:data.player_state.channel_id});
     	});
     	 }, 500);
