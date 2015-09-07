@@ -164,81 +164,55 @@ var app = angular.module('ecstatic', [
 
     })
 
-                    // a list of the user's likes on Soundcloud
+            // a list of the user's likes on Soundcloud
 
-                    .state('channel.mediapicker', {
-                        url: '/mediapicker',
-                        views: {
-                          'main': {
-                            templateUrl: 'mediapicker/mediapicker.html',
-                            controller: 'MediapickerCtrl'
-                          }
-                        }
-                    })
-
-                    // a modifiable playlist for the music player
-
-                    .state('channel.playlist', {
-                      url: '/playlist',
-                      views: {
-                        'channel-player': {
-                          templateUrl: 'playlist/playlist.html',
-                          controller: 'PlaylistCtrl'
-                        }
-                      }
-                    })
-
-            // the second tab : a video player
-
-            .state('channel.videoplayer', {
-                url: '/videoplayer',
+            .state('channel.mediapicker', {
+                url: '/mediapicker',
                 views: {
-                  'channel-videoplayer': {
-                    templateUrl: 'videoplayer/videoplayer.html',
-                    controller: 'VideoCtrl'
-                  }
-                }
-            })
-                    // the output of the user's main camera and a record button
-
-                    .state('channel.camera', {
-                        url: '/camera',
-                        views: {
-                          'channel-videoplayer': {
-                            templateUrl: 'camera/camera.html',
-                            controller: 'CameraCtrl'
-                          }
-                        }
-                    })
-
-                    // a modifiable playlist for the video player
-
-                    .state('channel.videolist', {
-                        url: '/videolist',
-                        views: {
-                          'channel-videoplayer': {
-                            templateUrl: 'videolist/videolist.html',
-                            controller: 'videolistCtrl'
-                          }
-                        }
-                    })
-
-            // the third tab : a chatroom
-
-            .state('channel.chat', {
-                url: '/chat',
-                views: {
-                  'channel-chat': {
-                    templateUrl: 'chat/chat.html',
-                    controller: 'ChatCtrl'
+                  'main@': {
+                    templateUrl: 'mediapicker/mediapicker.html',
+                    controller: 'MediapickerCtrl'
                   }
                 }
             })
 
-            //         // a list of all users in this channel
+            // a modifiable playlist for the music player
 
-            //         //.state('', {
-            //         //})
+            .state('channel.playlist', {
+              url: '/playlist',
+              views: {
+                'main@': {
+                  templateUrl: 'playlist/playlist.html',
+                  controller: 'PlaylistCtrl'
+                }
+              }
+            })
+
+            // the output of the user's main camera and a record button
+
+            .state('channel.camera', {
+                url: '/camera',
+                views: {
+                  'main@': {
+                    templateUrl: 'camera/camera.html',
+                    controller: 'CameraCtrl'
+                  }
+                }
+            })
+
+            // a modifiable playlist for the video player
+
+            .state('channel.videolist', {
+                url: '/videolist',
+                views: {
+                  'main@': {
+                    templateUrl: 'videolist/videolist.html',
+                    controller: 'videolistCtrl'
+                  }
+                }
+            })
+
+      
     
     $urlRouterProvider.otherwise('channels');
 });
