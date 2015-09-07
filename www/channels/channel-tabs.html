@@ -25,7 +25,7 @@
         <ion-nav-view name="player">
           <ion-view>
             <ion-content class="gradient">
-              <ng-switch on="showPlayer">
+              <ng-switch on="showPlayer" ng-controller="PlayerCtrl">
                 <!--if the player has songs in it-->
                 <div ng-switch-when="true" class="padding center-text player-view">
                   <!--the player	-->

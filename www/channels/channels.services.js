@@ -8,6 +8,7 @@ angular.module('ecstatic.channels')
 	//This function updates the number of users, and the playlist when songs are added.
 	socket.on('update', function (info) {
 		Service.getChannels().then(function (data){
+			console.log("updating");
 			var channel = Service.getChannel(info.channel_id);
 			userNumberEventService.broadcast(Object.keys(channel.users).length);
 			updatePlayerstateEventService.broadcast(channel);
