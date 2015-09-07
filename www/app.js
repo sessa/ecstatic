@@ -84,76 +84,92 @@ var app = angular.module('ecstatic', [
 
     .state('home', {
         url: '/home',
-        templateUrl: 'home/home.html',
-        controller: 'HomeCtrl'
+        views: {
+          'main': {
+            templateUrl: 'home/home.html',
+            controller: 'HomeCtrl'
+          }
+        }
     })
 
     // a list of all channels on the server
 
     .state('channels', {
         url: '/channels',
-        templateUrl: 'channels/channel-list.html',
-        controller: 'ChannelsCtrl'
+        views: {
+          'main': {
+            templateUrl: 'channels/channel-list.html',
+            controller: 'ChannelsCtrl'
+          }
+        }
     })
 
             // a form that sets the name of the channel
 
             .state('setName', {
                 url: '/setName',
-                templateUrl: 'create/setName/setName.html',
-                controller: 'setNameCtrl'
+                views: {
+                  'main': {
+                    templateUrl: 'create/setName/setName.html',
+                    controller: 'setNameCtrl'
+                  }
+                }
             })
 
             // a form that sets the time left before the music starts
 
             .state('setTimer', {
                 url: '/setTimer:channelName',
-                templateUrl: 'create/setTimer/setTimer.html',
-                controller: 'setTimerCtrl'
+                views: {
+                  'main': {
+                    templateUrl: 'create/setTimer/setTimer.html',
+                    controller: 'setTimerCtrl'
+                  }
+                }
             })
 
     // a feedback form that sends an e-mail to jonathan at silentdiscosquad dot com
 
     .state('feedback', {
         url: '/feedback',
-        templateUrl: 'feedback/feedback.html',
-        controller: 'FeedbackCtrl'
+        views: {
+          'main': {
+            templateUrl: 'feedback/feedback.html',
+            controller: 'FeedbackCtrl'
+          }
+        }
     })
 
             // a thank you note
 
             .state('feedback.thankyou', {
                 url: '/thankyou',
-                templateUrl: 'feedback/thankyou.html',
-                controller: 'FeedbackCtrl'
+                views: {
+                  'main': {
+                    templateUrl: 'feedback/thankyou.html',
+                    controller: 'FeedbackCtrl'
+                  }
+                }
             })
 
     // a channel 
 
     .state('channel', {
         url: '/channel/:channel_id',
-        abstract: true,
-        templateUrl: 'channels/channel-tabs.html'
+        views: {
+          'main': {
+            templateUrl: 'channels/channel-tabs.html'
+          }
+        }
 
     })
-            // the first tab : a music player
-
-            .state('channel.player', {
-                url: '/player',
-                views: {
-                  'channel-player': {
-                    templateUrl: 'player/player.html',
-                    controller: 'PlayerCtrl'
-                  }
-                }
-            })
 
                     // a list of the user's likes on Soundcloud
 
                     .state('channel.mediapicker', {
                         url: '/mediapicker',
                         views: {
-                          'channel-player': {
+                          'main': {
                             templateUrl: 'mediapicker/mediapicker.html',
                             controller: 'MediapickerCtrl'
                           }

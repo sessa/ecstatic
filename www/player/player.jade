@@ -1,14 +1,6 @@
 ion-view
 	ion-content.gradient
 
-		div(ng-controller="CountdownCtrl")
-			ng-switch(on="showCountdown")
-				div(ng-switch-when="true")
-					.countdown-container
-						timer(ng-attr-countdown="startTime" interval="1000" finish-callback="finished()"){{hours}}:{{minutes}}:{{seconds}}
-						br
-						p until the music starts
-
 		ng-switch(on="showPlayer")
 
 			//if the player has songs in it
@@ -42,17 +34,10 @@ ion-view
 			//if the player is empty
 
 			br
-			//.card.padding.center-text(ng-switch-default)
+			.card.padding.center-text(ng-switch-default)
 				br
 				h3.title Oh, wait.
 				p There's no song in this playlist.
 				br
-			.row 
-				.col.col-10
-				.col.col-80
-					.card.padding.center-text
-						br
-						p You can suggest music from your Soundcloud likes while waiting.
-						br
-						a.button.button-dark(ui-sref="channel.mediapicker") Add songs!
-				.col.col-10
+				a.button.button-dark(ui-sref="channel.mediapicker") Add songs
+

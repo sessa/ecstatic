@@ -1,4 +1,16 @@
 ion-view
-	ion-header-bar.bar.bar-subheader.miniplayer
-		timer(ng-attr-countdown="startTime" interval="1000" finish-callback="finished()"){{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
-	include ../../player/chat.jade
+	ion-content.gradient
+		.countdown-container
+			timer(ng-attr-countdown="startTime" interval="1000" finish-callback="finished()"){{hours}}:{{minutes}}:{{seconds}}
+			br
+			p until the music starts
+			br
+		.row 
+			.col.col-10
+			.col.col-80
+				.card.padding.center-text
+					br
+					p You can suggest music from your Soundcloud likes while waiting.
+					br
+					a.button.button-dark(ui-sref="channel.mediapicker") Add songs!
+			.col.col-10

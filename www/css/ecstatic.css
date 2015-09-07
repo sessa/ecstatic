@@ -460,3 +460,13 @@ circle.ring {
   }
 }
 
+
+.channel-tabs {
+  transition: bottom 0.25s ease;
+}
+
+
+body.channel-tabs-slide-away {
+    .channel-tabs {
+        bottom: 0;
+    }

@@ -22,7 +22,7 @@ angular.module('ecstatic.create')
 		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
 
 			$ionicLoading.hide();
-            $state.go('channel.player', {channel_id:data.player_state.channel_id});
+            $state.go('channel', {channel_id:data.player_state.channel_id});
     	});
     	 }, 500);
 	}
@@ -39,7 +39,7 @@ angular.module('ecstatic.create')
 			console.log("finished");
 			$scope.showCountdown = false;
 			countdownEventService.broadcast();
-			//$scope.$apply();
+			$scope.$apply();
 			//$state.go('app.channel.player', {channel_id:$stateParams.channel_id});
 		}	
 		if($scope.startTime < 1 ){
