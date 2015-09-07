@@ -49,7 +49,7 @@ angular.module('ecstatic.create')
 			console.log("finished");
 			$scope.showCountdown = false;
 			countdownEventService.broadcast();
-			$state.go('app.channel.player', {channel_id:$stateParams.channel_id});
+			$state.go('channel', {channel_id:$stateParams.channel_id}, {reload:true});
 		}	
 
 		if($scope.startTime < 1 ){
