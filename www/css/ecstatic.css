@@ -387,3 +387,11 @@ body.channel-tabs-slide-away {
     overflow: hidden !important;
 }
 
+#fileinput {
+  position: fixed;
+  background-color: red;
+  bottom: 80px;
+  left: 50%;
+  margin-left: 2em;
+  color: white;
+}

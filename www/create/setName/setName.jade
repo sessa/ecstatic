@@ -4,5 +4,6 @@ ion-view(view-title="")
 		.list.list-inset.card.padding.center-text
 			h4 What is the channel's name?
 			item.item-input.padding.create-channel
-				input.create-channel(type="text", placeholder="Type a name here.", ng-model="channelName")
+				input.create-channel(type="text", ng-model="channelName", ng-enter="nameChannel(channelName)", placeholder="Type a name here.")
+				input(type="submit", style="position: absolute; left: -9999px; width: 1px; height: 1px;", tabindex="-1")
 			button.button.button-dark.button-full.icon-right.ion-chevron-right(ng-click="nameChannel(channelName)", ng-init="channelName=random_name") Choose starting time

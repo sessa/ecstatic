@@ -22,6 +22,7 @@ angular.module('ecstatic.camera')
 		// david's code dont touch this mother fucker
 		document.getElementById('fileinput').addEventListener('change', function(){
 			file = this.files[0];
+			$scope.add();
 		}, false);
 	}
 
@@ -78,6 +79,7 @@ angular.module('ecstatic.camera')
 
 	if($scope.onDesktop){
 		//what to do for desktop
+		console.log("show cam");
 		$scope.showCamera();
 	}else{
 		//what to do for mobile
