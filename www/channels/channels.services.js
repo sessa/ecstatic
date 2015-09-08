@@ -23,7 +23,18 @@ angular.module('ecstatic.channels')
 
 		var request = {
 			msg: "update_channel",
-			channel_info: channel
+			channel_info: channel,
+			channel_id: channel_id
+		}
+
+		socketManager.sendRequest(request); 
+	}
+
+	Service.setCountdownFinished = function(channel_id) {
+		var channel = Service.getChannel(channel_id);
+		var request = {
+			msg: "setCountdownFinished",
+			channel_id:channel_id
 		}
 
 		socketManager.sendRequest(request); 
@@ -36,6 +47,7 @@ angular.module('ecstatic.channels')
 
 		//channelList returns all channels
 		socket.on('channelList', function (data) {
+			console.log("socket.on( channellist");
 			Service.setChannels(data);
 			socketManager.listener(data);
 		});

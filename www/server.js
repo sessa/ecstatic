@@ -79,6 +79,7 @@ io.sockets.on('connection', function (socket) {
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
                 'cliplist': [],
+                'hasCountdown': true,
                 'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
@@ -95,6 +96,8 @@ io.sockets.on('connection', function (socket) {
     socket.on('channelList', function (data) {
         client.lrange("roomlist", 0, -1, function(err, roomlist){
             var channel_ids = [];
+            console.log("channelListMARTIN"+roomlist);
+            console.log("err="+err);
             //extract the keys (room_id)
             for(var channel_id in roomlist) {
                 channel_ids.push(roomlist[channel_id]);
@@ -102,6 +105,7 @@ io.sockets.on('connection', function (socket) {
 
             //check whether the owner is in the room, if they are, then add the room
             async.map(channel_ids, get_channel_info, function (err, channelList){
+                console.log("inside async map");
                 socket.emit("channelList", {channelList:channelList, callback_id: data.callback_id});
             });
         });
@@ -196,12 +200,24 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('update_channel', function (data) {
-        client.get(socket.id, function (err, socket_info){
+        client.get(data.channel_id, function (err, socket_info){
             var socket_info_dict = JSON.parse(socket_info);
             socket_info_dict.player_state = data.channel_info;
             client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
             socket_info_dict.callback_id = data.callback_id;
             send_update(data.channel_info.channel_id);
+        });
+    });
+
+    socket.on('setCountdownFinished', function (data) {
+        console.log("heard countdown finished");
+        client.get(data.channel_id, function (err, socket_info){
+            var socket_info_dict = JSON.parse(socket_info);
+            socket_info_dict.player_state.hasCountdown = false;
+            socket_info_dict.player_state.timestamp = new Date().getTime();
+            client.set(data.channel_id, JSON.stringify(socket_info_dict));
+            socket_info_dict.callback_id = data.callback_id;
+            send_update(data.channel_id);
         });
     });
 
