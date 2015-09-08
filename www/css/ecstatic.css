@@ -66,38 +66,38 @@ input.set-timer {
 }
 
 .gradient {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
-	background: #F29537; /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  #F29537 0%, #C14D9E 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, top right, 0px, bottom left, 100%, color-stop(0%,#F29537), color-stop(100%,#C14D9E)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* IE10+ */
-	background: radial-gradient(ellipse at top right,  #F29537 0%,#C14D9E 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
+  background: #F29537; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  #F29537 0%, #C14D9E 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, top right, 0px, bottom left, 100%, color-stop(0%,#F29537), color-stop(100%,#C14D9E)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* IE10+ */
+  background: radial-gradient(ellipse at top right,  #F29537 0%,#C14D9E 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .hidden {
-	display: none;
-	visibility: hidden;
-	width: 0;
+  display: none;
+  visibility: hidden;
+  width: 0;
 }
 
 .nav-dark  {
-	border: none !important;
+  border: none !important;
 }
 
 .has-footer.has-tabs {
-	bottom: 105px !important;
+  bottom: 105px !important;
 }
 
 .sub-footer{
-	bottom:49px !important;
+  bottom:49px !important;
 }
 
 .bar.miniplayer {
- 	color: white;
- 	background-color: #333;
+  color: white;
+  background-color: #333;
 }
 
 .timer-input {
@@ -123,37 +123,37 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .current-song img {
-	max-width: 32px;
-	max-height: 32px;
-	float: left;
+  max-width: 32px;
+  max-height: 32px;
+  float: left;
 }
 
 .current-song p {
-	position: absolute;
-	top: 0;
-	padding: 0 0 0 40px;
-	margin: 0;
+  position: absolute;
+  top: 0;
+  padding: 0 0 0 40px;
+  margin: 0;
 }
 
 .announcements,
 .announcements h1 {
-	color: white;
+  color: white;
 }
 
 .message-box {
-	position: fixed!important;
-	bottom: 40px!important;
-	width: 100%;
-	border-top: 1px solid #aaa;
-	background-color: white;
+  position: fixed!important;
+  bottom: 40px!important;
+  width: 100%;
+  border-top: 1px solid #aaa;
+  background-color: white;
 }
 
 .chat-message.scroll-item {
-	border: none;
-	background-color: #fff;
-	margin: 0.5em 0 0.5em;
-	border-radius: 15px;
-	overflow: initial;
+  border: none;
+  background-color: #fff;
+  margin: 0.5em 0 0.5em;
+  border-radius: 15px;
+  overflow: initial;
   white-space: initial;
   display: inline-block;
 }
@@ -163,7 +163,7 @@ float: right;
 }
 
 input.typeform  {
-	width: 100% ;
+  width: 100% ;
 }
 
 /*
@@ -174,12 +174,12 @@ div.footer-button a.button.button-full {
 */
 
 .channel {
-	margin: 0 !important;
-	padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .community {
-	padding: 0 !important;	
+  padding: 0 !important;  
 }
 
 .item-thumbnail-channel-left, .item-thumbnail-channel-left .item-content {
@@ -196,7 +196,7 @@ div.footer-button a.button.button-full {
     height: 100%; }
 
 .chat-tabs {
-	border-top: none;
+  border-top: none;
 }
 
 .camera-menu {
@@ -218,22 +218,22 @@ div.footer-button a.button.button-full {
 }
 
 circle.rec-button {
-	width:44px;height:44px;
-	border-radius:50px;
-	fill: #DF0000;
+  width:44px;height:44px;
+  border-radius:50px;
+  fill: #DF0000;
   z-index: 200;
 }
 
 .rec-gesture {
-	width: 55px;
-	height: 55px;
-	border-radius: 50px;
-	border: 2px solid white;
-	background-color: white;
+  width: 55px;
+  height: 55px;
+  border-radius: 50px;
+  border: 2px solid white;
+  background-color: white;
   opacity: 0.3;
-	position: fixed;
-	bottom: 84px;
-	left: 50%;
+  position: fixed;
+  bottom: 84px;
+  left: 50%;
   margin-left: -28px;
   z-index: 200;
 
@@ -255,12 +255,9 @@ timer {
   font-size: 1.5em;
 }
 
-
-
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
     color: #CE5F84;
 }
-
 
 .record-button {
   color: red!important;
@@ -284,7 +281,6 @@ timer {
 
 }
 
-
 #videoElement, #videoplayer-container > video { 
     position: fixed;
     top: 0;
@@ -300,17 +296,13 @@ timer {
 }
 
 
-
-
 /* channel.videoplayer */
-
 
 .novideoyet-text{
   padding-top: 30vh;
   color: white;
   text-align: center
 }
-
 
 .round-icon {
   border-radius: 50%;
@@ -323,7 +315,6 @@ timer {
 .emptyvideoplayer {
   text-align: center;
 }
-
 
 .fullscreen-icon {
   position: fixed;
@@ -350,48 +341,25 @@ timer {
 }
 
 
-
-
 /* channel.camera */
 
-
 .camera-icons.trash {
-	position: fixed;
-	top: 20px;
-	left: 5px;
-	color: white!important;
+  position: fixed;
+  top: 20px;
+  left: 5px;
+  color: white!important;
 }
 
 .camera-icons.pizza {
-	position: fixed;
-	bottom: 100px;
-	right: 5px;
-	color: white!important;
-}
-
-.channel-tabs {
-  transition: bottom 0.25s ease;
-}
-
-
-body.channel-tabs-slide-away {
-    .channel-tabs {
-        bottom: 0;
-    }
-
-.custom-file-input button {
-    display: block !important;
-    width: 157px !important;
-    height: 57px !important;
-    opacity: 0 !important;
-    overflow: hidden !important;
+  position: fixed;
+  bottom: 100px;
+  right: 5px;
+  color: white!important;
 }
 
 #fileinput {
-  position: fixed;
-  background-color: red;
-  bottom: 80px;
-  left: 50%;
-  margin-left: 2em;
   color: white;
+  position: fixed;
+  bottom: 80px;
+  margin-left:2em;
 }
