@@ -1,10 +1,12 @@
 
 <ion-view>
   <ion-content scroll="false" class="darkbg has-header">
-    <div>
+    <div ng-hide="onDesktop">
       <div class="vertical-screen">
-        <input type="file" id="fileinput"/>
-        <button ng-click="add()">Add</button>
+        <div class="custom-file-input">
+          <input type="file" id="fileinput" accept="video/*"/>
+          <button ng-click="add()">Add</button>
+        </div>
       </div>
     </div>
     <div ng-show="onDesktop">

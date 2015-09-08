@@ -1,9 +1,10 @@
 ion-view
 	ion-content.darkbg.has-header(scroll="false")
-		div
+		div(ng-hide="onDesktop")
 			.vertical-screen
-				input(type="file" id="fileinput")
-				button(ng-click="add()") Add
+				.custom-file-input
+					input(type="file" id="fileinput" accept="video/*")
+					button(ng-click="add()") Add
 				//- video(ng-show="file" id="videoElement" loop)
 		div(ng-show="onDesktop")
 			.vertical-screen

@@ -1,6 +1,6 @@
 angular.module('ecstatic.camera')
 
-.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams) {
+.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', '$ionicHistory', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams, $ionicHistory) {
 	// currently will only work in Chrome:
 	// var blobURL;
 	var video;
@@ -28,6 +28,7 @@ angular.module('ecstatic.camera')
 	$scope.add = function() {
 		console.log("going through add function");
 		cameraServices.sendMobileVideo($stateParams.channel_id, file);
+		$ionicHistory.goBack(); 
 	}
 
 	$scope.onRelease = function() {
