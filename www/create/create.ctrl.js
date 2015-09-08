@@ -19,9 +19,7 @@ angular.module('ecstatic.create')
 		$ionicLoading.show({
 			template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
 		});
-		setTimeout(function(){ 
 		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
-
 			$ionicLoading.hide();
 		    $ionicHistory.nextViewOptions({
 		      disableAnimate: false,
@@ -29,7 +27,6 @@ angular.module('ecstatic.create')
 		    });
             $state.go('channel', {channel_id:data.player_state.channel_id});
     	});
-    	 }, 500);
 	}
 })
 .controller('CountdownCtrl', function(countdownEventService, $scope, channelServices, $stateParams, $state, $rootScope) {
