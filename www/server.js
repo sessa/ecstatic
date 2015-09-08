@@ -150,7 +150,7 @@ io.sockets.on('connection', function (socket) {
         }   
     });
     socket.on('send_video', function (data){
-        console.log("send_video, data.channel_id"+data.channel_id);
+        console.log("Inside send mobile video on server.js " + data.channel_id);
         //if there is a video, send video to S3
         client.get(data.channel_id, function (err, socket_info){
             var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
@@ -168,7 +168,7 @@ io.sockets.on('connection', function (socket) {
                     }
 
                     //add the clip to redis
-                    var info_with_clip = JSON.parse(socket_info)
+                    var info_with_clip = JSON.parse(socket_info);
                     info_with_clip.player_state.cliplist.push(parsed_data);
                     client.set(data.channel_id, JSON.stringify(info_with_clip));
 

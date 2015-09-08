@@ -1,25 +1,35 @@
 angular.module('ecstatic.camera')
 
-.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams) {
+.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', '$ionicHistory', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams, $ionicHistory) {
 	// currently will only work in Chrome:
 	// var blobURL;
 	var video;
 	$scope.recHold = false;
 	console.log($scope.recHold);
 	// var mediaRecorder;
+	$scope.onDesktop;
 	var file;
+
+	if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+  		console.log("we are not in browser");
+  		$scope.onDesktop = false;
+	} else {
+  		console.log("we are in browser");
+  		$scope.onDesktop = true;
+	}
 	
-	// david's code dont touch this mother fucker
-	// document.getElementById('fileinput').addEventListener('change', function(){
-	// 	file = this.files[0];
-	// 	console.log("name : " + file.name);
-	// 	console.log("size : " + file.size);
-	// 	console.log("type : " + file.type);
-	// 	console.log("date : " + file.lastModified);
-	// }, false);
+	if(!$scope.onDesktop){
+		// david's code dont touch this mother fucker
+		document.getElementById('fileinput').addEventListener('change', function(){
+			file = this.files[0];
+			$scope.add();
+		}, false);
+	}
 
 	$scope.add = function() {
-		cameraServices.sendMobileVideo(file);
+		console.log("going through add function");
+		cameraServices.sendMobileVideo($stateParams.channel_id, file);
+		$ionicHistory.goBack(); 
 	}
 
 	$scope.onRelease = function() {
@@ -45,9 +55,10 @@ angular.module('ecstatic.camera')
 		$ionicHistory.goBack();
 	}
 
-	$scope.sendMobileVideo = function(video) {
-		cameraServices.sendMobileVideo(video);
-	}
+	// $scope.sendMobileVideo = function(video) {
+	// 	console.log("Send Mobile Video Channel id: " + $stateParams.channel_id);
+	// 	cameraServices.sendMobileVideo($stateParams.channel_id, video);
+	// }
 
 	$scope.showCamera = function () {
 		cameraServices.cameraStart();
@@ -65,6 +76,14 @@ angular.module('ecstatic.camera')
 		video.src = source;
 		video.play();
 	});
-	$scope.showCamera();
+
+	if($scope.onDesktop){
+		//what to do for desktop
+		console.log("show cam");
+		$scope.showCamera();
+	}else{
+		//what to do for mobile
+	}
+	
 
 }]);

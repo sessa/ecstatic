@@ -15,7 +15,7 @@ ion-view
 			#empty-videoplayer(ng-switch-default)
 				.padding
 
-					h2.novideoyet-text no video yet :(
+					h2.novideoyet-text {{videoMessage}}
 
 	ion-footer(ng-controller="VideoCtrl")
 		button.button.button-large.button-clear.camera-icons.icon.ion-arrow-expand.fullscreen-icon(ng-click="videoplayerServices.API.toggleFullScreen()")
