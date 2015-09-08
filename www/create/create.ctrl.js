@@ -7,11 +7,18 @@ angular.module('ecstatic.create')
         $state.go('setTimer', {channelName:channelName});
     }
 })
-.controller('setTimerCtrl', function($scope, channelServices, $ionicLoading, $state, $ionicHistory, $stateParams){
+.controller('setTimerCtrl', function($scope, channelServices, $ionicLoading, $state, $ionicHistory, $stateParams, playerServices){
 
     $scope.setTimer = function(hours, mins) {
     	hours = typeof hours !== 'undefined' ? hours : 0;
     	mins = typeof mins !== 'undefined' ? mins : 0;
+
+    	//if you have a countdown, set it
+    	var hasCountdown = false;
+    	if(hours + mins != 0){
+    		hasCountdown = true;
+    	}
+
 		var milliSinceEpoch = new Date().getTime();
 		var starterTime = (hours*3600000+mins*60000)+milliSinceEpoch;
 
@@ -19,7 +26,7 @@ angular.module('ecstatic.create')
 			template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
 		});
 		setTimeout(function(){ 
-		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
+		channelServices.createChannel($stateParams.channelName, starterTime, hasCountdown).then(function(data) {
 
 			$ionicLoading.hide();
 		    $ionicHistory.nextViewOptions({
@@ -43,10 +50,8 @@ angular.module('ecstatic.create')
 		var milliSinceEpoch = new Date().getTime();
 		$scope.startTime = parseInt((channel.start_time - milliSinceEpoch)/1000);
 		$rootScope.$broadcast('timer-set-countdown', $scope.startTime);
-		$scope.showCountdown = true;
 		
 		$scope.finished = function(){
-			console.log("finished");
 			$scope.showCountdown = false;
 			countdownEventService.broadcast();
 			$state.go('channel', {channel_id:$stateParams.channel_id}, {reload:true});
@@ -54,6 +59,9 @@ angular.module('ecstatic.create')
 
 		if($scope.startTime < 1 ){
 			$scope.finished();
+		}
+		else{
+			$scope.showCountdown = true;
 		}
     }
 });

@@ -23,7 +23,18 @@ angular.module('ecstatic.channels')
 
 		var request = {
 			msg: "update_channel",
-			channel_info: channel
+			channel_info: channel,
+			channel_id: channel_id
+		}
+
+		socketManager.sendRequest(request); 
+	}
+
+	Service.setCountdownFinished = function(channel_id) {
+		var channel = Service.getChannel(channel_id);
+		var request = {
+			msg: "setCountdownFinished",
+			channel_id:channel_id
 		}
 
 		socketManager.sendRequest(request); 
@@ -80,11 +91,12 @@ angular.module('ecstatic.channels')
 		}
 	}
 
-	Service.createChannel = function(channelName, startTime) {
+	Service.createChannel = function(channelName, startTime, hasCountdown) {
 		var request = {
 			msg: "create_channel",
 			channel_name: channelName,
-			start_time: startTime
+			start_time: startTime,
+			hasCountdown: hasCountdown
 		}
 
 		//When create channel returns, add the data to the channelModel

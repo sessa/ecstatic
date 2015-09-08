@@ -79,6 +79,7 @@ io.sockets.on('connection', function (socket) {
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
                 'cliplist': [],
+                'hasCountdown': data.hasCountdown,
                 'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
@@ -196,12 +197,24 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('update_channel', function (data) {
-        client.get(socket.id, function (err, socket_info){
+        client.get(data.channel_id, function (err, socket_info){
             var socket_info_dict = JSON.parse(socket_info);
             socket_info_dict.player_state = data.channel_info;
             client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
             socket_info_dict.callback_id = data.callback_id;
             send_update(data.channel_info.channel_id);
+        });
+    });
+
+    socket.on('setCountdownFinished', function (data) {
+        console.log("heard countdown finished");
+        client.get(data.channel_id, function (err, socket_info){
+            var socket_info_dict = JSON.parse(socket_info);
+            socket_info_dict.player_state.hasCountdown = false;
+            socket_info_dict.player_state.timestamp = new Date().getTime();
+            client.set(data.channel_id, JSON.stringify(socket_info_dict));
+            socket_info_dict.callback_id = data.callback_id;
+            send_update(data.channel_id);
         });
     });
 
