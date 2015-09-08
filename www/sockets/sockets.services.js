@@ -7,8 +7,6 @@ angular.module('ecstatic.sockets')
 }])
 
 .factory('socketManager', ['$q', '$rootScope', 'socket', '$location', function($q, $rootScope, socket, $location) {
-		console.log("socketManager"+$location.absUrl().split(':')[0]+ ':' + $location.absUrl().split(':')[1] +':3001');
-		console.log("socketmaaaanager"+$location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2]);
 		// We return this object to anything injecting our service
 		var Service = {};
 		// Keep all pending requests here until they get responses
