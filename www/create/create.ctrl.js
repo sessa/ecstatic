@@ -20,6 +20,7 @@ angular.module('ecstatic.create')
 			template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
 		});
 		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
+			console.log("bang")
 			$ionicLoading.hide();
 		    $ionicHistory.nextViewOptions({
 		      disableAnimate: false,
