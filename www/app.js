@@ -35,6 +35,7 @@ var app = angular.module('ecstatic', [
       StatusBar.styleLightContent();
     }
   });
+
   $rootScope.dataReady = false;
   var channelsLoaded = false;
   console.log("beforechannelServices.getChannels");
@@ -47,7 +48,7 @@ var app = angular.module('ecstatic', [
   });
 
   $rootScope.$watch( 
-    function(){return channelsLoaded;console.log("returnchannelsLoaded="+channelsLoaded);},
+    function(){console.log("returnchannelsLoaded="+channelsLoaded); return channelsLoaded;},
     function(ready){$rootScope.dataReady = ready; console.log(ready);}
   );
 

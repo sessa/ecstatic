@@ -47,6 +47,7 @@ angular.module('ecstatic.channels')
 
 		//channelList returns all channels
 		socket.on('channelList', function (data) {
+			console.log("socket.on( channellist");
 			Service.setChannels(data);
 			socketManager.listener(data);
 		});
