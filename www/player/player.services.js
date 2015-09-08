@@ -6,6 +6,7 @@ angular.module('ecstatic.player')
     Service.soundcloudClientId = 0;
     ConfigService.getConfig().then(function (data){
          Service.soundcloudClientId = data.soundcloudClientId;
+         console.log("soundcloudClientId"+Service.soundcloudClientId);
     });
 
 	socket.on('next_song_action', function (data) {
@@ -77,11 +78,13 @@ angular.module('ecstatic.player')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.playlist[Service.currentItem];
+        console.log("client_id="+Service.soundcloudClientId);
         Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+Service.soundcloudClientId), type: "audio/"+source.original_format});
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
         $timeout(Service.API.play.bind(Service.API), 100);
+        console.log("should be playing...");
     }
     return Service;
 })
