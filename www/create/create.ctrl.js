@@ -12,6 +12,7 @@ angular.module('ecstatic.create')
     $scope.setTimer = function(hours, mins) {
     	hours = typeof hours !== 'undefined' ? hours : 0;
     	mins = typeof mins !== 'undefined' ? mins : 0;
+
 		var milliSinceEpoch = new Date().getTime();
 		var starterTime = (hours*3600000+mins*60000)+milliSinceEpoch;
 
@@ -31,22 +32,18 @@ angular.module('ecstatic.create')
     	 }, 500);
 	}
 })
-.controller('CountdownCtrl', function(countdownEventService, playerServices, $scope, channelServices, $stateParams, $state, $rootScope) {
+.controller('CountdownCtrl', function(countdownEventService, $scope, channelServices, $stateParams, $state, $rootScope) {
 	$scope.$watch('dataReady',function(ready){
         if (ready){ startController() }
     });
 
     function startController() {
-    	console.log("$stateParams.channel_id"+$stateParams.channel_id);
     	var channel = channelServices.getChannel($stateParams.channel_id); 
-    	console.log("channel="+JSON.stringify(channel));
 		var milliSinceEpoch = new Date().getTime();
 		$scope.startTime = parseInt((channel.start_time - milliSinceEpoch)/1000);
 		$rootScope.$broadcast('timer-set-countdown', $scope.startTime);
-		$scope.showCountdown = true;
 		
 		$scope.finished = function(){
-			console.log("finished");
 			$scope.showCountdown = false;
 			countdownEventService.broadcast();
 			$state.go('channel', {channel_id:$stateParams.channel_id}, {reload:true});
@@ -54,6 +51,9 @@ angular.module('ecstatic.create')
 
 		if($scope.startTime < 1 ){
 			$scope.finished();
+		}
+		else{
+			$scope.showCountdown = true;
 		}
     }
 });
