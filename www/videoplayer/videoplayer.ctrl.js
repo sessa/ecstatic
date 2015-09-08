@@ -31,7 +31,7 @@ angular.module('ecstatic.videoplayer')
                 if($scope.onDesktop){
                     $scope.showVideoplayer = true;
                 }else{
-                    $scope.videoMessage = "Video Playback Support coming to Mobile Soon :)";
+                    $scope.videoMessage = "Video Playback Support Coming to Mobile Soon :)";
                 }
                 $scope.videoplayerServices = videoplayerServices;
             }
