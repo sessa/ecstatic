@@ -13,12 +13,6 @@ angular.module('ecstatic.create')
     	hours = typeof hours !== 'undefined' ? hours : 0;
     	mins = typeof mins !== 'undefined' ? mins : 0;
 
-    	//if you have a countdown, set it
-    	var hasCountdown = false;
-    	if(hours + mins != 0){
-    		hasCountdown = true;
-    	}
-
 		var milliSinceEpoch = new Date().getTime();
 		var starterTime = (hours*3600000+mins*60000)+milliSinceEpoch;
 
@@ -26,7 +20,7 @@ angular.module('ecstatic.create')
 			template: '<ion-spinner icon="android" class="spinner-light"></ion-spinner>'
 		});
 		setTimeout(function(){ 
-		channelServices.createChannel($stateParams.channelName, starterTime, hasCountdown).then(function(data) {
+		channelServices.createChannel($stateParams.channelName, starterTime).then(function(data) {
 
 			$ionicLoading.hide();
 		    $ionicHistory.nextViewOptions({

@@ -79,7 +79,7 @@ io.sockets.on('connection', function (socket) {
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
                 'cliplist': [],
-                'hasCountdown': data.hasCountdown,
+                'hasCountdown': true,
                 'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};

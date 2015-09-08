@@ -91,12 +91,11 @@ angular.module('ecstatic.channels')
 		}
 	}
 
-	Service.createChannel = function(channelName, startTime, hasCountdown) {
+	Service.createChannel = function(channelName, startTime) {
 		var request = {
 			msg: "create_channel",
 			channel_name: channelName,
-			start_time: startTime,
-			hasCountdown: hasCountdown
+			start_time: startTime
 		}
 
 		//When create channel returns, add the data to the channelModel
