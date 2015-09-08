@@ -1,7 +1,9 @@
 angular.module('ecstatic.channels')
 
 .controller('ChannelsCtrl', ['$scope', 'channelServices', '$state', function($scope, channelServices, $state) {
+    console.log("channelsCtrl")
     $scope.$watch('dataReady',function(ready){
+            console.log("dataReady+"+ready);
         if (ready){ startController(); }
     });
 

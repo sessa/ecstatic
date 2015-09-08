@@ -96,6 +96,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('channelList', function (data) {
         client.lrange("roomlist", 0, -1, function(err, roomlist){
             var channel_ids = [];
+            console.log("channelList");
             //extract the keys (room_id)
             for(var channel_id in roomlist) {
                 channel_ids.push(roomlist[channel_id]);

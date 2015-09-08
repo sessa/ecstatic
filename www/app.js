@@ -37,16 +37,18 @@ var app = angular.module('ecstatic', [
   });
   $rootScope.dataReady = false;
   var channelsLoaded = false;
+  console.log("beforechannelServices.getChannels");
   channelServices.getChannels().then( function (data){
     channelsLoaded = true;
+      console.log("channelServices.getChannels channelsLoaded");
     if($stateParams.channel_id){
       channelServices.joinChannel($stateParams.channel_id);
     }
   });
 
   $rootScope.$watch( 
-    function(){return channelsLoaded},
-    function(ready){$rootScope.dataReady = ready; console.log(ready)}
+    function(){return channelsLoaded;console.log("returnchannelsLoaded="+channelsLoaded);},
+    function(ready){$rootScope.dataReady = ready; console.log(ready);}
   );
 
 
