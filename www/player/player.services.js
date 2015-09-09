@@ -5,6 +5,7 @@ angular.module('ecstatic.player')
 	var channel_id = 0;
     Service.soundcloudClientId = 0;
     ConfigService.getConfig().then(function (data){
+        console.log("data.soundcloudClientId="+data.soundcloudClientId);
          Service.soundcloudClientId = data.soundcloudClientId;
     });
 
@@ -56,7 +57,7 @@ angular.module('ecstatic.player')
         var channel = channelServices.getChannel($stateParams.channel_id);
         console.log("channel.hasCountdown"+channel.hasCountdown);
         if(channel.hasCountdown){
-            $timeout(channelServices.setCountdownFinished($stateParams.channel_id), 2000);
+            channelServices.setCountdownFinished($stateParams.channel_id);
         }
         else{
             Service.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
@@ -77,11 +78,13 @@ angular.module('ecstatic.player')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.playlist[Service.currentItem];
+                console.log("Service.soundcloudClientId="+Service.soundcloudClientId);
         Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+Service.soundcloudClientId), type: "audio/"+source.original_format});
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
-        $timeout(Service.API.play.bind(Service.API), 100);
+        Service.API.play();
+        console.log("plaaaay"+"audio/"+source.original_format);
     }
     return Service;
 })

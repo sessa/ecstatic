@@ -1,7 +1,7 @@
 angular.module('ecstatic.videolist')
 
 .controller('videolistCtrl',
-	['$sce', 'channelServices', '$stateParams', '$scope', '$state', 'playerServices', 'videoEventServices', function($sce, channelServices, $stateParams, $scope, $state, playerServices, videoEventServices) {
+	['$sce', 'channelServices', '$stateParams', '$scope', function($sce, channelServices, $stateParams, $scope) {
     channelServices.getChannels().then(function (channels){
 
         var channel = channelServices.getChannel($stateParams.channel_id);
