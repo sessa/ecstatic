@@ -23,10 +23,9 @@ angular.module('ecstatic.videoplayer')
             $scope.videoplayerServices = videoplayerServices;
             $scope.showVideoplayer = false;
             var channel = channelServices.getChannel($stateParams.channel_id);
-            $scope.cliplistLength = channel.cliplist.length;
-            console.log("render, cliplistLength="+$scope.cliplistLength);
-            if($scope.cliplistLength !== 0){
-                console.log("render cliplist");
+            console.log("videoplayer render");
+            if(videoplayerServices.getNumberOfActiveClips(channel.cliplist) !== 0){
+                console.log("active clips > 0");
                 videoplayerServices.setChannel(channel);
                 if($scope.onDesktop){
                     $scope.showVideoplayer = true;
@@ -34,6 +33,7 @@ angular.module('ecstatic.videoplayer')
                     $scope.videoMessage = "Video Playback Support Coming to Mobile Soon :)";
                 }
                 $scope.videoplayerServices = videoplayerServices;
+                $scope.showVideoplayer = true;
             }
         });
     }

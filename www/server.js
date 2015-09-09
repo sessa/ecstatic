@@ -162,6 +162,7 @@ io.sockets.on('connection', function (socket) {
                     console.log("Successfully uploaded data to myBucket/myKey"); 
                     var parsed_data = {
                         hasVideo: data.hasVideo,
+                        isActive: data.isActive,
                         video_key: data.video_key,
                         username: data.username,
                         format: data.format

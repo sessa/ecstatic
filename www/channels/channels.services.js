@@ -8,7 +8,6 @@ angular.module('ecstatic.channels')
 	//This function updates the number of users, and the playlist when songs are added.
 	socket.on('update', function (info) {
 		Service.getChannels().then(function (data){
-			console.log("updating");
 			var channel = Service.getChannel(info.channel_id);
 			userNumberEventService.broadcast(Object.keys(channel.users).length);
 			updatePlayerstateEventService.broadcast(channel);
@@ -40,6 +39,32 @@ angular.module('ecstatic.channels')
 		socketManager.sendRequest(request); 
 	}
 
+	Service.toggleClip = function(channel_id, clip) {
+		var channel = Service.getChannel(channel_id);
+		for(var i = 0; i < channel.cliplist.length; i++){
+			if(channel.cliplist[i].video_key === clip.video_key){
+				if(clip.isActive){
+					clip.isActive = false;
+					channel.cliplist[i] = clip;
+					break;
+				}
+				else{
+					clip.isActive = true;
+					channel.cliplist[i] = clip;
+					break;
+				}
+			}
+		}
+
+		var request = {
+			msg: "update_channel",
+			channel_info: channel,
+			channel_id: channel_id
+		}
+
+		socketManager.sendRequest(request); 
+	}
+
 	Service.getChannels = function() {
 		var request = {
 			msg: "channelList"
@@ -47,7 +72,6 @@ angular.module('ecstatic.channels')
 
 		//channelList returns all channels
 		socket.on('channelList', function (data) {
-			console.log("socket.on( channellist");
 			Service.setChannels(data);
 			socketManager.listener(data);
 		});

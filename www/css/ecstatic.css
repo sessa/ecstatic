@@ -326,8 +326,9 @@ timer {
 
 .videolist-icon {
   position: fixed;
-  top: 80px;
+  bottom: 80px;
   right: 0;
+  opacity: 0.01;
   color: white!important;
   z-index: 999;
 }
@@ -362,4 +363,9 @@ timer {
   position: fixed;
   bottom: 80px;
   margin-left:2em;
+}
+
+
+.videoclip-active {
+  background-color: green!important;
 }
