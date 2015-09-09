@@ -19,8 +19,6 @@ angular.module('ecstatic.videoplayer')
         videos = [];
         for(var i=0; i < cliplist.length; i++){
             if(cliplist[i].isActive){
-                console.log("loadVideoSources, cliplist[i]="+JSON.stringify(cliplist[i]));
-                console.log("loadVideoSources, [i]="+i);
                 videos.push ([{sources:[{src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+cliplist[i].video_key), type:"video/"+ cliplist[i].format}]}]);
             }
         }
@@ -45,7 +43,6 @@ angular.module('ecstatic.videoplayer')
         Service.API = API;
         Service.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
         Service.setItem(Service.currentItem);
-        console.log("onVideoplayerReady, Service.setItem()");
         Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
     }
     Service.onCompleteItem = function() {
@@ -56,8 +53,6 @@ angular.module('ecstatic.videoplayer')
     }
 
     Service.setItem = function(index) {
-        console.log("setItem, index="+index);
-        console.log("setItem, videos[index][0].sources="+JSON.stringify(videos[index][0].sources));
         Service.API.stop();
         Service.sources = videos[index][0].sources;    
         $timeout(Service.API.play.bind(Service.API), 100);
