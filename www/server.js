@@ -31,10 +31,21 @@ s3 = new aws.S3();
 // Handle new messages
 io.sockets.on('connection', function (socket) {
     //needed to store data regarding the socket
+    var room;
+
     client.set(socket.id, JSON.stringify({}));
 
     socket.on('disconnect', function () {
         console.log("heard disconnect");
+        console.log("room="+room);
+        var clients = io.sockets.adapter.rooms[room];   
+        var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
+        console.log("numClients"+numClients);
+        if(numClients === 0){
+            client.lrem("roomlist", 0, room, function(err){
+                console.log("err="+err);
+            });
+        }
     });
     socket.on('get_socket_id', function (data) {
         socket.emit("get_socket_id", {"socket_id": socket.id, "callback_id":data.callback_id});
@@ -43,16 +54,19 @@ io.sockets.on('connection', function (socket) {
     //creates a new room
     socket.on('create_channel', function (data) {    
         //check if you already joined a room
-        if(Object.keys(io.sockets.adapter.rooms).length > 1){
-            for(var key in io.sockets.adapter.rooms){
-                console.log("all keys="+key);
-                if(key !== socket.id){
-                    console.log("leave key="+key);
-                    socket.leave(key);
+        client.lrange("roomlist", 0, -1, function(err, roomlist){
+            if(Object.keys(roomlist).length > 1){
+                for(var key in roomlist){
+                    console.log("roomkey="+key);
+                    if(key !== socket.id){
+                        console.log("leave key="+key);
+                        socket.leave(key);
+                    }
                 }
             }
-        }
-    
+        });
+
+
         client.get(socket.id, function (err, socket_info){
             //create a new playerstate and save it
             var socket_info_dict = JSON.parse(socket_info);
@@ -65,12 +79,14 @@ io.sockets.on('connection', function (socket) {
                 'channel_name': data.channel_name, 
                 'channel_id': socket.id, 
                 'cliplist': [],
+                'hasCountdown': true,
                 'start_time': data.start_time,
                 'chat': [],
                 'playlist': []};
+            
             client.set(socket.id, JSON.stringify(socket_info_dict));
-
-            //add the callback id and send it back
+            client.lpush("roomlist", socket.id);
+            room = socket.id;
             socket_info_dict.callback_id = data.callback_id;
             io.sockets.emit("create_channel", socket_info_dict);
         });
@@ -78,17 +94,20 @@ io.sockets.on('connection', function (socket) {
 
     //lists all created rooms
     socket.on('channelList', function (data) {
-        var channels = io.sockets.adapter.rooms;
-        var channel_ids = [];
-        console.log(channels);
-        //extract the keys (room_id)
-        for(var channel_id in channels) {
-            channel_ids.push(channel_id);
-        }
+        client.lrange("roomlist", 0, -1, function(err, roomlist){
+            var channel_ids = [];
+            console.log("channelListMARTIN"+roomlist);
+            console.log("err="+err);
+            //extract the keys (room_id)
+            for(var channel_id in roomlist) {
+                channel_ids.push(roomlist[channel_id]);
+            }
 
-        //check whether the owner is in the room, if they are, then add the room
-        async.map(channel_ids, get_channel_info, function (err, channelList){
-            socket.emit("channelList", {channelList:channelList, callback_id: data.callback_id});
+            //check whether the owner is in the room, if they are, then add the room
+            async.map(channel_ids, get_channel_info, function (err, channelList){
+                console.log("inside async map");
+                socket.emit("channelList", {channelList:channelList, callback_id: data.callback_id});
+            });
         });
     });
 
@@ -122,13 +141,16 @@ io.sockets.on('connection', function (socket) {
 
     //Joins an existing channel
     socket.on('join_channel', function (data) {
+        console.log("socket.rooms"+socket.rooms);
         if(socket.rooms.indexOf(data.channel_id) < 0){
             socket.join(data.channel_id);
+            console.log("join"+data.channel_id);
+            room = data.channel_id;
             send_update(data.channel_id);
         }   
     });
     socket.on('send_video', function (data){
-        console.log("send_video, data.channel_id"+data.channel_id);
+        console.log("Inside send mobile video on server.js " + data.channel_id);
         //if there is a video, send video to S3
         client.get(data.channel_id, function (err, socket_info){
             var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: data.video};
@@ -147,7 +169,7 @@ io.sockets.on('connection', function (socket) {
                     }
 
                     //add the clip to redis
-                    var info_with_clip = JSON.parse(socket_info)
+                    var info_with_clip = JSON.parse(socket_info);
                     info_with_clip.player_state.cliplist.push(parsed_data);
                     client.set(data.channel_id, JSON.stringify(info_with_clip));
 
@@ -179,12 +201,24 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on('update_channel', function (data) {
-        client.get(socket.id, function (err, socket_info){
+        client.get(data.channel_id, function (err, socket_info){
             var socket_info_dict = JSON.parse(socket_info);
             socket_info_dict.player_state = data.channel_info;
             client.set(data.channel_info.channel_id, JSON.stringify(socket_info_dict));
             socket_info_dict.callback_id = data.callback_id;
             send_update(data.channel_info.channel_id);
+        });
+    });
+
+    socket.on('setCountdownFinished', function (data) {
+        console.log("heard countdown finished");
+        client.get(data.channel_id, function (err, socket_info){
+            var socket_info_dict = JSON.parse(socket_info);
+            socket_info_dict.player_state.hasCountdown = false;
+            socket_info_dict.player_state.timestamp = new Date().getTime();
+            client.set(data.channel_id, JSON.stringify(socket_info_dict));
+            socket_info_dict.callback_id = data.callback_id;
+            send_update(data.channel_id);
         });
     });
 

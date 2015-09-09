@@ -67,6 +67,7 @@ head
 	script(src='camera/camera.ctrl.js')
 	script(src='//connect.soundcloud.com/sdk-2.0.0.js')
 	script(src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js")
 
 // THE APP
 body(ng-app='ecstatic')
@@ -81,14 +82,16 @@ body(ng-app='ecstatic')
 				ion-nav-buttons(side="right")
 					//button.button.button-icon.button-clear.ion-android-more-vertical(ng-click="")
 
-			ion-nav-view(animation="slide-left-right")
+			ion-nav-view(name="main", animation="slide-left-right")
 
 
 		ion-side-menu(side="left", enable-menu-with-back-views="false")
 
 			ion-content
 				ion-list.ecstatic-menu
-					ion-item.center-text Ecstatic v1.5
+					ion-item.center-text Ecstatic 
+						span.beta-label BETA 
+						span v1.5.1
 					ion-item(menu-close, href="#/home")
 						i.icon.ion-android-home
 						|  

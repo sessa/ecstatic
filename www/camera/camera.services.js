@@ -91,7 +91,7 @@ angular.module('ecstatic.camera')
 	        format: "mp4",
 	        hasVideo: true,
     	}
-
+    	console.log("channel_id: " + channel_id);
     	var promise = socketManager.sendRequest(request);
     	return promise;
     }

@@ -1,6 +1,6 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'videoEventServices', 'socket', 'socketManager', 'playerServices','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, videoEventServices, socket, socketManager, playerServices, $sce, ConfigService) {
+.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'videoEventServices', 'socket', 'socketManager','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, videoEventServices, socket, socketManager, $sce, ConfigService) {
 	// We return this object to anything injecting our service
 	var Service = {};
 	Service.channels = [];
@@ -8,7 +8,6 @@ angular.module('ecstatic.channels')
 	//This function updates the number of users, and the playlist when songs are added.
 	socket.on('update', function (info) {
 		Service.getChannels().then(function (data){
-			console.log("update, info="+info);
 			var channel = Service.getChannel(info.channel_id);
 			userNumberEventService.broadcast(Object.keys(channel.users).length);
 			updatePlayerstateEventService.broadcast(channel);
@@ -23,7 +22,18 @@ angular.module('ecstatic.channels')
 
 		var request = {
 			msg: "update_channel",
-			channel_info: channel
+			channel_info: channel,
+			channel_id: channel_id
+		}
+
+		socketManager.sendRequest(request); 
+	}
+
+	Service.setCountdownFinished = function(channel_id) {
+		var channel = Service.getChannel(channel_id);
+		var request = {
+			msg: "setCountdownFinished",
+			channel_id:channel_id
 		}
 
 		socketManager.sendRequest(request); 
@@ -33,15 +43,12 @@ angular.module('ecstatic.channels')
 		var channel = Service.getChannel(channel_id);
 		for(var i = 0; i < channel.cliplist.length; i++){
 			if(channel.cliplist[i].video_key === clip.video_key){
-				console.log("toggleClip");
 				if(clip.isActive){
-									console.log("toggleClip, isActive = false now");
 					clip.isActive = false;
 					channel.cliplist[i] = clip;
 					break;
 				}
 				else{
-														console.log("toggleClip, isActive = true now");
 					clip.isActive = true;
 					channel.cliplist[i] = clip;
 					break;
@@ -51,7 +58,8 @@ angular.module('ecstatic.channels')
 
 		var request = {
 			msg: "update_channel",
-			channel_info: channel
+			channel_info: channel,
+			channel_id: channel_id
 		}
 
 		socketManager.sendRequest(request); 
@@ -119,7 +127,6 @@ angular.module('ecstatic.channels')
 		socket.on('create_channel', function (data) {
 			console.log("create_channel, data="+JSON.stringify(data));
 			Service.channels.push(data.player_state);
-			playerServices.channel_id = data.player_state.channel_id;
 			socketManager.listener(data);
 		});
 		// Storing in a variable for clarity on what sendRequest returns

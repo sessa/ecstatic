@@ -1,7 +1,7 @@
 
 <ion-view>
   <ion-content scroll="false" class="darkbg has-header">
-    <ng-switch on="showVideoplayer">
+    <ng-switch on="showVideoplayer" ng-controller="VideoCtrl">
       <div id="active-videoplayer" ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
           <vg-media id="videoplayer-container" vg-src="videoplayerServices.sources" vg-type="video"></vg-media>
@@ -9,12 +9,12 @@
       </div>
       <div id="empty-videoplayer" ng-switch-default="ng-switch-default">
         <div class="padding">
-          <h2 class="novideoyet-text">no video yet :(</h2>
+          <h2 class="novideoyet-text">{{videoMessage}}</h2>
         </div>
       </div>
     </ng-switch>
   </ion-content>
-  <ion-footer>
+  <ion-footer ng-controller="VideoCtrl">
     <button ng-click="videoplayerServices.API.toggleFullScreen()" class="button button-large button-clear camera-icons icon ion-arrow-expand fullscreen-icon"></button><a ui-sref="channel.videolist" class="button button-large button-clear camera-icons icon ion-android-list videolist-icon"></a><a ui-sref="channel.camera" class="button button-large button-clear button-assertive icon ion-videocamera camera-icon"></a>
   </ion-footer>
 </ion-view>

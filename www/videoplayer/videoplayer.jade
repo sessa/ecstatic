@@ -1,7 +1,7 @@
 ion-view
 	ion-content.darkbg.has-header(scroll="false")
 
-		ng-switch(on="showVideoplayer")
+		ng-switch(on="showVideoplayer", ng-controller="VideoCtrl")
 			
 			#active-videoplayer(ng-switch-when="true")
 				videogular(vg-player-ready="videoplayerServices.onVideoplayerReady($API)", 
@@ -15,9 +15,9 @@ ion-view
 			#empty-videoplayer(ng-switch-default)
 				.padding
 
-					h2.novideoyet-text no video yet :(
+					h2.novideoyet-text {{videoMessage}}
 
-	ion-footer
+	ion-footer(ng-controller="VideoCtrl")
 		button.button.button-large.button-clear.camera-icons.icon.ion-arrow-expand.fullscreen-icon(ng-click="videoplayerServices.API.toggleFullScreen()")
 		a.button.button-large.button-clear.camera-icons.icon.ion-android-list.videolist-icon(ui-sref="channel.videolist")
 		a.button.button-large.button-clear.button-assertive.icon.ion-videocamera.camera-icon(ui-sref="channel.camera")
