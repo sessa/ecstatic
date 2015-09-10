@@ -3,9 +3,8 @@
 
 // Declare variables used
 
-var app, express, events, cors, bodyParser, client, io, async, socket, config, http, server, nodemailer, smtpTransport, aws, s3;
+var app, express, cors, bodyParser, client, io, async, socket, http, server, nodemailer, smtpTransport, aws, s3;
 
-config = require('./config/config.json');
 client = require('redis').createClient(6379, process.env.cache, {no_ready_check: true});
 express = require('express');
 cors = require('cors');
