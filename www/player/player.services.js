@@ -45,13 +45,11 @@ angular.module('ecstatic.player')
     }
 
     Service.onLoadMetaData = function(evt) {
-        console.log("onLoadMetaData, evt="+JSON.stringify(evt));
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
     }
 
     Service.onPlayerReady = function(API) {
-        console.log("onPlayerReady");
         Service.API = API;
         var channel = channelServices.getChannel($stateParams.channel_id);
         if(channel.hasCountdown){
@@ -76,13 +74,10 @@ angular.module('ecstatic.player')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.playlist[Service.currentItem];
-        console.log(source.stream_url+"?client_id="+Service.soundcloudClientId);
         Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+Service.soundcloudClientId), type: "audio/"+source.original_format});
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
-        console.log("playing"+source.stream_url+"?client_id="+Service.soundcloudClientId);
-        console.log("playing"+"audio/"+source.original_format);
         $timeout(Service.API.play.bind(Service.API), 100);
     }
     return Service;

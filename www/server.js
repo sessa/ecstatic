@@ -35,11 +35,8 @@ io.sockets.on('connection', function (socket) {
     client.set(socket.id, JSON.stringify({}));
 
     socket.on('disconnect', function () {
-        console.log("heard disconnect");
-        console.log("room="+room);
         var clients = io.sockets.adapter.rooms[room];   
         var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
-        console.log("numClients"+numClients);
         if(numClients === 0){
             client.lrem("roomlist", 0, room, function(err){
                 console.log("err="+err);
@@ -56,9 +53,7 @@ io.sockets.on('connection', function (socket) {
         client.lrange("roomlist", 0, -1, function(err, roomlist){
             if(Object.keys(roomlist).length > 1){
                 for(var key in roomlist){
-                    console.log("roomkey="+key);
                     if(key !== socket.id){
-                        console.log("leave key="+key);
                         socket.leave(key);
                     }
                 }
@@ -95,8 +90,6 @@ io.sockets.on('connection', function (socket) {
     socket.on('channelList', function (data) {
         client.lrange("roomlist", 0, -1, function(err, roomlist){
             var channel_ids = [];
-            console.log("channelListMARTIN"+roomlist);
-            console.log("err="+err);
             //extract the keys (room_id)
             for(var channel_id in roomlist) {
                 channel_ids.push(roomlist[channel_id]);
@@ -143,7 +136,6 @@ io.sockets.on('connection', function (socket) {
         console.log("socket.rooms"+socket.rooms);
         if(socket.rooms.indexOf(data.channel_id) < 0){
             socket.join(data.channel_id);
-            console.log("join"+data.channel_id);
             room = data.channel_id;
             send_update(data.channel_id);
         }   
