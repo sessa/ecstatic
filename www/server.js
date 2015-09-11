@@ -228,37 +228,6 @@ io.sockets.on('connection', function (socket) {
  });
 
 //routes
-app.get('/soundcloud/callback', function(req, res) {
-    console.log("caught");
-    res.render('soundcloud/callback');
-});
-
-app.get('/soundcloudClientId', function(req, res) {
-    res.json({"soundcloudClientId": process.env.soundcloudClientId});
-});
-
-app.get('/partials/:name', function (req, res) {
-        console.log("req.params.name"+req.params.name);
-    var name = req.params.name;
-    res.render(name+ '/' + name);
-});
-
-app.get('feedback/thankyou', function (req, res) {
-    console.log("feedbacktanks");
-    res.render("feedback/thankyou");
-});
-
-app.get('channels/channel-list', function (req, res) {
-    res.render("channels/channel-list");
-});
-
-app.get('/*', function(req, res) {
-  res.render('index');
-});
-
-server.listen(app.get('port'), function(req, res) {
- console.log('Server listening at ' + app.get('port'));
-});
 
 //nodemailer
 app.post('/feedback', urlencodedParser, function(req, res){
@@ -287,3 +256,67 @@ app.post('/feedback', urlencodedParser, function(req, res){
         }
         });
   });
+
+app.get('/soundcloud/callback', function(req, res) {
+    res.render('soundcloud/callback');
+});
+
+app.get('/soundcloudClientId', function(req, res) {
+    res.json({"soundcloudClientId": process.env.soundcloudClientId});
+});
+
+app.get('/feedback/thankyou', function (req, res) {
+    res.render("feedback/thankyou");
+});
+
+app.get('/feedback/feedback', function (req, res) {
+    res.render("feedback/feedback");
+});
+
+app.get('/setName/setName', function (req, res) {
+    res.render("setName/setName");
+});
+
+app.get('/setTimer/setTimer', function (req, res) {
+    res.render("setTimer/setTimer");
+});
+
+app.get('/camera/camera', function (req, res) {
+    res.render("camera/camera");
+});
+
+app.get('/playlist/playlist', function (req, res) {
+    res.render("playlist/playlist");
+});
+
+app.get('/videolist/videolist', function (req, res) {
+    res.render("videolist/videolist");
+});
+
+app.get('/mediapicker/mediapicker', function (req, res) {
+    res.render("mediapicker/mediapicker");
+});
+
+app.get('/home/home', function (req, res) {
+    res.render("home/home");
+});
+
+app.get('/channels/channel-list', function (req, res) {
+    res.render("channels/channel-list");
+});
+
+app.get('/channels/channel-tabs', function (req, res) {
+    res.render("channels/channel-tabs");
+});
+
+app.get('/countdown/countdown', function (req, res) {
+    res.render("countdown/countdown");
+});
+
+app.get('/*', function(req, res) {
+  res.render('index');
+});
+
+server.listen(app.get('port'), function(req, res) {
+ console.log('Server listening at ' + app.get('port'));
+});
