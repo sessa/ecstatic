@@ -20,6 +20,8 @@ node_modules
 config/config.json
 npm-debug.log
 /platforms
+/*.html
+/*/*.html
 # Elastic Beanstalk Files
 !.elasticbeanstalk/config.yml
 !.elasticbeanstalk/*.cfg.yml

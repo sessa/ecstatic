@@ -80,7 +80,9 @@ angular.module('ecstatic.player')
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
-        Service.API.play();
+        console.log("playing"+source.stream_url+"?client_id="+Service.soundcloudClientId);
+        console.log("playing"+"audio/"+source.original_format);
+        $timeout(Service.API.play.bind(Service.API), 100);
     }
     return Service;
 })
