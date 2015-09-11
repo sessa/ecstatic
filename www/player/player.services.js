@@ -51,6 +51,7 @@ angular.module('ecstatic.player')
 
     Service.onPlayerReady = function(API) {
         Service.API = API;
+        Service.API.setVolume(1);
         var channel = channelServices.getChannel($stateParams.channel_id);
         if(channel.hasCountdown){
             channelServices.setCountdownFinished($stateParams.channel_id);

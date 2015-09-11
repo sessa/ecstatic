@@ -41,9 +41,7 @@ angular.module('ecstatic.player')
 
             var channel = channelServices.getChannel($stateParams.channel_id);
             var playlistLength = channel.playlist.length;
-                            console.log("berforeplaylistLength !== 0 && $scope ");
             if(playlistLength !== 0 && $scope.countdownFinished){
-                console.log("playlistLength !== 0 && $scope.countdownFinished");
                 playerServices.setChannel(channel);
                 $scope.playerServices = playerServices;
                 $scope.showPlayer = true;
