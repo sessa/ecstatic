@@ -76,6 +76,7 @@ angular.module('ecstatic.player')
         Service.currentItem = index;
         Service.sources = [];
         var source = Service.playlist[Service.currentItem];
+        console.log(source.stream_url+"?client_id="+Service.soundcloudClientId);
         Service.sources.push({src: $sce.trustAsResourceUrl(source.stream_url+"?client_id="+Service.soundcloudClientId), type: "audio/"+source.original_format});
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;

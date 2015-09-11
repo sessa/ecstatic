@@ -15,7 +15,9 @@ var app = angular.module('ecstatic', [
       'ecstatic.feedback',
       'ecstatic.camera',
       'ecstatic.mediapicker',
-      'ecstatic.create',
+      'ecstatic.setTimer',
+      'ecstatic.setName',
+      'ecstatic.countdown',
       'ecstatic.videoplayer',
       'ecstatic.videolist',
 ])
