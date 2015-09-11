@@ -237,9 +237,23 @@ app.get('/soundcloudClientId', function(req, res) {
     res.json({"soundcloudClientId": process.env.soundcloudClientId});
 });
 
-app.route('/*')
-.get(function(req, res) {
-  res.render('index')
+app.get('/partials/:name', function (req, res) {
+        console.log("req.params.name"+req.params.name);
+    var name = req.params.name;
+    res.render(name+ '/' + name);
+});
+
+app.get('feedback/thankyou', function (req, res) {
+    console.log("feedbacktanks");
+    res.render("feedback/thankyou");
+});
+
+app.get('channels/channel-list', function (req, res) {
+    res.render("channels/channel-list");
+});
+
+app.get('/*', function(req, res) {
+  res.render('index');
 });
 
 server.listen(app.get('port'), function(req, res) {

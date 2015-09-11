@@ -90,7 +90,7 @@ var app = angular.module('ecstatic', [
         url: '/channels',
         views: {
           'main': {
-            templateUrl: 'channels/channel-list.html',
+            templateUrl: 'channels/channel-list',
             controller: 'ChannelsCtrl'
           }
         }
@@ -102,7 +102,7 @@ var app = angular.module('ecstatic', [
                 url: '/setName',
                 views: {
                   'main': {
-                    templateUrl: 'create/setName/setName.html',
+                    templateUrl: 'partials/setName',
                     controller: 'setNameCtrl'
                   }
                 }
@@ -114,7 +114,7 @@ var app = angular.module('ecstatic', [
                 url: '/setTimer:channelName',
                 views: {
                   'main': {
-                    templateUrl: 'create/setTimer/setTimer.html',
+                    templateUrl: 'partials/setTimer',
                     controller: 'setTimerCtrl'
                   }
                 }
@@ -126,7 +126,7 @@ var app = angular.module('ecstatic', [
         url: '/feedback',
         views: {
           'main': {
-            templateUrl: 'feedback/feedback.html',
+            templateUrl: 'partials/feedback',
             controller: 'FeedbackCtrl'
           }
         }
@@ -138,7 +138,7 @@ var app = angular.module('ecstatic', [
                 url: '/thankyou',
                 views: {
                   'main': {
-                    templateUrl: 'feedback/thankyou.html',
+                    templateUrl: 'feedback/thankyou',
                     controller: 'FeedbackCtrl'
                   }
                 }

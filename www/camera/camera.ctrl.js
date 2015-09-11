@@ -55,11 +55,6 @@ angular.module('ecstatic.camera')
 		$ionicHistory.goBack();
 	}
 
-	// $scope.sendMobileVideo = function(video) {
-	// 	console.log("Send Mobile Video Channel id: " + $stateParams.channel_id);
-	// 	cameraServices.sendMobileVideo($stateParams.channel_id, video);
-	// }
-
 	$scope.showCamera = function () {
 		cameraServices.cameraStart();
 
