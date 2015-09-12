@@ -1,6 +1,6 @@
 angular.module('ecstatic.channels')
 
-.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'videoEventServices', 'socket', 'socketManager','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, videoEventServices, socket, socketManager, $sce, ConfigService) {
+.factory('channelServices', ['userNumberEventService', 'updatePlayerstateEventService', 'socket', 'socketManager','$sce', 'ConfigService', function(userNumberEventService, updatePlayerstateEventService, socket, socketManager, $sce, ConfigService) {
 	// We return this object to anything injecting our service
 	var Service = {};
 	Service.channels = [];
@@ -11,7 +11,7 @@ angular.module('ecstatic.channels')
 			var channel = Service.getChannel(info.channel_id);
 			userNumberEventService.broadcast(Object.keys(channel.users).length);
 			updatePlayerstateEventService.broadcast(channel);
-			videoEventServices.broadcast(channel.cliplist);
+			//videoEventServices.broadcast(channel.cliplist);
 		});
 	});
 

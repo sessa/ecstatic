@@ -1,25 +1,37 @@
 var app = angular.module('ecstatic', [
-      'ngSanitize',
-      'ngStorage',
-      'ngAnimate',
-      'timer',
       'ionic',
-      'ecstatic.player',
-      'ecstatic.playlist',
-      'ecstatic.sockets',
-      'ecstatic.soundcloud',
+      'ngStorage',
+      // 'ngSanitize',
+      // 'ngAnimate',
+
+      // 'ecstatic.sockets',
+
       'ecstatic.home',
-      'ecstatic.chat',
       'ecstatic.channels',
-      'ecstatic.config',
       'ecstatic.feedback',
-      'ecstatic.camera',
-      'ecstatic.mediapicker',
-      'ecstatic.setTimer',
-      'ecstatic.setName',
-      'ecstatic.countdown',
-      'ecstatic.videoplayer',
-      'ecstatic.videolist',
+
+      // 'ecstatic.setTimer',
+      // 'ecstatic.setName',
+      // 'ecstatic.countdown',
+      // 'timer',
+
+      // 'ecstatic.player',
+      // 'ecstatic.playlist',
+      // 'ecstatic.soundcloud',
+      // 'ecstatic.config',
+      // 'ecstatic.mediapicker',
+      // 'ecstatic.videoplayer',
+      // 'ecstatic.camera',
+      // 'ecstatic.videolist',
+      // 'ecstatic.chat',
+
+
+      
+
+
+
+      
+
 ])
 
 .run(function($ionicPlatform, $rootScope, channelServices, $stateParams) {
@@ -66,10 +78,11 @@ var app = angular.module('ecstatic', [
 
 /*  States.js */
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($controllerProvider, $compileProvider, $filterProvider, $provide, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+
 
   $ionicConfigProvider.views.maxCache(3);
-
   $stateProvider
 
     // ecstatic & it's navigation menu
@@ -108,6 +121,7 @@ var app = angular.module('ecstatic', [
                     controller: 'setNameCtrl'
                   }
                 }
+
             })
 
             // a form that sets the time left before the music starts
@@ -208,7 +222,7 @@ var app = angular.module('ecstatic', [
 
       
     
-    $urlRouterProvider.otherwise('channels');
+    $urlRouterProvider.otherwise('home');
 });
 
 function analytics(){
