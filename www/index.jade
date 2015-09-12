@@ -65,6 +65,9 @@ head
 	script(src='mediapicker/mediapicker.module.js')
 	script(src='mediapicker/mediapicker.services.js')
 	script(src='mediapicker/mediapicker.ctrl.js')
+	script(src='auth/auth.module.js')
+	script(src='auth/auth.services.js')
+	script(src='auth/auth.ctrl.js')
 	script(src='app.js')
 	script(src='camera/camera.module.js')
 	script(src='camera/camera.services.js')
@@ -92,6 +95,7 @@ body(ng-app='ecstatic')
 		ion-side-menu(side="left", enable-menu-with-back-views="false")
 
 			ion-content
+
 				ion-list.ecstatic-menu
 					ion-item.center-text Ecstatic 
 						span.beta-label BETA 
@@ -106,3 +110,9 @@ body(ng-app='ecstatic')
 					ion-item(menu-close, href="#/feedback") 
 						i.icon.ion-clipboard
 						|  Feedback
+
+			.bar.bar-footer.login-menu
+				button.button(ng-click)
+					| Login
+				button.button
+					| Create an account
