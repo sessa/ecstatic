@@ -1,20 +1,17 @@
-ion-side-menu-content.gradient(ng-controller="chatCtrl" has-header="true")
-	ion-content.has-tabs.has-footer(has-header="true")
-		.chatbox.padding
-			.announcements.padding
-				// Channel announcements
-				h1(ng-show="username") hi {{username}}! :)
-				p There's 
-					span(ng-hide="numberOfUsers") only you  
-					span(ng-show="numberOfUsers") {{numberOfUsers}} other ecstatic(s)
-					| in this channel. 
-				a(ng-click="goToVideolist()") button
-			// Channel discussion
-			.chat-message.scroll-item.padding(ng-repeat="line in chatLog track by $index")
-				strong{{line.username}}: 
-				{{line.txt}}
-	.message-box.list.padding		
-		form.item-icon-right
-			label.item-inset
-				input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
-			button.hidden(ng-click="enterText(lineText); lineText=''")
+ion-view(ng-controller="ChatCtrl as controller", cache-view="false" )
+	ion-content.has-header.has-footer.gradient.padding(has-header="true")
+
+		// Channel discussion
+		div(ng-repeat="line in chatLog track by $index")
+			.chat-message.scroll-item.padding
+				strong {{line.username}}:
+				|  
+				|  {{line.txt}}
+			br
+	ion-footer.chat-input(has-footer="true")
+
+		.message-box.list.padding
+			form
+				label.item-inset
+					input.typeform.padding(type="search", ng-model="lineText", ng-enter="enterText(lineText); lineText=''", placeholder="{{textPrompt}}")
+				button.hidden(ng-click="enterText(lineText); lineText=''")

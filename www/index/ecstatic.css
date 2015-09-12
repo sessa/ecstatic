@@ -310,4 +310,12 @@ input.email:focus {
   display:block;
 }
 
-/*# sourceMappingURL=ecstatic.css.map */
+span.beta-label {
+  color: white!important;
+  background-color: #aaa!important;
+  border-radius: 10px!important;
+  padding: 0.3em 0.3em 0.3em 0.6em!important;
+  font-size: xx-small!important;
+  margin: 0 0.5em 0 0!important;
+}
+

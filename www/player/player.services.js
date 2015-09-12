@@ -1,6 +1,6 @@
 angular.module('ecstatic.player')
 
-.factory('playerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout){
+.factory('playerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout, channelServices){
 	var Service = {};
 	var channel_id = 0;
     Service.soundcloudClientId = 0;
@@ -12,6 +12,18 @@ angular.module('ecstatic.player')
 		console.log("heard next_song_action");
 		$rootScope.$broadcast('nextSong');
 	});
+
+    Service.getSocketId = function() {
+        var request = {
+            msg: "get_socket_id",
+        }
+        socket.on('get_socket_id', function (data) {
+            socketManager.listener(data);
+        });
+
+        var promise = socketManager.sendRequest(request); 
+        return promise;
+    }
 
 	Service.nextSongAction = function(playlistIndex, channel_id) {
 		var request = {
@@ -31,18 +43,26 @@ angular.module('ecstatic.player')
         Service.sources = [];
         Service.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css";
     }
+
     Service.onLoadMetaData = function(evt) {
         console.log("onLoadMetaData, evt="+JSON.stringify(evt));
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
     }
+
     Service.onPlayerReady = function(API) {
         console.log("onPlayerReady");
         Service.API = API;
-        Service.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
+        var channel = channelServices.getChannel($stateParams.channel_id);
+        if(channel.hasCountdown){
+            channelServices.setCountdownFinished($stateParams.channel_id);
+        }
+        else{
+            Service.API.mediaElement[0].addEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
+            Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
+        }
+
         Service.setItem(Service.currentItem);
-        Service.delta = (Service.channel.requestTime - Service.channel.timestamp)/1000;
-        console.log("delta="+Service.delta);
     }
     Service.onCompleteItem = function() {
         Service.isCompleted = true;
@@ -60,7 +80,11 @@ angular.module('ecstatic.player')
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
-        $timeout(Service.API.play.bind(Service.API), 100);
+        Service.API.play();
     }
     return Service;
+})
+.service("countdownEventService", function ($rootScope){
+    this.broadcast = function() {$rootScope.$broadcast("countdownFinished");}
+    this.listen = function(callback) {$rootScope.$on("countdownFinished",callback)}
 })

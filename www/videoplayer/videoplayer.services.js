@@ -9,30 +9,35 @@ angular.module('ecstatic.videoplayer')
     Service.setChannel = function(channel) {
         Service.currentItem = channel.playlistIndex;
         Service.autoplay = true;
-        Service.cliplist = channel.cliplist;
-        Service.channel = channel
-        Service.sources = [];
+        Service.channel = channel;
         Service.theme = "http://www.videogular.com/styles/themes/default/latest/videogular.css"
         Service.loadVideoSources();
     }
 
     Service.loadVideoSources = function(){
-        for(var i=0; i < Service.channel.cliplist.length; i++){
-            console.log("item");
-            var format = "video/" + Service.channel.cliplist[i].format;
-            videos[i] = [
-                {
-                    sources: [
-                        {src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+Service.channel.cliplist[i].video_key), type: format}
-                    ]
-                }
-            ];
+        var cliplist = Service.channel.cliplist;
+        videos = [];
+        for(var i=0; i < cliplist.length; i++){
+            if(cliplist[i].isActive){
+                videos.push ([{sources:[{src:  $sce.trustAsResourceUrl("https://s3.amazonaws.com/ecstatic-videos/"+cliplist[i].video_key), type:"video/"+ cliplist[i].format}]}]);
+            }
         }
+    }
+
+    Service.getNumberOfActiveClips = function(cliplist){
+        var numberOfActiveClips = 0;
+        for(var i=0; i < cliplist.length; i++){
+            if(cliplist[i].isActive){
+                numberOfActiveClips++;
+            }
+        }
+        return numberOfActiveClips;
     }
 
     Service.onLoadMetaData = function(evt) {
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
+        Service.API.setVolume(0);
     }
     Service.onVideoplayerReady = function(API) {
         Service.API = API;
@@ -43,7 +48,7 @@ angular.module('ecstatic.videoplayer')
     Service.onCompleteItem = function() {
         Service.currentItem++;
         Service.delta = 0;
-        if (Service.currentItem >= Service.cliplist.length) Service.currentItem= 0;
+        if (Service.currentItem >= videos.length) Service.currentItem= 0;
         Service.setItem(Service.currentItem);
     }
 
@@ -54,4 +59,8 @@ angular.module('ecstatic.videoplayer')
     }
     
     return Service;
+})
+.service("videoEventServices", function ($rootScope){
+    this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
+    this.listen = function(callback) {$rootScope.$on("videoAdded",callback)}
 })

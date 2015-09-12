@@ -1,16 +1,18 @@
 
-<ion-side-menu side="right" ng-controller="CameraCtrl" ng-init="doSomething()">
-  <ion-content has-header="true" class="has-tabs has-footer">
-    <div class="chatbox padding">
-      <div class="announcements padding">
-        <video id="videoElement" ng-hide="{{hide}}" height="192" width="256" loop="loop"></video>
-        <button on-release="onRelease()" on-hold="onHold()">Take Video</button>
-        <button ng-click="sendVideo()">SendVideo()</button>
-        <button ng-click="showCamera()">showCamera()</button>
-        <button ng-click="deleteClip()">deleteClip()</button>
-        <input type="file" id="fileinput"/>
-        <button ng-click="add()">Add</button>
+<ion-view>
+  <ion-content scroll="false" class="darkbg has-header">
+    <div ng-hide="onDesktop">
+      <div class="vertical-screen">
+        <input type="file" id="fileinput" accept="video/*"/>
       </div>
     </div>
+    <div ng-show="onDesktop">
+      <div class="vertical-screen">
+        <video id="videoElement" loop="loop"></video>
+      </div>
+      <button ng-click="deleteClip()" class="button button-large button-clear camera-icons icon ion-trash-b"></button>
+      <button ng-click="sendVideo()" class="button button-large button-clear camera-icons icon ion-checkmark-circled pizza"></button><a on-release="onRelease();" on-hold="onHold()" class="button round-icon record-button"></a>
+      <div class="record-button-label">(Press &amp; Hold to Rec)</div>
+    </div>
   </ion-content>
-</ion-side-menu>
+</ion-view>

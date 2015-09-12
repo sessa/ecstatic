@@ -1,103 +1,371 @@
+/* Fonts */
+
+body, .ionic-body {
+  font-family: 'Nunito', sans-serif!important;}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 500;
+  font-family: 'Nunito', sans-serif!important;}
+
+input, button, select, textarea {
+  font-family: 'Nunito', sans-serif!important; }
+
+input, button, select, textarea {
+  font-family: 'Nunito', sans-serif!important; }
+
+.cover-art {
+  width: 150px;
+  height: 150px;
+}
+
+.player-view {
+  color: white;
+
+}
+
+.player-view .button-clear {
+  color: white;
+  text-decoration: underline;
+}
+
+.center-text {
+  text-align: center;
+}
+
+ion-list.ecstatic-menu.item-content{
+  background: none!important;
+  color: white!important;
+  border: none!important;
+}
+
+/*.ecstatic-menu > ion-item {
+  background: none!important;
+  color: white!important;
+  border: none!important;
+}*/
+
+
+row.set-timer {
+  text-align: center;
+}
+
+input.create-channel {
+   font-size: 2em;
+   height: 2em;
+   padding: 0;
+   margin: 0.4em 0 0;
+   line-height: 2em;
+   border-bottom: 1px solid #aaa;
+}
+
+input.set-timer {
+   font-size: 4em;
+   min-height: 3em;
+   margin: 0;
+   line-height: 4em;
+}
+
 .gradient {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
-	background: #F29537; /* Old browsers */
-	background: -moz-radial-gradient(center, ellipse cover,  #F29537 0%, #C14D9E 100%); /* FF3.6+ */
-	background: -webkit-gradient(radial, top right, 0px, bottom left, 100%, color-stop(0%,#F29537), color-stop(100%,#C14D9E)); /* Chrome,Safari4+ */
-	background: -webkit-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Opera 12+ */
-	background: -ms-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* IE10+ */
-	background: radial-gradient(ellipse at top right,  #F29537 0%,#C14D9E 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#F29537+0,ff89cc+100 */
+  background: #F29537; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover,  #F29537 0%, #C14D9E 100%); /* FF3.6+ */
+  background: -webkit-gradient(radial, top right, 0px, bottom left, 100%, color-stop(0%,#F29537), color-stop(100%,#C14D9E)); /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* Opera 12+ */
+  background: -ms-radial-gradient(top right, ellipse cover,  #F29537 0%,#C14D9E 100%); /* IE10+ */
+  background: radial-gradient(ellipse at top right,  #F29537 0%,#C14D9E 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F29537', endColorstr='#C14D9E',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .hidden {
-	display: none;
-	visibility: hidden;
-	width: 0;
+  display: none;
+  visibility: hidden;
+  width: 0;
 }
 
 .nav-dark  {
-	border: none !important;
+  border: none !important;
 }
 
 .has-footer.has-tabs {
-	bottom: 105px !important;
+  bottom: 105px !important;
 }
 
 .sub-footer{
-	bottom:49px !important;
+  bottom:49px !important;
 }
 
 .bar.miniplayer {
- 	color: white;
- 	background-color: #333;
+  color: white;
+  background-color: #333;
 }
 
+.timer-input {
+  font-size: 3em!important;
+  min-height: 2em;
+  margin-top: 0.5em;
+  margin-left: -0.5em;
+  width: 3em;
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.starting-time.label{
+
+  text-transform: uppercase;
+  font-weight: 200;
+  margin-left: -0.5em;
+}
 
 .current-song img {
-	max-width: 32px;
-	max-height: 32px;
-	float: left;
+  max-width: 32px;
+  max-height: 32px;
+  float: left;
 }
 
 .current-song p {
-	position: absolute;
-	top: 0;
-	padding: 0 0 0 40px;
-	margin: 0;
+  position: absolute;
+  top: 0;
+  padding: 0 0 0 40px;
+  margin: 0;
 }
 
 .announcements,
 .announcements h1 {
-	color: white;
+  color: white;
 }
 
 .message-box {
-	position: fixed!important;
-	bottom: 49px!important;
-	width: 100%;
-	border-top: 1px solid #aaa;
-	background-color: white;
+  position: fixed!important;
+  bottom: 40px!important;
+  width: 100%;
+  border-top: 1px solid #aaa;
+  background-color: white;
 }
 
 .chat-message.scroll-item {
-	border: none;
-	background-color: #eee;
-	margin: 0.5em 0 0.5em;
-	border-radius: 10px;
-	overflow: initial;
-    white-space: initial;
+  border: none;
+  background-color: #fff;
+  margin: 0.5em 0 0.5em;
+  border-radius: 15px;
+  overflow: initial;
+  white-space: initial;
+  display: inline-block;
+}
 
+.chat-message.scroll-item.me {
+float: right;
 }
 
 input.typeform  {
-	width: 100% ;
+  width: 100% ;
 }
 
-video.bgvid { 
+/*
+div.footer-button a.button.button-full {
+    width:100%;
+    margin-top: 0
+}
+*/
+
+.channel {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.community {
+  padding: 0 !important;  
+}
+
+.item-thumbnail-channel-left, .item-thumbnail-channel-left .item-content {
+  padding-top: 8px;
+  padding-left: 166px;
+  min-height: 100px; }
+  .item-thumbnail-channel-left > img:first-child, .item-thumbnail-channel-left .item-image, .item-thumbnail-channel-left .item-content > img:first-child, .item-thumbnail-channel-left .item-content .item-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 140px;
+    max-height: 80px;
+    width: 100%;
+    height: 100%; }
+
+.chat-tabs {
+  border-top: none;
+}
+
+.camera-menu {
+
+  z-index: 200;
+}
+
+
+/* the record button */
+#rec-button-holder {
     position: fixed;
-    top: 50%;
+    bottom: 0;
+    left: 50%;
+    width: auto;
+    height: auto;
+    z-index: 200;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+circle.rec-button {
+  width:44px;height:44px;
+  border-radius:50px;
+  fill: #DF0000;
+  z-index: 200;
+}
+
+.rec-gesture {
+  width: 55px;
+  height: 55px;
+  border-radius: 50px;
+  border: 2px solid white;
+  background-color: white;
+  opacity: 0.3;
+  position: fixed;
+  bottom: 84px;
+  left: 50%;
+  margin-left: -28px;
+  z-index: 200;
+
+}
+
+.countdown-container {
+  text-align: center;
+  width: 100%;
+  padding-top: 20vh;
+  color: white;
+}
+
+timer {
+  font-size: 5em;
+
+}
+
+.countdown-container p {
+  font-size: 1.5em;
+}
+
+.tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
+    color: #CE5F84;
+}
+
+.record-button {
+  color: red!important;
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  margin: -1em;
+  max-width: 1em;
+  height: 44px!important;
+  width: 44px!important;
+  background-color: red;
+  border: none;
+}
+
+.record-button-label {
+  color: red!important;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  margin-left: -4em;
+
+}
+
+#videoElement, #videoplayer-container > video { 
+    position: fixed;
+    top: 0;
     left: 50%;
     min-width: 100%;
     min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -webkit-transform: translateX(-50%) translateY(0%);
+    width: auto!important;
+    height: auto!important;
     transform: translateX(-50%) translateY(0%);
-    background: url(polina.jpg) no-repeat;
-    background-size: cover; 
+    background-color: black;
+    background-size: cover;
+    transition: 1s opacity;
 }
 
-.ecstatic-alert {
-	position: absolute;
-	left: 50%;
-	margin-left: -100px;
-	top: 10%;
-	z-index: 10;
-	border: 0;
-	background-color: white;
-	width: 200px;
-	border-radius: 5px;
-	text-align: center;
+
+/* channel.videoplayer */
+
+.novideoyet-text{
+  padding-top: 30vh;
+  color: white;
+  text-align: center
+}
+
+.round-icon {
+  border-radius: 50%;
+}
+
+.darkbg {
+  background-color: #222222;
+}
+
+.emptyvideoplayer {
+  text-align: center;
+}
+
+.fullscreen-icon {
+  position: fixed;
+  top: 40px;
+  right: 0;
+  color: white!important;
+  z-index: 999;
+}
+
+.videolist-icon {
+  position: fixed;
+  bottom: 80px;
+  right: 0;
+  opacity: 0.01;
+  color: white!important;
+  z-index: 999;
+}
+
+.camera-icon {
+  position: fixed;
+  top: 120px;
+  right: 0;
+  color: white!important;
+  z-index: 999;
+}
+
+
+/* channel.camera */
+
+.camera-icons.trash {
+  position: fixed;
+  top: 20px;
+  left: 5px;
+  color: white!important;
+}
+
+.camera-icons.pizza {
+  position: fixed;
+  bottom: 100px;
+  right: 5px;
+  color: white!important;
+}
+
+#fileinput {
+  color: white;
+  position: fixed;
+  bottom: 80px;
+  margin-left:2em;
+}
+
+
+.videoclip-active {
+  background-color: green!important;
 }

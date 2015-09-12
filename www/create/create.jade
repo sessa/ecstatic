@@ -5,9 +5,9 @@ ion-view(view-title="")
 		.row.row-center
 			.col
 				.list.list-inset
+					p What do you want to call you channel?
 					label.item.item-input.padding
-						input(type="text", placeholder="What do you want to call you channel?", ng-model="channelName")
-					button.button.button-positive.button-full(ng-click="create_channel(channelName)", ng-init="channelName=random_name") Create {{channelName}}
+						input(type="text", placeholder="Type a name here.", ng-model="channelName")					button.button.button-positive.button-full(ng-click="create_channel(channelName)", ng-init="channelName=random_name") Create {{channelName}}
 		.row.row-center
 			.col
 				.list.list-inset(ng-controller="CountdownCtrl")

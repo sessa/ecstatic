@@ -6,8 +6,7 @@ head
 	base(href='/')
 
 	// external imports
-	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Raleway:400,200,100', type='text/css')
-	link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Lato:400,100', type='text/css')
+	link(href='https://fonts.googleapis.com/css?family=Nunito:700,300,400' rel='stylesheet' type='text/css')
 	
 	// internal imports
 	script(src='lib/ionic/js/ionic.bundle.js')
@@ -69,11 +68,38 @@ head
 	script(src='camera/camera.ctrl.js')
 	script(src='//connect.soundcloud.com/sdk-2.0.0.js')
 	script(src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js")
+	script(src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js")
 
 // THE APP
 body(ng-app='ecstatic')
-	ion-nav-bar.bar-dark
 
-		ion-nav-back-button
+	ion-side-menus(enable-menu-with-back-views="false")
+		ion-side-menu-content(ng-controller="NavCtrl")
+			ion-nav-bar.bar-dark
+				ion-nav-back-button
 
-	ion-nav-view
+				ion-nav-buttons(side="left")
+					button.button.button-icon.button-clear.ion-navicon(ng-click="showMenu()", menu-toggle="left")
+				ion-nav-buttons(side="right")
+					//button.button.button-icon.button-clear.ion-android-more-vertical(ng-click="")
+
+			ion-nav-view(name="main", animation="slide-left-right")
+
+
+		ion-side-menu(side="left", enable-menu-with-back-views="false")
+
+			ion-content
+				ion-list.ecstatic-menu
+					ion-item.center-text Ecstatic 
+						span.beta-label BETA 
+						span v1.5.1
+					ion-item(menu-close, href="#/home")
+						i.icon.ion-android-home
+						|  
+						| Home
+					ion-item(menu-close, href="#/channels") 
+						i.icon.ion-radio-waves
+						|  Channels
+					ion-item(menu-close, href="#/feedback") 
+						i.icon.ion-clipboard
+						|  Feedback

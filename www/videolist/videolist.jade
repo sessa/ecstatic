@@ -1,9 +1,11 @@
-ion-view(view-title="videolist")
-	ion-content
+ion-view(view-title="Super Secret VideoList that controls the projector")
+	ion-content.gradient
 		ion-list
-			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='clip in cliplist', type='item-text-wrap', ng-click="activate(video)")
-				h2 {{clip.video_key}}
-				video(width="320" height="240" controls)
-					source(src="{{clip.src}}" type="video/mp4")
-				i.icon.ion-chevron-right.icon-accessory
+			ion-item.item-remove-animate.item-avatar.item-icon-right(ng-repeat='clip in cliplist', type='item-text-wrap', ng-click="toggleClip(clip)")
+				.card(ng-class="videoclip-active: {{clip.isActive}}")
+					h2 {{clip.video_key}}
+					h2 it is {{clip.isActive}} that this clip is active
+						video(width="320" height="240" controls autoplay loop)
+							source(src="{{clip.src}}" type="video/mp4")
+					i.icon.ion-chevron-right.icon-accessory
 				

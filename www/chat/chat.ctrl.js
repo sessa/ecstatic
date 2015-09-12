@@ -1,11 +1,12 @@
 angular.module('ecstatic.chat')
 //on receive messages display them
 
-.controller('chatCtrl', ['$state', "$sce", "$scope", "chatServices", "$stateParams", "cameraServices","chatEventServices", "$ionicScrollDelegate", function($state, $sce, $scope, chatServices, $stateParams,cameraServices, chatEventServices, $ionicScrollDelegate) {
+.controller('ChatCtrl', ['$state', "$sce", "$scope", "chatServices", "$stateParams", "cameraServices","chatEventServices", 'channelServices', "$ionicScrollDelegate", function($state, $sce, $scope, chatServices, $stateParams,cameraServices, chatEventServices,channelServices, $ionicScrollDelegate) {
 	$scope.chatLog = chatServices.getChatBacklog($stateParams.channel_id);
 	$scope.channel_id = $stateParams.channel_id;
 	$scope.textPrompt = chatServices.getTextPrompt();
 	$scope.username = "";
+    channelServices.joinChannel($stateParams.channel_id);
 
 	$scope.goToVideolist = function(){
 		$state.go('tab.channels-videolist');

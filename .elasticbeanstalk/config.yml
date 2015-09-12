@@ -1,6 +1,6 @@
 branch-defaults:
-  ionicdeploy:
-    environment: Squad-dev
+  master:
+    environment: prod 
 global:
   application_name: Squad
   default_ec2_keyname: aws-eb2

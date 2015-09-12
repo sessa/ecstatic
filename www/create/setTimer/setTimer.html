@@ -1,20 +1,26 @@
 
-<ion-view view-title="">
-  <ion-content>
-    <p>How many hours till the event starts? (or do you want to get funky right now?)</p>
-    <div class="row"></div>
-    <div class="row row-center">
-      <div class="col">
-        <div class="list list-inset">
-          <label class="item item-input padding">
-            <input type="number" ng-model="startTimeHours" min="0" placeholder="Hours"/>
-          </label>
-          <label class="item item-input padding">
-            <input type="number" ng-model="startTimeMinutes" min="0" max="59" placeholder="Minutes"/>
-          </label>
-          <button ng-click="setTimer(startTimeHours, startTimeMinutes)" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
+<ion-view view-title="{{channelName}}">
+  <ion-content class="gradient">
+    <div ng-if="!doneLoading" class="loader-center">
+      <div class="loader"><i class="icon ion-loading-c"></i></div>
+    </div>
+    <div style="text-align: center" class="list list-inset card padding"> <br/>
+      <h2>Commencing in...</h2>
+      <div class="row set-timer">
+        <div class="col">
+          <input type="number" ng-model="startTimeHours" min="0" placeholder="0" class="set-timer"/>
+        </div>
+        <div class="col"></div>
+        <div class="col">
+          <input type="number" ng-model="startTimeMinutes" min="0" max="59" placeholder="0" class="set-timer"/>
         </div>
       </div>
+      <div class="row">
+        <div class="col"><span class="starting-time label">hours</span></div>
+        <div class="col"><span class="starting-time label">and</span></div>
+        <div class="col"><span class="starting-time label">minutes</span></div>
+      </div><br/><br/>
+      <button ng-click="setTimer(startTimeHours, startTimeMinutes)" ng-init="channelName=random_name" class="button button-dark button-full">Create {{channelName}}</button>
     </div>
   </ion-content>
 </ion-view>

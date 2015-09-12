@@ -5,8 +5,7 @@
   <title>Ecstatic</title>
   <base href="/">
   <!-- external imports-->
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Raleway:400,200,100" type="text/css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,100" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:700,300,400" rel="stylesheet" type="text/css">
   <!-- internal imports-->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
   <!-- cordova script (this will be a 404 during development)-->
@@ -67,11 +66,34 @@
   <script src="camera/camera.ctrl.js"></script>
   <script src="//connect.soundcloud.com/sdk-2.0.0.js"></script>
   <script src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
 </head>
 <!-- THE APP-->
 <body ng-app="ecstatic">
-  <ion-nav-bar class="bar-dark">
-    <ion-nav-back-button></ion-nav-back-button>
-  </ion-nav-bar>
-  <ion-nav-view></ion-nav-view>
+  <ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content ng-controller="NavCtrl">
+      <ion-nav-bar class="bar-dark">
+        <ion-nav-back-button></ion-nav-back-button>
+        <ion-nav-buttons side="left">
+          <button ng-click="showMenu()" menu-toggle="left" class="button button-icon button-clear ion-navicon"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+          <!--button.button.button-icon.button-clear.ion-android-more-vertical(ng-click="")-->
+        </ion-nav-buttons>
+      </ion-nav-bar>
+      <ion-nav-view name="main" animation="slide-left-right"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" enable-menu-with-back-views="false">
+      <ion-content>
+        <ion-list class="ecstatic-menu">
+          <ion-item class="center-text">Ecstatic <span class="beta-label">BETA </span><span>v1.5.1</span></ion-item>
+          <ion-item menu-close href="#/home"><i class="icon ion-android-home"></i> 
+            Home
+          </ion-item>
+          <ion-item menu-close href="#/channels"> <i class="icon ion-radio-waves"></i> Channels</ion-item>
+          <ion-item menu-close href="#/feedback"> <i class="icon ion-clipboard"></i> Feedback</ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-side-menu>
+  </ion-side-menus>
 </body>

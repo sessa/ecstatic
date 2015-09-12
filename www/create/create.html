@@ -6,8 +6,9 @@
     <div class="row row-center">
       <div class="col">
         <div class="list list-inset">
+          <p>What do you want to call you channel?</p>
           <label class="item item-input padding">
-            <input type="text" placeholder="What do you want to call you channel?" ng-model="channelName"/>
+            <input type="search" ng-model="channelName" ng-enter="create_channel(channelName)" placeholder="Type a name here."/>
           </label>
           <button ng-click="create_channel(channelName)" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
         </div>
@@ -16,13 +17,6 @@
     <div class="row row-center">
       <div class="col">
         <div ng-controller="CountdownCtrl" class="list list-inset">
-          <label class="item item-input padding">
-            <input type="number" ng-model="startTimeHours" min="0" placeholder="How many hours till the event starts?"/>
-          </label>
-          <label class="item item-input padding">
-            <input type="number" ng-model="startTimeMinutes" min="0" max="59" placeholder="How many minutes till the event starts?"/>
-          </label>
-          <button ng-click="create_timer(startTimeHours, startTimeMinutes, channelName)" ng-init="channelName=random_name" class="button button-positive button-full">Create {{channelName}}</button>
         </div>
       </div>
     </div>

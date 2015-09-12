@@ -2,7 +2,7 @@ angular.module('ecstatic.sockets')
 
 .factory('socket', ['ApiEndpoint', 'socketFactory','ConfigService', '$location', function (ApiEndpoint, socketFactory, ConfigService, $location) {
 	return socketFactory({
-		ioSocket: io.connect(ApiEndpoint.url)
+		ioSocket: io.connect($location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2])
 	});
 }])
 
@@ -23,14 +23,12 @@ angular.module('ecstatic.sockets')
 				cb:defer
 			};
 			request.callback_id = callbackId;
-			console.log('Sending request', JSON.stringify(request));
 			socket.emit(request.msg, request);
 			return defer.promise;
 		}
 
 		Service.listener = function(data) {
 			var messageObj = data;
-			console.log("Received data from websocket: ", JSON.stringify(messageObj));
 			// If an object exists with callback_id in our callbacks object, resolve it
 			if(callbacks.hasOwnProperty(messageObj.callback_id)) {
 				$rootScope.$apply(callbacks[messageObj.callback_id].cb.resolve(messageObj));
