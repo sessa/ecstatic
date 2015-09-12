@@ -45,14 +45,13 @@ angular.module('ecstatic.player')
     }
 
     Service.onLoadMetaData = function(evt) {
-        console.log("onLoadMetaData, evt="+JSON.stringify(evt));
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
     }
 
     Service.onPlayerReady = function(API) {
-        console.log("onPlayerReady");
         Service.API = API;
+        Service.API.setVolume(1);
         var channel = channelServices.getChannel($stateParams.channel_id);
         if(channel.hasCountdown){
             channelServices.setCountdownFinished($stateParams.channel_id);
@@ -80,7 +79,7 @@ angular.module('ecstatic.player')
         Service.trackTitle = Service.playlist[Service.currentItem].title;
         Service.trackUser = Service.playlist[Service.currentItem].user.username;
         Service.trackCover = Service.playlist[Service.currentItem].artwork_url;
-        Service.API.play();
+        $timeout(Service.API.play.bind(Service.API), 100);
     }
     return Service;
 })
