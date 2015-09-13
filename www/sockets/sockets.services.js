@@ -1,8 +1,8 @@
 angular.module('ecstatic.sockets')
 
-.factory('socket', ['ApiEndpoint', 'socketFactory','ConfigService', '$location', function (ApiEndpoint, socketFactory, ConfigService, $location) {
+.factory('socket', ['socketFactory','ConfigService', '$location', function (socketFactory, ConfigService, $location) {
 	return socketFactory({
-		ioSocket: io.connect($location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2])
+		ioSocket: io.connect($location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2], {'path': '/api/socket.io'})
 	});
 }])
 

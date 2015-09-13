@@ -5,14 +5,16 @@
 		{
 			"path": "/api",
 			"proxyUrl": "http://localhost:3001"
-		},
-		{
-			"path": "/socket.io",
-			"proxyUrl": "http://localhost:3001/socket.io"
-		} 
+		}
 	],
 	"gulpStartupTasks": [
 		"jade",
-		"watch"
-	]
+		"minify-js", 
+		"minify-css"
+	],
+	"watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
+

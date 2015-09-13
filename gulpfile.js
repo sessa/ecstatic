@@ -4,6 +4,8 @@ var uglify = require("gulp-uglify");
 var gutil = require('gulp-util');
 var minifyCss = require('gulp-minify-css');
 var jade = require('gulp-jade');
+var concat = require('gulp-concat');
+var stripDebug = require('gulp-strip-debug');
 
 var replaceFiles = ['./www/js/app.js'];
 var paths = {
@@ -30,6 +32,8 @@ gulp.task('jade', function (done) {
 
 gulp.task('minify-js', function () {
     gulp.src(paths.js) 
+    //.pipe(concat('script.js'))
+    .pipe(stripDebug())
     .pipe(uglify().on('error', gutil.log))
     .pipe(gulp.dest('dist'));
 });

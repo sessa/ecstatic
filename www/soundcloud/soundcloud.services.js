@@ -5,7 +5,7 @@ angular.module('ecstatic.soundcloud')
 	  var defer = $q.defer();
 
 	  Service.getFavorites = function() {
-		var redirect_uri = $location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2] +'/soundcloud/callback';
+		var redirect_uri = $location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2] +'/api/soundcloud/callback';
 		
 		if(SC.accessToken()){
 		  	$localStorage.accessToken = SC.accessToken();
