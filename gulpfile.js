@@ -14,6 +14,8 @@ var paths = {
 
 //copy over jade 
 gulp.src(['www/**/*.jade']).pipe(gulp.dest('dist'));
+//copy over png 
+gulp.src(['www/**/*.png']).pipe(gulp.dest('dist'));
 //copy over lib 
 gulp.src(['www/lib{,/**}']).pipe(gulp.dest('dist'));
 

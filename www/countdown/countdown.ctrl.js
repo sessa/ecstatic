@@ -1,7 +1,7 @@
 angular.module('ecstatic.countdown')
 
 
-.controller('CountdownCtrl', function(countdownEventService, $scope, channelServices, $stateParams, $state, $rootScope) {
+.controller('CountdownCtrl', ['countdownEventService', '$scope', 'channelServices', '$stateParams', '$state', '$rootScope', function(countdownEventService, $scope, channelServices, $stateParams, $state, $rootScope) {
 	$scope.$watch('dataReady',function(ready){
         if (ready){ startController() }
     });
@@ -25,4 +25,4 @@ angular.module('ecstatic.countdown')
 			$scope.showCountdown = true;
 		}
     }
-});
+}]);

@@ -1,6 +1,6 @@
 angular.module('ecstatic.setTimer')
 
-.controller('setTimerCtrl', function($scope, channelServices, $ionicLoading, $state, $ionicHistory, $stateParams){
+.controller('setTimerCtrl', ['$scope','channelServices', '$ionicLoading', '$state', '$ionicHistory', '$stateParams', function($scope, channelServices, $ionicLoading, $state, $ionicHistory, $stateParams){
 
     $scope.setTimer = function(hours, mins) {
     	hours = typeof hours !== 'undefined' ? hours : 0;
@@ -13,4 +13,4 @@ angular.module('ecstatic.setTimer')
             $state.go('channel', {channel_id:data.player_state.channel_id});
     	});
 	}
-})
+}])
