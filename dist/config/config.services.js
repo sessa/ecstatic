@@ -1,1 +1,0 @@
-angular.module("ecstatic.config",[]).factory("ConfigService",["$http","$q","$rootScope","$location",function(o,t,e,n){var r={};return r.getConfig=function(){var e=t.defer();return o.get(n.absUrl().split("/")[0]+"//"+n.absUrl().split("/")[2]+"/api/soundcloudClientId").success(function(o){e.resolve(o)}),e.promise},r}]);

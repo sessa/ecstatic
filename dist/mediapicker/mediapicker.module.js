@@ -1,1 +1,0 @@
-angular.module("ecstatic.mediapicker",["ionic"]);

@@ -5,15 +5,11 @@ head
 	title Ecstatic
 	base(href='/')
 
-	// external imports
-	link(href='https://fonts.googleapis.com/css?family=Nunito:700,300,400' rel='stylesheet' type='text/css')
-	
-	// internal imports
+	// build:js dist_js/app.js
+	script(src='app.js')
+	script(src='dist/templates/templates.js')
 	script(src='lib/ionic/js/ionic.bundle.js')
-	// cordova script (this will be a 404 during development)
 	script(src='cordova.js')
-	link(rel='stylesheet', href='lib/ionic/css/ionic.css')
-	link(rel='stylesheet', href='css/ecstatic.css')
 	script(src='lib/bower_components/angular-sanitize/angular-sanitize.min.js')
 	script(src='lib/bower_components/angular-animate/angular-animate.js')
 	script(src='lib/bower_components/angular-socket-io/socket.js')
@@ -27,7 +23,6 @@ head
 	script(src='lib/bower_components/momentjs/min/locales.min.js')
 	script(src='lib/bower_components/humanize-duration/humanize-duration.js')
 	script(src='api/lib/socket.io-client/socket.io.js')
-	script(src="templates/templates.js")
 	script(src='lib/countdown.js')
 	script(src='config/config.services.js')
 	script(src='setName/setName.module.js')
@@ -64,13 +59,24 @@ head
 	script(src='home/home.ctrl.js')
 	script(src='mediapicker/mediapicker.module.js')
 	script(src='mediapicker/mediapicker.ctrl.js')
-	script(src='app.js')
 	script(src='camera/camera.module.js')
 	script(src='camera/camera.services.js')
 	script(src='camera/camera.ctrl.js')
+	// endbuild 
+
+	//CSS
+	// build:css dist_css/styles.css 
+	link(href="css/ionic.app.css" rel="stylesheet")
+	// endbuild 
+
+	link(rel='stylesheet', href='lib/ionic/css/ionic.css')
+	link(rel='stylesheet', href='css/ecstatic.css')
+
+	//Third Party
 	script(src='//connect.soundcloud.com/sdk-2.0.0.js')
 	script(src="https://cdn.webrtc-experiment.com/MediaStreamRecorder.js")
 	script(src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js")
+	link(href='https://fonts.googleapis.com/css?family=Nunito:700,300,400' rel='stylesheet' type='text/css')
 
 // THE APP
 body(ng-app='ecstatic')

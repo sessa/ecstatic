@@ -6,6 +6,7 @@ var app = angular.module('ecstatic', [
 	'timer',
 	'templates',
 	'ionic',
+	'useref',
 	'ecstatic.player',
 	'ecstatic.playlist',
 	'ecstatic.sockets',

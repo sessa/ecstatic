@@ -1,5 +1,6 @@
 {
 	"name": "squad_app",
+	"documentRoot": "www",
 	"app_id": "",
 	"proxies": [
 		{
@@ -8,10 +9,7 @@
 		}
 	],
 	"gulpStartupTasks": [
-		"jade",
-		"templatecache",
-		"minify-js", 
-		"minify-css"
+		"build"
 	],
 	"watchPatterns": [
     "www/**/*",

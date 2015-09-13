@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var jade = require( 'gulp-jade' );
-var uglify = require("gulp-uglify");
+var uglify = require('gulp-uglifyjs');
 var gutil = require('gulp-util');
 var minifyCss = require('gulp-minify-css');
 var jade = require('gulp-jade');
@@ -8,13 +8,14 @@ var concat = require('gulp-concat');
 var stripDebug = require('gulp-strip-debug');
 var jslint = require('gulp-jslint');
 var templateCache = require('gulp-angular-templatecache');
+var useref = require('gulp-useref');
 
 var replaceFiles = ['./www/js/app.js'];
 var paths = {
   jade: ['./www/**/*.jade', '!./www/lib{,/**}'],
-  js: ['./www/**/*.js', '!./www/lib{,/**}'],
-  css: ['./www/**/*.css', '!./www/lib{,/**}'],
-  templatecache: ['./dist/**/*.html', '!./dist/lib{,/**}']
+  js: ['./www/*.js', './www/*/*.js'],
+  templatecache: ['./www/**/*.html', '!./www/lib{,/**}'],
+  useref: ['./dist/**/*.html']
 };
 
 //copy over jade 
@@ -38,39 +39,36 @@ gulp.task('jslint', function () {
         });
 });
 
+//compile Jade files to html
 gulp.task('jade', function (done) {
   	gulp.src(paths.jade)
     .pipe(jade().on('error', gutil.log))
-    .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('www'))
     .on('end', done);
-    	console.log("jade finished");
 });
 
+//concatenate the templates and put it in dist 
 gulp.task('templatecache', ['jade'], function (done) {
 gulp.src(paths.templatecache)
   .pipe(templateCache({standalone:true}))
-  .pipe(gulp.dest('www/templates'))
+  .pipe(gulp.dest('www/dist'))
   .on('end', done);
 });
 
-gulp.task('minify-js', function () {
+//NG-Annotate. Ensure all the module imports are there for Dependency injection. Shortens code.
+
+//minify and concatene the JS File
+gulp.task('uglify', function () {
     gulp.src(paths.js) 
-    //.pipe(concat('script.js'))
-    .pipe(stripDebug())
-    .pipe(uglify().on('error', gutil.log))
-    .pipe(gulp.dest('dist'));
+    .pipe(uglify('app.min.js', 
+    	{ outSourceMap: true, output: { beautify: true }})
+    	.on('error', gutil.log))
+    .pipe(gulp.dest('www/dist'));
 });
 
-gulp.task('minify-css', function() {
-  return gulp.src(paths.css)
-    .pipe(minifyCss({compatibility: 'ie8'}).on('error', gutil.log))
-    .pipe(gulp.dest('dist'));
-});
 
 gulp.task('watch', function() {
-	gulp.watch(paths.jade, ['jade']);
-	gulp.watch(paths.templatecache, ['templatecache']);
+	gulp.watch(paths.jade, ['build']);
 });
 
-gulp.task('default', ['jade', 'templatecache', 'minify-js', 'minify-css']);
+gulp.task('build', ['jade', 'templatecache', 'uglify', 'minify-css']);

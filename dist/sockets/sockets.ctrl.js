@@ -1,1 +1,0 @@
-angular.module("ecstatic.sockets").controller("SocketsCtrl",["$scope",function(c){}]);
