@@ -6,12 +6,15 @@ var minifyCss = require('gulp-minify-css');
 var jade = require('gulp-jade');
 var concat = require('gulp-concat');
 var stripDebug = require('gulp-strip-debug');
+var jslint = require('gulp-jslint');
+var templateCache = require('gulp-angular-templatecache');
 
 var replaceFiles = ['./www/js/app.js'];
 var paths = {
   jade: ['./www/**/*.jade', '!./www/lib{,/**}'],
   js: ['./www/**/*.js', '!./www/lib{,/**}'],
-  css: ['./www/**/*.css']
+  css: ['./www/**/*.css', '!./www/lib{,/**}'],
+  templatecache: ['./dist/**/*.html', '!./dist/lib{,/**}']
 };
 
 //copy over jade 
@@ -21,6 +24,19 @@ gulp.src(['www/**/*.png']).pipe(gulp.dest('dist'));
 //copy over lib 
 gulp.src(['www/lib{,/**}']).pipe(gulp.dest('dist'));
 
+gulp.task('jslint', function () {
+    return gulp.src(paths.js)
+         .pipe(jslint({
+            node: true,
+            evil: true,
+            nomen: true,
+            white: true,
+            errorsOnly: false
+        }))
+        .on('error', function (error) {
+            console.error(String(error));
+        });
+});
 
 gulp.task('jade', function (done) {
   	gulp.src(paths.jade)
@@ -28,6 +44,14 @@ gulp.task('jade', function (done) {
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('www'))
     .on('end', done);
+    	console.log("jade finished");
+});
+
+gulp.task('templatecache', ['jade'], function (done) {
+gulp.src(paths.templatecache)
+  .pipe(templateCache({standalone:true}))
+  .pipe(gulp.dest('www/templates'))
+  .on('end', done);
 });
 
 gulp.task('minify-js', function () {
@@ -45,7 +69,8 @@ gulp.task('minify-css', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch( paths.jade, ['jade'] );
+	gulp.watch(paths.jade, ['jade']);
+	gulp.watch(paths.templatecache, ['templatecache']);
 });
 
-gulp.task('default', ['jade', 'minify-js', 'minify-css']);
+gulp.task('default', ['jade', 'templatecache', 'minify-js', 'minify-css']);

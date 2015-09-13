@@ -1,8 +1,10 @@
+/*global document, window, alert, console, require, angular*/
 var app = angular.module('ecstatic', [
 	'ngSanitize',
 	'ngStorage',
 	'ngAnimate',
 	'timer',
+	'templates',
 	'ionic',
 	'ecstatic.player',
 	'ecstatic.playlist',
@@ -19,7 +21,7 @@ var app = angular.module('ecstatic', [
 	'ecstatic.setName',
 	'ecstatic.countdown',
 	'ecstatic.videoplayer',
-	'ecstatic.videolist',
+	'ecstatic.videolist'
 ])
 
 .run(['$ionicPlatform', '$rootScope', 'channelServices', '$stateParams', function($ionicPlatform, $rootScope, channelServices, $stateParams) {

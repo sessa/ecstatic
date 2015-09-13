@@ -9,6 +9,7 @@
 	],
 	"gulpStartupTasks": [
 		"jade",
+		"templatecache",
 		"minify-js", 
 		"minify-css"
 	],
