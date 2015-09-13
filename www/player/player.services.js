@@ -1,6 +1,6 @@
 angular.module('ecstatic.player')
 
-.factory('playerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout, channelServices){
+.factory('playerServices',['$rootScope', '$sce', '$stateParams', 'ConfigService', 'socket', 'socketManager', '$timeout', 'channelServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout, channelServices){
 	var Service = {};
 	var channel_id = 0;
     Service.soundcloudClientId = 0;
@@ -82,8 +82,8 @@ angular.module('ecstatic.player')
         $timeout(Service.API.play.bind(Service.API), 100);
     }
     return Service;
-})
-.service("countdownEventService", function ($rootScope){
+}])
+.service("countdownEventService", ['$rootScope', function ($rootScope){
     this.broadcast = function() {$rootScope.$broadcast("countdownFinished");}
     this.listen = function(callback) {$rootScope.$on("countdownFinished",callback)}
-})
+}]);

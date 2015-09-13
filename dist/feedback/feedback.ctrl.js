@@ -1,0 +1,1 @@
+angular.module("ecstatic.feedback").controller("FeedbackCtrl",["$scope",function(e){}]);

@@ -135,11 +135,11 @@ angular.module('ecstatic.channels')
 	}
 	return Service;
 }])
-.service("userNumberEventService", function ($rootScope){
+.service("userNumberEventService", ['$rootScope', function ($rootScope){
     this.broadcast = function(userNumber) {$rootScope.$broadcast("userNumber", userNumber); console.log("userNumber="+userNumber);}
     this.listen = function(callback) {$rootScope.$on("userNumber",callback)}
-})
-.service("updatePlayerstateEventService", function ($rootScope){
+}])
+.service("updatePlayerstateEventService", ['$rootScope', function ($rootScope){
     this.broadcast = function(playerstate) {$rootScope.$broadcast("playerstate", playerstate)}
     this.listen = function(callback) {$rootScope.$on("playerstate",callback)}
-});
+}]);

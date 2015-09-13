@@ -1,14 +1,18 @@
 {
-  "name": "squad_app",
-  "app_id": "",
-  "proxies": [
-    {
-      "path": "/api",
-      "proxyUrl": "http://localhost:3001"
-    },
-    {
-	"path": "/socket.io",
-	"proxyUrl": "http://localhost:3001/socket.io"
-    }	
-  ]
+	"name": "squad_app",
+	"app_id": "",
+	"proxies": [
+		{
+			"path": "/api",
+			"proxyUrl": "http://localhost:3001"
+		},
+		{
+			"path": "/socket.io",
+			"proxyUrl": "http://localhost:3001/socket.io"
+		} 
+	],
+	"gulpStartupTasks": [
+		"jade",
+		"watch"
+	]
 }

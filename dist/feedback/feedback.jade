@@ -1,0 +1,10 @@
+ion-view(view-title='Feedback')
+	ion-content
+		form.list(action='/feedback', method="post")
+			label.item.item-input.padding
+				input(ng-model="name", id="name", name="name", type="text", placeholder="First Name")
+			label.item.item-input.padding
+				input(ng-model="email", id="email", name="email", type="email", placeholder="E-mail")
+			label.item.item-input.padding
+				input(ng-model="message", id="message", name="message", type="text", placeholder="Message")
+			button.button.button-positive.button-full(type="submit", value="send") Send

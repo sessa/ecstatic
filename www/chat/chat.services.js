@@ -54,11 +54,11 @@ angular.module('ecstatic.chat')
     return Service;
   }])
 
-.service("chatEventServices", function ($rootScope){
+.service("chatEventServices", ['$rootScope', function ($rootScope){
     this.broadcastBacklog = function(backlog) {$rootScope.$broadcast("send_chat_text", backlog);}
     this.listenBacklog = function(callback) {$rootScope.$on("send_chat_text", callback)}
     this.broadcastText = function(text) {$rootScope.$broadcast("send_text", text);}
     this.listenText = function(callback) {$rootScope.$on("send_text", callback)}
     this.broadcastName = function(name) {$rootScope.$broadcast("send_name", name);}
     this.listenName = function(callback) {$rootScope.$on("send_name", callback)};
-});
+}]);

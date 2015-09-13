@@ -29,7 +29,7 @@ var app = angular.module('ecstatic', [
 //  url: 'http://cors.api.com/api'
 // })
 
-.run(function($ionicPlatform, $rootScope, channelServices, $stateParams) {
+.run(['$ionicPlatform', '$rootScope', 'channelServices', '$stateParams', function($ionicPlatform, $rootScope, channelServices, $stateParams) {
   analytics();
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -58,22 +58,18 @@ var app = angular.module('ecstatic', [
     function(){return channelsLoaded},
     function(ready){$rootScope.dataReady = ready; console.log(ready);}
   );
+}])
 
 
-})
-
-
-.controller('NavCtrl', function($scope, $ionicSideMenuDelegate, $ionicPopover) {
-
+.controller('NavCtrl', ['$scope', '$ionicSideMenuDelegate', '$ionicPopover', function($scope, $ionicSideMenuDelegate, $ionicPopover) {
     $scope.showMenu = function () {
       $ionicSideMenuDelegate.toggleLeft();
-    };
-    
-})
+    }  
+}])
 
 /*  States.js */
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$ionicConfigProvider', function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
   $ionicConfigProvider.views.maxCache(3);
 
@@ -87,7 +83,7 @@ var app = angular.module('ecstatic', [
         url: '/home',
         views: {
           'main': {
-            templateUrl: 'home/home',
+            templateUrl: 'home/home.html',
             controller: 'HomeCtrl'
           }
         }
@@ -99,7 +95,7 @@ var app = angular.module('ecstatic', [
         url: '/channels',
         views: {
           'main': {
-            templateUrl: 'channels/channel-list',
+            templateUrl: 'channels/channel-list.html',
             controller: 'ChannelsCtrl'
           }
         }
@@ -111,7 +107,7 @@ var app = angular.module('ecstatic', [
                 url: '/setName',
                 views: {
                   'main': {
-                    templateUrl: 'setName/setName',
+                    templateUrl: 'setName/setName.html',
                     controller: 'setNameCtrl'
                   }
                 }
@@ -123,7 +119,7 @@ var app = angular.module('ecstatic', [
                 url: '/setTimer:channelName',
                 views: {
                   'main': {
-                    templateUrl: 'setTimer/setTimer',
+                    templateUrl: 'setTimer/setTimer.html',
                     controller: 'setTimerCtrl'
                   }
                 }
@@ -135,7 +131,7 @@ var app = angular.module('ecstatic', [
         url: '/feedback',
         views: {
           'main': {
-            templateUrl: 'feedback/feedback',
+            templateUrl: 'feedback/feedback.html',
             controller: 'FeedbackCtrl'
           }
         }
@@ -147,7 +143,7 @@ var app = angular.module('ecstatic', [
                 url: '/thankyou',
                 views: {
                   'main': {
-                    templateUrl: 'feedback/thankyou',
+                    templateUrl: 'feedback/thankyou.html',
                     controller: 'FeedbackCtrl'
                   }
                 }
@@ -159,7 +155,7 @@ var app = angular.module('ecstatic', [
         url: '/channel/:channel_id',
         views: {
           'main': {
-            templateUrl: 'channels/channel-tabs'
+            templateUrl: 'channels/channel-tabs.html'
           }
         }
 
@@ -171,7 +167,7 @@ var app = angular.module('ecstatic', [
                 url: '/mediapicker',
                 views: {
                   'main@': {
-                    templateUrl: 'mediapicker/mediapicker',
+                    templateUrl: 'mediapicker/mediapicker.html',
                     controller: 'MediapickerCtrl'
                   }
                 }
@@ -183,7 +179,7 @@ var app = angular.module('ecstatic', [
               url: '/playlist',
               views: {
                 'main@': {
-                  templateUrl: 'playlist/playlist',
+                  templateUrl: 'playlist/playlist.html',
                   controller: 'PlaylistCtrl'
                 }
               }
@@ -195,7 +191,7 @@ var app = angular.module('ecstatic', [
                 url: '/camera',
                 views: {
                   'main@': {
-                    templateUrl: 'camera/camera',
+                    templateUrl: 'camera/camera.html',
                     controller: 'CameraCtrl'
                   }
                 }
@@ -207,7 +203,7 @@ var app = angular.module('ecstatic', [
                 url: '/videolist',
                 views: {
                   'main@': {
-                    templateUrl: 'videolist/videolist',
+                    templateUrl: 'videolist/videolist.html',
                     controller: 'videolistCtrl'
                   }
                 }
@@ -216,7 +212,7 @@ var app = angular.module('ecstatic', [
       
     
     $urlRouterProvider.otherwise('channels');
-});
+}]);
 
 function analytics(){
     // Google Analytics

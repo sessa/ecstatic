@@ -1,6 +1,6 @@
 angular.module('ecstatic.camera')
 
-.factory('cameraServices', function(cameraEventServices, playerServices, socketManager) {
+.factory('cameraServices', ['cameraEventServices', 'playerServices', 'socketManager', function(cameraEventServices, playerServices, socketManager) {
 	var Service = {};
 
 	var mediaRecorder;
@@ -101,11 +101,11 @@ angular.module('ecstatic.camera')
 	});
 
 	return Service;
-})
+}])
 
-.service("cameraEventServices", function($rootScope) {
+.service("cameraEventServices", ['$rootScope', function($rootScope) {
 	this.broadcastVideoSource = function(source) {$rootScope.$broadcast("video_source", source);}
 	this.listenVideoSource = function(callback) {$rootScope.$on("video_source", callback);}
 	this.broadcastCameraStart = function(video) {$rootScope.$broadcast("camera_start", video);}
 	this.listenCameraStart = function(callback) {$rootScope.$on("camera_start", callback);}
-});
+}]);

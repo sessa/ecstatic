@@ -1,6 +1,6 @@
 angular.module('ecstatic.videoplayer')
 
-.factory('videoplayerServices', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout){
+.factory('videoplayerServices', ['$rootScope', '$sce', '$stateParams', 'ConfigService', 'socket', 'socketManager', '$timeout', function($rootScope, $sce, $stateParams, ConfigService, socket, socketManager, $timeout){
 	var Service = {};
 	var channel_id = 0;
     var videos = [];
@@ -59,8 +59,8 @@ angular.module('ecstatic.videoplayer')
     }
     
     return Service;
-})
-.service("videoEventServices", function ($rootScope){
+}])
+.service("videoEventServices", ['$rootScope', function ($rootScope){
     this.broadcast = function(data) {$rootScope.$broadcast("videoAdded", data)}
     this.listen = function(callback) {$rootScope.$on("videoAdded",callback)}
-})
+}])

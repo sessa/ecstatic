@@ -1,0 +1,1 @@
+angular.module("ecstatic.setTimer").controller("setTimerCtrl",function(e,n,t,a,i,c){e.setTimer=function(e,t){e="undefined"!=typeof e?e:0,t="undefined"!=typeof t?t:0;var i=(new Date).getTime(),l=36e5*e+6e4*t+i;n.createChannel(c.channelName,l).then(function(e){a.go("channel",{channel_id:e.player_state.channel_id})})}});

@@ -1,0 +1,43 @@
+ion-view
+	ion-content.gradient
+
+		ng-switch(on="showPlayer", ng-controller="PlayerCtrl")
+
+			//if the player has songs in it
+			.padding.center-text.player-view(ng-switch-when="true")
+
+				//the player	
+				videogular(vg-theme="playerServices.theme", 
+					vg-player-ready="playerServices.onPlayerReady($API)", 
+					vg-complete="playerServices.onCompleteItem()", 
+					class="videogular-container audio" 
+					vg-auto-play="playerServices.autoplay")
+					vg-media(vg-src="playerServices.sources", vg-type="audio")
+				
+				br
+				br
+				br
+				img.cover-art(src="{{playerServices.trackCover}}")
+				p
+					strong {{playerServices.trackTitle}}
+					br
+					| {{playerServices.trackUser}}
+				
+				br
+				a.button.button-dark(ui-sref="channel.mediapicker") Add songs
+				//a.button.button-full.button-dark(ui-sref="channel.playlist") Modify the playlist
+				br
+				br
+				button.button.button-clear(ng-click="nextSong()")  Skip this song
+				br
+					
+			//if the player is empty
+
+			br
+			.card.padding.center-text(ng-switch-default)
+				br
+				h3.title Oh, wait.
+				p There's no song in this playlist.
+				br
+				a.button.button-dark(ui-sref="channel.mediapicker") Add songs
+
