@@ -19,7 +19,6 @@ angular.module('ecstatic.camera')
 	}
 	
 	if(!$scope.onDesktop){
-		// david's code dont touch this mother fucker
 		document.getElementById('fileinput').addEventListener('change', function(){
 			file = this.files[0];
 			$scope.add();

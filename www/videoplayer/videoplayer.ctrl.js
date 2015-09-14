@@ -17,6 +17,7 @@ angular.module('ecstatic.videoplayer')
         console.log("we are in browser");
         $scope.onDesktop = true;
     }
+    $scope.onDesktop = false;
 
     $scope.render = function() {
         channelServices.getChannels().then(function (channels){
@@ -33,7 +34,6 @@ angular.module('ecstatic.videoplayer')
                     $scope.videoMessage = "Video Playback Support Coming to Mobile Soon :)";
                 }
                 $scope.videoplayerServices = videoplayerServices;
-                $scope.showVideoplayer = true;
             }
         });
     }

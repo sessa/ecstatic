@@ -20,7 +20,7 @@ angular.module('ecstatic.camera')
 
 	      	//set up the recording feature
 	      	mediaRecorder = new MediaStreamRecorder(stream);
-			mediaRecorder.mimeType = 'video/webm';
+			mediaRecorder.mimeType = 'video/mp4';
 
 		    //callback for mediaRecorder when it is done processing
 		    mediaRecorder.ondataavailable = function (blob) {
@@ -70,9 +70,9 @@ angular.module('ecstatic.camera')
         channel_id: channel_id,
         username: Service.username,
         isActive: true,
-        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".webm",
+        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".mp4",
         video: Service.getCurrentBlob(),
-        format: "webm",
+        format: "mp4",
         hasVideo: true,
       }
 

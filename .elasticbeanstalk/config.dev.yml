@@ -1,6 +1,6 @@
 branch-defaults:
   development:
-    environment: development 
+    environment: dev 
 global:
   application_name: Squad
   default_ec2_keyname: aws-eb2
