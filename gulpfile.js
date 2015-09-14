@@ -13,9 +13,10 @@ var useref = require('gulp-useref');
 var replaceFiles = ['./www/js/app.js'];
 var paths = {
   jade: ['./www/**/*.jade', '!./www/lib{,/**}'],
+  html: ['./www/*.html', './www/*/*.html'],
   js: ['./www/*.js', './www/*/*.js'],
-  templatecache: ['./www/**/*.html', '!./www/lib{,/**}'],
-  useref: ['./dist/**/*.html']
+  css: ['./www/**/*.css', '!./www/lib{,/**}'],
+  templatecache: ['./www/**/*.html', '!./www/lib{,/**}']
 };
 
 //copy over jade 
@@ -57,18 +58,42 @@ gulp.src(paths.templatecache)
 
 //NG-Annotate. Ensure all the module imports are there for Dependency injection. Shortens code.
 
-//minify and concatene the JS File
-gulp.task('uglify', function () {
+//minify a JS File
+/*gulp.task('uglify', function () {
     gulp.src(paths.js) 
     .pipe(uglify('app.min.js', 
-    	{ outSourceMap: true, output: { beautify: true }})
+    	{ outSourceMap: true,       mangle: false,
+output: { beautify: true }})
     	.on('error', gutil.log))
+    .pipe(gulp.dest('www/dist'));
+});*/
+
+//delete all the minified js files in dist
+
+//concatenate the js files
+
+gulp.task('useref', function (done) {
+var assets = useref.assets();
+gulp.src(paths.html)
+  .pipe(assets)
+  .pipe(assets.restore())
+  .pipe(useref())
+  .pipe(gulp.dest('www/dist'))
+  .on('end', done);
+});
+
+
+gulp.task('minify-css', function() {
+  return gulp.src(paths.css)
+    .pipe(minifyCss({compatibility: 'ie8'}).on('error', gutil.log))
     .pipe(gulp.dest('www/dist'));
 });
 
 
 gulp.task('watch', function() {
-	gulp.watch(paths.jade, ['build']);
+	gulp.watch(paths.jade, ['jade']);
+	gulp.watch(paths.templatecache, ['templatecache']);
+	gulp.watch(paths.useref, ['useref']);
 });
 
-gulp.task('build', ['jade', 'templatecache', 'uglify', 'minify-css']);
+gulp.task('default', ['jade', 'templatecache', 'useref', 'minify-css']);

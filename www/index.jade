@@ -5,6 +5,7 @@ head
 	title Ecstatic
 	base(href='/')
 
+	// build:js dist_js/app.js
 	script(src='app.js')
 	script(src='dist/templates/templates.js')
 	script(src='lib/ionic/js/ionic.bundle.js')
@@ -61,8 +62,13 @@ head
 	script(src='camera/camera.module.js')
 	script(src='camera/camera.services.js')
 	script(src='camera/camera.ctrl.js')
+	// endbuild 
 
 	//CSS
+	// build:css dist_css/styles.css 
+	link(href="css/ionic.app.css" rel="stylesheet")
+	// endbuild 
+
 	link(rel='stylesheet', href='lib/ionic/css/ionic.css')
 	link(rel='stylesheet', href='css/ecstatic.css')
 

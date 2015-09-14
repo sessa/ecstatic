@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "grunt test --verbose",
-    "start": "gulp; cd dist; node server.js & cd ..; ionic serve"
+    "start": "gulp; cd www; node server.js & cd ..; ionic serve"
   },
   "repository": {
     "type": "git",

@@ -9,7 +9,10 @@
 		}
 	],
 	"gulpStartupTasks": [
-		"build"
+		"jade",
+		"templatecache",
+		"useref", 
+		"minify-css"
 	],
 	"watchPatterns": [
     "www/**/*",
