@@ -258,7 +258,8 @@ app.get('/soundcloudClientId', function(req, res) {
 });
 
 app.get('/*', function(req, res) {
-  res.render('index');
+    console.log("sending file"+__dirname+"/index.html");
+  res.sendFile('/index.html', {root: __dirname});
 });
 
 server.listen(app.get('port'), function(req, res) {
