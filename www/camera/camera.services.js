@@ -20,7 +20,10 @@ angular.module('ecstatic.camera')
 
 	      	//set up the recording feature
 	      	mediaRecorder = new MediaStreamRecorder(stream);
-			mediaRecorder.mimeType = 'video/webm';
+			mediaRecorder.mimeType = 'video/mp4';
+
+			mediaRecorder.width = 640;
+    		mediaRecorder.height = 480;
 
 		    //callback for mediaRecorder when it is done processing
 		    mediaRecorder.ondataavailable = function (blob) {
@@ -66,13 +69,13 @@ angular.module('ecstatic.camera')
 	//This is really stupid design that I guess I will fix, we probably dont care that our packets have slightly more text anyway
 	Service.sendVideo = function(channel_id) {
       var request = {
-        msg: "send_video",
+        msg: "send_desktop_video",
         channel_id: channel_id,
         username: Service.username,
         isActive: true,
-        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".webm",
+        video_key: "" + Service.username + "_" + (new Date()).getTime() + ".mp4",
         video: Service.getCurrentBlob(),
-        format: "webm",
+        format: "mp4",
         hasVideo: true,
       }
 
@@ -82,7 +85,7 @@ angular.module('ecstatic.camera')
 
     Service.sendMobileVideo = function(channel_id, video) {
     	var request = {
-	    	msg: "send_video",
+	    	msg: "send_mobile_video",
 	        channel_id: channel_id,
 	        username: Service.username,
         	isActive: true,

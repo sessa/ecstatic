@@ -19,7 +19,6 @@ angular.module('ecstatic.camera')
 	}
 	
 	if(!$scope.onDesktop){
-		// david's code dont touch this mother fucker
 		document.getElementById('fileinput').addEventListener('change', function(){
 			file = this.files[0];
 			$scope.add();
@@ -43,7 +42,6 @@ angular.module('ecstatic.camera')
 		cameraServices.startVideoClip();
 	}
 	$scope.sendVideo = function() {
-		//check if there is anything to send form mobile
 		if(cameraServices.getCurrentBlob()){
 			cameraServices.sendVideo($stateParams.channel_id);
 		}else if($scope.video){

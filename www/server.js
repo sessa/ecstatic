@@ -3,7 +3,7 @@
 
 // Declare variables used
 
-var app, express, cors, bodyParser, client, io, async, socket, http, server, nodemailer, smtpTransport, aws, s3;
+var app, express, cors, bodyParser, client, io, async, socket, http, server, nodemailer, smtpTransport, aws, s3, ffmpeg, SimpleFileWriter, read, del;
 
 client = require('redis').createClient(6379, process.env.cache, {no_ready_check: true});
 express = require('express');
@@ -20,6 +20,10 @@ server = require('http').Server(app);
 io = require('socket.io')(server);
 nodemailer = require('nodemailer');
 smtpTransport = require('nodemailer-smtp-transport');
+ffmpeg = require('ffmpeg');
+SimpleFileWriter = require('simple-file-writer');
+read = require('read-file');
+del = require('delete');
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -140,7 +144,8 @@ io.sockets.on('connection', function (socket) {
             send_update(data.channel_id);
         }   
     });
-    socket.on('send_video', function (data){
+
+    socket.on('send_mobile_video', function (data){
         console.log("Inside send mobile video on server.js " + data.channel_id);
         //if there is a video, send video to S3
         client.get(data.channel_id, function (err, socket_info){
@@ -169,6 +174,79 @@ io.sockets.on('connection', function (socket) {
                 }
             });
         });
+    });
+
+    socket.on('send_desktop_video', function (data){
+        var preprocessed_filename = './pre_' + (new Date()).getDate() + '.mp4';
+        var postprocessed_filename = './post_' + (new Date()).getDate() + '.mp4';
+        //right to temp file
+        var writer = new SimpleFileWriter(preprocessed_filename);
+        writer.write(new Buffer(data.video), function() {
+        });
+        //transcode temp file with ffmpeg
+        try {
+            var unprocessed_video = new ffmpeg(preprocessed_filename);
+            unprocessed_video.then(function (video) {
+                video.setVideoFormat('mp4');
+                video.setVideoCodec('h264');
+                video.setVideoFrameRate(30);
+                video.save(postprocessed_filename, function (error, file) {
+                    if (!error){   
+                        read(postprocessed_filename, function(err, buffer) {
+                          if(!err){
+                            // Send To Amazon
+                            client.get(data.channel_id, function (err, socket_info){
+                                var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: buffer};
+                                s3.putObject(params, function(err, s3data) {
+                                    if (err)       
+                                    {
+                                        console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
+                                    } else {
+                                        var parsed_data = {
+                                            hasVideo: data.hasVideo,
+                                            isActive: data.isActive,
+                                            video_key: data.video_key,
+                                            username: data.username,
+                                            format: data.format
+                                        }
+                                        //add the clip to redis
+                                        var info_with_clip = JSON.parse(socket_info);
+                                        info_with_clip.player_state.cliplist.push(parsed_data);
+                                        client.set(data.channel_id, JSON.stringify(info_with_clip));
+                                        console.log(parsed_data);
+                                        //tell everyone the state changed
+                                        send_update(data.channel_id);
+                                        del.promise(preprocessed_filename)
+                                            .then(function() {
+                                        });
+                                        del.promise(postprocessed_filename)
+                                            .then(function() {
+                                            });
+
+                                    }
+                                });
+                            });
+
+                          }else{
+                            console.log("read didnt work");
+                          }
+                        });
+                    }
+                    else{
+                        //read file back as data
+                        console.log('Video file failed: ' + error);
+                    }
+                });
+
+            }, function (err) {
+                console.log('Error: ' + err);
+            });
+        } catch (e) {
+            console.log("caught error on ffmpeg transcode");
+            console.log(e.code);
+            console.log(e.msg);
+        }
+
     });
 
     socket.on('send_text', function (data) {
