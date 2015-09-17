@@ -9,12 +9,6 @@ angular.module('ecstatic.videoplayer')
     });
 
     $scope.videoMessage = "no video yet :(";
-    // $scope.onDesktop;
-    // if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
-    //     $scope.onDesktop = false;
-    // } else {
-    //     $scope.onDesktop = true;
-    // }
 
     $scope.render = function() {
         channelServices.getChannels().then(function (channels){

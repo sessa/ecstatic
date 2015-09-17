@@ -1,22 +1,16 @@
 angular.module('ecstatic.camera')
 
-.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', '$ionicHistory', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams, $ionicHistory) {
+.controller('CameraCtrl', ['$scope', 'cameraEventServices', 'cameraServices', '$ionicHistory', '$stateParams', '$ionicHistory', 'storageServices', function($scope, cameraEventServices, cameraServices, $ionicHistory, $stateParams, $ionicHistory, storageServices) {
 	// currently will only work in Chrome:
 	// var blobURL;
 	var video;
 	$scope.recHold = false;
 	console.log($scope.recHold);
 	// var mediaRecorder;
-	$scope.onDesktop;
+	$scope.onDesktop = storageServices.onDesktop();
 	var file;
 
-	if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
-  		console.log("we are not in browser");
-  		$scope.onDesktop = false;
-	} else {
-  		console.log("we are in browser");
-  		$scope.onDesktop = true;
-	}
+
 	
 	if(!$scope.onDesktop){
 		document.getElementById('fileinput').addEventListener('change', function(){

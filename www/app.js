@@ -20,6 +20,7 @@ var app = angular.module('ecstatic', [
       'ecstatic.countdown',
       'ecstatic.videoplayer',
       'ecstatic.videolist',
+      'ecstatic.storage',
 ])
 
 .run(function($ionicPlatform, $rootScope, channelServices, $stateParams) {
