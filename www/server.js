@@ -3,7 +3,7 @@
 
 // Declare variables used
 
-var app, express, cors, bodyParser, client, io, async, socket, http, server, nodemailer, smtpTransport, aws, s3, ffmpeg;
+var app, express, cors, bodyParser, client, io, async, socket, http, server, nodemailer, smtpTransport, aws, s3, ffmpeg, SimpleFileWriter, read, del;
 
 client = require('redis').createClient(6379, process.env.cache, {no_ready_check: true});
 express = require('express');
@@ -21,7 +21,9 @@ io = require('socket.io')(server);
 nodemailer = require('nodemailer');
 smtpTransport = require('nodemailer-smtp-transport');
 ffmpeg = require('ffmpeg');
-// fileWriter = require('simple-file-writer');
+SimpleFileWriter = require('simple-file-writer');
+read = require('read-file');
+del = require('delete');
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -178,29 +180,20 @@ io.sockets.on('connection', function (socket) {
         var preprocessed_filename = './pre_' + (new Date()).getDate() + '.mp4';
         var postprocessed_filename = './post_' + (new Date()).getDate() + '.mp4';
         //right to temp file
-        var SimpleFileWriter = require('simple-file-writer');
         var writer = new SimpleFileWriter(preprocessed_filename);
         writer.write(new Buffer(data.video), function() {
-            console.log('data written to file');
         });
         //transcode temp file with ffmpeg
         try {
             var unprocessed_video = new ffmpeg(preprocessed_filename);
             unprocessed_video.then(function (video) {
-
-                console.log("inside process!");
                 video.setVideoFormat('mp4');
                 video.setVideoCodec('h264');
                 video.setVideoFrameRate(30);
                 video.save(postprocessed_filename, function (error, file) {
-                    console.log("inside save!");
-                    if (!error){
-                        console.log("write success!");
-                        var read = require('read-file');
+                    if (!error){   
                         read(postprocessed_filename, function(err, buffer) {
                           if(!err){
-                            console.log("read worked!");
-
                             // Send To Amazon
                             client.get(data.channel_id, function (err, socket_info){
                                 var params = {Bucket: 'ecstatic-videos', Key: data.video_key, Body: buffer};
@@ -209,7 +202,6 @@ io.sockets.on('connection', function (socket) {
                                     {
                                         console.log("Server - send_video_to_s3 - Error Uploading Video to S3 \n" + err);     
                                     } else {
-                                        console.log("Successfully uploaded data to myBucket/myKey"); 
                                         var parsed_data = {
                                             hasVideo: data.hasVideo,
                                             isActive: data.isActive,
@@ -222,20 +214,13 @@ io.sockets.on('connection', function (socket) {
                                         info_with_clip.player_state.cliplist.push(parsed_data);
                                         client.set(data.channel_id, JSON.stringify(info_with_clip));
                                         console.log(parsed_data);
-
                                         //tell everyone the state changed
                                         send_update(data.channel_id);
-
-                                        var del = require('delete');
-
                                         del.promise(preprocessed_filename)
                                             .then(function() {
-                                                console.log("local pre file deleted!");
                                         });
-
                                         del.promise(postprocessed_filename)
                                             .then(function() {
-                                                console.log("local post file deleted")
                                             });
 
                                     }
@@ -249,7 +234,7 @@ io.sockets.on('connection', function (socket) {
                     }
                     else{
                         //read file back as data
-                        console.log('Video file: ' + error);
+                        console.log('Video file failed: ' + error);
                     }
                 });
 
@@ -257,7 +242,7 @@ io.sockets.on('connection', function (socket) {
                 console.log('Error: ' + err);
             });
         } catch (e) {
-            console.log("caught error on ffmpeg?");
+            console.log("caught error on ffmpeg transcode");
             console.log(e.code);
             console.log(e.msg);
         }
