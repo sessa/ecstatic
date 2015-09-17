@@ -37,6 +37,7 @@ angular.module('ecstatic.videoplayer')
     Service.onLoadMetaData = function(evt) {
         Service.API.seekTime(Service.delta, false);
         Service.API.mediaElement[0].removeEventListener("loadedmetadata", this.onLoadMetaData.bind(this), false);
+        Service.API.mediaElement[0].muted = true;
         Service.API.setVolume(0);
     }
     Service.onVideoplayerReady = function(API) {

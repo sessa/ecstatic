@@ -9,15 +9,12 @@ angular.module('ecstatic.videoplayer')
     });
 
     $scope.videoMessage = "no video yet :(";
-    $scope.onDesktop;
-    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
-        console.log("we are not in browser");
-        $scope.onDesktop = false;
-    } else {
-        console.log("we are in browser");
-        $scope.onDesktop = true;
-    }
-    $scope.onDesktop = false;
+    // $scope.onDesktop;
+    // if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) {
+    //     $scope.onDesktop = false;
+    // } else {
+    //     $scope.onDesktop = true;
+    // }
 
     $scope.render = function() {
         channelServices.getChannels().then(function (channels){
@@ -28,11 +25,7 @@ angular.module('ecstatic.videoplayer')
             if(videoplayerServices.getNumberOfActiveClips(channel.cliplist) !== 0){
                 console.log("active clips > 0");
                 videoplayerServices.setChannel(channel);
-                if($scope.onDesktop){
-                    $scope.showVideoplayer = true;
-                }else{
-                    $scope.videoMessage = "Video Playback Support Coming to Mobile Soon :)";
-                }
+                $scope.showVideoplayer = true;
                 $scope.videoplayerServices = videoplayerServices;
             }
         });

@@ -43,6 +43,8 @@ angular.module('ecstatic.camera')
 	}
 	$scope.sendVideo = function() {
 		//check if there is anything to send form mobile
+				console.log("printing shit");
+
 		if(cameraServices.getCurrentBlob()){
 			cameraServices.sendVideo($stateParams.channel_id);
 		}else if($scope.video){
