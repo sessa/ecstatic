@@ -1,7 +1,6 @@
 
 <ion-view>
   <ion-content scroll="false" class="darkbg has-header">
-    <script src="http://jsconsole.com/remote.js?CCE965B5-E08D-4B6F-8EAC-6C4C4636EBC7"></script>
     <ng-switch on="showVideoplayer" ng-controller="VideoCtrl">
       <div id="active-videoplayer" ng-switch-when="true">
         <videogular vg-player-ready="videoplayerServices.onVideoplayerReady($API)" vg-complete="videoplayerServices.onCompleteItem()" vg-auto-play="videoplayerServices.autoplay" class="videogular-container video">
