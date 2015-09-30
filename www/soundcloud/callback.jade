@@ -1,2 +1,2 @@
-body(onload="window.opener.setTimeout(window.opener.SC.connectCallback, 1)")
+body(onload="var xhr = new XMLHttpRequest(); xhr.open('GET', 'http://localhost:3001/soundcloud/redirect', false); xhr.send();")
     b(style="width: 100%; text-align: center;") "This popup should automatically close in a few seconds"
