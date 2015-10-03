@@ -52,10 +52,15 @@ var app = angular.module('ecstatic', [
     function(){return channelsLoaded},
     function(ready){$rootScope.dataReady = ready; console.log(ready);}
   );
-
-
 })
 
+.constant('ApiEndpoint', {
+  url: 'http://localhost:3001/'
+})
+// For the real endpoint, we'd use this
+// .constant('ApiEndpoint', {
+//  url: 'http://cors.api.com/api'
+// })
 
 .controller('NavCtrl', function($scope, $ionicSideMenuDelegate, $ionicPopover) {
 

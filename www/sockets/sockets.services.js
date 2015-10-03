@@ -1,12 +1,12 @@
 angular.module('ecstatic.sockets')
 
-.factory('socket', ['socketFactory','ConfigService', '$location', function (socketFactory, ConfigService, $location) {
+.factory('socket', ['socketFactory','ConfigService', 'ApiEndpoint', function (socketFactory, ConfigService, ApiEndpoint) {
 	return socketFactory({
-		ioSocket: io.connect($location.absUrl().split('/')[0]+ '//' + $location.absUrl().split('/')[2])
+		ioSocket: io.connect(ApiEndpoint.url)
 	});
 }])
 
-.factory('socketManager', ['$q', '$rootScope', 'socket', '$location', function($q, $rootScope, socket, $location) {
+.factory('socketManager', ['$q', '$rootScope', 'socket', function($q, $rootScope, socket) {
 		// We return this object to anything injecting our service
 		var Service = {};
 		// Keep all pending requests here until they get responses

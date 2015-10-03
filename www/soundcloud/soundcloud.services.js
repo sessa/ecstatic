@@ -1,6 +1,6 @@
 angular.module('ecstatic.soundcloud')
 
-.factory('soundcloudService',['$q', '$rootScope', 'ConfigService', '$location', '$localStorage', function($q, $rootScope, ConfigService, $location, $localStorage) {
+.factory('soundcloudService',['$q', '$rootScope', 'ConfigService', '$localStorage', function($q, $rootScope, ConfigService, $localStorage) {
 	  var Service = {};
 	  var defer = $q.defer();
 
