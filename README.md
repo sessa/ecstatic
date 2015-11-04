@@ -32,9 +32,8 @@ This code runs with Node 0.12.6 on 64bit Amazon Linux (Elastic Beanstalk) with R
 	//and run it
 	npm start
 
-
-todos
-
+#architecture
+##todos
 	refactoring
 
 	**ionic is both in lib and node_modules ???
@@ -50,14 +49,14 @@ todos
 
 
 ---------------------
-the server
+##the server
 	
 
 	index.js
 
 
 ---------------------
-states
+##states
 
 	0. 'tab' Abstract state for the tabs directive
 
@@ -81,7 +80,7 @@ states
 
 
 ---------------------
-angular modules
+##angular modules
 
 
 	1. 'services' (js/services.js)
@@ -151,7 +150,7 @@ angular modules
 
 
 ---------------------
-libraries
+##libraries
 
 
 	1. bower.json (bower_components)
@@ -172,14 +171,14 @@ libraries
 
 
 ---------------------
-tests
+##tests
 
 
 	Gruntfile.js (test)
 
 
 ---------------------
-misc
+##misc
 
 
 	general ionic app settings
