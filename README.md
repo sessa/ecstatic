@@ -15,6 +15,24 @@ README.md
 	  Thank you for being here.
 
 ---------------------
+
+#installation
+This code runs with Node 0.12.6 on 64bit Amazon Linux (Elastic Beanstalk) with Redis 2.8.
+
+	//download the code
+	git clone git@github.com:mweiss17/ecstatic.git
+	
+	//set environment variables
+	AWS_ACCESS_KEY_ID = Your AWS Access Key
+	AWS_SECRET_ACCESS_KEY = Your AWS Secret Access Key
+
+	//install dependencies
+	npm install
+
+	//and run it
+	npm start
+
+
 todos
 
 	refactoring
